@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { heroesEnum, Hero } from "@/enums/HeroesEnum";
 import { useGoalStores } from './useGoals';
+import UXManager from '@/managers/UXManager';
 
 type HeroStoreType = {
     index: string;
@@ -19,6 +20,7 @@ type HeroStoreType = {
     isWorkingThere: (areaIndex: string) => boolean,
     isFree: () => boolean;
     isUnlocked: () => boolean;
+    getDOMid: () => string;
   };
   
   // Create a map of store functions
@@ -36,6 +38,7 @@ type HeroStoreType = {
         gainXp(amount: number|null = null) {
           amount = amount ?? parseInt((Math.random() * (5 - 1) + 1).toFixed(0));
           this.xp += amount;
+          UXManager.showFlyingTextOnElement(amount.toString(), '/public/xp.png', this.getDOMid(), 50);
         },
         levelUp() {
             this.xp = 0;
@@ -57,8 +60,11 @@ type HeroStoreType = {
             const goalStore = useGoalStores[this.requirement]();
             return goalStore.isCompleted;
         },
+        getDOMid() {
+          return `hero-thumb-${this.index}`;
+        }
       },
-      persist: true, // Enable persistence for each store
+      persist: true,
     });
   
     // Return the store with type assertion for autocompletion

@@ -26,11 +26,11 @@
         </div>
       </div>
       <div class="action-container">
-          <button class="mine-button" @click="mineTokens">
+          <button class="mine-button" @click="mineManually($event)">
             <img src="/public/mines/miningButton.png" alt="Mine Logo" class="button-logo" />
             Mine!
           </button>
-          <button class="upgrade-button" @click="mineStore.upgrade()" :disabled="!mineStore.canUpgrade()">
+          <button class="upgrade-button" @click="upgrade" :disabled="!mineStore.canUpgrade()">
             <img src="/public/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" />
             Upgrade (Cost: {{ mineStore.getUpgradeCost() }} <img :src="tokenStore.getIcon()" class="token-icon-small" />)
           </button>
@@ -60,6 +60,7 @@ import HeroThumb from '@/components/HeroThumb.vue';
 import MineManager from '@/managers/MineManager';
 import TokenManager from '@/managers/TokenManager';
 import HeroManager from '@/managers/HeroManager';
+import UXManager from '@/managers/UXManager';
   
 export default defineComponent({
     components: {
@@ -81,19 +82,31 @@ export default defineComponent({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }));
-      
-      const mineTokens = () => {
-        mineStore.clicks += 1;
-        mineStore.mine(null);
-      };
-  
+
       const handleHeroDrop = (event: DragEvent) => {
-            const heroIndex = event.dataTransfer?.getData('heroIndex');
-            if (heroIndex) {
-                const hero = HeroManager.getHeroStore(heroIndex);
-                hero.location = mineStore.index;
-                heroes.value = HeroManager.getHeroes();
-            }
+        const heroIndex = event.dataTransfer?.getData('heroIndex');
+        if (heroIndex) {
+          const hero = HeroManager.getHeroStore(heroIndex);
+          hero.location = mineStore.index;
+          heroes.value = HeroManager.getHeroes();
+        }
+      };
+      
+      const mineManually = (event: MouseEvent) => {
+        mineStore.clicks += 1;
+        const minedAmount = mineStore.getDefaultMiningAmount();
+        mineStore.mine(minedAmount);
+        const x = event.clientX;
+        const y = event.clientY;
+        UXManager.showFlyingText(minedAmount.toString(), tokenStore.getIcon(), x, y);
+      };
+
+      
+      const upgrade = (event: MouseEvent) => {
+        mineStore.upgrade()
+        const x = event.clientX;
+        const y = event.clientY;
+        UXManager.showFlyingText('Level UP !', '/public/levelUp.png', x, y);
       };
 
       return {
@@ -101,8 +114,9 @@ export default defineComponent({
         backgroundStyle,
         tokenStore,
         heroes,
-        mineTokens,
         handleHeroDrop,
+        mineManually,
+        upgrade,
       };
     },
   });

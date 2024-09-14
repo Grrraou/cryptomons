@@ -1,5 +1,5 @@
 <template>
-    <div class="hero" @dragstart="dragStart($event, hero)" >
+    <div class="hero" @dragstart="dragStart($event, hero)" :id="heroStore.getDOMid()">
       <div class="hero-icons">
         <div class="mining-icon">
           <span>⛏️{{ heroStore.miningPower }}</span>
@@ -31,8 +31,7 @@
 </template>
   
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import { useHeroStores } from '@/stores/useHeroes';
+import { defineComponent } from 'vue';
 import { Hero } from '@/enums/HeroesEnum';
 import HeroManager from '@/managers/HeroManager';
   
