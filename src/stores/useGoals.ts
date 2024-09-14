@@ -1,73 +1,72 @@
 import { defineStore } from 'pinia';
+import { Goal, goalsEnum } from '@/enums/GoalsEnum';
+import TokenManager from '@/managers/TokenManager';
 
-// Define the type for a token
-type Token = {
+// Define stores for each goal but do not create them yet
+export type GoalStoreType = {
   index: string;
   name: string;
-  price: number;
-  balance: number;
+  description: string;
+  costs: { token: string; value: number; isPaid: boolean }[];
+  reward: string;
+  isCompleted: boolean;
+  canPayCost(tokenIndex: string): boolean;
+  payCost: (tokenIndex: string) => void;
+  completeGoal: () => void;
+  getImage: () => string;
 };
 
-// Define the token list
-export const tokensEnum = [
-    { index: 'price', name: 'Crypto Dollar', price: 1 },
-    { index: 'btc', name: 'Bitcoin', price: 10 },//2009
-    { index: 'nmc', name: 'Namecoin', price: 5 },//2011
-    { index: 'ltc', name: 'Litecoin', price: 5 },//2011
-    { index: 'xrp', name: 'Ripple', price: 1 },//2012
-    { index: 'ppc', name: 'Peercoin', price: 1 },//2012
-    { index: 'doge', name: 'Dogecoin', price: 0.2 },//2013
-    { index: 'dash', name: 'Dash', price: 2 },//2014
-    { index: 'xmr', name: 'Monero', price: 0.5 },//2014
-    { index: 'eth', name: 'Ethereum', price: 2 },//2015
-    { index: 'zec', name: 'Zcash', price: 2 },//2016
-    { index: 'bch', name: 'Bitcoin Cash', price: 0.2 },//2017
-    { index: 'eos', name: 'EOS', price: 0.2 },//2017
-    { index: 'ada', name: 'Cardano', price: 0.2 },//2017
-    { index: 'trx', name: 'Tron', price: 0.2 },//2017
-    { index: 'bnb', name: 'Binance Coin', price: 0.2 },//2017
-    { index: 'link', name: 'Chainlink', price: 0.2 },//2017
-    { index: 'xtz', name: 'Tezos', price: 0.2 },//2018
-    { index: 'dot', name: 'Polkadot', price: 0.2 },//2020
-    { index: 'sol', name: 'Solana', price: 1 },//2020
-    { index: 'shib', name: 'Shiba Inu', price: 0.1 },//2020
-    { index: 'uni', name: 'Uniswap', price: 0.1 },//2020
-];
-
-// Define stores for each token but do not create them yet
-type TokenStoreType = {
-    index: string;
-    name: string;
-    balance: number;
-    price: number;
-    updateBalance: (amount: number) => void;
-    getIcon: () => string;
-    getBalanceInCrypto: () => number;
-};
-  
 // Create a map of store functions
-export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.reduce((acc, token) => {
-  const store = defineStore(`token_${token.index}`, {
-    state: (): Omit<Token, 'balance'> & { balance: number } => ({
-      ...token,
-      balance: 0, // Initialize balance to 0
+export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.reduce((acc, goal) => {
+  const store = defineStore(`goal_${goal.index}`, {
+    state: (): Omit<Goal, 'completeGoal' | 'payCost'> & { isCompleted: boolean } => ({
+      ...goal,
+      isCompleted: false, // Initialize isCompleted to false
     }),
     actions: {
-      updateBalance(amount: number) {
-        this.balance += amount;
+      completeGoal() {
+        this.isCompleted = true;
+        // Additional logic for when the goal is completed
       },
-      getIcon() {
-        const imgPath = `/src/assets/tokens/${this.index}.png`;
+      isCostPaid(tokenIndex: string): boolean {
+        // Check if the cost for the given token index is paid
+        const cost = this.costs.find(cost => cost.token === tokenIndex);
+        return cost ? cost.isPaid : false;
+      },
+      canPayCost (tokenIndex: string) {
+        const tokenStore = TokenManager.getTokenStore(tokenIndex);
+        const cost = this.costs.find(cost => cost.token === tokenIndex);
+        return tokenStore && cost ? tokenStore.balance >= cost.value : false;
+      },
+      payCost(tokenIndex: string) {
+        let isFullyPaid = true;
+        // Mark the cost for the specified token as paid
+        
+        this.costs.forEach(cost => {
+          if (cost.token === tokenIndex && !cost.isPaid && this.canPayCost(tokenIndex)) {
+            cost.isPaid = true;
+            const tokenStore = TokenManager.getTokenStore(tokenIndex);
+            tokenStore.updateBalance(-cost.value)
+          }
+          if (!cost.isPaid) {
+            isFullyPaid = false;
+          }
+        });
+
+        // Check if all costs are paid
+        if (isFullyPaid) {
+          this.completeGoal();
+        }
+      },
+      getImage() {
+        const imgPath = this.image ? `/public/goals/${this.index}.png` : '/public/goals/default.png';
         return new URL(imgPath, import.meta.url).href;
-      },
-      getBalanceInCrypto() {
-        return this.balance * this.price;
       },
     },
     persist: true, // Enable persistence for each store
   });
-    
+
   // Return the store with type assertion for autocompletion
-  acc[token.index] = store as unknown as () => TokenStoreType;
+  acc[goal.index] = store as unknown as () => GoalStoreType;
   return acc;
-}, {} as Record<string, () => TokenStoreType>);
+}, {} as Record<string, () => GoalStoreType>);

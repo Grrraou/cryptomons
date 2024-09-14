@@ -6,10 +6,10 @@
           </div>
         <div class="side-menu-container">
           <div class="logo-container">
-            <img src="@/assets/mainLogo.png" alt="Cryptomons Logo" class="logo" />
+            <img src="/public/mainLogo.png" alt="Cryptomons Logo" class="logo" />
           </div>
           <div class="totalAssets">
-            {{ totalAssetsValue }} <img class="token-icon" src="@/assets/tokens/cryptodollar.png">
+            {{ totalAssetsValue }} <img class="token-icon" :src="TokenManager.getTokenIcon('cryptodollar')">
           </div>
           <nav class="main-menu-nav">
             <ul>
@@ -19,31 +19,31 @@
               <li>
                 <router-link to="/mines">⛏️ Mines</router-link>
               </li>
-              <li v-if="true">
+              <li v-if="useGoalStores['discover_proof_of_stake']().isCompleted">
                 <router-link to="/staking">🔒 Staking</router-link>
               </li>
               <li v-else>
                 <router-link to="/staking" class="forbidden-link">🚫 Staking</router-link>
               </li>
-              <li v-if="true">
+              <li v-if="useGoalStores['grandma_bitcoin']().isCompleted">
                 <router-link to="/vault">🏛️ Vault</router-link>
               </li>
               <li v-else>
                 <router-link to="/vault" class="forbidden-link">🚫 Vault</router-link>
               </li>
-              <li v-if="true">
+              <li v-if="useGoalStores['build_and_build']().isCompleted">
                 <router-link to="/battle">⚔️ Battle</router-link>
               </li>
               <li v-else>
                 <router-link to="/battle" class="forbidden-link">🚫 Battle</router-link>
               </li>
-              <li v-if="true">
+              <li v-if="useGoalStores['shopping_on_silk_road']().isCompleted">
                 <router-link to="/inventory">📦 Inventory</router-link>
               </li>
               <li v-else>
                 <router-link to="/inventory" class="forbidden-link">🚫 Inventory</router-link>
               </li>
-              <li v-if="true">
+              <li v-if="useGoalStores['centralize_decentralization']().isCompleted">
                 <router-link to="/swap">🔄 Swap</router-link>
               </li>
               <li v-else>
@@ -70,12 +70,13 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, onBeforeUnmount } from 'vue';
+import { useGoalStores } from '@/stores/useGoals';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 
 export default defineComponent({
     name: 'SideMenu',
-    setup(props) {
+    setup() {
         /* SOUND */
         const soundOn = ref<boolean>(true);
         const soundIcon = computed(() => {
@@ -85,6 +86,13 @@ export default defineComponent({
             soundOn.value = !soundOn.value;
             AudioManager.toggleSound();
         };
+
+        /* GOALS UNLOCK */
+        const isStakingUnlocked = useGoalStores['discover_proof_of_stake']().isCompleted;
+        /* const isVaultUnlocked = GoalManager.isGoalReached('grandma_bitcoin');
+        const isBattleUnlocked = GoalManager.isGoalReached('build_and_build');
+        const isInventoryUnlocked = GoalManager.isGoalReached('shopping_on_silk_road');
+        const isSwapUnlocked = GoalManager.isGoalReached('centralize_decentralization'); */
 
         /* Refreshed total assets */
         const totalAssetsValue = ref<number>(TokenManager.getTotalAssetsValue());
@@ -102,10 +110,11 @@ export default defineComponent({
         });
 
         return {
-            TokenManager,
-            soundIcon,
-            toggleSound,
-            totalAssetsValue,
+          useGoalStores,
+          TokenManager,
+          soundIcon,
+          toggleSound,
+          totalAssetsValue,
     };
   },
 });
@@ -159,7 +168,7 @@ export default defineComponent({
 .side-menu {
     width: 160px;
     padding: 20px;
-    background-image: url('@/assets/menuBG.png');
+    background-image: url('/public/menuBG.png');
     position: fixed;
     height: 100vh;
 }

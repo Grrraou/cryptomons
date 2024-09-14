@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 
+const images = import.meta.glob('/src/assets/tokens/*.png');
+
 // Define the type for a token
 type Token = {
   index: string;
@@ -10,7 +12,7 @@ type Token = {
 
 // Define the token list
 export const tokensEnum = [
-    { index: 'price', name: 'Crypto Dollar', price: 1 },
+    { index: 'cryptodollar', name: 'Crypto Dollar', price: 1 },
     { index: 'btc', name: 'Bitcoin', price: 10 },//2009
     { index: 'nmc', name: 'Namecoin', price: 5 },//2011
     { index: 'ltc', name: 'Litecoin', price: 5 },//2011
@@ -57,7 +59,7 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
         this.balance += amount;
       },
       getIcon() {
-        const imgPath = `/src/assets/tokens/${this.index}.png`;
+        const imgPath = `/public/tokens/${this.index}.png`;
         return new URL(imgPath, import.meta.url).href;
       },
       getBalanceInCrypto() {
