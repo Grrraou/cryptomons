@@ -15,7 +15,7 @@ class TokenManager {
 
     static getTokenStore = (tokenIndex: string) => {
         return useTokenStores[tokenIndex]?.();
-      };
+    };
 
     static getTokenIcon(tokenIndex: string) {
         const tokenStore = this.getTokenStore(tokenIndex);

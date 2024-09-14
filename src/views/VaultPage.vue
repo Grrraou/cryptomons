@@ -35,6 +35,7 @@
   import { defineComponent, computed, ref } from 'vue';
   import { useTokenStores } from '@/stores/useTokens';
   import TokenThumb from '@/components/TokenThumb.vue';
+import TokenManager from '@/managers/TokenManager';
   
   export default defineComponent({
     name: 'VaultPage',
@@ -43,7 +44,7 @@
     },
     setup() {
       // Get all token stores
-      const tokenStores = Object.keys(useTokenStores).map(key => useTokenStores[key]());
+      const tokenStores = TokenManager.getTokens();
       
       const filterText = ref('');
       const sortOption = ref('default');

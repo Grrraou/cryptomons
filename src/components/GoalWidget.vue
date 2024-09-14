@@ -38,7 +38,7 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, computed, ref, onMounted } from 'vue';
+  import { defineComponent, computed } from 'vue';
   import { useGoalStores } from '@/stores/useGoals';
   import TokenManager from '@/managers/TokenManager';
   
@@ -64,17 +64,11 @@
       };
   
       // Background style for the goal box
-      const backgroundImage = ref('');
       const backgroundStyle = computed(() => ({
-        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${backgroundImage.value}')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${goalStore.getImage()}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }));
-  
-      // Load background image on mount
-      onMounted(() => {
-        backgroundImage.value = goalStore.getImage();
-      });
   
       return {
         goalStore,
