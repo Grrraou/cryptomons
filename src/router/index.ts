@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
-import CounterView from '@/views/CounterView.vue';
+import VaultPage from '@/views/VaultPage.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
-  { path: '/counter', name: 'Counter', component: CounterView },
+  { path: '/vault', name: 'Vault', component: VaultPage },
 ];
 
 const router = createRouter({

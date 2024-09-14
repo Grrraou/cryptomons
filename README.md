@@ -1,33 +1,34 @@
-# cryptomons
+# Cryptomons
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Cryptomons is a Vue 3 application with TypeScript, Pinia for state management, and Vue Router for navigation.
 
 ## Project Setup
 
-```sh
-yarn
-```
+### Prerequisites
 
-### Compile and Hot-Reload for Development
+- [Node.js](https://nodejs.org/) (v14+)
+- [Yarn](https://yarnpkg.com/)
 
-```sh
+### Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/cryptomons.git
+    ```
+
+2. Navigate into the project directory:
+    ```bash
+    cd cryptomons
+    ```
+
+3. Install dependencies:
+    ```bash
+    yarn install
+    ```
+
+## Development
+
+To run the project in development mode:
+
+```bash
 yarn dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-yarn build
-```
