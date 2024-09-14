@@ -24,8 +24,8 @@
             <img :src="tokenStore.getIcon()" class="token-icon" />
           </p>
         </div>
-        
-        <div class="action-container">
+      </div>
+      <div class="action-container">
           <button class="mine-button" @click="mineTokens">
             <img src="/public/mines/miningButton.png" alt="Mine Logo" class="button-logo" />
             Mine!
@@ -34,7 +34,6 @@
             <img src="/public/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" />
             Upgrade (Cost: {{ mineStore.getUpgradeCost() }} <img :src="tokenStore.getIcon()" class="token-icon-small" />)
           </button>
-        </div>
       </div>
   
       <!-- Workers Area Section -->
@@ -85,7 +84,7 @@ export default defineComponent({
       
       const mineTokens = () => {
         mineStore.clicks += 1;
-        mineStore.mine();
+        mineStore.mine(null);
       };
   
       const handleHeroDrop = (event: DragEvent) => {

@@ -9,7 +9,7 @@
             <img src="/public/mainLogo.png" alt="Cryptomons Logo" class="logo" />
           </div>
           <div class="totalAssets">
-            {{ totalAssetsValue }} <img class="token-icon" :src="TokenManager.getTokenIcon('cryptodollar')">
+            {{ totalAssetsValue.toFixed(2) }} <img class="token-icon" :src="TokenManager.getTokenIcon('cryptodollar')">
           </div>
           <nav class="main-menu-nav">
             <ul>
