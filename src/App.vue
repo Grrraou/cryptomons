@@ -1,11 +1,44 @@
 <template>
-  <div id="app">
-    <router-view />
+  <div class="layout">
+    <!-- Use the SideMenu component here -->
+    <SideMenu />
+
+    <!-- Main content area -->
+    <div class="page-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'App',
-};
+import { defineComponent } from 'vue';
+import SideMenu from './components/SideMenu.vue';
+import './assets/styles/main.css';
+import 'vue3-select/dist/vue3-select.css';
+
+export default defineComponent({
+  components: {
+    SideMenu,
+  },
+  created() {
+    // You can add any logic you want to run when the component is created here.
+  },
+});
 </script>
+
+<style scoped>
+body {
+  margin: 0px !important;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.page-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}
+</style>

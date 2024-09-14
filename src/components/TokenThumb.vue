@@ -29,10 +29,11 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, computed, ref } from 'vue';
+  import { defineComponent } from 'vue';
   import { useTokenStores } from '@/stores/useTokens';
   
   export default defineComponent({
+    name: 'TokenThumb',
     props: {
       token: {
         type: Object as () => { index: string; name: string },

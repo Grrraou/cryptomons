@@ -32,7 +32,7 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, computed, ref, onMounted, onBeforeUnmount } from 'vue';
+  import { defineComponent, computed, ref } from 'vue';
   import { useTokenStores } from '@/stores/useTokens';
   import TokenThumb from '@/components/TokenThumb.vue';
   
@@ -77,23 +77,6 @@
         return filtered;
       });
   
-      let intervalId: ReturnType<typeof setInterval> | null = null;
-  
-      const updateData = () => {
-        // Trigger reactivity updates
-        filteredTokens.value; // Accessing the computed property to trigger recomputation
-      };
-  
-      onMounted(() => {
-        intervalId = setInterval(updateData, 200);
-      });
-  
-      onBeforeUnmount(() => {
-        if (intervalId) {
-          clearInterval(intervalId);
-        }
-      });
-  
       return {
         filterText,
         sortOption,
@@ -102,9 +85,9 @@
       };
     },
   });
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   .filter-sort {
     display: flex;
     justify-content: space-between;
