@@ -23,7 +23,7 @@
       <p :class="{'highlight-total-value': sortOption === 'totalValue'}">
         <span class='label'>Total Value in Cryptocredits:</span>
         <br>
-        <span class="tokenSum">{{ tokenStore.getBalanceInCrypto() }} <img class="token-icon" :src="TokenManager.getTokenIcon('cryptodollar')" /></span>
+        <span class="tokenSum">{{ tokenStore.getBalanceInCrypto().toFixed(2) }} <img class="token-icon" :src="TokenManager.getTokenIcon('cryptodollar')" /></span>
       </p>
     </div>
   </template>

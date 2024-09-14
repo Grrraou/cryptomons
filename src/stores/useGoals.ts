@@ -21,15 +21,13 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
   const store = defineStore(`goal_${goal.index}`, {
     state: (): Omit<Goal, 'completeGoal' | 'payCost'> & { isCompleted: boolean } => ({
       ...goal,
-      isCompleted: false, // Initialize isCompleted to false
+      isCompleted: false,
     }),
     actions: {
       completeGoal() {
         this.isCompleted = true;
-        // Additional logic for when the goal is completed
       },
       isCostPaid(tokenIndex: string): boolean {
-        // Check if the cost for the given token index is paid
         const cost = this.costs.find(cost => cost.token === tokenIndex);
         return cost ? cost.isPaid : false;
       },
@@ -40,7 +38,6 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
       },
       payCost(tokenIndex: string) {
         let isFullyPaid = true;
-        // Mark the cost for the specified token as paid
         
         this.costs.forEach(cost => {
           if (cost.token === tokenIndex && !cost.isPaid && this.canPayCost(tokenIndex)) {

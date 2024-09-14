@@ -67,7 +67,9 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
             mine(amount: number|null) {
                 const token = TokenManager.getTokenStore(this.token);
                 token.balance += amount ?? this.getDefaultMiningAmount();
-                AudioManager.playRandom(miningSoundsEnum);
+                if (window.location.pathname === '/mines') {
+                    AudioManager.playRandom(miningSoundsEnum);
+                }
             },
             getDefaultMiningAmount() {
                 return (Math.random() * (this.level) * (0.0009 - 0.000001) + 0.000001);

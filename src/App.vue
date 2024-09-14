@@ -16,6 +16,7 @@ import SideMenu from './components/SideMenu.vue';
 import './assets/styles/main.css';
 import 'vue3-select/dist/vue3-select.css';
 import MineManager from './managers/MineManager';
+import StakingManager from './managers/StakingManager';
 
 export default defineComponent({
   components: {
@@ -24,6 +25,8 @@ export default defineComponent({
   created() {
     const mineManager = new MineManager();
     mineManager.startAutoMining();
+    const stakingManager = new StakingManager();
+    stakingManager.startAutoStaking();
   },
 });
 </script>
@@ -35,7 +38,7 @@ body {
 
 .layout {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .page-content {

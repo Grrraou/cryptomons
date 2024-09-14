@@ -88,6 +88,8 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     color: black;
     text-align: center;
+    min-width: 100%;
+    width: 50%; /* Update this to make it full width */
   }
   
   .goal-header {
@@ -191,7 +193,7 @@
   }
   
   .goal-info {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     padding: 15px;
     font-weight: bold;

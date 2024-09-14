@@ -1,9 +1,10 @@
 <template>
   <div class="goals-page">
     <h1 class="page-title">Goals /* <InfoBubble page="goals" /> */</h1>
-    <p>It is recommended to unlock them in order, but I don't really care, you're free!</p>
-    <div v-for="goal in goals" :key="goal.index">
-      <GoalWidget :goal="goal" />
+    <div class="goals-container">
+      <div v-for="goal in goals" :key="goal.index">
+        <GoalWidget :goal="goal" />
+      </div>
     </div>
   </div>
 </template>
@@ -53,6 +54,13 @@ export default defineComponent({
 
 .goals-page {
   padding: 20px;
+}
+
+.goals-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 70px;
+  align-items: flex-start;
 }
 
 h1 {
