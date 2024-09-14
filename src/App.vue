@@ -15,13 +15,15 @@ import { defineComponent } from 'vue';
 import SideMenu from './components/SideMenu.vue';
 import './assets/styles/main.css';
 import 'vue3-select/dist/vue3-select.css';
+import MineManager from './managers/MineManager';
 
 export default defineComponent({
   components: {
     SideMenu,
   },
   created() {
-    // You can add any logic you want to run when the component is created here.
+    const mineManager = new MineManager();
+    mineManager.startAutoMining();
   },
 });
 </script>

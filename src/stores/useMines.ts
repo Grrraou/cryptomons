@@ -1,10 +1,11 @@
 // src/stores/mineStore.ts
 import { defineStore } from 'pinia';
-import { minesEnum, Mine } from '@/enums/MinesEnum'; // Adjust the import path accordingly
+import { minesEnum, Mine, miningSoundsEnum } from '@/enums/MinesEnum'; // Adjust the import path accordingly
 import { useGoalStores } from './useGoals';
 import { useHeroStores } from './useHeroes';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
+import AudioManager from '@/managers/AudioManager';
 
 type MineStoreType = {
   index: string;
@@ -20,7 +21,8 @@ type MineStoreType = {
   canUpgrade: () => boolean;
   getUpgradeCost: () => number;
   getImage: () => string;
-  mine: () => void;
+  mine: (mount: number|null) => void;
+  getDefaultMiningAmount: () => number;
 };
 
 // Create a map of store functions for mines
@@ -28,8 +30,8 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
     const store = defineStore(`mine_${mine.index}`, {
         state: (): Mine & { clicks: number; level: number } => ({
         ...mine,
-        clicks: 0,   // Initialize clicks
-        level: 1,    // Initialize level
+        clicks: 0,
+        level: 1,
         }),
         actions: {
             isUnlocked() {
@@ -62,9 +64,13 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 const imgPath = this.image ? `/public/mines/${this.index}.png` : '/public/mines/default.png';
                 return new URL(imgPath, import.meta.url).href;
             },
-            mine() {
+            mine(amount: number|null) {
                 const token = TokenManager.getTokenStore(this.token);
-                token.balance += 1;
+                token.balance += amount ?? this.getDefaultMiningAmount();
+                AudioManager.playRandom(miningSoundsEnum);
+            },
+            getDefaultMiningAmount() {
+                return (Math.random() * (this.level) * (0.0009 - 0.000001) + 0.000001);
             },
         },
         persist: true, // Enable persistence for each store if needed

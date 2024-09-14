@@ -13,7 +13,7 @@ type HeroStoreType = {
     location: string;
     xp: number;
     level: number;
-    gainXp: (amount: number) => void;
+    gainXp: (amount: number|null) => void;
     levelUp: () => void;
     getPicture: () => string;
     isWorkingThere: (areaIndex: string) => boolean,
@@ -33,7 +33,8 @@ type HeroStoreType = {
         level: 1,
       }),
       actions: {
-        gainXp(amount: number) {
+        gainXp(amount: number|null = null) {
+          amount = amount ?? parseInt((Math.random() * (5 - 1) + 1).toFixed(0));
           this.xp += amount;
         },
         levelUp() {

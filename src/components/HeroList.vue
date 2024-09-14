@@ -93,6 +93,7 @@ import MineManager from '@/managers/MineManager';
   height: calc(80vh);
   overflow-y: auto;
   margin-top: 50px;
+  width: 120px;
 }
 
 .hero-grid {
