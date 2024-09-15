@@ -14,7 +14,6 @@
 import { defineComponent } from 'vue';
 import SideMenu from './components/SideMenu.vue';
 import './assets/styles/main.css';
-import 'vue3-select/dist/vue3-select.css';
 import MineManager from './managers/MineManager';
 import StakingManager from './managers/StakingManager';
 import BattlefieldManager from './managers/BattlefieldManager';

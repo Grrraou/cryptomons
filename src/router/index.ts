@@ -8,6 +8,7 @@ import AchievementsPage from '@/views/AchievementsPage.vue';
 import BattlePage from '@/views/BattlePage.vue';
 import StatsPage from '@/views/StatsPage.vue';
 import SettingsPage from '@/views/SettingsPage.vue';
+import SwapPage from '@/views/SwapPage.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
@@ -15,6 +16,7 @@ const routes = [
   { path: '/staking', name: 'Staking', component: StakingPage },
   { path: '/vault', name: 'Vault', component: VaultPage },
   { path: '/battle', name: 'Battle', component: BattlePage },
+  { path: '/swap', name: 'Swap', component: SwapPage },
   { path: '/goals', name: 'Goals', component: GoalsPage },
   { path: '/achievements', name: 'Achievements', component: AchievementsPage },
   { path: '/stats', name: 'Stats', component: StatsPage },
