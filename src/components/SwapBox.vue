@@ -73,8 +73,8 @@
         <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult }} <img :src="toToken.getIcon()" class="token-icon"></p>
       </div>
       <div v-else class="swap-result">
-        <p><img :src="fromToken.getIcon()" class="token-icon"> = {{ fromToken.price }}<img :src="getTokenPriceIcon('cryptodollar')" class="token-icon"></p>
-        <p><img :src="toToken.getIcon()" class="token-icon"> = {{ toToken.price }}<img :src="getTokenPriceIcon('cryptodollar')" class="token-icon"></p>
+        <p><img :src="fromToken.getIcon()" class="token-icon"> = {{ fromToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon"></p>
+        <p><img :src="toToken.getIcon()" class="token-icon"> = {{ toToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon"></p>
       </div>
     </div>
   </template>
@@ -83,6 +83,7 @@
   import { defineComponent, ref } from 'vue';
   import VueSelect from "vue3-select-component";
   import TokenManager from '@/managers/TokenManager';
+  import { TokenStoreType } from '@/stores/useTokens';
   
   export default defineComponent({
     name: 'SimpleSwapBox',
@@ -92,20 +93,29 @@
     setup() {
       // Initialize token stores
       const rawTokenStores = TokenManager.getTokens();
-  
-      // Simplify tokens to basic label and value properties, and add icon
-      const simpleTokenOptions = rawTokenStores.map(token => ({
+
+        interface SimpleTokenOption {
+            label: string;
+            value: TokenStoreType;
+            icon: string;
+            balance: number;
+            price: number;
+            index: string;
+            updateBalance: (amount: number) => void;
+        }
+      
+      const simpleTokenOptions: SimpleTokenOption[] = rawTokenStores.slice().map(token => ({
         label: token.name,
-        value: token, // Store the token object to maintain reference
-        icon: token.getIcon(), // Include the icon URL
+        value: token,
+        icon: token.getIcon(),
         balance: token.balance,
         price: token.price,
         index: token.index,
         updateBalance: token.updateBalance,
       }));
 
-      const fromTokenOptions = simpleTokenOptions.slice().sort((a, b) => b.balance - a.balance);
-      const toTokenOptions = simpleTokenOptions.slice().sort((a, b) => b.price - a.price);
+      const fromTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.balance - a.balance);
+      const toTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.price - a.price);
   
         // State for the selected tokens
         const cryptodollarToken = rawTokenStores.find(token => token.index === "cryptodollar")
@@ -113,17 +123,17 @@
         const highestBalanceToken = rawTokenStores.reduce((prev, current) => {
             if (current.index === 'cryptodollar') return prev;
             return (current.balance > prev.balance) ? current : prev;
-        }, simpleTokenOptions[1]);
+        }, rawTokenStores[1]);
         const fromToken = ref(highestBalanceToken);
         //console.log(fromToken.value)
 
         const toToken = ref(cryptodollarToken || rawTokenStores[0]);
         const amount = ref(0);
-        const swapResult = ref<string | null>(null);
+        const swapResult = ref<number>(0);
         
   
       // Custom filter method for VueSelect
-      const customFilter = (option, label, search) => {
+      const customFilter = (option: SimpleTokenOption, label: string, search: string) => {
         //console.log(search)
         if (!search) return true;
         const searchLower = search.toLowerCase();
@@ -131,16 +141,10 @@
         return option.label.toLowerCase().includes(searchLower) || option.index.toLowerCase().includes(searchLower);
       };
   
-      // Methods
-      const getTokenPriceIcon = (index) => {
-        const token = simpleTokenOptions.find(t => t.index === index);
-        return token ? token.icon : '';
-      };
-  
       const updateBalances = () => {
         //console.log()
-        fromToken.balance = fromToken.balance;
-        toToken.balance = toToken.balance;
+        fromToken.value.balance = fromToken.value.balance;
+        toToken.value.balance = toToken.value.balance;
         calculatePotentialSwap();
       };
   
@@ -158,13 +162,13 @@
         //console.log(amount)
         if (amount.value > 0 && fromTokenValue > 0 && toTokenValue > 0) {
           const fromTokenValueInDollar = amount.value * fromTokenValue;
-          swapResult.value = (fromTokenValueInDollar / toTokenValue).toFixed(6);
+          swapResult.value = (fromTokenValueInDollar / toTokenValue);
         } else {
-          swapResult.value = null;
+          swapResult.value = 0;
         }
       };
   
-      const selectPercentage = (percentage) => {
+      const selectPercentage = (percentage: number) => {
         amount.value = (fromToken.value.balance * percentage) / 100;
         calculatePotentialSwap();
       };
@@ -174,16 +178,15 @@
           alert(`Can't swap 0.`);
           return;
         }
-        console.log(fromToken.value.balance)
+
         if (fromToken.value.balance < amount.value) {
           alert(`Insufficient ${fromToken.value.index.toUpperCase()} balance.`);
           return;
         }
   
         alert(`Swapped ${amount.value} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
-        console.log(fromToken)
         fromToken.value.updateBalance(-amount.value);
-        toToken.value.updateBalance(parseFloat(swapResult.value));
+        toToken.value.updateBalance(swapResult.value);
         window.location.reload();
       };
   
@@ -194,9 +197,7 @@
         toTokenOptions,
         amount,
         swapResult,
-        simpleTokenOptions,
         customFilter,
-        getTokenPriceIcon,
         selectPercentage,
         switchTokens,
         swapTokens,

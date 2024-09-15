@@ -37,7 +37,7 @@ export const tokensEnum = [
 ];
 
 // Define stores for each token but do not create them yet
-type TokenStoreType = {
+export type TokenStoreType = {
     index: string;
     name: string;
     balance: number;
