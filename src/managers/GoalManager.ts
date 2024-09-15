@@ -10,6 +10,11 @@ class GoalManager {
     static getGoalStore (goalIndex: string) {
         return useGoalStores[goalIndex]?.();
     }
+
+    static isGoalReached(goalIndex: string) {
+        const goalStore = this.getGoalStore(goalIndex);
+        return goalStore ? goalStore.isCompleted : false;
+    }
 }
 
 export default GoalManager;
