@@ -17,6 +17,7 @@ import './assets/styles/main.css';
 import 'vue3-select/dist/vue3-select.css';
 import MineManager from './managers/MineManager';
 import StakingManager from './managers/StakingManager';
+import BattlefieldManager from './managers/BattlefieldManager';
 
 export default defineComponent({
   components: {
@@ -25,8 +26,17 @@ export default defineComponent({
   created() {
     const mineManager = new MineManager();
     mineManager.startAutoMining();
+
     const stakingManager = new StakingManager();
     stakingManager.startAutoStaking();
+
+    const battlefieldManager = new BattlefieldManager();
+    battlefieldManager.startAutoBattle();
+
+    // prevent right click
+    /* document.addEventListener('contextmenu', function (event) {
+      event.preventDefault();
+    }); */
   },
 });
 </script>

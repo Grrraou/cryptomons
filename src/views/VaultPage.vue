@@ -1,7 +1,6 @@
 <template>
     <div class="vault-page game-container">
-      <h1 class="page-title">Crypto Vault</h1>
-      <p>Total Value of Assets in Cryptocredits: {{ totalAssetsValue.toFixed(2) }}</p>
+      <h1 class="page-title">Crypto Vault <InfoBubble page="vault" /></h1>
   
       <!-- Filter and Sort UI -->
       <div class="filter-sort">
@@ -31,16 +30,17 @@
     </div>
   </template>
   
-  <script lang="ts">
-  import { defineComponent, computed, ref } from 'vue';
-  import { useTokenStores } from '@/stores/useTokens';
-  import TokenThumb from '@/components/TokenThumb.vue';
+<script lang="ts">
+import { defineComponent, computed, ref } from 'vue';
+import TokenThumb from '@/components/TokenThumb.vue';
 import TokenManager from '@/managers/TokenManager';
+import InfoBubble from '@/components/InfoBubble.vue';
   
   export default defineComponent({
     name: 'VaultPage',
     components: {
       TokenThumb,
+      InfoBubble
     },
     setup() {
       // Get all token stores
@@ -48,13 +48,6 @@ import TokenManager from '@/managers/TokenManager';
       
       const filterText = ref('');
       const sortOption = ref('default');
-  
-      // Compute the total value of all assets in Cryptocredits
-      const totalAssetsValue = computed(() => {
-        return tokenStores.reduce((total, store) => {
-          return total + (store.balance * store.price);
-        }, 0);
-      });
   
       // Filter and sort tokens based on the user's input
       const filteredTokens = computed(() => {
@@ -81,7 +74,6 @@ import TokenManager from '@/managers/TokenManager';
       return {
         filterText,
         sortOption,
-        totalAssetsValue,
         filteredTokens,
       };
     },

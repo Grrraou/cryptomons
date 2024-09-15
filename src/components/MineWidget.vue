@@ -48,7 +48,7 @@
               :hero="hero"
               class="hero-container"
             />
-        </div>
+          </div>
         </div>
       </div>
     </div>

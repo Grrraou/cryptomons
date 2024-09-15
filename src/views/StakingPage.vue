@@ -1,6 +1,6 @@
 <template>
     <div class="staking-page game-container">
-        <h1 class="page-title">Crypto Staking <!-- <InfoBubble page="staking" /> --></h1>
+        <h1 class="page-title">Crypto Staking <InfoBubble page="staking" /></h1>
         <div class="staking-list" v-for="staking in stakings" :key="staking.index">
             <StakingWidget
                 v-if="staking.isUnlocked()"
@@ -13,7 +13,7 @@
   
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-//import InfoBubble from '@/components/InfoBubble.vue';
+import InfoBubble from '@/components/InfoBubble.vue';
 import StakingWidget from '@/components/StakingWidget.vue';
 import StakingManager from '@/managers/StakingManager';
   
@@ -21,7 +21,7 @@ export default defineComponent({
     name: 'StakingPage',
     components: {
         StakingWidget,
-        //InfoBubble,
+        InfoBubble,
     },
     setup() {
         const stakings = StakingManager.getStakings();

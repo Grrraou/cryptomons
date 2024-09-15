@@ -3,7 +3,7 @@ import { heroesEnum, Hero } from "@/enums/HeroesEnum";
 import { useGoalStores } from './useGoals';
 import UXManager from '@/managers/UXManager';
 
-type HeroStoreType = {
+export type HeroStoreType = {
     index: string;
     name: string;
     requirement: string;

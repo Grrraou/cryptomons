@@ -9,6 +9,7 @@ export type AchievementStoreType = {
     description: string;
     target: number;
     loot: string | null;
+    image: boolean;
     progress: number;
     isCompleted: boolean;
     incrementProgress: (amount: number) => void;
@@ -34,10 +35,10 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
             },
             completeAchievement() {
                 this.isCompleted = true;
-                UXManager.showSuccess(`${this.title} achievement UNLOCKED`);
+                UXManager.showSuccess(`🎉 ${this.title} achievement UNLOCKED 🎉`);
             },
             getImage() {
-                const imgPath = this.index ? `/achievements/${this.index}.png` : '/achievements/default.png';
+                const imgPath = this.image ? `/achievements/${this.index}.png` : '/achievements/default.png';
                 return new URL(imgPath, import.meta.url).href;
             },
         },

@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia';
 import { minesEnum, Mine, miningSoundsEnum } from '@/enums/MinesEnum'; // Adjust the import path accordingly
 import { useGoalStores } from './useGoals';
-import { useHeroStores } from './useHeroes';
+import { HeroStoreType, useHeroStores } from './useHeroes';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
@@ -16,7 +16,7 @@ type MineStoreType = {
   clicks: number;
   level: number;
   isUnlocked: () => boolean,
-  getHeroes: () => any[];
+  getHeroes: () => HeroStoreType[];
   increaseClicks: (amount: number) => void;
   upgrade: () => void;
   canUpgrade: () => boolean;

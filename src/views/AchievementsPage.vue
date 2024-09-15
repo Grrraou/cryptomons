@@ -12,13 +12,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AchievementThumb from '@/components/AchievementThumb.vue';
-//import InfoBubble from '@/components/InfoBubble.vue';
+import InfoBubble from '@/components/InfoBubble.vue';
 import AchievementManager from '@/managers/AchievementManager';
   
 export default defineComponent({
     components: {
         AchievementThumb,
-        //InfoBubble,
+        InfoBubble,
     },
     setup() {
         const achievements = AchievementManager.getAchievements();

@@ -2,7 +2,7 @@
     <div class="clicker-game">
         <div class="game-container">
             <div class="areas-container">
-                <h1 class="page-title">Mines <!-- <InfoBubble page="mines" /> --></h1>
+                <h1 class="page-title">Mines <InfoBubble page="mines" /></h1>
   
                 <div class="areas-grid">
                     <div v-for="mine in mines" :key="mine.index">
@@ -25,12 +25,13 @@ import { defineComponent } from 'vue';
 import MineWidget from '@/components/MineWidget.vue';
 import HeroList from '@/components/HeroList.vue';
 import MineManager from '@/managers/MineManager';
+import InfoBubble from '@/components/InfoBubble.vue';
   
 export default defineComponent({
     components: {
     MineWidget,
     HeroList,
-    //InfoBubble,
+    InfoBubble,
     },
     setup() {
         const mines = MineManager.getMines();

@@ -1,6 +1,6 @@
 <template>
   <div class="goals-page">
-    <h1 class="page-title">Goals /* <InfoBubble page="goals" /> */</h1>
+    <h1 class="page-title">Goals <InfoBubble page="goals" /></h1>
     <div class="goals-container">
       <div v-for="goal in goals" :key="goal.index">
         <GoalWidget :goal="goal" />
@@ -13,12 +13,12 @@
 import { defineComponent, computed } from 'vue';
 import { useGoalStores } from '@/stores/useGoals';
 import GoalWidget from '@/components/GoalWidget.vue';
-//import InfoBubble from '@/components/InfoBubble.vue';
+import InfoBubble from '@/components/InfoBubble.vue';
 
 export default defineComponent({
   components: {
     GoalWidget,
-    //InfoBubble,
+    InfoBubble,
   },
   setup() {
     // Retrieve all goal stores

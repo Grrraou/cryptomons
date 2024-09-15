@@ -23,8 +23,7 @@ class MineManager {
         // Set a new interval and store its ID
         this.autoClickerIntervals = setInterval(() => {
             MineManager.getMines().forEach(mineStore => {
-                mineStore.getHeroes().forEach(hero => {
-                    const heroStore = HeroManager.getHeroStore(hero.index);
+                mineStore.getHeroes().forEach(heroStore => {
                     const tokenStore = TokenManager.getTokenStore(mineStore.token);
                     let amount = heroStore.miningPower * mineStore.getDefaultMiningAmount();
                     mineStore.mine(amount);
