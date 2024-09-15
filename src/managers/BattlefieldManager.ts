@@ -21,7 +21,7 @@ class BattlefieldManager {
         const monsters = this.getMonsters();
         const randomIndex = Math.floor(Math.random() * monsters.length);
         const monster = monsters[randomIndex];
-        return monster;
+        return { ...monster };
     }
 
     startAutoBattle() {

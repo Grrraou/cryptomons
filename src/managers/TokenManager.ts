@@ -1,4 +1,4 @@
-import { useTokenStores } from '@/stores/useTokens';
+import { TokenStoreType, useTokenStores } from '@/stores/useTokens';
 
 class TokenManager {
     construct() {}
@@ -13,7 +13,7 @@ class TokenManager {
         }, 0);
     }
 
-    static getTokenStore = (tokenIndex: string) => {
+    static getTokenStore(tokenIndex: string): TokenStoreType  {
         return useTokenStores[tokenIndex]?.();
     };
 

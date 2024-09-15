@@ -1,40 +1,41 @@
 <template>
-    <h1 class="page-title">BattleFields <InfoBubble page="battle" /></h1>
-    <div class="battle-page game-container">
-        <div class="battlefields-container">
-            <div v-for="(battlefield, index) in battlefields" 
-                :key="battlefield.index" 
-            >
-                <BattlefieldWidget :battlefield="battlefield" />
+    <h1 class="page-title">Inventory <InfoBubble page="inventory" /></h1>
+    <div class="inventory-page">
+        <!-- Top Section: Equipment and Selling -->
+        <div class="top-section">
+            <div class="equipement-section">
+                <InventoryEquipement />
+            </div>
+            <div class="selling-section">
+                <InventorySelling />
             </div>
         </div>
-        <HeroList class="hero-list" />
+  
+        <!-- Bottom Section: Inventory Component (Full Width) -->
+        <div class="inventory-section">
+            <InventoryChest />
+        </div>
     </div>
 </template>
   
 <script lang="ts">
 import { defineComponent } from 'vue';
-import BattlefieldWidget from '@/components/BattlefieldWidget.vue';
-import HeroList from '@/components/HeroList.vue';
+import InventoryEquipement from '@/components/InventoryEquipement.vue';
+import InventorySelling from '@/components/InventorySelling.vue';
+import InventoryChest from '@/components/InventoryChest.vue';
 import InfoBubble from '@/components/InfoBubble.vue';
-import BattlefieldManager from '@/managers/BattlefieldManager';
-
+  
 export default defineComponent({
     components: {
-        BattlefieldWidget,
-        HeroList,
-        InfoBubble
-    },
-    setup() {
-        const battlefields = BattlefieldManager.getBattlefields();
-
-        return {
-            battlefields,
-        };
+        InventoryEquipement,
+        InventorySelling,
+        InventoryChest,
+        InfoBubble,
     },
 });
 </script>
-  
+
+
 <style scoped>
 .page-title {
     position: relative;
@@ -51,46 +52,67 @@ export default defineComponent({
     letter-spacing: 1px;
     text-transform: uppercase;
     border-bottom: 2px solid #ffa500;
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
 }
-  
-.battle-page {
-    display: flex;
-    justify-content: space-between;
-}
-  
-.battlefields-container {
+
+.inventory-page {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    gap: 20px;
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
 }
   
-.battlefield-block {
-    margin: 10px auto;
-    padding: 20px;
+.top-section {
+    display: flex;
+    width: 100%;
+    height: 40%;
+    margin-bottom: 10px;
+}
+  
+.equipement-section {
     width: 90%;
-    border: 2px solid #ffa500;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fdfdfd;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #444;
+    border-radius: 10px;
+    background-color: #f0f0f0;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    background-blend-mode: lighten;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    margin-right: 10px;
+    background-size: cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/equipementBG.png');
 }
   
-.hero-list {
-    width: 200px;
-    max-height: 80vh;
+.selling-section {
+    width: 10%;
+    border: 2px solid #444;
+    border-radius: 10px;
+    background-color: #f5c6cb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/sellingBG.png');
+}
+  
+.inventory-section {
+    width: 100%;
+    height: 50%;
+    border: 2px solid #444;
+    border-radius: 10px;
+    background-color: #e0f7fa;
     overflow-y: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+    box-sizing: border-box;
+    background-size: cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/inventoryBG.png');
 }
 </style>
   

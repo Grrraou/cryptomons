@@ -5,8 +5,9 @@ import { Monster } from '@/enums/MonstersEnum';
 import BattlefieldManager from '@/managers/BattlefieldManager';
 import AudioManager from '@/managers/AudioManager';
 import HeroManager from '@/managers/HeroManager';
-import { Hero } from '@/enums/HeroesEnum';
 import { HeroStoreType } from './useHeroes';
+import ItemManager from '@/managers/ItemManager';
+import UXManager from '@/managers/UXManager';
 
 type BattlefieldStoreType = {
     index: string;
@@ -19,7 +20,9 @@ type BattlefieldStoreType = {
     getImage: () => string;
     getHeroes: () => HeroStoreType[];
     setMonster: () => string;
+    getMonsterImage: () => string;
     damageMonster: (amount: number) => void;
+    lootMonster: () => void;
     getDefaultDamage: () => number;
 };
 
@@ -49,22 +52,38 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
             },
             setMonster() {
                 const monster = BattlefieldManager.getRandomMonster();
-                monster.health = 100 * monster.power;
+                const randomness = Math.floor(Math.random() * (150 - 50 + 1)) + 50;
+                monster.health = randomness * monster.power;
                 this.currentMonster = monster;
+            },
+            getMonsterImage() {
+                return `/monsters/${this.currentMonster.index}.png`;
             },
             damageMonster(amount: number) {
                 if (this.currentMonster.health) {
                     this.currentMonster.health -= amount;
                     AudioManager.playRandom(attackSoundsEnum, 0.5);
                     if (this.currentMonster.health <= 0) {
+                        this.lootMonster();
                         this.setMonster();
                     }
                 } else {
                     this.setMonster();
                 }
             },
+            lootMonster() {
+                const loot = this.currentMonster.loot;
+                if (loot) {
+                    const item = ItemManager.getBaseItem(loot.index);
+                    if (item) {
+                        const itemStore = ItemManager.getItemStore();
+                        itemStore.addItemToInventory(item);
+                        UXManager.showSuccess(`🎁 looted: ${item.name}`);
+                    }
+                }
+            },
             getDefaultDamage() {
-                return 1;
+                return 10;
             }
         },
         persist: true,

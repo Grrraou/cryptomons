@@ -87,13 +87,6 @@ export default defineComponent({
             AudioManager.toggleSound();
         };
 
-        /* GOALS UNLOCK */
-        const isStakingUnlocked = useGoalStores['discover_proof_of_stake']().isCompleted;
-        /* const isVaultUnlocked = GoalManager.isGoalReached('grandma_bitcoin');
-        const isBattleUnlocked = GoalManager.isGoalReached('build_and_build');
-        const isInventoryUnlocked = GoalManager.isGoalReached('shopping_on_silk_road');
-        const isSwapUnlocked = GoalManager.isGoalReached('centralize_decentralization'); */
-
         /* Refreshed total assets */
         const totalAssetsValue = ref<number>(TokenManager.getTotalAssetsValue());
         let intervalId: number | null = null;

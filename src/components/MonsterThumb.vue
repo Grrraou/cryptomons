@@ -1,10 +1,10 @@
 <template>
-    <div class="monsterThumb" @click="attackManually($event)">
-        <img v-if="monster"
-           :src="monsterImage"
-           :alt="monster.name"
+    <div class="monsterThumb" @click="attackManually($event)" id="DomId">
+        <img v-if="battlefieldStore.currentMonster"
+           :src="battlefieldStore.getMonsterImage()"
+           :alt="battlefieldStore.currentMonster.name"
            class="monster-portrait" />
-        <p v-if="monster">{{ monster.name }} (HP: {{ monster.health }})</p>
+        <p v-if="battlefieldStore.currentMonster">{{ battlefieldStore.currentMonster.name }} (HP: {{ battlefieldStore.currentMonster.health }})</p>
         <p v-else>No monster</p>
     </div>
 </template>
@@ -27,24 +27,28 @@ export default defineComponent({
     },
     setup(props) {
       const battlefieldStore = BattlefieldManager.getBattlefieldStore(props.battlefield.index);
+      const DomId = `monster_${battlefieldStore.index}`;
+      console.log(battlefieldStore.index);
 
-      let monster = battlefieldStore.currentMonster;
-      const monsterImage = `/monsters/${monster.index}.png`;
-      if (!monster.health) {
+      battlefieldStore.currentMonster;
+      const monsterImage = `/monsters/${battlefieldStore.currentMonster.index}.png`;
+      if (!battlefieldStore.currentMonster.health) {
         battlefieldStore.setMonster();
-        monster = battlefieldStore.currentMonster;
       }
 
       const attackManually = (event: MouseEvent) => {
         const damage = battlefieldStore.getDefaultDamage();
+        console.log(battlefieldStore.currentMonster.index)
         battlefieldStore.damageMonster(damage);
         const x = event.clientX;
         const y = event.clientY;
         UXManager.showFlyingText('⚔️' + damage.toString(), null, x, y);
+        console.log(battlefieldStore.currentMonster.health)
       };
 
       return {
-        monster,
+        DomId,
+        battlefieldStore,
         monsterImage,
         attackManually,
       };
