@@ -21,6 +21,10 @@ class TokenManager {
         const tokenStore = this.getTokenStore(tokenIndex);
         return tokenStore ? tokenStore.getIcon() : '';
     }
+
+    static calculateSwapReturn(fromToken, toToken) {
+        const swapFees = 0.05;
+    }
 }
 
 export default TokenManager;

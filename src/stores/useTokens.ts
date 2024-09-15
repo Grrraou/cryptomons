@@ -42,6 +42,7 @@ export type TokenStoreType = {
     name: string;
     balance: number;
     price: number;
+    swapFees: number;
     updateBalance: (amount: number) => void;
     getIcon: () => string;
     getBalanceInCrypto: () => number;
@@ -50,9 +51,10 @@ export type TokenStoreType = {
 // Create a map of store functions
 export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.reduce((acc, token) => {
   const store = defineStore(`token_${token.index}`, {
-    state: (): Omit<Token, 'balance'> & { balance: number } => ({
+    state: (): Omit<Token, 'balance'> & { balance: number, swapFees: number } => ({
       ...token,
-      balance: 0, // Initialize balance to 0
+      balance: 0,
+      swapFees: 0.05,
     }),
     actions: {
       updateBalance(amount: number) {

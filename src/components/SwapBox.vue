@@ -1,6 +1,6 @@
 <template>
     <div class="swap-box">
-      <h2>Crypto Swap</h2>
+      <h2>Crypto Swap (fees: {{ fromToken.swapFees * 100 }}%)</h2>
       <div class="swap-interface">
         <!-- From Token -->
         <label for="from-token">From:</label>
@@ -16,7 +16,7 @@
           <template #option="{ option }">
             <div class="option-content">
               <img :src="option.icon" alt="Token Logo" class="token-logo" />
-              <span class="option-label">{{ option.label }} ( {{ option.balance }} )</span>
+              <span class="option-label">{{ option.label }} ( {{ toToken.balance }} )</span>
             </div>
           </template>
         </VueSelect>
@@ -84,6 +84,8 @@
   import VueSelect from "vue3-select-component";
   import TokenManager from '@/managers/TokenManager';
   import { TokenStoreType } from '@/stores/useTokens';
+import AudioManager from '@/managers/AudioManager';
+import UXManager from '@/managers/UXManager';
   
   export default defineComponent({
     name: 'SimpleSwapBox',
@@ -104,7 +106,7 @@
             updateBalance: (amount: number) => void;
         }
       
-      const simpleTokenOptions: SimpleTokenOption[] = rawTokenStores.slice().map(token => ({
+      let simpleTokenOptions: SimpleTokenOption[] = rawTokenStores.slice().map(token => ({
         label: token.name,
         value: token,
         icon: token.getIcon(),
@@ -114,8 +116,8 @@
         updateBalance: token.updateBalance,
       }));
 
-      const fromTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.balance - a.balance);
-      const toTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.price - a.price);
+      let fromTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.balance - a.balance);
+      let toTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.price - a.price);
   
         // State for the selected tokens
         const cryptodollarToken = rawTokenStores.find(token => token.index === "cryptodollar")
@@ -125,7 +127,6 @@
             return (current.balance > prev.balance) ? current : prev;
         }, rawTokenStores[1]);
         const fromToken = ref(highestBalanceToken);
-        //console.log(fromToken.value)
 
         const toToken = ref(cryptodollarToken || rawTokenStores[0]);
         const amount = ref(0);
@@ -149,7 +150,6 @@
       };
   
       const switchTokens = () => {
-        //console.log(fromToken.value)
         const tempToken = fromToken.value;
         fromToken.value = toToken.value;
         toToken.value = tempToken;
@@ -159,9 +159,10 @@
       const calculatePotentialSwap = () => {
         const fromTokenValue = fromToken.value.price;
         const toTokenValue = toToken.value.price;
-        //console.log(amount)
+        const fees = amount.value * fromToken.value.swapFees;
+
         if (amount.value > 0 && fromTokenValue > 0 && toTokenValue > 0) {
-          const fromTokenValueInDollar = amount.value * fromTokenValue;
+          const fromTokenValueInDollar = ((amount.value - fees) * fromTokenValue);
           swapResult.value = (fromTokenValueInDollar / toTokenValue);
         } else {
           swapResult.value = 0;
@@ -183,11 +184,30 @@
           alert(`Insufficient ${fromToken.value.index.toUpperCase()} balance.`);
           return;
         }
-  
-        alert(`Swapped ${amount.value} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
+
+        const priceChangeFactor = 0.01; // Control the price change sensitivity
+        // Adjust the fromToken price
+        if (fromToken.value.index !== 'cryptodollar') {
+            // Decrease fromToken price, proportional to its current price and the amount being swapped
+            const priceDecrease = fromToken.value.price * (priceChangeFactor * (amount.value / (amount.value + fromToken.value.price)));
+            fromToken.value.price = Math.max(fromToken.value.price - priceDecrease, 0.01);
+        }
+
+        // Adjust the toToken price
+        if (toToken.value.index !== 'cryptodollar') {
+            // Increase toToken price, proportional to its current price and the amount being swapped
+            const priceIncrease = toToken.value.price * (priceChangeFactor * (amount.value / (amount.value + toToken.value.price)));
+            toToken.value.price = Math.max(toToken.value.price + priceIncrease, 0.01);
+        }
+        
         fromToken.value.updateBalance(-amount.value);
         toToken.value.updateBalance(swapResult.value);
-        window.location.reload();
+        UXManager.showSuccess(`Swapped ${amount.value} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
+        AudioManager.play('swap.wav');
+        updateBalances();
+        swapResult.value = 0;
+        amount.value = 0;
+        //window.location.reload();
       };
   
       return {
