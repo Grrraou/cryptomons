@@ -12,7 +12,7 @@ body {
     padding: 0 !important;
     padding: 0 !important;
     background-size: cover;
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/public/defaultBG.png');
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('defaultBG.png');
     
 }
 
@@ -20,5 +20,5 @@ body {
     justify-content: space-between;
     padding: 0 !important;
     background-size: cover;
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/public/defaultBG.png');
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('defaultBG.png');
 }

@@ -15,7 +15,7 @@ class AudioManager {
 
     static play(soundFileName: string, volume = 1): Promise<void> {
         return new Promise<void>((resolve) => {
-            const sound = new Audio(`/public/sounds/${soundFileName}`);
+            const sound = new Audio(`/sounds/${soundFileName}`);
             
             if (this.isSoundOn()) {
                 sound.volume = volume;

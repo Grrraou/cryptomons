@@ -4,6 +4,7 @@ import MinesPage from '@/views/MinesPage.vue';
 import VaultPage from '@/views/VaultPage.vue';
 import GoalsPage from '@/views/GoalsPage.vue';
 import StakingPage from '@/views/StakingPage.vue';
+import AchievementsPage from '@/views/AchievementsPage.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
@@ -11,6 +12,7 @@ const routes = [
   { path: '/staking', name: 'Staking', component: StakingPage },
   { path: '/vault', name: 'Vault', component: VaultPage },
   { path: '/goals', name: 'Goals', component: GoalsPage },
+  { path: '/achievements', name: 'Achievements', component: AchievementsPage },
 ];
 
 const router = createRouter({

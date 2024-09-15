@@ -1,13 +1,27 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import router from './router';
 import { createPinia } from 'pinia';
 import piniaPersistedState from 'pinia-plugin-persistedstate';
-import router from './router';
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+const app = createApp(App);
+app.use(router);
 
 const pinia = createPinia();
 pinia.use(piniaPersistedState);
-
-const app = createApp(App);
 app.use(pinia);
-app.use(router);
+
+/* https://vue3-toastify.js-bridge.com/api/toast.html */
+app.use(Vue3Toastify, {
+    position: 'top-right',
+    autoClose: 20000,
+    closeOnClick: true,
+    pauseOnHover: true,
+    hideProgressBar: false,
+    icon: false,
+    rtl: false,
+} as ToastContainerOptions);
+
 app.mount('#app');

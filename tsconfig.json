@@ -4,7 +4,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client", "vue3-toastify/global"],
     "moduleResolution": "Node", // Ensure this is set to Node
     "noEmit": true,
     "strict": true,

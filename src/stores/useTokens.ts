@@ -59,7 +59,7 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
         this.balance += amount;
       },
       getIcon() {
-        const imgPath = `/public/tokens/${this.index}.png`;
+        const imgPath = `/tokens/${this.index}.png`;
         return new URL(imgPath, import.meta.url).href;
       },
       getBalanceInCrypto() {

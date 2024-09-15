@@ -82,7 +82,7 @@ import MineManager from '@/managers/MineManager';
   text-align: center;
   padding: 20px;
   position: fixed;
-  background-image: url('/public/heroes/workersMenuBG.png');
+  background-image: url('/heroes/workersMenuBG.png');
   background-size: cover;
   background-position: center;
   scrollbar-width: none;

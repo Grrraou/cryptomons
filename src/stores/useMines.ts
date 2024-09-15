@@ -6,6 +6,7 @@ import { useHeroStores } from './useHeroes';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
+import AchievementManager from '@/managers/AchievementManager';
 
 type MineStoreType = {
   index: string;
@@ -44,11 +45,13 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
             },
             increaseClicks(amount: number) {
                 this.clicks += amount;
+                AchievementManager.incrementClickAreaAchievements(this.index, amount);
             },
             upgrade() {
                 if (this.canUpgrade()) {
                     const token = TokenManager.getTokenStore(this.token);
                     this.level += 1;
+                    AchievementManager.incrementUpgradeAreaAchievements(this.index, 1);
                     token.balance -= this.getUpgradeCost();
                 }
             },
@@ -61,7 +64,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return this.level * this.level * 100; // Example: cost increases with the level
             },
             getImage() {
-                const imgPath = this.image ? `/public/mines/${this.index}.png` : '/public/mines/default.png';
+                const imgPath = this.image ? `/mines/${this.index}.png` : '/mines/default.png';
                 return new URL(imgPath, import.meta.url).href;
             },
             mine(amount: number|null) {

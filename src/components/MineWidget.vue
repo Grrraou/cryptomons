@@ -13,11 +13,11 @@
         <div class="statsBox">
           <p class="clicks-display statDisplay">
             <span class="clicks-text">{{ mineStore.clicks }}</span>
-            <img src="/public/mines/clickCount.png" class="click-icon" />
+            <img src="/mines/clickCount.png" class="click-icon" />
           </p>
           <p class="level-display statDisplay">
             <span class="level-text">{{ mineStore.level }}</span>
-            <img src="/public/mines/upgradeLevel.png" class="level-icon" />
+            <img src="/mines/upgradeLevel.png" class="level-icon" />
           </p>
           <p class="token-balance-display statDisplay">
             <span class="token-balance-text">{{ tokenStore.balance }}</span>
@@ -27,11 +27,11 @@
       </div>
       <div class="action-container">
           <button class="mine-button" @click="mineManually($event)">
-            <img src="/public/mines/miningButton.png" alt="Mine Logo" class="button-logo" />
+            <img src="/mines/miningButton.png" alt="Mine Logo" class="button-logo" />
             Mine!
           </button>
           <button class="upgrade-button" @click="upgrade" :disabled="!mineStore.canUpgrade()">
-            <img src="/public/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" />
+            <img src="/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" />
             Upgrade (Cost: {{ mineStore.getUpgradeCost() }} <img :src="tokenStore.getIcon()" class="token-icon-small" />)
           </button>
       </div>
@@ -93,7 +93,7 @@ export default defineComponent({
       };
       
       const mineManually = (event: MouseEvent) => {
-        mineStore.clicks += 1;
+        mineStore.increaseClicks(1);
         const minedAmount = mineStore.getDefaultMiningAmount();
         mineStore.mine(minedAmount);
         const x = event.clientX;
@@ -101,12 +101,11 @@ export default defineComponent({
         UXManager.showFlyingText(minedAmount.toString(), tokenStore.getIcon(), x, y);
       };
 
-      
       const upgrade = (event: MouseEvent) => {
         mineStore.upgrade()
         const x = event.clientX;
         const y = event.clientY;
-        UXManager.showFlyingText('Level UP !', '/public/levelUp.png', x, y);
+        UXManager.showFlyingText('Level UP !', '/levelUp.png', x, y);
       };
 
       return {
@@ -313,7 +312,7 @@ export default defineComponent({
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    background-image: url('/public/mines/workingBG.png');
+    background-image: url('/mines/workingBG.png');
     background-size: cover;
     background-position: center;
     border-radius: 15px;

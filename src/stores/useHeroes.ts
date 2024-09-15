@@ -38,7 +38,7 @@ type HeroStoreType = {
         gainXp(amount: number|null = null) {
           amount = amount ?? parseInt((Math.random() * (5 - 1) + 1).toFixed(0));
           this.xp += amount;
-          UXManager.showFlyingTextOnElement(amount.toString(), '/public/xp.png', this.getDOMid(), 50);
+          UXManager.showFlyingTextOnElement(amount.toString(), '/xp.png', this.getDOMid(), 50);
         },
         levelUp() {
             this.xp = 0;
@@ -47,7 +47,7 @@ type HeroStoreType = {
             this.level += 1;
         },
         getPicture() {
-            const imgPath = `/public/heroes/${this.index}.png`;
+            const imgPath = `/heroes/${this.index}.png`;
             return new URL(imgPath, import.meta.url).href;
         },
         isWorkingThere(areaIndex: string) {

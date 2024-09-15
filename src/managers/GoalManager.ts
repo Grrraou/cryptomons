@@ -7,9 +7,9 @@ class GoalManager {
         return Object.keys(useGoalStores).map(key => useGoalStores[key]());
     }
 
-    static getGoalStore = (goalIndex: string) => {
+    static getGoalStore (goalIndex: string) {
         return useGoalStores[goalIndex]?.();
-    };
+    }
 }
 
 export default GoalManager;

@@ -56,7 +56,7 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
         }
       },
       getImage() {
-        const imgPath = this.image ? `/public/goals/${this.index}.png` : '/public/goals/default.png';
+        const imgPath = this.image ? `/goals/${this.index}.png` : '/goals/default.png';
         return new URL(imgPath, import.meta.url).href;
       },
     },

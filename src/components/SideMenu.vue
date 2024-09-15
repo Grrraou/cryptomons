@@ -6,7 +6,7 @@
           </div>
         <div class="side-menu-container">
           <div class="logo-container">
-            <img src="/public/mainLogo.png" alt="Cryptomons Logo" class="logo" />
+            <img src="/mainLogo.png" alt="Cryptomons Logo" class="logo" />
           </div>
           <div class="totalAssets">
             {{ totalAssetsValue.toFixed(2) }} <img class="token-icon" :src="TokenManager.getTokenIcon('cryptodollar')">
@@ -168,7 +168,7 @@ export default defineComponent({
 .side-menu {
     width: 160px;
     padding: 20px;
-    background-image: url('/public/menuBG.png');
+    background-image: url('/menuBG.png');
     position: fixed;
     height: 100vh;
 }
