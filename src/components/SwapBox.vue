@@ -4,7 +4,6 @@
       <div class="swap-interface">
         <!-- From Token -->
         <label for="from-token">From:</label>
-        {{ fromToken }}
         <VueSelect
           v-model="fromToken"
           :options="fromTokenOptions"
@@ -71,7 +70,7 @@
   
       <!-- Swap Result -->
       <div v-if="swapResult" class="swap-result">
-        <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult }} <img :src="toToken.icon" class="token-icon"></p>
+        <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult }} <img :src="toToken.getIcon()" class="token-icon"></p>
       </div>
       <div v-else class="swap-result">
         <p><img :src="fromToken.getIcon()" class="token-icon"> = {{ fromToken.price }}<img :src="getTokenPriceIcon('cryptodollar')" class="token-icon"></p>
@@ -116,7 +115,7 @@
             return (current.balance > prev.balance) ? current : prev;
         }, simpleTokenOptions[1]);
         const fromToken = ref(highestBalanceToken);
-        console.log(fromToken.value)
+        //console.log(fromToken.value)
 
         const toToken = ref(cryptodollarToken || rawTokenStores[0]);
         const amount = ref(0);
@@ -125,7 +124,7 @@
   
       // Custom filter method for VueSelect
       const customFilter = (option, label, search) => {
-        console.log(search)
+        //console.log(search)
         if (!search) return true;
         const searchLower = search.toLowerCase();
         
@@ -139,14 +138,14 @@
       };
   
       const updateBalances = () => {
-        console.log()
+        //console.log()
         fromToken.balance = fromToken.balance;
         toToken.balance = toToken.balance;
         calculatePotentialSwap();
       };
   
       const switchTokens = () => {
-        console.log(fromToken.value)
+        //console.log(fromToken.value)
         const tempToken = fromToken.value;
         fromToken.value = toToken.value;
         toToken.value = tempToken;
@@ -156,7 +155,7 @@
       const calculatePotentialSwap = () => {
         const fromTokenValue = fromToken.value.price;
         const toTokenValue = toToken.value.price;
-  
+        //console.log(amount)
         if (amount.value > 0 && fromTokenValue > 0 && toTokenValue > 0) {
           const fromTokenValueInDollar = amount.value * fromTokenValue;
           swapResult.value = (fromTokenValueInDollar / toTokenValue).toFixed(6);
@@ -175,15 +174,16 @@
           alert(`Can't swap 0.`);
           return;
         }
+        console.log(fromToken.value.balance)
         if (fromToken.value.balance < amount.value) {
           alert(`Insufficient ${fromToken.value.index.toUpperCase()} balance.`);
           return;
         }
   
         alert(`Swapped ${amount.value} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
-  
-        fromToken.value.value.updateBalance(-amount.value);
-        toToken.value.value.updateBalance(parseFloat(swapResult.value));
+        console.log(fromToken)
+        fromToken.value.updateBalance(-amount.value);
+        toToken.value.updateBalance(parseFloat(swapResult.value));
         window.location.reload();
       };
   
