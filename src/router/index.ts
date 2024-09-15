@@ -6,6 +6,8 @@ import GoalsPage from '@/views/GoalsPage.vue';
 import StakingPage from '@/views/StakingPage.vue';
 import AchievementsPage from '@/views/AchievementsPage.vue';
 import BattlePage from '@/views/BattlePage.vue';
+import StatsPage from '@/views/StatsPage.vue';
+import SettingsPage from '@/views/SettingsPage.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
@@ -15,6 +17,8 @@ const routes = [
   { path: '/battle', name: 'Battle', component: BattlePage },
   { path: '/goals', name: 'Goals', component: GoalsPage },
   { path: '/achievements', name: 'Achievements', component: AchievementsPage },
+  { path: '/stats', name: 'Stats', component: StatsPage },
+  { path: '/settings', name: 'Settings', component: SettingsPage },
 ];
 
 const router = createRouter({
