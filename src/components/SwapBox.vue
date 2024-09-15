@@ -24,7 +24,7 @@
         <!-- Swap Button (Switch From and To Tokens) -->
         <div class="swap-tokens-button-container">
           <button class="swap-tokens-button" @click="switchTokens">
-            <img src="/swap/swapButton.png" alt="Switch Tokens" class="swap-icon" />
+            <img src="/swap/switch.png" alt="Switch Tokens" class="swap-icon" />
           </button>
         </div>
   
@@ -211,6 +211,7 @@ import UXManager from '@/managers/UXManager';
       };
   
       return {
+        rawTokenStores,
         fromToken,
         fromTokenOptions,
         toToken,
