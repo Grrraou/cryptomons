@@ -16,7 +16,7 @@
           <template #option="{ option }">
             <div class="option-content">
               <img :src="option.icon" alt="Token Logo" class="token-logo" />
-              <span class="option-label">{{ option.label }} ( {{ toToken.balance }} )</span>
+              <span class="option-label">{{ option.label }} ( {{ option.balance }} )</span>
             </div>
           </template>
         </VueSelect>
