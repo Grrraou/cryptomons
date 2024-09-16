@@ -18,11 +18,11 @@
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <input type="number" v-model.number="stakeInput"  placeholder="Enter amount to stake" />
-        <div class="convenience-buttons">
-            <button @click="setStakePercentage(25)">Stake 25%</button>
-            <button @click="setStakePercentage(50)">Stake 50%</button>
-            <button @click="setStakePercentage(75)">Stake 75%</button>
-            <button @click="setStakePercentage(100)">Stake 100%</button>
+        <div class="quick-select-buttons">
+          <button @click="selectPercentage(25)">25%</button>
+          <button @click="selectPercentage(50)">50%</button>
+          <button @click="selectPercentage(75)">75%</button>
+          <button @click="selectPercentage(100)">100%</button>
         </div>
         <button @click="stakeTokens" class="staking-button">Stake</button>
     </div>
@@ -64,7 +64,7 @@ export default defineComponent({
             }
         };
   
-        const setStakePercentage = (percentage: number) => {
+        const selectPercentage = (percentage: number) => {
             stakeInput.value = (tokenStore.balance * percentage) / 100;
         };
   
@@ -74,7 +74,7 @@ export default defineComponent({
             stakeInput,
             backgroundStyle,
             stakeTokens,
-            setStakePercentage,
+            selectPercentage,
         };
     },
 });
@@ -82,6 +82,25 @@ export default defineComponent({
   
 
 <style scoped>
+.staking-widget {
+    margin: 10px auto;
+    padding: 20px;
+    width: 25%;
+    border: 4px solid #ffa500;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fdfdfd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-blend-mode: 'lighten';
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #444;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
 .staking-button {
     display: inline-flex;
     align-items: center;
@@ -109,25 +128,6 @@ export default defineComponent({
     transition: transform 0.3s ease;
 }
 
-.staking-widget {
-    margin: 10px auto;
-    padding: 20px;
-    width: 90%;
-    border: 4px solid #ffa500;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fdfdfd;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-blend-mode: 'lighten';
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #444;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
-
 .staking-widget:hover {
     border: 4px solid #5EC15E;
 }
@@ -153,6 +153,41 @@ export default defineComponent({
     padding: 5px 10px;
 }
 
+
+
+/* PERCENT BUTTONS */
+.quick-select-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.quick-select-buttons button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 2px solid #e0e0e0;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quick-select-buttons button:hover {
+    background-color: #ffa500;
+    color: #fff;
+    border-color: #ffa500;
+}
+
+.quick-select-buttons button:active {
+    transform: scale(0.95);
+}
+
+.quick-select-buttons button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
 .convenience-buttons button {
     margin-right: 5px;
 }

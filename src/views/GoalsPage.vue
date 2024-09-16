@@ -60,7 +60,8 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   gap: 0 70px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 h1 {

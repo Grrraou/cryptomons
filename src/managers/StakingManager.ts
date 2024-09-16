@@ -22,15 +22,17 @@ class StakingManager {
     
         // Set a new interval and store its ID
         this.autoClickerIntervals = setInterval(() => {
+            let isThereStaked = false;
             StakingManager.getStakings().forEach(stakingStore => {
                 if (stakingStore.staked > 0 && stakingStore.getEstimatedGains() > 0) {
+                    isThereStaked = true;
                     const tokenStore = TokenManager.getTokenStore(stakingStore.token);
                     const amount = stakingStore.getEstimatedGains();
                     tokenStore.balance += amount;
                     UXManager.showFlyingTextOnElement(amount.toString(), tokenStore.getIcon(), stakingStore.getDOMid(), 150);
                 }
             });
-            if (window.location.pathname === '/staking') {
+            if (window.location.pathname === '/staking' && isThereStaked) {
                 AudioManager.play('staking.wav', 0.2);
             }
         }, 10000);
