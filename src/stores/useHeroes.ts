@@ -6,6 +6,7 @@ import UXManager from '@/managers/UXManager';
 export type HeroStoreType = {
     index: string;
     name: string;
+    token: string;
     requirement: string;
     baseBattlePower: number;
     baseMiningPower: number;
