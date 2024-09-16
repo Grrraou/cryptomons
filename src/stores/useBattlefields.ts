@@ -83,7 +83,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 }
             },
             getDefaultDamage() {
-                return 10;
+                return 1;
             }
         },
         persist: true,

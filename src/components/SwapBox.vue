@@ -1,241 +1,166 @@
 <template>
-    <div class="swap-box">
-      <h2>Crypto Swap (fees: {{ fromToken.swapFees * 100 }}%)</h2>
-      <div class="swap-interface">
-        <!-- From Token -->
-        <label for="from-token">From:</label>
-        <VueSelect
-          v-model="fromToken"
-          :options="fromTokenOptions"
-          label="label"
-          placeholder="Select or search token"
-          :filterBy="customFilter"
-          :clearable="false"
-        >
-          <!-- Option template to display each option with an icon -->
-          <template #option="{ option }">
-            <div class="option-content">
-              <img :src="option.icon" alt="Token Logo" class="token-logo" />
-              <span class="option-label">{{ option.label }} ( {{ option.balance }} )</span>
-            </div>
-          </template>
-        </VueSelect>
-  
-        <!-- Swap Button (Switch From and To Tokens) -->
-        <div class="swap-tokens-button-container">
-          <button class="swap-tokens-button" @click="switchTokens">
-            <img src="/swap/switch.png" alt="Switch Tokens" class="swap-icon" />
-          </button>
-        </div>
-  
-        <!-- To Token -->
-        <label for="to-token">To:</label>
-        <VueSelect
-          v-model="toToken"
-          :options="toTokenOptions"
-          label="label"
-          placeholder="Select or search token"
-          :customFilter="customFilter"
-        >
-          <template #option="{ option }">
-            <div class="option-content">
-              <img :src="option.icon" alt="Token Logo" class="token-logo" />
-              <span class="option-label">{{ option.label }} ( {{ option.balance }} )</span>
-            </div>
-          </template>
-        </VueSelect>
-  
-        <!-- Swap Amount -->
-        <div class="swap-amount">
-          <input 
-            v-model="amount" 
-            type="number" 
-            placeholder="Amount" 
-            class="amount-input" 
-          />
-          <div class="quick-select-buttons">
-            <button @click="selectPercentage(25)">25%</button>
-            <button @click="selectPercentage(50)">50%</button>
-            <button @click="selectPercentage(75)">75%</button>
-            <button @click="selectPercentage(100)">100%</button>
+  <div class="swap-box">
+    <h2>Crypto Swap (fees: {{ fromToken.swapFees * 100 }}%)</h2>
+    <div class="swap-interface">
+
+      <!-- From Token -->
+      <label for="from-token">From:</label>
+      <VueSelect
+        v-model="fromToken"
+        :options="swapStore.getFromTokenSwapOptions()"
+        label="label"
+        placeholder="Select or search token"
+        :clearable=false
+      >
+        <!-- Option template to display each option with an icon -->
+        <template #option="{ option }">
+          <div class="option-content">
+            <img :src="option.icon" alt="Token Logo" class="token-logo" draggable="false" />
+            <span class="option-label">{{ option.label }} ( {{ option.balance }} )</span>
           </div>
-        </div>
+        </template>
+      </VueSelect>
   
-        <!-- Swap Button -->
-        <button class="swap-button" @click="swapTokens">
-          <img src="/swap/swapButton.png" alt="Swap Logo" class="button-logo" />
-          Swap!
+      <!-- Swap Button (Switch From and To Tokens) -->
+      <div class="swap-tokens-button-container">
+        <button class="swap-tokens-button" @click="swapStore.switchTokens()">
+          <img src="/swap/switch.png" alt="Switch Tokens" class="swap-icon" draggable="false" />
         </button>
       </div>
   
-      <!-- Swap Result -->
-      <div v-if="swapResult" class="swap-result">
-        <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult }} <img :src="toToken.getIcon()" class="token-icon"></p>
-      </div>
-      <div v-else class="swap-result">
-        <p><img :src="fromToken.getIcon()" class="token-icon"> = {{ fromToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon"></p>
-        <p><img :src="toToken.getIcon()" class="token-icon"> = {{ toToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon"></p>
-      </div>
-    </div>
-  </template>
+      <!-- To Token -->
+      <label for="to-token">To:</label>
+      <VueSelect
+        v-model="toToken"
+        :options="swapStore.getToTokenSwapOptions()"
+        label="label"
+        placeholder="Select or search token"
+      >
+        <template #option="{ option }">
+          <div class="option-content">
+            <img :src="option.icon" alt="Token Logo" class="token-logo" draggable="false" />
+            <span class="option-label">{{ option.label }}  at {{ option.price }}<img src="/tokens/cryptodollar.png" alt="Token Logo" class="token-logo" /></span>
+          </div>
+        </template>
+      </VueSelect>
   
-  <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import VueSelect from "vue3-select-component";
-  import TokenManager from '@/managers/TokenManager';
-  import { TokenStoreType } from '@/stores/useTokens';
+      <!-- Swap Amount -->
+      <div class="swap-amount">
+        <input 
+          v-model="swapStore.amount" 
+          type="number" 
+          placeholder="Amount" 
+          class="amount-input" 
+        />
+        <div class="quick-select-buttons">
+          <button @click="selectPercentage(25)">25%</button>
+          <button @click="selectPercentage(50)">50%</button>
+          <button @click="selectPercentage(75)">75%</button>
+          <button @click="selectPercentage(100)">100%</button>
+        </div>
+      </div>
+  
+      <!-- Swap Button -->
+      <button class="swap-button" @click="swapTokens">
+        <img src="/swap/swapButton.png" alt="Swap Logo" class="button-logo" draggable="false" />
+        Swap!
+      </button>
+    </div>
+  
+    <!-- Swap Result -->
+    <div v-if="swapResult" class="swap-result">
+      <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult }} <img :src="toToken.getIcon()" class="token-icon"></p>
+    </div>
+    <div v-else class="swap-result">
+      <p>1<img :src="fromToken.getIcon()" class="token-icon" draggable="false"> = {{ fromToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon" draggable="false"></p>
+      <p>1<img :src="toToken.getIcon()" class="token-icon" draggable="false"> = {{ toToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon" draggable="false"></p>
+    </div>
+  </div>
+</template>
+  
+<script lang="ts">
+import { computed, defineComponent } from 'vue';
+import VueSelect from "vue3-select-component";
+import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import UXManager from '@/managers/UXManager';
   
-  export default defineComponent({
-    name: 'SimpleSwapBox',
-    components: {
-      VueSelect,
-    },
-    setup() {
-      // Initialize token stores
-      const rawTokenStores = TokenManager.getTokens();
+export default defineComponent({
+  name: 'SimpleSwapBox',
+  components: {
+    VueSelect,
+  },
+  setup() {
+    const swapStore = TokenManager.getSwapStore();
 
-        interface SimpleTokenOption {
-            label: string;
-            value: TokenStoreType;
-            icon: string;
-            balance: number;
-            price: number;
-            index: string;
-            updateBalance: (amount: number) => void;
-        }
-      
-      let simpleTokenOptions: SimpleTokenOption[] = rawTokenStores.slice().map(token => ({
-        label: token.name,
-        value: token,
-        icon: token.getIcon(),
-        balance: token.balance,
-        price: token.price,
-        index: token.index,
-        updateBalance: token.updateBalance,
-      }));
-
-      let fromTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.balance - a.balance);
-      let toTokenOptions: SimpleTokenOption[] = simpleTokenOptions.slice().sort((a, b) => b.price - a.price);
+    const fromToken = computed({
+      get: () => swapStore.getFromTokenStore(),
+      set: (value) => swapStore.fromToken = value.index,
+    });
+    const toToken = computed({
+      get: () => swapStore.getToTokenStore(),
+      set: (value) => swapStore.toToken = value.index,
+    });
+    const swapResult = computed({
+      get: () => swapStore.calculatePotentialSwap(),
+      set: (value) => swapStore.swapResult = value,
+    });
   
-        // State for the selected tokens
-        const cryptodollarToken = rawTokenStores.find(token => token.index === "cryptodollar")
+    const selectPercentage = (percentage: number) => {
+      let selectedAmount = (fromToken.value.balance * percentage) / 100;
+      selectedAmount = (selectedAmount > fromToken.value.balance) ? fromToken.value.balance : selectedAmount;
+      swapStore.setAmount(selectedAmount);
+    };
+  
+    const swapTokens = () => {
+      if (swapStore.amount <= 0) {
+        UXManager.showError(`Can't swap 0.`);
+        return;
+      }
 
-        const highestBalanceToken = rawTokenStores.reduce((prev, current) => {
-            if (current.index === 'cryptodollar') return prev;
-            return (current.balance > prev.balance) ? current : prev;
-        }, rawTokenStores[1]);
-        const fromToken = ref(highestBalanceToken);
+      if (fromToken.value.balance < swapStore.amount) {
+        UXManager.showError(`Insufficient ${fromToken.value.index.toUpperCase()} balance.`);
+        return;
+      }
 
-        const toToken = ref(cryptodollarToken || rawTokenStores[0]);
-        const amount = ref(0);
-        const swapResult = ref<number>(0);
+      if (!fromToken.value.isFiat()) {
+          // Decrease fromToken price, proportional to its current price and the amount being swapped
+          const priceDecrease = fromToken.value.price * (swapStore.priceFactor * (swapStore.amount / (swapStore.amount + fromToken.value.price)));
+          fromToken.value.price = Math.max(fromToken.value.price - priceDecrease, 0.01);
+      }
+
+      if (!toToken.value.isFiat()) {
+          // Increase toToken price, proportional to its current price and the amount being swapped
+          const priceIncrease = toToken.value.price * (swapStore.priceFactor * (swapStore.amount / (swapStore.amount + toToken.value.price)));
+          toToken.value.price = Math.max(toToken.value.price + priceIncrease, 0.01);
+      }
         
+      fromToken.value.updateBalance(-swapStore.amount);
+      toToken.value.updateBalance(swapResult.value);
+      UXManager.showSuccess(`Swapped ${swapStore.amount} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
+      AudioManager.play('swap.wav');
+      swapResult.value = 0;
+      swapStore.amount = 0;
+    };
   
-      // Custom filter method for VueSelect
-      const customFilter = (option: SimpleTokenOption, label: string, search: string) => {
-        //console.log(search)
-        if (!search) return true;
-        const searchLower = search.toLowerCase();
-        
-        return option.label.toLowerCase().includes(searchLower) || option.index.toLowerCase().includes(searchLower);
-      };
-  
-      const updateBalances = () => {
-        //console.log()
-        fromToken.value.balance = fromToken.value.balance;
-        toToken.value.balance = toToken.value.balance;
-        calculatePotentialSwap();
-      };
-  
-      const switchTokens = () => {
-        const tempToken = fromToken.value;
-        fromToken.value = toToken.value;
-        toToken.value = tempToken;
-        updateBalances();
-      };
-  
-      const calculatePotentialSwap = () => {
-        const fromTokenValue = fromToken.value.price;
-        const toTokenValue = toToken.value.price;
-        const fees = amount.value * fromToken.value.swapFees;
-
-        if (amount.value > 0 && fromTokenValue > 0 && toTokenValue > 0) {
-          const fromTokenValueInDollar = ((amount.value - fees) * fromTokenValue);
-          swapResult.value = (fromTokenValueInDollar / toTokenValue);
-        } else {
-          swapResult.value = 0;
-        }
-      };
-  
-      const selectPercentage = (percentage: number) => {
-        amount.value = (fromToken.value.balance * percentage) / 100;
-        calculatePotentialSwap();
-      };
-  
-      const swapTokens = () => {
-        if (amount.value <= 0) {
-          alert(`Can't swap 0.`);
-          return;
-        }
-
-        if (fromToken.value.balance < amount.value) {
-          alert(`Insufficient ${fromToken.value.index.toUpperCase()} balance.`);
-          return;
-        }
-
-        const priceChangeFactor = 0.01; // Control the price change sensitivity
-        // Adjust the fromToken price
-        if (fromToken.value.index !== 'cryptodollar') {
-            // Decrease fromToken price, proportional to its current price and the amount being swapped
-            const priceDecrease = fromToken.value.price * (priceChangeFactor * (amount.value / (amount.value + fromToken.value.price)));
-            fromToken.value.price = Math.max(fromToken.value.price - priceDecrease, 0.01);
-        }
-
-        // Adjust the toToken price
-        if (toToken.value.index !== 'cryptodollar') {
-            // Increase toToken price, proportional to its current price and the amount being swapped
-            const priceIncrease = toToken.value.price * (priceChangeFactor * (amount.value / (amount.value + toToken.value.price)));
-            toToken.value.price = Math.max(toToken.value.price + priceIncrease, 0.01);
-        }
-        
-        fromToken.value.updateBalance(-amount.value);
-        toToken.value.updateBalance(swapResult.value);
-        UXManager.showSuccess(`Swapped ${amount.value} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
-        AudioManager.play('swap.wav');
-        updateBalances();
-        swapResult.value = 0;
-        amount.value = 0;
-        //window.location.reload();
-      };
-  
-      return {
-        rawTokenStores,
-        fromToken,
-        fromTokenOptions,
-        toToken,
-        toTokenOptions,
-        amount,
-        swapResult,
-        customFilter,
-        selectPercentage,
-        switchTokens,
-        swapTokens,
-        updateBalances,
-      };
-    },
-    mounted() {
-      this.updateBalances();
-    },
-  });
-  </script>
+    return {
+      swapStore,
+      fromToken,
+      toToken,
+      swapResult,
+      selectPercentage,
+      swapTokens,
+    };
+  },
+});
+</script>
 
 <style scoped>
 .token-icon {
   width: 16px;
   height: auto;
   transition: transform 0.3s ease;
+  margin-bottom: -2px;
 }
 .option-content {
   display: flex;
@@ -296,11 +221,42 @@ import UXManager from '@/managers/UXManager';
   margin: 16px 0;
 }
 
+/* PERCENT BUTTONS */
 .quick-select-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 8px;
 }
+
+.quick-select-buttons button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 2px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quick-select-buttons button:hover {
+  background-color: #ffa500;
+  color: #fff;
+  border-color: #ffa500;
+}
+
+.quick-select-buttons button:active {
+  transform: scale(0.95);
+}
+
+.quick-select-buttons button:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+
+
 
 .swap-result {
   margin-top: 20px;

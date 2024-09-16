@@ -46,6 +46,7 @@ export type TokenStoreType = {
     updateBalance: (amount: number) => void;
     getIcon: () => string;
     getBalanceInCrypto: () => number;
+    isFiat: () => boolean;
 };
   
 // Create a map of store functions
@@ -67,6 +68,9 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
       getBalanceInCrypto() {
         return this.balance * this.price;
       },
+      isFiat(): boolean {
+        return this.index === 'cryptodollar';
+      }
     },
     persist: true, // Enable persistence for each store
   });

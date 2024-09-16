@@ -7,7 +7,7 @@
         <p class="goal-reward">🏅 {{ goal.reward }}</p>
       </div>
       <div>
-        <img :src="goalStore.getImage()" class="goal-logo">
+        <img :src="goalStore.getImage()" class="goal-logo" draggable="false">
       </div>
     </div>
   
@@ -23,7 +23,7 @@
           class="pay-button"
         >
           <div class="cost-details">
-            <p>{{ cost.value }} <img :src="getTokenIcon(cost.token)" class="token-icon" alt="Token Icon" /></p>
+            <p>{{ cost.value }} <img :src="getTokenIcon(cost.token)" class="token-icon" alt="Token Icon" draggable="false" /></p>
           </div>
         </button>
       </div>

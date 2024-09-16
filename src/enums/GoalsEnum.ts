@@ -44,7 +44,7 @@ export const goalsEnum = [
       name: 'Gold deserve Silver',
       description: 'If you have gold, why not having silver too ?',
       costs: [
-        { token: 'nmc', value: 20, isPaid: false },
+        { token: 'nmc', value: 10, isPaid: false },
       ],
       reward: 'Unlock the Litecoin mine',
       image: true,

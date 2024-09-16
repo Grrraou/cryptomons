@@ -1,12 +1,13 @@
 <template>
-    <div class="monsterThumb" @click="attackManually($event)" id="DomId">
-        <img v-if="battlefieldStore.currentMonster"
-           :src="battlefieldStore.getMonsterImage()"
-           :alt="battlefieldStore.currentMonster.name"
-           class="monster-portrait" />
-        <p v-if="battlefieldStore.currentMonster">{{ battlefieldStore.currentMonster.name }} (HP: {{ battlefieldStore.currentMonster.health }})</p>
-        <p v-else>No monster</p>
-    </div>
+  <div class="monsterThumb" @click="attackManually($event)" id="DomId">
+    <img v-if="battlefieldStore.currentMonster"
+      :src="battlefieldStore.getMonsterImage()"
+      :alt="battlefieldStore.currentMonster.name"
+      draggable="false"
+      class="monster-portrait" />
+    <p v-if="battlefieldStore.currentMonster">{{ battlefieldStore.currentMonster.name }} (HP: {{ battlefieldStore.currentMonster.health }})</p>
+    <p v-else>No monster</p>
+  </div>
 </template>
   
 <script lang="ts">

@@ -1,57 +1,59 @@
 <template>
-    <!-- @todo removed :style="backgroundStyle" -->
-    <div class="clicker-area" :style="backgroundStyle" @dragover.prevent @drop="handleHeroDrop">
-      <!-- Title and Logo Section -->
-      <div class="title-section">
-        <h3 class="mine-name">{{ mineStore.name }}</h3>
-        <img :src="mineStore.getImage()" alt="Bitcoin Mine Logo" class="logo-image" />
-        <div class="logs"></div>
-      </div>
+  <!-- @todo removed :style="backgroundStyle" -->
+  <div class="clicker-area" :style="backgroundStyle" @dragover.prevent @drop="handleHeroDrop">
+    <!-- Title and Logo Section -->
+    <div class="title-section">
+      <h3 class="mine-name">{{ mineStore.name }}</h3>
+      <img :src="mineStore.getImage()" alt="Bitcoin Mine Logo" class="logo-image" draggable="false" />
+      <div class="logs"></div>
+    </div>
   
-      <!-- Statistics and Actions Section -->
-      <div class="stats-actions-section">
-        <div class="statsBox">
-          <p class="clicks-display statDisplay">
-            <span class="clicks-text">{{ mineStore.clicks }}</span>
-            <img src="/mines/clickCount.png" class="click-icon" />
-          </p>
-          <p class="level-display statDisplay">
-            <span class="level-text">{{ mineStore.level }}</span>
-            <img src="/mines/upgradeLevel.png" class="level-icon" />
-          </p>
-          <p class="token-balance-display statDisplay">
-            <span class="token-balance-text">{{ tokenStore.balance }}</span>
-            <img :src="tokenStore.getIcon()" class="token-icon" />
-          </p>
-        </div>
+    <!-- Statistics and Actions Section -->
+    <div class="stats-actions-section">
+      <div class="statsBox">
+        <p class="clicks-display statDisplay">
+          <span class="clicks-text">{{ mineStore.clicks }}</span>
+          <img src="/mines/clickCount.png" class="click-icon" draggable="false" />
+        </p>
+        <p class="level-display statDisplay">
+          <span class="level-text">{{ mineStore.level }}</span>
+          <img src="/mines/upgradeLevel.png" class="level-icon" draggable="false" />
+        </p>
+        <p class="token-balance-display statDisplay">
+          <span class="token-balance-text">{{ tokenStore.balance }}</span>
+          <img :src="tokenStore.getIcon()" class="token-icon" draggable="false" />
+        </p>
       </div>
-      <div class="action-container">
-          <button class="mine-button" @click="mineManually($event)">
-            <img src="/mines/miningButton.png" alt="Mine Logo" class="button-logo" />
-            Mine!
-          </button>
-          <button class="upgrade-button" @click="upgrade" :disabled="!mineStore.canUpgrade()">
-            <img src="/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" />
-            Upgrade (Cost: {{ mineStore.getUpgradeCost() }} <img :src="tokenStore.getIcon()" class="token-icon-small" />)
-          </button>
-      </div>
+    </div>
+
+    <div class="action-container">
+        <button class="mine-button" @click="mineManually($event)">
+          <img src="/mines/miningButton.png" alt="Mine Logo" class="button-logo" draggable="false" />
+          Mine!
+        </button>
+        <button class="upgrade-button" @click="upgrade" :disabled="!mineStore.canUpgrade()">
+          <img src="/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" draggable="false" />
+          Upgrade (Cost: {{ mineStore.getUpgradeCost() }} <img :src="tokenStore.getIcon()" class="token-icon-small" />)
+        </button>
+    </div>
   
-      <!-- Workers Area Section -->
-      <div class="workers-section">
-        <p class="workers-heading">Workers in this Area:</p>
-        <p v-if="heroes.length === 0" class="no-heroes">No workers assigned</p>
-        <div v-if="heroes.length > 0" class="heroes-in-area">
-          <div v-for="(hero, index) in heroes">
-            <HeroThumb 
-              v-if="hero.isWorkingThere(mineStore.index)"
-              :key="index" 
-              :hero="hero"
-              class="hero-container"
-            />
-          </div>
+    <!-- Workers Area Section -->
+    <div class="workers-section">
+      <p class="workers-heading">Workers in this Area:</p>
+      <p v-if="heroes.length === 0" class="no-heroes">No workers assigned</p>
+      <div v-if="heroes.length > 0" class="heroes-in-area">
+        <div v-for="(hero, index) in heroes">
+          <HeroThumb 
+            v-if="hero.isWorkingThere(mineStore.index)"
+            :key="index" 
+            :hero="hero"
+            class="hero-container"
+            draggable="true"
+          />
         </div>
       </div>
     </div>
+  </div>
 </template>
   
 <script lang="ts">

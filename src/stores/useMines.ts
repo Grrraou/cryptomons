@@ -61,7 +61,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
             },
             getUpgradeCost(): number {
                 // Define the logic for calculating the upgrade cost
-                return this.level * this.level * 100; // Example: cost increases with the level
+                return this.level * this.level * 10; // Example: cost increases with the level
             },
             getImage() {
                 const imgPath = this.image ? `/mines/${this.index}.png` : '/mines/default.png';

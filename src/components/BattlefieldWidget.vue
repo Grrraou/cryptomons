@@ -19,6 +19,7 @@
                 :key="index" 
                 :hero="hero"
                 class="hero-container"
+                draggable="true"
               />
             </div>
           </div>

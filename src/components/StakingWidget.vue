@@ -6,16 +6,16 @@
         </div>
         <p>
             <strong>Staked Amount:</strong> {{ stakingStore.staked }} 
-            <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token">
+            <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <p>
             <strong>Stored Amount:</strong> {{ tokenStore.balance }} 
-            <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token">
+            <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <p><strong>APR:</strong> {{ stakingStore.apr * 100 }}%</p>
         <p>
             <strong>Estimated gains:</strong> {{ stakingStore.getEstimatedGains() }} 
-            <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token">
+            <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <input type="number" v-model.number="stakeInput"  placeholder="Enter amount to stake" />
         <div class="convenience-buttons">

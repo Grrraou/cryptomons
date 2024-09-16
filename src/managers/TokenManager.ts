@@ -1,3 +1,5 @@
+import { useSettingsStore } from '@/stores/useSettings';
+import { useSwapStore } from '@/stores/useSwap';
 import { TokenStoreType, useTokenStores } from '@/stores/useTokens';
 
 class TokenManager {
@@ -6,6 +8,26 @@ class TokenManager {
     static getTokens() {
         return Object.keys(useTokenStores).map(key => useTokenStores[key]());
     }
+
+    static getTokenStore(tokenIndex: string): TokenStoreType  {
+        return useTokenStores[tokenIndex]?.();
+    };
+
+    static getReferenceTokenStore() {
+        const settings = useSettingsStore();
+        return TokenManager.getTokenStore(settings.referenceTokenIndex);
+    }
+
+    static getSwapStore() {
+        const swapStore = useSwapStore();
+        swapStore.amount = 0;
+        swapStore.swapResult = 0;
+        return swapStore;
+    }
+
+    static getTokensOrderedByBalance() {
+        return this.getTokens().slice().sort((a, b) => b.balance - a.balance);
+    }
     
     static getTotalAssetsValue() {
         return this.getTokens().reduce((total, store) => {
@@ -13,17 +35,9 @@ class TokenManager {
         }, 0);
     }
 
-    static getTokenStore(tokenIndex: string): TokenStoreType  {
-        return useTokenStores[tokenIndex]?.();
-    };
-
     static getTokenIcon(tokenIndex: string) {
         const tokenStore = this.getTokenStore(tokenIndex);
         return tokenStore ? tokenStore.getIcon() : '';
-    }
-
-    static calculateSwapReturn(fromToken, toToken) {
-        const swapFees = 0.05;
     }
 }
 

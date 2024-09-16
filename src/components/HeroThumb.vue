@@ -12,8 +12,8 @@
         :src="heroStore.getPicture()" 
         :alt="heroStore.name" 
         class="hero-image" 
-        draggable="true" 
-        @dragstart="dragStart($event, hero)" 
+        draggable="false" 
+        @mousedown="triggerParentDrag($event)" 
       />
       <p class="hero-name">{{ hero.name }}</p>
       <div class="xp-container">
@@ -55,11 +55,20 @@ export default defineComponent({
             heroStore.gainXp(xpGain);
             }
         }
+
+        function triggerParentDrag(event: MouseEvent) {
+            const parent = (event.target as HTMLElement).closest('.hero');
+            if (parent) {
+                // Manually trigger the mousedown on the parent to start dragging
+                parent.dispatchEvent(new MouseEvent('mousedown', event));
+            }
+        }
   
       return {
             heroStore,
             dragStart,
             increaseXp,
+            triggerParentDrag,
         };
     },
 });

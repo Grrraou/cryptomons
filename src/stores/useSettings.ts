@@ -1,9 +1,11 @@
+import TokenManager from '@/managers/TokenManager';
 import { defineStore } from 'pinia';
 
 // Define the type for the store
 export type SettingsStore = {
   soundOn: boolean;
   musicOn: boolean;
+  referenceTokenIndex: string;
   toggleSound: () => boolean;
   toggleMusic: () => boolean;
 };
@@ -13,6 +15,7 @@ export const useSettingsStore = defineStore('settings', {
   state: () => ({
     soundOn: true,
     musicOn: true,
+    referenceTokenIndex: 'cryptodollar',
   }),
   actions: {
     toggleSound() {
