@@ -14,7 +14,7 @@ class StakingManager {
         return useStakingsStores[stakingIndex]?.();
     };
 
-    startAutoStaking() {
+    startAutoStaking(interval: number = 10000) {
         // Clear the existing interval if it exists
         if (this.autoClickerIntervals !== null) {
             clearInterval(this.autoClickerIntervals);
@@ -35,7 +35,7 @@ class StakingManager {
             if (window.location.pathname === '/staking' && isThereStaked) {
                 AudioManager.play('staking.wav', 0.2);
             }
-        }, 10000);
+        }, interval);
     }
 }
 

@@ -14,7 +14,7 @@ class MineManager {
         return useMinesStores[mineIndex]?.();
     };
 
-    startAutoMining() {
+    startAutoMining(interval: number = 5000) {
         // Clear the existing interval if it exists
         if (this.autoClickerIntervals !== null) {
             clearInterval(this.autoClickerIntervals);
@@ -31,7 +31,7 @@ class MineManager {
                     UXManager.showFlyingTextOnElement(amount.toString(), tokenStore.getIcon(), heroStore.getDOMid());
                 });
             });
-        }, 10000);
+        }, interval);
     }
 }
 

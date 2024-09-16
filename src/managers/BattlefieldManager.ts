@@ -24,7 +24,7 @@ class BattlefieldManager {
         return { ...monster };
     }
 
-    startAutoBattle() {
+    startAutoBattle(interval: number = 5000) {
         // Clear the existing interval if it exists
         if (this.autoClickerIntervals !== null) {
             clearInterval(this.autoClickerIntervals);
@@ -40,7 +40,7 @@ class BattlefieldManager {
                     UXManager.showFlyingTextOnElement('⚔️' + amount.toString(), null, heroStore.getDOMid());
                 });
             });
-        }, 1000);
+        }, interval);
     }
 }
 
