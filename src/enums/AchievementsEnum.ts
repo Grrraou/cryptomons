@@ -1,4 +1,3 @@
-// Define the Achievement type
 export type Achievement = {
     index: string;
     title: string;
@@ -6,9 +5,8 @@ export type Achievement = {
     target: number;
     loot: string | null;
     image: boolean;
-  };
+};
   
-  // Convert the array to use the Achievement type
 export const achievementsEnum: Achievement[] = [
     {
         index: "clicks_area_btc_mine_10",

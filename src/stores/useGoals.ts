@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { Goal, goalsEnum } from '@/enums/GoalsEnum';
 import TokenManager from '@/managers/TokenManager';
 
-// Define stores for each goal but do not create them yet
 export type GoalStoreType = {
   index: string;
   name: string;
@@ -16,7 +15,6 @@ export type GoalStoreType = {
   getImage: () => string;
 };
 
-// Create a map of store functions
 export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.reduce((acc, goal) => {
   const store = defineStore(`goal_${goal.index}`, {
     state: (): Omit<Goal, 'completeGoal' | 'payCost'> & { isCompleted: boolean } => ({
@@ -49,8 +47,7 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
             isFullyPaid = false;
           }
         });
-
-        // Check if all costs are paid
+        
         if (isFullyPaid) {
           this.completeGoal();
         }
@@ -60,10 +57,9 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
         return new URL(imgPath, import.meta.url).href;
       },
     },
-    persist: true, // Enable persistence for each store
+    persist: true,
   });
 
-  // Return the store with type assertion for autocompletion
   acc[goal.index] = store as unknown as () => GoalStoreType;
   return acc;
 }, {} as Record<string, () => GoalStoreType>);

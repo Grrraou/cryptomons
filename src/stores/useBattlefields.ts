@@ -87,9 +87,8 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
             }
         },
         persist: true,
-});
+    });
 
-    // Return the store with type assertion for autocompletion
     acc[battlefield.index] = store as unknown as () => BattlefieldStoreType;
     return acc;
 }, {} as Record<string, () => BattlefieldStoreType>);

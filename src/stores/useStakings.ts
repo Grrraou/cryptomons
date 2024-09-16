@@ -17,7 +17,6 @@ export type StakingStoreType = {
     getDOMid: () => string;
 };
 
-// Create a map of store functions
 export const useStakingsStores: Record<string, () => StakingStoreType> = stakingsEnum.reduce((acc, staking) => {
     const store = defineStore(`staking_${staking.index}`, {
         state: () => ({
@@ -52,7 +51,6 @@ export const useStakingsStores: Record<string, () => StakingStoreType> = staking
         persist: true,
     });
 
-  // Return the store with type assertion for autocompletion
   acc[staking.index] = store as unknown as () => StakingStoreType;
   return acc;
 }, {} as Record<string, () => StakingStoreType>);

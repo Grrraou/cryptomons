@@ -13,7 +13,6 @@ export type TokenStoreType = {
     isFiat: () => boolean;
 };
   
-// Create a map of store functions
 export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.reduce((acc, token) => {
   const store = defineStore(`token_${token.index}`, {
     state: (): Omit<Token, 'balance'> & { balance: number, swapFees: number } => ({
@@ -36,10 +35,9 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
         return this.index === 'cryptodollar';
       }
     },
-    persist: true, // Enable persistence for each store
+    persist: true,
   });
-    
-  // Return the store with type assertion for autocompletion
+
   acc[token.index] = store as unknown as () => TokenStoreType;
   return acc;
 }, {} as Record<string, () => TokenStoreType>);

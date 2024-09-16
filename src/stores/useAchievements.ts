@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { achievementsEnum, Achievement } from '@/enums/AchievementsEnum';// Assume the AchievementsEnum is updated as in the previous message
 import UXManager from '@/managers/UXManager';
 
-// Define the store type
 export type AchievementStoreType = {
     index: string;
     title: string;
@@ -45,7 +44,6 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
         persist: true,
     });
 
-    // Return the store with type assertion for autocompletion
     acc[achievement.index] = store as unknown as () => AchievementStoreType;
     return acc;
 }, {} as Record<string, () => AchievementStoreType>);

@@ -1,6 +1,5 @@
-// src/stores/mineStore.ts
 import { defineStore } from 'pinia';
-import { minesEnum, Mine, miningSoundsEnum } from '@/enums/MinesEnum'; // Adjust the import path accordingly
+import { minesEnum, Mine, miningSoundsEnum } from '@/enums/MinesEnum';
 import { useGoalStores } from './useGoals';
 import { HeroStoreType, useHeroStores } from './useHeroes';
 import HeroManager from '@/managers/HeroManager';
@@ -26,7 +25,6 @@ type MineStoreType = {
   getDefaultMiningAmount: () => number;
 };
 
-// Create a map of store functions for mines
 export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.reduce((acc, mine) => {
     const store = defineStore(`mine_${mine.index}`, {
         state: (): Mine & { clicks: number; level: number } => ({
@@ -78,10 +76,9 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return (Math.random() * (this.level) * (0.0009 - 0.000001) + 0.000001);
             },
         },
-        persist: true, // Enable persistence for each store if needed
+        persist: true,
     });
 
-    // Return the store with type assertion for autocompletion
     acc[mine.index] = store as unknown as () => MineStoreType;
     return acc;
 }, {} as Record<string, () => MineStoreType>);
