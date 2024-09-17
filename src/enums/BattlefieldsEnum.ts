@@ -2,13 +2,14 @@ export type Battlefield = {
     index: string;
     name: string;
     requirement: string | null;
+    monsters: string[];
     image?: boolean;
 };
   
 export const battlefieldsEnum: Battlefield[] = [
-    { index: 'binance_barricade', name: 'Binance Barricade', requirement: null, image: false },
-    { index: 'kraken_abyss', name: "Kraken's Abyss", requirement: 'buy_uwucrew_and_digidaigaku', image: false },
-    { index: 'uniswap_underground', name: 'Uniswap Underground', requirement: 'fill_a_pool_with_cash_money', image: true },
+    { index: 'binance_barricade', name: 'Binance Barricade', requirement: null, monsters: ['fisc_gobelin', 'scammer_troll'], image: false },
+    { index: 'kraken_abyss', name: "Kraken's Abyss", requirement: 'buy_uwucrew_and_digidaigaku', monsters: ['pump_and_dump_dragon'], image: false },
+    { index: 'uniswap_underground', name: 'Uniswap Underground', requirement: 'fill_a_pool_with_cash_money', monsters: ['rug_puller_wraith'], image: true },
     /* { index: 'gemini_gorge', name: 'Gemini Gorge', requirement: null, image: false },
     { index: 'bybit_blitz', name: 'Bybit Blitz', requirement: null, image: false },
     { index: 'sushiswap_slaughterhouse', name: 'SushiSwap Slaughterhouse', requirement: null, image: false },

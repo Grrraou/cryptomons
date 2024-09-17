@@ -29,13 +29,6 @@
         const itemsStore = useItemsStore();
         const inventoryIndex = props.inventoryIndex ?? 0;
 
-    /*     function dragStart(event: DragEvent, item: Item, inventoryIndex: Number) {
-            event.dataTransfer?.setData('itemIndex', item.index);
-            event.dataTransfer?.setData('inventoryIndex', inventoryIndex.toString());
-            console.log('inventoryThumb: ' + inventoryIndex.toString())
-        }
-   */
-        // Consume the item by its index
         const consumeItem = (index: string) => {
             itemsStore.consumeItem(index);
         };

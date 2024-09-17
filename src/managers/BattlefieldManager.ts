@@ -17,11 +17,8 @@ class BattlefieldManager {
         return monstersEnum;
     }
 
-    static getRandomMonster() {
-        const monsters = this.getMonsters();
-        const randomIndex = Math.floor(Math.random() * monsters.length);
-        const monster = monsters[randomIndex];
-        return { ...monster };
+    static getMonster(monsterIndex: string) {
+        return { ...this.getMonsters().find(monster => monster.index === monsterIndex)};
     }
 
     startAutoBattle(interval: number = 5000) {

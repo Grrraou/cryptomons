@@ -29,7 +29,6 @@ export default defineComponent({
     setup(props) {
       const battlefieldStore = BattlefieldManager.getBattlefieldStore(props.battlefield.index);
       const DomId = `monster_${battlefieldStore.index}`;
-      console.log(battlefieldStore.index);
 
       battlefieldStore.currentMonster;
       const monsterImage = `/monsters/${battlefieldStore.currentMonster.index}.png`;
@@ -39,12 +38,10 @@ export default defineComponent({
 
       const attackManually = (event: MouseEvent) => {
         const damage = battlefieldStore.getDefaultDamage();
-        console.log(battlefieldStore.currentMonster.index)
         battlefieldStore.damageMonster(damage);
         const x = event.clientX;
         const y = event.clientY;
         UXManager.showFlyingText('⚔️' + damage.toString(), null, x, y);
-        console.log(battlefieldStore.currentMonster.health)
       };
 
       return {

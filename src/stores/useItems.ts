@@ -40,9 +40,7 @@ export const useItemsStore = defineStore('items', {
             return this.inventory[inventoryIndex];
         },
         removeItemFromInventory(index: number) {
-            console.log(this.inventory)
             this.inventory.splice(index, 1);
-            console.log(this.inventory)
         },
         moveItemInInventory(fromIndex: number, toIndex: number) {
             const item = this.inventory.splice(fromIndex, 1)[0];

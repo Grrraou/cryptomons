@@ -58,7 +58,6 @@ export default defineComponent({
   
         const stakeTokens = () => {
             if (stakeInput.value > 0 && stakeInput.value <= tokenStore.balance) {
-                console.log('yaya')
                 stakingStore.stakeTokens(stakeInput.value);
                 stakeInput.value = 0;
             }

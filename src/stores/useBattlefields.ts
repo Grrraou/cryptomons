@@ -13,6 +13,7 @@ type BattlefieldStoreType = {
     index: string;
     name: string;
     requirement: string | null;
+    monsters: string[];
     image: boolean;
     currentMonster: Monster;
     isUnlocked: () => boolean;
@@ -20,6 +21,7 @@ type BattlefieldStoreType = {
     getImage: () => string;
     getHeroes: () => HeroStoreType[];
     setMonster: () => string;
+    getRandomMonster: () => Object;
     getMonsterImage: () => string;
     damageMonster: (amount: number) => void;
     lootMonster: () => void;
@@ -30,7 +32,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
     const store = defineStore(`battlefield_${battlefield.index}`, {
         state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster } => ({
             ...battlefield,
-            currentMonster: BattlefieldManager.getRandomMonster(),
+            currentMonster: BattlefieldManager.getMonster(battlefield.monsters[0]) as Monster,
         }),
         actions: {
             isUnlocked() {
@@ -51,10 +53,15 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 return HeroManager.getHeroByArea(this.index);
             },
             setMonster() {
-                const monster = BattlefieldManager.getRandomMonster();
+                const monster = this.getRandomMonster();
                 const randomness = Math.floor(Math.random() * (150 - 50 + 1)) + 50;
                 monster.health = randomness * monster.power;
                 this.currentMonster = monster;
+            },
+            getRandomMonster() {
+                const randomIndex = Math.floor(Math.random() * this.monsters.length);
+                const monster = BattlefieldManager.getMonster(this.monsters[randomIndex]);
+                return { ...monster } as Monster;
             },
             getMonsterImage() {
                 return `/monsters/${this.currentMonster.index}.png`;
@@ -74,16 +81,19 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
             lootMonster() {
                 const loot = this.currentMonster.loot;
                 if (loot) {
-                    const item = ItemManager.getBaseItem(loot.index);
-                    if (item) {
-                        const itemStore = ItemManager.getItemStore();
-                        itemStore.addItemToInventory(item);
-                        UXManager.showSuccess(`🎁 looted: ${item.name}`);
+                    const chance = Math.random();
+                    if (chance < loot.ratio) {
+                        const item = ItemManager.getBaseItem(loot.index);
+                        if (item) {
+                            const itemStore = ItemManager.getItemStore();
+                            itemStore.addItemToInventory(item);
+                            UXManager.showSuccess(`🎁 looted: ${item.name}`);
+                        }
                     }
                 }
             },
             getDefaultDamage() {
-                return 1;
+                return 10;
             }
         },
         persist: true,

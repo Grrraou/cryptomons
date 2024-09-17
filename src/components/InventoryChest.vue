@@ -30,7 +30,6 @@
       const dragItem = (inventoryIndex: number, event: DragEvent) => {
         if (event.dataTransfer) {
           event.dataTransfer.setData('inventoryIndex', inventoryIndex.toString());
-          console.log('inventory2Chest: ' + event.dataTransfer?.getData('inventoryIndex'))
         }
       };
   
