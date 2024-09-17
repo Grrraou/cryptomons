@@ -74,7 +74,11 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 }
             },
             getDefaultMiningAmount() {
-                return (Math.random() * (this.level) * (0.0009 - 0.000001) + 0.000001) * SettingsManager.getSettings().miningPower;
+                const randomFactor = Math.random() * 0.000001; // Small random factor
+                const levelFactor = this.level * 0.0009; // Larger influence from this.level
+                const miningPower = SettingsManager.getSettings().miningPower;
+                const result = (randomFactor + levelFactor) * miningPower;
+                return result;
             },
         },
         persist: true,
