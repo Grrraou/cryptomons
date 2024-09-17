@@ -28,11 +28,21 @@ class TokenManager {
     static getTokensOrderedByBalance() {
         return this.getTokens().slice().sort((a, b) => b.balance - a.balance);
     }
+
+    static getAssetValue(tokenIndex: string) {
+        const tokenStore = this.getTokenStore(tokenIndex);
+        const totalInCryptoDollars = tokenStore.balance * tokenStore.price;
+        return tokenStore.balance + (totalInCryptoDollars / TokenManager.getReferenceTokenStore().price);
+    }
     
     static getTotalAssetsValue() {
         return this.getTokens().reduce((total, store) => {
-            return total + (store.balance * store.price);
+            const totalInCryptoDollars = store.balance * store.price;
+            return total + (totalInCryptoDollars / TokenManager.getReferenceTokenStore().price);
         }, 0);
+        /* return this.getTokens().reduce((total, store) => {
+            return total + (store.balance * store.price);
+        }, 0); */
     }
 
     static getTokenIcon(tokenIndex: string) {

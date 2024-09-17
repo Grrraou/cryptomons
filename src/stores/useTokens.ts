@@ -1,4 +1,5 @@
 import { tokensEnum, Token } from '@/enums/TokensEnum';
+import TokenManager from '@/managers/TokenManager';
 import { defineStore } from 'pinia';
 
 export type TokenStoreType = {
@@ -29,7 +30,7 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
         return new URL(imgPath, import.meta.url).href;
       },
       getBalanceInCrypto() {
-        return this.balance * this.price;
+        return TokenManager.getAssetValue(this.index);
       },
       isFiat(): boolean {
         return this.index === 'cryptodollar';

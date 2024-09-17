@@ -6,7 +6,8 @@ export type Item = {
   value: number;
   type: 'Consumable' | 'Head' | 'Chest' | 'Weapon';
   img?: boolean;
-  stat?: number;
+  xp?: number;
+  damage?: number;
   effect?: () => void | number;
 }
 
@@ -33,7 +34,7 @@ export const itemsEnum: Item[] = [
     description: 'A sturdy chest armor infused with the power of Binance, offering strong protection.',
     value: 300,
     type: 'Chest',
-    stat: 2,
+    xp: 10,
     img: true,
   },
   {
@@ -42,16 +43,8 @@ export const itemsEnum: Item[] = [
     description: 'An elite chestplate crafted with Binance\'s finest technology, providing superior defense.',
     value: 500,
     type: 'Chest',
-    stat: 4,
+    xp: 20,
     img: true,
-  },
-  {
-    index: 'steel-chestplate',
-    name: 'Steel Chestplate',
-    description: 'A heavy steel chestplate that provides excellent protection.',
-    value: 250,
-    type: 'Chest',
-    stat: 1,
   },
   {
     index: 'fire-sword',
@@ -59,7 +52,7 @@ export const itemsEnum: Item[] = [
     description: 'A sword imbued with fire, increasing attack power.',
     value: 500,
     type: 'Weapon',
-    stat: 1,
+    damage: 10,
   },
   {
     index: 'manual-mining-potion',

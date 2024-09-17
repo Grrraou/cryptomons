@@ -10,6 +10,7 @@ import { defineComponent } from 'vue';
 import TokenManager from '@/managers/TokenManager';
 import ItemManager from '@/managers/ItemManager';
 import UXManager from '@/managers/UXManager';
+import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
   setup() {
@@ -33,8 +34,9 @@ export default defineComponent({
           itemsStore.unequipItem(slotType, false);
       }
       if (item) {
-          tokenStore.updateBalance(item.value);
-          UXManager.showFlyingTextOnElement(item.value.toString(), tokenStore.getIcon(), 'sell-area', 50);
+        const sellingPrice = ItemManager.getItemPrice(item);
+        tokenStore.updateBalance(sellingPrice);
+        UXManager.showFlyingTextOnElement(sellingPrice.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), 'sell-area', 50);
       }
     };
 
@@ -53,7 +55,6 @@ export default defineComponent({
   justify-content: center;
   height: 100%;
   padding: 10px;
-  border: 2px solid #444;
   border-radius: 10px;
 }
 

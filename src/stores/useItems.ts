@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Item } from '@/enums/ItemsEnum'; // Assuming the Item type is in a file named types.ts
+import { Item, itemsEnum } from '@/enums/ItemsEnum'; // Assuming the Item type is in a file named types.ts
 
 interface EquipmentState {
     Head: Item | null;
@@ -17,7 +17,6 @@ export const useItemsStore = defineStore('items', {
     }),
     actions: {
         equipItem(slotType: 'Head' | 'Chest' | 'Weapon', inventoryIndex: number) {
-            // If there's already an item equipped in this slot, move it to the inventory
             if (this[slotType]) {
                 this.inventory.push(this[slotType]!);
             }
@@ -46,6 +45,14 @@ export const useItemsStore = defineStore('items', {
         moveItemInInventory(fromIndex: number, toIndex: number) {
             const item = this.inventory.splice(fromIndex, 1)[0];
             this.inventory.splice(toIndex, 0, item);
+        },
+        getEquipementStats() {
+            let xp = this.Head?.xp ?? 0;
+            xp += this.Chest?.xp ?? 0;
+            xp += this.Weapon?.xp ?? 0;
+            return {
+                xp: xp,
+            };
         },
         consumeItem(index: string) {
            /*  const item = this.inventory.find((item) => item.index === index);

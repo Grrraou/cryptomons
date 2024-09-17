@@ -21,7 +21,7 @@
     
     <!-- Total Value in Cryptocredits with dynamic class binding for highlighting -->
     <p :class="{'highlight-total-value': sortOption === 'totalValue'}">
-      <span class='label'>Total Value in Cryptocredits:</span>
+      <span class='label'>Total Value in {{ TokenManager.getReferenceTokenStore().name }}:</span>
       <br>
       <span class="tokenSum">{{ tokenStore.getBalanceInCrypto().toFixed(2) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>
     </p>

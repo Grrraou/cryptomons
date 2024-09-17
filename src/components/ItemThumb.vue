@@ -1,11 +1,19 @@
 <template>
   <div class="item" :style="backgroundStyle">
-    <p>{{ item.name }} ({{ item.type }})</p>
 
     <!-- Consumable Button: Visible only for consumable items -->
     <button v-if="item.type === 'Consumable'" class="consume-btn" @click="consumeItem(item.index)">
       Use
     </button>
+
+    <!-- Info Box -->
+    <div class="infobox">
+      <p>{{ item.name }}</p>
+      <p>Type: {{ item.type }}</p>
+      <p v-if="item.description">Description: {{ item.description }}</p>
+      <p v-if="item.xp"><img style="width: 12px;" src="/xp.png"> +{{ item.xp }}%</p>
+      <p>value: {{ ItemManager.getItemPrice(item).toFixed(SettingsManager.getSettings().decimals) }}<img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()"></p>
+    </div>
   </div>
 </template>
   
@@ -14,6 +22,8 @@ import { defineComponent, PropType, computed } from 'vue';
 import { useItemsStore } from '@/stores/useItems';
 import { Item } from '@/enums/ItemsEnum';
 import ItemManager from '@/managers/ItemManager';
+import TokenManager from '@/managers/TokenManager';
+import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
   props: {
@@ -36,7 +46,7 @@ export default defineComponent({
     };
 
     const backgroundStyle = computed(() => ({
-      backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${ItemManager.getItemImage(props.item.index)}')`,
+      backgroundImage: `url('${ItemManager.getItemImage(props.item.index)}')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundColor: '#000',
@@ -45,6 +55,9 @@ export default defineComponent({
     return {
       inventoryIndex,
       backgroundStyle,
+      ItemManager,
+      TokenManager,
+      SettingsManager,
       consumeItem,
     };
   },
@@ -87,5 +100,35 @@ export default defineComponent({
   .consume-btn:hover {
     background-color: #ff0000;
   }
-  </style>
+
+/* INFOBOX */
+.infobox {
+  display: none;
+  position: absolute;
+  border-radius: 10%;
+  border: 2px solid #444;
+  top: 110%; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  width: 200px;
+  pointer-events: none;
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s ease; /* Smooth transition */
+  transform: translateY(-50%);
+}
+
+.item:hover .infobox, .item .infobox:hover {
+  display: block;
+  opacity: 1; /* Fade in */
+  pointer-events: auto;
+}
+
+.token-icon {
+  width: 12px;
+}
+</style>
   

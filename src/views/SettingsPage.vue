@@ -1,11 +1,11 @@
 <template>
   <div class="settings-page game-container">
     <h1 class="page-title">Settings <InfoBubble page="settings" /></h1>
-
+    <br><hr><br>
     <SaveGame />
-    <br><br>
+    <br><hr><br>
     <UserSettings />
-    <br><br>
+    <br><hr><br>
     <DebugSettings />
   </div>
 </template>

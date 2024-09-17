@@ -12,7 +12,7 @@
             <label for="lootPower">Loot Power:</label>
             <input :value="SettingsManager.getSettings().lootPower" type="number" id="lootPower" />
         </div>
-
+        <br>
         <button @click="saveSettings">Save settings</button>
         <button @click="resetSettings">reset</button>
     </div>

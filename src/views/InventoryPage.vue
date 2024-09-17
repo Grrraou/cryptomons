@@ -64,18 +64,20 @@ export default defineComponent({
     margin-right: 10px;
     background-size: cover;
     background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/equipementBG.png');
+    background-size: cover;
+    overflow: hidden;
 }
   
 .selling-section {
     width: 10%;
     border: 2px solid #444;
     border-radius: 10px;
-    background-color: #f5c6cb;
     display: flex;
     align-items: center;
     justify-content: center;
     background-size: cover;
     background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/sellingBG.png');
+    background-size: cover;
 }
   
 .inventory-section {
@@ -93,6 +95,8 @@ export default defineComponent({
     box-sizing: border-box;
     background-size: cover;
     background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/inventoryBG.png');
+    background-size: cover;
+    overflow: hidden;
 }
 </style>
   
