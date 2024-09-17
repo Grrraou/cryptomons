@@ -11,15 +11,14 @@ export type Monster = {
 };
 
 export const monstersEnum: Monster[] = [
-    { index: 'fisc_gobelin', name: 'Fisc Goblin', description: 'He wants your money', power: 1, loot: { index: 'binance-chestguard', ratio: 0.5 } },
-    { index: 'scammer_troll', name: 'Scammer Troll', description: "Don't trust everyone", power: 2, loot: { index: 'binance-fortress-plate', ratio: 0.1 } },
+    { index: 'fisc_gobelin', name: 'Fisc Goblin', description: 'He wants your money', power: 1, loot: { index: 'binance-chestguard', ratio: 0.05 } },
+    { index: 'scammer_troll', name: 'Scammer Troll', description: "Don't trust everyone", power: 2, loot: { index: 'binance-fortress-plate', ratio: 0.01 } },
+    { index: 'pump_and_dump_dragon', name: 'Pump-and-Dump Dragon', description: 'Master of market manipulation', power: 1, loot: { index: 'binance-helmet', ratio: 0.05 } },
+    { index: 'rug_puller_wraith', name: 'Rug-Puller Wraith', description: 'Vanishing with your investments', power: 2, loot: { index: 'binance-fortress-helmet', ratio: 0.02 } },
+    { index: 'ponzi_kraken', name: 'Ponzi Kraken', description: 'Feeding off the naive', power: 1, loot: { index: 'binance-sword', ratio: 0.05 } },
+    { index: 'gas_fee_gremlin', name: 'Gas Fee Gremlin', description: 'Eats up your transactions', power: 2, loot: { index: 'binance-fortress-sword', ratio: 0.02 } },
 
-    
-    { index: 'pump_and_dump_dragon', name: 'Pump-and-Dump Dragon', description: 'Master of market manipulation', power: 3, loot: { index: 'steel-chestplate', ratio: 0.0002 } },
-    { index: 'rug_puller_wraith', name: 'Rug-Puller Wraith', description: 'Vanishing with your investments', power: 4, loot: { index: 'fire-sword', ratio: 0.0002 } },
-    /* { index: 'ponzi_kraken', name: 'Ponzi Kraken', description: 'Feeding off the naive', power: 5 },
-    { index: 'gas_fee_gremlin', name: 'Gas Fee Gremlin', description: 'Eats up your transactions', power: 2 },
-    { index: 'fomo_phantom', name: 'FOMO Phantom', description: 'Drives fear of missing out', power: 3 },
+    /* { index: 'fomo_phantom', name: 'FOMO Phantom', description: 'Drives fear of missing out', power: 3 },
     { index: 'shill_serpent', name: 'Shill Serpent', description: 'Tempts you with empty promises', power: 4 },
     { index: 'whale_manipulator', name: 'Whale Manipulator', description: 'Shakes the market at will', power: 5 },
     { index: 'dusting_demon', name: 'Dusting Demon', description: 'Leaves traces to track you', power: 2 },

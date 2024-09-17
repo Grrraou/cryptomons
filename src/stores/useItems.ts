@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Item, itemsEnum } from '@/enums/ItemsEnum'; // Assuming the Item type is in a file named types.ts
+import { Item } from '@/enums/ItemsEnum'; // Assuming the Item type is in a file named types.ts
 
 interface EquipmentState {
     Head: Item | null;
@@ -50,8 +50,19 @@ export const useItemsStore = defineStore('items', {
             let xp = this.Head?.xp ?? 0;
             xp += this.Chest?.xp ?? 0;
             xp += this.Weapon?.xp ?? 0;
+
+            let damage = this.Head?.damage ?? 0;
+            damage += this.Chest?.damage ?? 0;
+            damage += this.Weapon?.damage ?? 0;
+
+            let mining = this.Head?.mining ?? 0;
+            mining += this.Chest?.mining ?? 0;
+            mining += this.Weapon?.mining ?? 0;
+
             return {
                 xp: xp,
+                damage: damage,
+                mining: mining,
             };
         },
         consumeItem(index: string) {

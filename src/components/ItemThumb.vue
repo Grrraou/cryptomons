@@ -7,11 +7,13 @@
     </button>
 
     <!-- Info Box -->
-    <div class="infobox">
+    <div class="infobox" @dragstart.prevent>
       <p>{{ item.name }}</p>
       <p>Type: {{ item.type }}</p>
       <p v-if="item.description">Description: {{ item.description }}</p>
       <p v-if="item.xp"><img style="width: 12px;" src="/xp.png"> +{{ item.xp }}%</p>
+      <p v-if="item.damage">⚔️ +{{ item.damage }}%</p>
+      <p v-if="item.mining">⛏️ +{{ item.mining }}%</p>
       <p>value: {{ ItemManager.getItemPrice(item).toFixed(SettingsManager.getSettings().decimals) }}<img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()"></p>
     </div>
   </div>

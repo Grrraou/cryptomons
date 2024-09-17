@@ -1,67 +1,67 @@
 <template>
-    <div class="equipement-container">
-      <div id="equipement-stats">
-        <!-- {{ equipementStats }} -->
-        <p v-if="equipementStats.xp"><img style="width: 12px;" src="/xp.png"> +{{ equipementStats.xp }}%</p>
-      </div>
-      <div class="equipement-container"></div>
-      <!-- Head Slot -->
-      <div
-        class="slot"
-        id="headSlot"
-        @dragover.prevent
-        @drop="handleDrop($event, 'Head')"
-        @dragenter.prevent
-      >
-        <!-- <p class="slot-name">Head</p> -->
-        <ItemThumb
-          class="equip-slot"
-          :class="{ occupied: itemsStore.Head }"
-          :item="itemsStore.Head"
-          v-if="itemsStore.Head"
-          draggable="true"
-          @dragstart="dragItem('Head', $event)"
-        />
-      </div>
-  
-      <!-- Chest Slot -->
-      <div
-        class="slot"
-        id="chestSlot"
-        @dragover.prevent
-        @drop="handleDrop($event, 'Chest')"
-        @dragenter.prevent
-      >
-        <!-- <p class="slot-name">Chest</p> -->
-        <ItemThumb
-          class="equip-slot"
-          :class="{ occupied: itemsStore.Chest }"
-          :item="itemsStore.Chest"
-          v-if="itemsStore.Chest"
-          draggable="true"
-          @dragstart="dragItem('Chest', $event)"
-        />
-      </div>
-  
-      <!-- Weapon Slot -->
-      <div
-        class="slot"
-        id="weaponSlot"
-        @dragover.prevent
-        @drop="handleDrop($event, 'Weapon')"
-        @dragenter.prevent
-      >
-        <!-- <p class="slot-name">Weapon</p> -->
-        <ItemThumb
-          class="equip-slot"
-          :class="{ occupied: itemsStore.Weapon }"
-          :item="itemsStore.Weapon"
-          v-if="itemsStore.Weapon"
-          draggable="true"
-          @dragstart="dragItem('Weapon', $event)"
-        />
-      </div>
+  <div class="equipement-container">
+    <div id="equipement-stats">
+      <!-- {{ equipementStats }} -->
+      <span v-if="equipementStats.xp"><img style="width: 12px;" src="/xp.png"> +{{ equipementStats.xp }}%</span>
+      <span v-if="equipementStats.damage">⚔️ +{{ equipementStats.damage }}%</span>
+      <span v-if="equipementStats.mining">⛏️ +{{ equipementStats.mining }}%</span>
     </div>
+    <div class="equipement-container"></div>
+    <!-- Head Slot -->
+    <div
+      class="slot"
+      id="headSlot"
+      @dragover.prevent
+      @drop="handleDrop($event, 'Head')"
+      @dragenter.prevent
+    >
+      <ItemThumb
+        class="equip-slot"
+        :class="{ occupied: itemsStore.Head }"
+        :item="itemsStore.Head"
+        v-if="itemsStore.Head"
+        draggable="true"
+        @dragstart="dragItem('Head', $event)"
+      />
+    </div>
+  
+    <!-- Chest Slot -->
+    <div
+      class="slot"
+      id="chestSlot"
+      @dragover.prevent
+      @drop="handleDrop($event, 'Chest')"
+      @dragenter.prevent
+    >
+      <ItemThumb
+        class="equip-slot"
+        :class="{ occupied: itemsStore.Chest }"
+        :item="itemsStore.Chest"
+        v-if="itemsStore.Chest"
+        draggable="true"
+        @dragstart="dragItem('Chest', $event)"
+      />
+    </div>
+  
+    <!-- Weapon Slot -->
+    <div
+      class="slot"
+      id="weaponSlot"
+      @dragover.prevent
+      @drop="handleDrop($event, 'Weapon')"
+      @dragenter.prevent
+    >
+      <ItemThumb
+        class="equip-slot"
+        :class="{ occupied: itemsStore.Weapon }"
+        :item="itemsStore.Weapon"
+        v-if="itemsStore.Weapon"
+        draggable="true"
+        @dragstart="dragItem('Weapon', $event)"
+      />
+    </div>
+    <div class="spacer"></div>
+  </div>
 </template>
   
 <script lang="ts">
@@ -165,6 +165,11 @@ export default defineComponent({
   background-color: #ffeb3b;
 }
 
+.spacer {
+  width: 100%;
+  height: 300px; /* This height acts as padding-bottom */
+}
+
 
 
 /* CUSTOM SLOTS */
@@ -196,6 +201,10 @@ export default defineComponent({
   border-radius: 10px;
   background: #fff;
   padding: 0 5px;
+}
+
+#equipement-stats span {
+  margin: 2px 5px;
 }
 </style>
   

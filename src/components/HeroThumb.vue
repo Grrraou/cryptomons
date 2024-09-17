@@ -19,7 +19,7 @@
       <div class="xp-container">
         <div class="xp-bar">
           <div class="xp-bar-fill" :style="{ width: (heroStore.xp / heroStore.getLevelUpCost()) + '%' }">
-            <span class="xp-text">{{ heroStore.xp }} XP</span>
+            <span class="xp-text">{{ (heroStore.xp / heroStore.getLevelUpCost()).toFixed(2) }} %</span>
           </div>
         </div>
         <div class="level-icon">

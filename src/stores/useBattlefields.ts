@@ -86,7 +86,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 if (loot) {
                     const chance = Math.random();
                     if (chance < (loot.ratio * SettingsManager.getSettings().lootPower)) {
-                        const item = ItemManager.getBaseItem(loot.index);
+                        const item = ItemManager.generateLoot(loot.index);
                         if (item) {
                             const itemStore = ItemManager.getItemStore();
                             itemStore.addItemToInventory(item);

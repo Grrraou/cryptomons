@@ -1,6 +1,6 @@
 <template>
-    <div class="inventory-container" @dragover.prevent @drop="handleDrop">
-      <div v-for="(item, index) in inventoryItems">
+  <div class="inventory-container" @dragover.prevent @drop="handleDrop">
+    <div v-for="(item, index) in inventoryItems">
       <ItemThumb 
         class="item" 
         :key="index"
@@ -10,8 +10,9 @@
         @dragstart="dragItem(index, $event)"
       /> 
     </div>
-    </div>
-  </template>
+    <div class="spacer"></div>
+  </div>
+</template>
   
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
@@ -56,16 +57,20 @@ export default defineComponent({
 .inventory-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   justify-content: flex-start;
   width: 100%;
   padding: 10px;
+  padding-bottom: 300px;
   overflow-y: auto;
   height: 100%;
-  max-height: 400px;
   border: 2px solid #ccc;
   border-radius: 5px;
   scrollbar-width: none;
+}
+
+.spacer {
+  width: 100%;
+  height: 300px; /* This height acts as padding-bottom */
 }
 </style>
   

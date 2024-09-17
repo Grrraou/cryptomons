@@ -5,7 +5,10 @@
       :alt="battlefieldStore.currentMonster.name"
       draggable="false"
       class="monster-portrait" />
-    <p v-if="battlefieldStore.currentMonster">{{ battlefieldStore.currentMonster.name }} (HP: {{ battlefieldStore.currentMonster.health }})</p>
+    <p v-if="battlefieldStore.currentMonster">
+      {{ battlefieldStore.currentMonster.name }}
+      {{ battlefieldStore.currentMonster.health?.toFixed(2) }} HP
+    </p>
     <p v-else>No monster</p>
   </div>
 </template>
@@ -14,6 +17,7 @@
 import BattlefieldManager from '@/managers/BattlefieldManager';
 import { defineComponent } from 'vue';
 import UXManager from '@/managers/UXManager';
+import ItemManager from '@/managers/ItemManager';
   
 export default defineComponent({
     props: {
@@ -37,11 +41,12 @@ export default defineComponent({
       }
 
       const attackManually = (event: MouseEvent) => {
-        const damage = battlefieldStore.getDefaultDamage();
+        let damage = battlefieldStore.getDefaultDamage();
+        damage *= 1 + (ItemManager.getItemStore().getEquipementStats().damage / 100);
         battlefieldStore.damageMonster(damage);
         const x = event.clientX;
         const y = event.clientY;
-        UXManager.showFlyingText('⚔️' + damage.toString(), null, x, y);
+        UXManager.showFlyingText('⚔️' + damage.toFixed(2).toString(), null, x, y);
       };
 
       return {
