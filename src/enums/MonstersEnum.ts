@@ -11,8 +11,10 @@ export type Monster = {
 };
 
 export const monstersEnum: Monster[] = [
-    { index: 'fisc_gobelin', name: 'Fisc Goblin', description: 'He wants your money', power: 1, loot: { index: 'manual-mining-potion', ratio: 0.5 } },
-    { index: 'scammer_troll', name: 'Scammer Troll', description: "Don't trust everyone", power: 2, loot: { index: 'iron-helmet', ratio: 0.5 } },
+    { index: 'fisc_gobelin', name: 'Fisc Goblin', description: 'He wants your money', power: 1, loot: { index: 'binance-chestguard', ratio: 0.5 } },
+    { index: 'scammer_troll', name: 'Scammer Troll', description: "Don't trust everyone", power: 2, loot: { index: 'binance-fortress-plate', ratio: 0.1 } },
+
+    
     { index: 'pump_and_dump_dragon', name: 'Pump-and-Dump Dragon', description: 'Master of market manipulation', power: 3, loot: { index: 'steel-chestplate', ratio: 0.0002 } },
     { index: 'rug_puller_wraith', name: 'Rug-Puller Wraith', description: 'Vanishing with your investments', power: 4, loot: { index: 'fire-sword', ratio: 0.0002 } },
     /* { index: 'ponzi_kraken', name: 'Ponzi Kraken', description: 'Feeding off the naive', power: 5 },

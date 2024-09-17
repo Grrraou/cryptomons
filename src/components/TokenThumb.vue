@@ -9,14 +9,14 @@
     <p :class="{'highlight-amount': sortOption === 'amount'}">
       <span class='label'>Current Amount:</span> 
       <br>
-      <span class="tokenSum">{{ tokenStore.balance }} <img class="token-icon" :src="tokenStore.getIcon()" draggable="false" /></span>
+      <span class="tokenSum">{{ tokenStore.balance.toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="tokenStore.getIcon()" draggable="false" /></span>
     </p>
 
     <!-- Price per token with dynamic class binding for highlighting -->
     <p :class="{'highlight-price': sortOption === 'price'}">
       <span class='label'>Price per {{ tokenStore.name }}:</span>
       <br>
-      <span class="tokenSum">{{ tokenStore.price }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>
+      <span class="tokenSum">{{ tokenStore.price.toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>
     </p>
     
     <!-- Total Value in Cryptocredits with dynamic class binding for highlighting -->
@@ -32,6 +32,7 @@
 import { defineComponent } from 'vue';
 import { useTokenStores } from '@/stores/useTokens';
 import TokenManager from '@/managers/TokenManager';
+import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
   name: 'TokenThumb',
@@ -51,6 +52,7 @@ export default defineComponent({
     return {
       tokenStore,
       TokenManager,
+      SettingsManager,
     };
   },
 });

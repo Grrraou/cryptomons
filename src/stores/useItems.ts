@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Item } from '@/enums/itemsEnum'; // Assuming the Item type is in a file named types.ts
+import { Item } from '@/enums/ItemsEnum'; // Assuming the Item type is in a file named types.ts
 
 interface EquipmentState {
     Head: Item | null;

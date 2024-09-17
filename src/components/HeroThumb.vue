@@ -26,8 +26,10 @@
           <span>Lvl.{{ heroStore.level }}</span>
         </div>
         <button class="levelup-button" :class="levelupButtonClass" @click="heroStore.levelUp()" >
-          <span class="levelup-text">levelup: </span> 
-          {{ heroStore.getLevelUpCost() }}<img :src="TokenManager.getTokenStore(heroStore.token).getIcon()" class="token-icon">
+          <span class="levelup-text">levelup:&nbsp;</span> 
+          <span class="levelup-price">
+            {{ heroStore.getLevelUpCost() }}<img :src="TokenManager.getTokenStore(heroStore.token).getIcon()" class="token-icon" :title="TokenManager.getTokenStore(heroStore.token).index">
+          </span>
         </button>
       </div>
     </div>
@@ -206,6 +208,7 @@ export default defineComponent({
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     padding: 5px 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .levelup-button.inactive {
@@ -217,8 +220,13 @@ export default defineComponent({
     transform: translateY(-2px);
 }
 
-.token-icon {
+.levelup-price {
+  color: #444;
+}
+
+.levelup-price .token-icon {
   width: 14px;
-  margin-bottom: 0;
+  margin-bottom: -3px;
+  margin-left: 1px;
 }
 </style>

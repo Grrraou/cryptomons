@@ -5,16 +5,16 @@
             <div class="logs"></div>
         </div>
         <p>
-            <strong>Staked Amount:</strong> {{ stakingStore.staked }} 
+            <strong>Staked Amount:</strong> {{ stakingStore.staked.toFixed(SettingsManager.getSettings().decimals) }} 
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <p>
-            <strong>Stored Amount:</strong> {{ tokenStore.balance }} 
+            <strong>Stored Amount:</strong> {{ tokenStore.balance.toFixed(SettingsManager.getSettings().decimals) }} 
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <p><strong>APR:</strong> {{ stakingStore.apr * 100 }}%</p>
         <p>
-            <strong>Estimated gains:</strong> {{ stakingStore.getEstimatedGains() }} 
+            <strong>Estimated gains:</strong> {{ stakingStore.getEstimatedGains().toFixed(SettingsManager.getSettings().decimals) }} 
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
         <input type="number" v-model.number="stakeInput"  placeholder="Enter amount to stake" />
@@ -32,6 +32,7 @@
 import { defineComponent, ref, computed } from 'vue';
 import { useStakingsStores } from '@/stores/useStakings';
 import { useTokenStores } from '@/stores/useTokens';
+import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
     name: 'StakingWidget',
@@ -72,6 +73,7 @@ export default defineComponent({
             tokenStore,
             stakeInput,
             backgroundStyle,
+            SettingsManager,
             stakeTokens,
             selectPercentage,
         };

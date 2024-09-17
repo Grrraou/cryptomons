@@ -4,6 +4,8 @@
 
     <SaveGame />
     <br><br>
+    <UserSettings />
+    <br><br>
     <DebugSettings />
   </div>
 </template>
@@ -13,12 +15,14 @@ import { defineComponent } from 'vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import SaveGame from '@/components/settings/SaveGame.vue';
 import DebugSettings from '@/components/settings/DebugSettings.vue';
+import UserSettings from '@/components/settings/UserSettings.vue';
 
 export default defineComponent({
   name: 'SettingsPage',
   components: {
     InfoBubble,
     SaveGame,
+    UserSettings,
     DebugSettings,
   }
 });

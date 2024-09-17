@@ -1,15 +1,24 @@
-import { Item, itemsEnum } from "@/enums/itemsEnum";
+import { Item, itemsEnum } from "@/enums/ItemsEnum";
 import { useItemsStore } from "@/stores/useItems";
+import UXManager from "./UXManager";
 
 class ItemManager {
 
-    static getBaseItem(itemIndex: string): Item | void {
+    static getBaseItem(itemIndex: string): Item {
         const item = itemsEnum.find(item => item.index === itemIndex);
-        if (item) return { ...item };
+        return { ...item } as Item;
     }
 
     static getItemStore () {
         return useItemsStore();
+    }
+
+    static getItemImage(itemIndex: string) {
+        const item = this.getBaseItem(itemIndex);
+        if (item && item.img) {
+            return `/public/items/${item.type}/${item.index}.png`;
+        }
+        return '/public/items/default.png';
     }
 }
 

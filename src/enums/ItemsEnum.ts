@@ -5,6 +5,7 @@ export type Item = {
   description: string;
   value: number;
   type: 'Consumable' | 'Head' | 'Chest' | 'Weapon';
+  img?: boolean;
   stat?: number;
   effect?: () => void | number;
 }
@@ -27,12 +28,22 @@ export const itemsEnum: Item[] = [
     },
   },
   {
-    index: 'iron-helmet',
-    name: 'Iron Helmet',
-    description: 'A sturdy helmet made of iron that protects the head.',
-    value: 100,
-    type: 'Head',
-    stat: 0.1,
+    index: 'binance-chestguard',
+    name: 'Binance Chestguard',
+    description: 'A sturdy chest armor infused with the power of Binance, offering strong protection.',
+    value: 300,
+    type: 'Chest',
+    stat: 2,
+    img: true,
+  },
+  {
+    index: 'binance-fortress-plate',
+    name: 'Binance Fortress Plate',
+    description: 'An elite chestplate crafted with Binance\'s finest technology, providing superior defense.',
+    value: 500,
+    type: 'Chest',
+    stat: 4,
+    img: true,
   },
   {
     index: 'steel-chestplate',

@@ -18,7 +18,7 @@ class BattlefieldManager {
     }
 
     static getMonster(monsterIndex: string) {
-        return { ...this.getMonsters().find(monster => monster.index === monsterIndex)};
+        return { ...BattlefieldManager.getMonsters().find(monster => monster.index === monsterIndex)};
     }
 
     startAutoBattle(interval: number = 5000) {

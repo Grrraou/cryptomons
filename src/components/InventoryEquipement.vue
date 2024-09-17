@@ -66,7 +66,6 @@ export default defineComponent({
       ItemThumb,
     },
     setup() {
-      // Get the equipped items from the store
       const itemsStore = ItemManager.getItemStore();
   
       const dragItem = (slotType: 'Head' | 'Chest' | 'Weapon', event: DragEvent) => {

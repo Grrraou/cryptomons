@@ -41,9 +41,14 @@ export const useHeroStores: Record<string, () => HeroStoreType> = heroesEnum.red
     }),
     actions: {
       gainXp(amount: number|null = null) {
-        amount = amount ?? parseInt((Math.random() * (5 - 1) + 1).toFixed(0));
-        this.xp += amount;
-        UXManager.showFlyingTextOnElement(amount.toString(), '/xp.png', this.getDOMid(), 50);
+        if (!this.canLevelUp()) {
+          amount = amount ?? parseInt((Math.random() * (5 - 1) + 1).toFixed(0));
+          this.xp += amount;
+          if (this.xp > this.getXpToLevel()) {
+            this.xp = this.getXpToLevel();
+          }
+          UXManager.showFlyingTextOnElement(amount.toString(), '/xp.png', this.getDOMid(), 50);
+        }
       },
       getXpToLevel() {
         return this.level * this.level * 100;

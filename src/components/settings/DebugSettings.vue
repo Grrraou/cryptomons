@@ -3,14 +3,18 @@
         <div>
             <label for="miningPower">Mining Power:</label>
             <input :value="SettingsManager.getSettings().miningPower" type="number" id="miningPower" />
-            <button @click="saveMiningPower">Save Mining Power</button>
         </div>
-  
         <div>
             <label for="battlePower">Battle Power:</label>
             <input :value="SettingsManager.getSettings().battlePower" type="number" id="battlePower" />
-            <button @click="saveBattlePower">Save Battle Power</button>
         </div>
+        <div>
+            <label for="lootPower">Loot Power:</label>
+            <input :value="SettingsManager.getSettings().lootPower" type="number" id="lootPower" />
+        </div>
+
+        <button @click="saveSettings">Save settings</button>
+        <button @click="resetSettings">reset</button>
     </div>
 </template>
   
@@ -21,25 +25,36 @@ import SettingsManager from '@/managers/SettingsManager';
 export default defineComponent({
     name: 'MiningBattlePower',
     setup() {
-        const saveMiningPower = () => {
-            const input = document.getElementById('miningPower') as HTMLInputElement;
+        const saveSettings = () => {
+            let input = null;
+            input = document.getElementById('miningPower') as HTMLInputElement;
             if (input) {
                 const value = parseInt(input.value, 10);
                 SettingsManager.getSettings().miningPower = value;
             }
-        };
-  
-        const saveBattlePower = () => {
-            const input = document.getElementById('battlePower') as HTMLInputElement;
+
+            input = document.getElementById('battlePower') as HTMLInputElement;
             if (input) {
                 const value = parseInt(input.value, 10);
                 SettingsManager.getSettings().battlePower = value;
             }
+
+            input = document.getElementById('lootPower') as HTMLInputElement;
+            if (input) {
+                const value = parseInt(input.value, 10);
+                SettingsManager.getSettings().lootPower = value;
+            }
+        };
+
+        const resetSettings = () => {
+            SettingsManager.getSettings().miningPower = 1;
+            SettingsManager.getSettings().battlePower = 1;
+            SettingsManager.getSettings().lootPower = 1;
         };
   
         return {
-            saveMiningPower,
-            saveBattlePower,
+            saveSettings,
+            resetSettings,
             SettingsManager,
         };
     },

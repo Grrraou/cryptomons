@@ -20,7 +20,7 @@
           <img src="/mines/upgradeLevel.png" class="level-icon" draggable="false" />
         </p>
         <p class="token-balance-display statDisplay">
-          <span class="token-balance-text">{{ tokenStore.balance }}</span>
+          <span class="token-balance-text">{{ tokenStore.balance.toFixed(SettingsManager.getSettings().decimals) }}</span>
           <img :src="tokenStore.getIcon()" class="token-icon" draggable="false" />
         </p>
       </div>
@@ -63,6 +63,7 @@ import MineManager from '@/managers/MineManager';
 import TokenManager from '@/managers/TokenManager';
 import HeroManager from '@/managers/HeroManager';
 import UXManager from '@/managers/UXManager';
+import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
     components: {
@@ -100,7 +101,7 @@ export default defineComponent({
         mineStore.mine(minedAmount);
         const x = event.clientX;
         const y = event.clientY;
-        UXManager.showFlyingText(minedAmount.toString(), tokenStore.getIcon(), x, y);
+        UXManager.showFlyingText(minedAmount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), x, y);
       };
 
       const upgrade = (event: MouseEvent) => {
@@ -115,6 +116,7 @@ export default defineComponent({
         backgroundStyle,
         tokenStore,
         heroes,
+        SettingsManager,
         handleHeroDrop,
         mineManually,
         upgrade,
