@@ -1,8 +1,8 @@
 <template>
     <div class="inventory-container" @dragover.prevent @drop="handleDrop">
+      <div v-for="(item, index) in inventoryItems">
       <ItemThumb 
         class="item" 
-        v-for="(item, index) in inventoryItems"
         :key="index"
         :item="item"
         :inventoryIndex="index"
@@ -10,10 +10,11 @@
         @dragstart="dragItem(index, $event)"
       /> 
     </div>
+    </div>
   </template>
   
   <script lang="ts">
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent, ref, watch } from 'vue';
   import { useItemsStore } from '@/stores/useItems';
   import ItemThumb from './ItemThumb.vue';
   
@@ -23,10 +24,8 @@
     },
     setup() {
       const itemsStore = useItemsStore();
-  
-      // Computed property to get inventory items from the store
-      const inventoryItems = computed(() => itemsStore.inventory);
-  
+      let inventoryItems = ref(itemsStore.inventory);
+
       const dragItem = (inventoryIndex: number, event: DragEvent) => {
         if (event.dataTransfer) {
           event.dataTransfer.setData('inventoryIndex', inventoryIndex.toString());

@@ -79,8 +79,7 @@ export default defineComponent({
         const inventoryIndex = event.dataTransfer?.getData('inventoryIndex');
 
         if (inventoryIndex && slotType) {
-          const item = itemsStore.getItemFromInventory(parseInt(inventoryIndex)); 
-          itemsStore.equipItem(slotType, item, parseInt(inventoryIndex));
+          itemsStore.equipItem(slotType, parseInt(inventoryIndex));
         }
       };
   

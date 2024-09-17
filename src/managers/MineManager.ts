@@ -1,5 +1,5 @@
 import { useMinesStores } from "@/stores/useMines";
-import HeroManager from "./HeroManager";
+import SettingsManager from "./SettingsManager";
 import UXManager from "./UXManager";
 import TokenManager from "./TokenManager";
 
@@ -28,7 +28,7 @@ class MineManager {
                     let amount = heroStore.miningPower * mineStore.getDefaultMiningAmount();
                     mineStore.mine(amount);
                     heroStore.gainXp(null);
-                    UXManager.showFlyingTextOnElement(amount.toString(), tokenStore.getIcon(), heroStore.getDOMid());
+                    UXManager.showFlyingTextOnElement(amount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), heroStore.getDOMid());
                 });
             });
         }, interval);

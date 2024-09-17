@@ -2,6 +2,7 @@ import { useStakingsStores } from '@/stores/useStakings';
 import TokenManager from './TokenManager';
 import UXManager from './UXManager';
 import AudioManager from './AudioManager';
+import SettingsManager from './SettingsManager';
 
 class StakingManager {
     private autoClickerIntervals: number | null = null;
@@ -29,7 +30,9 @@ class StakingManager {
                     const tokenStore = TokenManager.getTokenStore(stakingStore.token);
                     const amount = stakingStore.getEstimatedGains();
                     tokenStore.balance += amount;
-                    UXManager.showFlyingTextOnElement(amount.toString(), tokenStore.getIcon(), stakingStore.getDOMid(), 150);
+                    UXManager.showFlyingTextOnElement(
+                        amount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), stakingStore.getDOMid(), 150
+                    );
                 }
             });
             if (window.location.pathname === '/staking' && isThereStaked) {

@@ -27,7 +27,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const item = ItemManager.getBaseItem(props.item.index);
     const itemsStore = useItemsStore();
     const inventoryIndex = props.inventoryIndex ?? 0;
 
@@ -37,7 +36,7 @@ export default defineComponent({
     };
 
     const backgroundStyle = computed(() => ({
-      backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${ItemManager.getItemImage(item.index)}')`,
+      backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${ItemManager.getItemImage(props.item.index)}')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundColor: '#000',

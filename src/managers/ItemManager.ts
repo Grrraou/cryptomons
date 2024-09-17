@@ -1,6 +1,5 @@
 import { Item, itemsEnum } from "@/enums/ItemsEnum";
 import { useItemsStore } from "@/stores/useItems";
-import UXManager from "./UXManager";
 
 class ItemManager {
 

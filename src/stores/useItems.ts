@@ -16,11 +16,12 @@ export const useItemsStore = defineStore('items', {
         inventory: [],
     }),
     actions: {
-        equipItem(slotType: 'Head' | 'Chest' | 'Weapon', item: Item, inventoryIndex: number) {
+        equipItem(slotType: 'Head' | 'Chest' | 'Weapon', inventoryIndex: number) {
             // If there's already an item equipped in this slot, move it to the inventory
             if (this[slotType]) {
                 this.inventory.push(this[slotType]!);
             }
+            const item = this.getItemFromInventory(inventoryIndex);
             if (slotType === item.type) {
                 this[slotType] = item;
                 this.removeItemFromInventory(inventoryIndex);
