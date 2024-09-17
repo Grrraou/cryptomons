@@ -18,22 +18,26 @@
       <p class="hero-name">{{ hero.name }}</p>
       <div class="xp-container">
         <div class="xp-bar">
-          <div class="xp-bar-fill" :style="{ width: heroStore.xp + '%' }">
-            <span class="xp-text">{{ heroStore.xp }}% XP</span>
+          <div class="xp-bar-fill" :style="{ width: (heroStore.xp / heroStore.getLevelUpCost()) + '%' }">
+            <span class="xp-text">{{ heroStore.xp }} XP</span>
           </div>
         </div>
         <div class="level-icon">
           <span>Lvl.{{ heroStore.level }}</span>
         </div>
-        <button @click="increaseXp">Gain XP</button>
+        <button class="levelup-button" :class="levelupButtonClass" @click="heroStore.levelUp()" >
+          <span class="levelup-text">levelup: </span> 
+          {{ heroStore.getLevelUpCost() }}<img :src="TokenManager.getTokenStore(heroStore.token).getIcon()" class="token-icon">
+        </button>
       </div>
     </div>
 </template>
   
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { Hero } from '@/enums/HeroesEnum';
 import HeroManager from '@/managers/HeroManager';
+import TokenManager from '@/managers/TokenManager';
   
 export default defineComponent({
     props: {
@@ -44,16 +48,13 @@ export default defineComponent({
     },
     setup(props) {
         const heroStore = HeroManager.getHeroStore(props.hero.index);
+
+        const levelupButtonClass = computed(() => {
+          return (heroStore.canLevelUp()) ? 'active' : 'inactive';
+        });
   
         function dragStart(event: DragEvent, hero: Hero) {
             event.dataTransfer?.setData('heroIndex', hero.index);
-        }
-  
-        function increaseXp() {
-            if (heroStore.xp < 100) {
-            const xpGain = 1;
-            heroStore.gainXp(xpGain);
-            }
         }
 
         function triggerParentDrag(event: MouseEvent) {
@@ -66,8 +67,9 @@ export default defineComponent({
   
       return {
             heroStore,
+            TokenManager,
+            levelupButtonClass,
             dragStart,
-            increaseXp,
             triggerParentDrag,
         };
     },
@@ -130,7 +132,7 @@ export default defineComponent({
 }
 
 .mining-icon span, .combat-icon span {
-  margin-left: 5px; /* Space between icon and number */
+  margin-left: 5px;
 }
 
 .mining-icon {
@@ -152,7 +154,7 @@ export default defineComponent({
 /** XP BAR */
 .xp-container {
   width: 100%;
-  max-width: 500px; /* Optional: Set a maximum width */
+  max-width: 500px;
   text-align: center;
 }
 
@@ -189,4 +191,34 @@ export default defineComponent({
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
+.levelup-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ffa500;
+    border: 2px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 5px 5px;
+}
+
+.levelup-button.inactive {
+  display: none;
+}
+
+.levelup-button.active:hover {
+    background-color: #ff8c00;
+    transform: translateY(-2px);
+}
+
+.token-icon {
+  width: 14px;
+  margin-bottom: 0;
+}
 </style>
