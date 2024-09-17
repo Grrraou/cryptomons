@@ -59,8 +59,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return token.balance >= this.getUpgradeCost();
             },
             getUpgradeCost(): number {
-                // Define the logic for calculating the upgrade cost
-                return this.level * this.level * 10; // Example: cost increases with the level
+                return this.level + this.level * 10;
             },
             getImage() {
                 const imgPath = this.image ? `/mines/${this.index}.png` : '/mines/default.png';
@@ -74,8 +73,8 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 }
             },
             getDefaultMiningAmount() {
-                const randomFactor = Math.random() * 0.000001; // Small random factor
-                const levelFactor = this.level * 0.0009; // Larger influence from this.level
+                const randomFactor = Math.random() * 0.000001;
+                const levelFactor = this.level * 0.0009;
                 const miningPower = SettingsManager.getSettings().miningPower;
                 const result = (randomFactor + levelFactor) * miningPower;
                 return result;
