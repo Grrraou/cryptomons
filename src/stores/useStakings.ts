@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { stakingsEnum } from '@/enums/StakingsEnum';
+import { Staking, stakingsEnum } from '@/enums/StakingsEnum';
 import GoalManager from '@/managers/GoalManager';
 import TokenManager from '@/managers/TokenManager';
 
@@ -19,7 +19,7 @@ export type StakingStoreType = {
 
 export const useStakingsStores: Record<string, () => StakingStoreType> = stakingsEnum.reduce((acc, staking) => {
     const store = defineStore(`staking_${staking.index}`, {
-        state: () => ({
+        state: (): Staking & { staked: number; } => ({
             ...staking,
             staked: 0,
         }),
