@@ -10,7 +10,7 @@
     <div class="infobox" @dragstart.prevent>
       <p>{{ item.name }}</p>
       <p>Type: {{ item.type }}</p>
-      <p v-if="item.description">Description: {{ item.description }}</p>
+      <p v-if="item.description">{{ item.description }}</p>
       <p v-if="item.xp"><img style="width: 12px;" src="/xp.png"> +{{ item.xp }}%</p>
       <p v-if="item.damage">⚔️ +{{ item.damage }}%</p>
       <p v-if="item.mining">⛏️ +{{ item.mining }}%</p>
@@ -121,6 +121,10 @@ export default defineComponent({
   opacity: 0; /* Initially invisible */
   transition: opacity 0.3s ease; /* Smooth transition */
   transform: translateY(-50%);
+}
+
+.infobox p {
+  margin: 5px 0;
 }
 
 .item:hover .infobox, .item .infobox:hover {
