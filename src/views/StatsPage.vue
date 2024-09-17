@@ -3,19 +3,19 @@
         <h1 class="page-title">Stats Page <InfoBubble page="stats" /></h1>
         <p class="subtitle">View your game stats below.</p>
         <div class="menu">
-        <button @click="resetStoredStats">Reset Stats</button>
-    </div>
-  
-    <div class="stats-list">
-        <div v-if="Object.keys(localStorageItems).length > 0">
-            <div v-for="(value, key) in localStorageItems" :key="key" class="stat-item">
-                <span class="stat-key">{{ key }}:</span>
-                <span class="stat-value"><pre>{{ value }}</pre></span>
-            </div>
+            <button @click="resetStoredStats">Reset Stats</button>
         </div>
-        <p v-else class="no-stats">No stats available. Start playing to generate stats!</p>
+  
+        <div class="stats-list">
+            <div v-if="Object.keys(localStorageItems).length > 0">
+                <div v-for="(value, key) in localStorageItems" :key="key" class="stat-item">
+                    <span class="stat-key">{{ key }}:</span>
+                    <span class="stat-value"><pre>{{ value }}</pre></span>
+                </div>
+            </div>
+            <p v-else class="no-stats">No stats available. Start playing to generate stats!</p>
+        </div>
     </div>
-</div>
 </template>
   
 <script lang="ts">
@@ -63,19 +63,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.page-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #444;
-    text-align: center;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    border-bottom: 2px solid #ffa500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .subtitle {
     text-align: center;
     color: #777;

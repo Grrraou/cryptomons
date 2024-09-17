@@ -8,6 +8,7 @@ import HeroManager from '@/managers/HeroManager';
 import { HeroStoreType } from './useHeroes';
 import ItemManager from '@/managers/ItemManager';
 import UXManager from '@/managers/UXManager';
+import SettingsManager from '@/managers/SettingsManager';
 
 type BattlefieldStoreType = {
     index: string;
@@ -16,6 +17,7 @@ type BattlefieldStoreType = {
     monsters: string[];
     image: boolean;
     currentMonster: Monster;
+    defaultDamage: number,
     isUnlocked: () => boolean;
     getRequirementDescription: () => string | null;
     getImage: () => string;
@@ -30,9 +32,10 @@ type BattlefieldStoreType = {
 
 export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> = battlefieldsEnum.reduce((acc, battlefield) => {
     const store = defineStore(`battlefield_${battlefield.index}`, {
-        state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster } => ({
+        state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster, defaultDamage: number } => ({
             ...battlefield,
             currentMonster: BattlefieldManager.getMonster(battlefield.monsters[0]) as Monster,
+            defaultDamage: 1,
         }),
         actions: {
             isUnlocked() {
@@ -93,7 +96,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 }
             },
             getDefaultDamage() {
-                return 10;
+                return SettingsManager.getSettings().battlePower;
             }
         },
         persist: true,

@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import { minesEnum, Mine, miningSoundsEnum } from '@/enums/MinesEnum';
 import { useGoalStores } from './useGoals';
-import { HeroStoreType, useHeroStores } from './useHeroes';
+import { HeroStoreType } from './useHeroes';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import AchievementManager from '@/managers/AchievementManager';
+import SettingsManager from '@/managers/SettingsManager';
 
 type MineStoreType = {
   index: string;
@@ -73,7 +74,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 }
             },
             getDefaultMiningAmount() {
-                return (Math.random() * (this.level) * (0.0009 - 0.000001) + 0.000001);
+                return (Math.random() * (this.level) * (0.0009 - 0.000001) + 0.000001) * SettingsManager.getSettings().miningPower;
             },
         },
         persist: true,

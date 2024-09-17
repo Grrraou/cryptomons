@@ -4,6 +4,8 @@ export type SettingsStore = {
   soundOn: boolean;
   musicOn: boolean;
   referenceTokenIndex: string;
+  miningPower: number;
+  battlePower: number;
   toggleSound: () => boolean;
   toggleMusic: () => boolean;
 };
@@ -13,6 +15,8 @@ export const useSettingsStore = defineStore('settings', {
     soundOn: true,
     musicOn: true,
     referenceTokenIndex: 'cryptodollar',
+    miningPower: 1,
+    battlePower: 1,
   }),
   actions: {
     toggleSound() {
