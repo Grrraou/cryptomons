@@ -60,7 +60,6 @@ export default defineComponent({
   justify-content: flex-start;
   width: 100%;
   padding: 10px;
-  padding-bottom: 300px;
   overflow-y: auto;
   height: 100%;
   border: 2px solid #ccc;

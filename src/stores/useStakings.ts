@@ -46,7 +46,7 @@ export const useStakingsStores: Record<string, () => StakingStoreType> = staking
             },
             getDOMid() {
                 return `staking-widget-${this.index}`;
-            }
+            },
         },
         persist: true,
     });

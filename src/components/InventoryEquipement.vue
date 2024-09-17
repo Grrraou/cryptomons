@@ -1,5 +1,6 @@
 <template>
   <div class="equipement-container">
+    <div style="height: 10px;"></div>
     <div id="equipement-stats">
       <!-- {{ equipementStats }} -->
       <span v-if="equipementStats.xp"><img style="width: 12px;" src="/xp.png"> +{{ equipementStats.xp }}%</span>
@@ -116,7 +117,7 @@ export default defineComponent({
   align-items: center;
   padding: 10px;
   scrollbar-width: none;
-  height: 100%;
+  width: 100%;
 }
 
 .slot {
