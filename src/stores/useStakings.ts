@@ -41,7 +41,7 @@ export const useStakingsStores: Record<string, () => StakingStoreType> = staking
                 return this.apr * this.staked;
             },
             getImage() {
-                const imgPath = this.image ? `/stakings/${this.index}.png` : '/stakings/default.png';
+                const imgPath = this.img === false ? '/stakings/default.png' : `/stakings/${this.index}.png`;
                 return new URL(imgPath, import.meta.url).href;
             },
             getDOMid() {
