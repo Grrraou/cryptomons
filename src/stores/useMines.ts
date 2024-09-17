@@ -62,7 +62,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return this.level + this.level * 10;
             },
             getImage() {
-                const imgPath = this.image ? `/mines/${this.index}.png` : '/mines/default.png';
+                const imgPath = this.img === false ? '/mines/default.png' : `/mines/${this.index}.png`;
                 return new URL(imgPath, import.meta.url).href;
             },
             mine(amount: number|null) {

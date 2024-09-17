@@ -26,7 +26,7 @@ export default defineComponent({
         InfoBubble
     },
     setup() {
-        const battlefields = BattlefieldManager.getBattlefields();
+        const battlefields = BattlefieldManager.getAvailableBattlefields();
 
         return {
             battlefields,

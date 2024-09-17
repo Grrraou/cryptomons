@@ -49,7 +49,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 return goalStore ? goalStore.name : null;
             },
             getImage() {
-                const imgPath = this.image ? `/battlefields/${this.index}.png` : '/battlefields/default.png';
+                const imgPath = this.image === false ? '/battlefields/default.png' : `/battlefields/${this.index}.png`;
                 return new URL(imgPath, import.meta.url).href;
             },
             getHeroes() {

@@ -13,6 +13,10 @@ class BattlefieldManager {
         return useBattlefieldsStores[goalIndex]?.();
     }
 
+    static getAvailableBattlefields() {
+        return this.getBattlefields().filter(battlefield => battlefield.isUnlocked());
+    }
+
     static getMonsters() {
         return monstersEnum;
     }
