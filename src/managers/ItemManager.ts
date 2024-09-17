@@ -40,6 +40,9 @@ class ItemManager {
         let price = 1;
         const referencePrice = TokenManager.getReferenceTokenStore().price;
         if (item.xp) price += (item.xp + item.xp) * referencePrice;
+        if (item.damage) price += (item.damage + item.damage) * referencePrice;
+        if (item.mining) price += (item.mining + item.mining) * referencePrice;
+
         return price;
     }
 }

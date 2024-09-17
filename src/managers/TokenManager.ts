@@ -32,17 +32,13 @@ class TokenManager {
     static getAssetValue(tokenIndex: string) {
         const tokenStore = this.getTokenStore(tokenIndex);
         const totalInCryptoDollars = tokenStore.balance * tokenStore.price;
-        return tokenStore.balance + (totalInCryptoDollars / TokenManager.getReferenceTokenStore().price);
+        return totalInCryptoDollars / TokenManager.getReferenceTokenStore().price;
     }
     
     static getTotalAssetsValue() {
         return this.getTokens().reduce((total, store) => {
-            const totalInCryptoDollars = store.balance * store.price;
-            return total + (totalInCryptoDollars / TokenManager.getReferenceTokenStore().price);
+            return total + this.getAssetValue(store.index);
         }, 0);
-        /* return this.getTokens().reduce((total, store) => {
-            return total + (store.balance * store.price);
-        }, 0); */
     }
 
     static getTokenIcon(tokenIndex: string) {
