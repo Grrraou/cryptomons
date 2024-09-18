@@ -6,7 +6,7 @@
         </div>
 
         <div>
-            <label for="referenceToken">Number of decimals:</label>
+            <label for="referenceToken">Reference Token:</label>
             <select id="referenceToken">
                 <option
                     v-for="token in tokenList" 
