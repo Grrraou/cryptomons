@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { Goal, goalsEnum } from '@/enums/GoalsEnum';
 import TokenManager from '@/managers/TokenManager';
+import AudioManager from '@/managers/AudioManager';
 
 export type GoalStoreType = {
   index: string;
@@ -24,6 +25,7 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
     actions: {
       completeGoal() {
         this.isCompleted = true;
+        AudioManager.play('goal.wav');
       },
       isCostPaid(tokenIndex: string): boolean {
         const cost = this.costs.find(cost => cost.token === tokenIndex);
@@ -53,7 +55,7 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
         }
       },
       getImage() {
-        const imgPath = this.image ? `/goals/${this.index}.png` : '/goals/default.png';
+        const imgPath = this.img === false ? '/goals/default.png' : `/goals/${this.index}.png`;
         return new URL(imgPath, import.meta.url).href;
       },
     },

@@ -116,7 +116,8 @@ export default defineComponent({
 
 .goal-costs {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
   gap: 15px;
 }
@@ -144,10 +145,14 @@ export default defineComponent({
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 0px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.pay-button p {
+  margin: 0;
 }
 
 .pay-button:disabled {

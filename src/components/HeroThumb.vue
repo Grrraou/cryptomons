@@ -25,7 +25,13 @@
         <div class="level-icon">
           <span>Lvl.{{ heroStore.level }}</span>
         </div>
-        <button class="levelup-button" :class="levelupButtonClass" @click="heroStore.levelUp()" >
+        <button v-if="heroStore.canLevelUp() && heroStore.canBuyLevelUp()" class="levelup-button active" @click="heroStore.levelUp()" >
+          <span class="levelup-text">levelup:&nbsp;</span> 
+          <span class="levelup-price">
+            {{ heroStore.getLevelUpCost() }}<img :src="TokenManager.getTokenStore(heroStore.token).getIcon()" class="token-icon" :title="TokenManager.getTokenStore(heroStore.token).index">
+          </span>
+        </button>
+        <button v-if="heroStore.canLevelUp() && !heroStore.canBuyLevelUp()" class="levelup-button inactive" >
           <span class="levelup-text">levelup:&nbsp;</span> 
           <span class="levelup-price">
             {{ heroStore.getLevelUpCost() }}<img :src="TokenManager.getTokenStore(heroStore.token).getIcon()" class="token-icon" :title="TokenManager.getTokenStore(heroStore.token).index">
@@ -212,7 +218,10 @@ export default defineComponent({
 }
 
 .levelup-button.inactive {
-  display: none;
+  background-color: #444;
+}
+.levelup-button.inactive .levelup-price {
+  color: #FFF;
 }
 
 .levelup-button.active:hover {

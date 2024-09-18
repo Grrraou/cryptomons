@@ -36,6 +36,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
         actions: {
             isUnlocked() {
                 if (!this.requirement) return true;
+                console.log(this.requirement)
                 const goalStore = useGoalStores[this.requirement]();
                 return goalStore.isCompleted;
             },

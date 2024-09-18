@@ -4,8 +4,11 @@ export type SettingsStore = {
   soundOn: boolean;
   musicOn: boolean;
   referenceTokenIndex: string;
+  /* UX */
   decimals: number;
-
+  goalsHideUnlocked: boolean;
+  goalsHideUnpayable: boolean;
+  
   /* debug settings */
   miningPower: number;
   battlePower: number;
@@ -20,6 +23,8 @@ export const useSettingsStore = defineStore('settings', {
     musicOn: true,
     referenceTokenIndex: 'cryptodollar',
     decimals: 5,
+    goalsHideUnlocked: false,
+    goalsHideUnpayable: false,
     miningPower: 1,
     battlePower: 1,
     lootPower: 1,

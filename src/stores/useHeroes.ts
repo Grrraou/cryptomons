@@ -60,7 +60,7 @@ export const useHeroStores: Record<string, () => HeroStoreType> = heroesEnum.red
         return this.getLevelUpCost() <= tokenStore.balance;
       },
       levelUp() {
-        if (this.canLevelUp()) {
+        if (this.canLevelUp() && this.canBuyLevelUp()) {
           const tokenStore = TokenManager.getTokenStore(this.token);
           tokenStore.updateBalance(-this.getLevelUpCost());
           this.xp = 0;
@@ -71,7 +71,7 @@ export const useHeroStores: Record<string, () => HeroStoreType> = heroesEnum.red
         }
       },
       canLevelUp() {
-        return this.getXpToLevel() <= this.xp && this.canBuyLevelUp()
+        return this.getXpToLevel() <= this.xp;
       },
       getLevelUpCost() {
         return this.level * this.level;

@@ -5,39 +5,45 @@ export type Goal = {
     costs: { token: string; value: number; isPaid: boolean }[];
     reward: string;
     isCompleted: boolean;
-    image: boolean
+    img?: boolean
 };
 
 export const goalsEnum = [
-    {
-      index: 'grandma_bitcoin',
-      name: 'Convince Grandma to Buy Bitcoin',
-      description: 'Help your grandma set up a crypto wallet and buy her first bitcoin.',
-      costs: [
-        { token: 'btc', value: 0.5, isPaid: false },
-      ],
-      reward: 'Unlock the Vault and gain access to all your cryptos!',
-      image: true,
-    },
     {
       index: 'halving_bitcoin',
       name: 'Halving Bitcoin',
       description: 'This won\'t really halve BTC mining... or maybe it will.. uhm',
       costs: [
-        { token: 'btc', value: 1, isPaid: false },
+        { token: 'btc', value: 0.5, isPaid: false },
       ],
       reward: 'Unlock Bitcomon !',
-      image: true,
+    },
+    {
+      index: 'bitcoin_savings_and_trust',
+      name: 'Bitcoin Savings & Trust',
+      description: 'Trust me dude.',
+      costs: [
+        { token: 'btc', value: 0.5, isPaid: false },
+      ],
+      reward: 'Unlock Bitcomon too !',
     },
     {
       index: 'decentralize_dns',
       name: 'Decentralize the Domain Name System',
       description: 'Everything must be decentralized, start with DNS.',
       costs: [
-        { token: 'btc', value: 5, isPaid: false },
+        { token: 'btc', value: 1, isPaid: false },
       ],
       reward: 'Unlock the Namecoin mine',
-      image: true,
+    },
+    {
+      index: 'merged_mining_effort',
+      name: 'Merge the mining effort',
+      description: 'Why mining one token when you can mine two ?',
+      costs: [
+        { token: 'nmc', value: 2.5, isPaid: false },
+      ],
+      reward: 'Unlock Namecomon',
     },
     {
       index: 'gold_deserve_silver',
@@ -47,171 +53,320 @@ export const goalsEnum = [
         { token: 'nmc', value: 5, isPaid: false },
       ],
       reward: 'Unlock the Litecoin mine',
-      image: true,
+    },
+    {
+      index: 'third_but_fastest',
+      name: 'Being the third but the fastest',
+      description: 'You can be faster but taking your time.',
+      costs: [
+        { token: 'ltc', value: 7, isPaid: false },
+      ],
+      reward: 'Unlock Litecomon',
+    },
+    {
+      index: 'grandma_bitcoin',
+      name: 'Convince Grandma to Buy Bitcoin',
+      description: 'Help your grandma set up a crypto wallet and buy her first bitcoin.',
+      costs: [
+        { token: 'btc', value: 2, isPaid: false },
+        { token: 'nmc', value: 2, isPaid: false },
+        { token: 'ltc', value: 2, isPaid: false },
+      ],
+      reward: 'Unlock the Vault and gain access to all your cryptos!',
     },
     {
       index: 'centralize_decentralization',
       name: 'Centralize decentralization',
       description: 'This makes no sens ? yeah i know...',
       costs: [
-        { token: 'ltc', value: 10, isPaid: false },
+        { token: 'btc', value: 5, isPaid: false },
+        { token: 'nmc', value: 5, isPaid: false },
+        { token: 'ltc', value: 5, isPaid: false },
       ],
       reward: 'Unlock Swap',
-      image: true,
-    },
-    {
-      index: 'discover_proof_of_stake',
-      name: 'Discover the Proof of stake',
-      description: 'How dare you mining crypto when you can just stake !?',
-      costs: [
-        { token: 'ppc', value: 100, isPaid: false },
-      ],
-      reward: 'Unlock Staking',
-      image: true,
     },
     {
       index: 'play_million_doge_disco',
       name: 'Play Million Doge Disco',
       description: 'Disco stu would enjoy',
       costs: [
-        { token: 'cryptodollar', value: 5000, isPaid: false },
+        { token: 'cryptodollar', value: 100, isPaid: false },
       ],
       reward: 'Unlock Dogecoin mine !',
-      image: true,
-    },
-    {
-      index: 'shopping_on_silk_road',
-      name: 'Do some shopping on Silk Road',
-      description: 'Make your mama proud',
-      costs: [
-        { token: 'btc', value: 500, isPaid: false },
-      ],
-      reward: 'Unlock The inventory !',
-      image: true,
     },
     {
       index: 'sponsorize_nascar_driver',
       name: 'Sponsorize a NASCAR driver',
       description: 'Why ? Because we can.',
       costs: [
-        { token: 'doge', value: 5000, isPaid: false },
+        { token: 'doge', value: 200, isPaid: false },
+        { token: 'cryptodollar', value: 100, isPaid: false },
       ],
       reward: 'Unlock Dogemon',
-      image: true,
+    },
+    {
+      index: 'discover_proof_of_stake',
+      name: 'Discover the Proof of stake',
+      description: 'How dare you mining crypto when you can just stake !?',
+      costs: [
+        { token: 'ppc', value: 20, isPaid: false },
+        { token: 'cryptodollar', value: 200, isPaid: false },
+      ],
+      reward: 'Unlock Staking',
+    },
+    {
+      index: 'shopping_on_silk_road',
+      name: 'Do some shopping on Silk Road',
+      description: 'Make your mama proud',
+      costs: [
+        { token: 'btc', value: 50, isPaid: false },
+        { token: 'cryptodollar', value: 500, isPaid: false },
+      ],
+      reward: 'Unlock The inventory !',
     },
     {
       index: 'fork_bitcoin_plug_paypal',
       name: 'Fork Bitcoin and plug it to paypal',
       description: 'Ever dreamed of paying with crypto via paypal ?',
       costs: [
-        { token: 'cryptodollar', value: 10000, isPaid: false },
-        { token: 'btc', value: 200, isPaid: false },
+        { token: 'cryptodollar', value: 1000, isPaid: false },
+        { token: 'dash', value: 75, isPaid: false },
       ],
-      reward: 'Unlock Dash mine',
-      image: true,
+      reward: 'Unlock the Dash mine',
     },
     {
-      index: 'work_for_lazarus_group',
-      name: 'Work for the Lazarus group (APT38)',
-      description: 'Join the glorious leaders and fight evil america.',
+      index: 'find_perfect_token_name',
+      name: 'Find the perfect token name',
+      description: 'XCoin ? Darkcoin ? meeeh.. Dash ?',
       costs: [
-        { token: 'cryptodollar', value: 25000, isPaid: false },
+        { token: 'cryptodollar', value: 1000, isPaid: false },
+        { token: 'dash', value: 75, isPaid: false },
       ],
-      reward: 'Unlock Monero mine',
-      image: true,
-    },
-    {
-      index: 'hack_a_dao',
-      name: 'Hack a DAO',
-      description: 'All those coins are so unsecure, grab them all !',
-      costs: [
-        { token: 'cryptodollar', value: 35000, isPaid: false },
-        { token: 'eth', value: 820, isPaid: false },
-      ],
-      reward: 'Unlock Ethereum staking',
-      image: true,
-    },
-    {
-      index: 'rejected_by_bitcoin_community',
-      name: 'Be rejected by Bitcoin community',
-      description: 'Your idea suck, go do it solo !',
-      costs: [
-        { token: 'cryptodollar', value: 35000, isPaid: false },
-        { token: 'eth', value: 450, isPaid: false },
-      ],
-      reward: 'Unlock Etheremon',
-      image: true,
-    },
-    {
-      index: 'zero_knowledge_master',
-      name: 'Zero-Knowledge Master',
-      description: 'Hide your ass like you were doing illegal stuff !',
-      costs: [
-        { token: 'cryptodollar', value: 75000, isPaid: false },
-      ],
-      reward: 'Unlock Zcash mine',
-      image: true,
-    },
-    {
-      index: 'prove_size_matter',
-      name: 'Prove that the size does matter',
-      description: 'Yes it does !',
-      costs: [
-        { token: 'cryptodollar', value: 150000, isPaid: false },
-      ],
-      reward: 'Unlock Bitcoin Cash mine',
-      image: true,
-    },
-    {
-      index: 'participate_an_ico',
-      name: 'Participate an ICO',
-      description: 'Shut up and take my money !',
-      costs: [
-        { token: 'cryptodollar', value: 250000, isPaid: false },
-      ],
-      reward: 'Unlock EOS staking',
-      image: true,
-    },
-    {
-      index: 'read_ada_lovelace_wikipedia_page',
-      name: 'Read Ada Lovelace wikipedia page',
-      description: 'There is no girl on the internet',
-      costs: [
-        { token: 'cryptodollar', value: 550000, isPaid: false },
-      ],
-      reward: 'Unlock Cardano staking',
-      image: false,
-    },
-    {
-      index: 'have_lunch_with_warren_buffet',
-      name: 'Have a lunch with Warren Buffet',
-      description: 'Ask him for lottery numbers',
-      costs: [
-        { token: 'cryptodollar', value: 4600000, isPaid: false },
-      ],
-      reward: 'Unlock Tron staking',
-      image: false,
+      reward: 'Unlock Dashmon',
     },
     {
       index: 'build_and_build',
       name: 'Build and Build',
       description: 'and build and build and build and build and build and build and build',
       costs: [
-        { token: 'cryptodollar', value: 10000000, isPaid: false },
-        { token: 'bnb', value: 100000, isPaid: false },
+        { token: 'cryptodollar', value: 2000, isPaid: false },
+        { token: 'bnb', value: 200, isPaid: false },
       ],
       reward: 'Unlock the Battlefield',
-      image: false,
     },
     {
       index: 'buy_uwucrew_and_digidaigaku',
       name: 'Buy some uwucrew and DigiDaigaku',
       description: 'Kawai desu neeee',
       costs: [
-        { token: 'cryptodollar', value: 10000000, isPaid: false },
+        { token: 'cryptodollar', value: 5000, isPaid: false },
       ],
       reward: 'Unlock the Kraken\'s Abyss',
-      image: false,
+    },
+    {
+      index: 'work_for_lazarus_group',
+      name: 'Work for the Lazarus group (APT38)',
+      description: 'Join the glorious leaders and fight evil america.',
+      costs: [
+        { token: 'cryptodollar', value: 2500, isPaid: false },
+        { token: 'xmr', value: 500, isPaid: false },
+      ],
+      reward: 'Unlock the Monero mine',
+    },
+    {
+      index: 'get_delisted_from_binance',
+      name: 'Get delisted from Binance',
+      description: 'Hide your shady dealings by denouncing others',
+      costs: [
+        { token: 'cryptodollar', value: 5000, isPaid: false },
+        { token: 'xmr', value: 750, isPaid: false },
+      ],
+      reward: 'Unlock Moneromon',
+    },
+    {
+      index: 'hack_a_dao',
+      name: 'Hack a DAO',
+      description: 'All those coins are so unsecure, grab them all !',
+      costs: [
+        { token: 'cryptodollar', value: 7500, isPaid: false },
+        { token: 'eth', value: 1000, isPaid: false },
+      ],
+      reward: 'Unlock Ethereum staking',
+    },
+    {
+      index: 'rejected_by_bitcoin_community',
+      name: 'Be rejected by Bitcoin community',
+      description: 'Your idea suck, go do it solo !',
+      costs: [
+        { token: 'cryptodollar', value: 10000, isPaid: false },
+        { token: 'eth', value: 1250, isPaid: false },
+      ],
+      reward: 'Unlock Etheremon',
+    },
+    {
+      index: 'zero_knowledge_master',
+      name: 'Zero-Knowledge Master',
+      description: 'Hide your ass like you were doing illegal stuff !',
+      costs: [
+        { token: 'cryptodollar', value: 12500, isPaid: false },
+        { token: 'zec', value: 1500, isPaid: false },
+      ],
+      reward: 'Unlock Zcash mine',
+    },
+    {
+      index: 'be_sexy_to_greyscale',
+      name: 'Be Sexy To Greyscale',
+      description: 'The more you hide, the more you\'re sexy!',
+      costs: [
+        { token: 'cryptodollar', value: 15000, isPaid: false },
+        { token: 'zec', value: 1750, isPaid: false },
+      ],
+      reward: 'Unlock Zcashmon',
+    },
+    {
+      index: 'prove_size_matter',
+      name: 'Prove that the size does matter',
+      description: 'Yes it does ! At least for the blocks.',
+      costs: [
+        { token: 'cryptodollar', value: 17500, isPaid: false },
+        { token: 'bch', value: 2000, isPaid: false },
+      ],
+      reward: 'Unlock Bitcoin Cash mine',
+    },
+    {
+      index: 'create_a_schism',
+      name: 'Create a schism',
+      description: 'Every serious beliefs needs schism.',
+      costs: [
+        { token: 'cryptodollar', value: 20000, isPaid: false },
+        { token: 'bch', value: 5000, isPaid: false },
+      ],
+      reward: 'Unlock Bitcocashmon',
+    },
+    {
+      index: 'participate_an_ico',
+      name: 'Participate an ICO',
+      description: 'Shut up and take my money !',
+      costs: [
+        { token: 'cryptodollar', value: 25000, isPaid: false },
+        { token: 'eos', value: 7500, isPaid: false },
+      ],
+      reward: 'Unlock EOS staking',
+    },
+    {
+      index: 'community_takeover',
+      name: 'Community Takeover',
+      description: 'The company failled, let the community revolt !',
+      costs: [
+        { token: 'cryptodollar', value: 50000, isPaid: false },
+        { token: 'eos', value: 10000, isPaid: false },
+      ],
+      reward: 'Unlock EOS staking',
+    },
+    {
+      index: 'read_ada_lovelace_wikipedia_page',
+      name: 'Read Ada Lovelace wikipedia page',
+      description: 'There is no girl on the internet',
+      costs: [
+        { token: 'cryptodollar', value: 100000, isPaid: false },
+        { token: 'ada', value: 20000, isPaid: false },
+      ],
+      reward: 'Unlock Ada staking',
+    },
+    {
+      index: 'ouroboros_consensus',
+      name: 'Ouroboros Consensus',
+      description: 'Using less energy is cool',
+      costs: [
+        { token: 'cryptodollar', value: 150000, isPaid: false },
+        { token: 'ada', value: 30000, isPaid: false },
+      ],
+      reward: 'Unlock Adamon',
+    },
+    {
+      index: 'have_lunch_with_warren_buffet',
+      name: 'Have a lunch with Warren Buffet',
+      description: 'Ask him for lottery numbers',
+      costs: [
+        { token: 'cryptodollar', value: 500000, isPaid: false },
+        { token: 'trx', value: 50000, isPaid: false },
+      ],
+      reward: 'Unlock Tron staking',
+    },
+    {
+      index: 'buy_bittorent',
+      name: 'Buy Bittorent',
+      description: 'Remember DivX ?',
+      costs: [
+        { token: 'cryptodollar', value: 750000, isPaid: false },
+        { token: 'trx', value: 75000, isPaid: false },
+      ],
+      reward: 'Unlock Tronomon',
+    },
+    
+    {
+      index: 'yolo_or_fomo',
+      name: 'YOLO or FOMO',
+      description: 'Number goes brrrrrr',
+      costs: [
+        { token: 'cryptodollar', value: 1000000, isPaid: false },
+        { token: 'bnb', value: 250000, isPaid: false },
+        { token: 'trx', value: 250000, isPaid: false },
+        { token: 'ada', value: 250000, isPaid: false },
+        { token: 'eos', value: 250000, isPaid: false },
+        { token: 'bch', value: 250000, isPaid: false },
+      ],
+      reward: 'Unlock Degenomon',
+    },
+    
+    {
+      index: 'save_harambe',
+      name: 'Save Harambe',
+      description: 'Save the world from collapse by saving Harembe.',
+      costs: [
+        { token: 'cryptodollar', value: 10000000, isPaid: false },
+      ],
+      reward: 'Ooooh ooohh AAAhh AH!',
+    },
+    {
+      index: 'fill_a_pool_with_cash_money',
+      name: 'Fill a pool with cash money',
+      description: 'Save water, swim in cash.',
+      costs: [
+        { token: 'cryptodollar', value: 10000000, isPaid: false },
+        { token: 'uni', value: 500000, isPaid: false },
+      ],
+      reward: 'Unlock the Uniswap Underground',
+    },
+    {
+      index: 'swap_whatever_in_large_amounts',
+      name: 'Swap whatever in large amounts',
+      description: 'We don\'t care we\'re just here for the airdrop',
+      costs: [
+        { token: 'cryptodollar', value: 10000000, isPaid: false },
+        { token: 'uni', value: 750000, isPaid: false },
+      ],
+      reward: 'Unlock the Unimon',
+    },
+    {
+      index: 'ok_boomer',
+      name: 'OK boomer !',
+      description: 'The future is now, old man',
+      costs: [
+        { token: 'cryptodollar', value: 5000000, isPaid: false },
+        { token: 'sol', value: 1000000, isPaid: false },
+      ],
+      reward: 'Unlock Solana Staking',
+    },
+    {
+      index: 'beat_visa_transaction_speed',
+      name: 'Beat VISA transaction speed',
+      description: 'VISA is so over-rated',
+      costs: [
+        { token: 'cryptodollar', value: 10000000, isPaid: false },
+        { token: 'sol', value: 5000000, isPaid: false },
+      ],
+      reward: 'Unlock Solanamon',
     },
     {
       index: 'consult_the_oracles',
@@ -219,88 +374,41 @@ export const goalsEnum = [
       description: 'Ask them for lottery numbers, might work this time',
       costs: [
         { token: 'cryptodollar', value: 50000000, isPaid: false },
-        { token: 'link', value: 5000000, isPaid: false },
+        { token: 'link', value: 10000000, isPaid: false },
       ],
       reward: 'Unlock Chainlinkomon',
-      image: false,
     },
     {
       index: 'harass_your_friends_about_nfts',
       name: 'Harass your friends about NFTs',
       description: 'I\'m sure they will find you SUPER cool !',
       costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'xtz', value: 500000, isPaid: false },
+        { token: 'cryptodollar', value: 100000000, isPaid: false },
+        { token: 'xtz', value: 50000000, isPaid: false },
       ],
       reward: 'Unlock Tezosomon',
-      image: false,
     },
     {
       index: 'crowdsource_parachain',
       name: 'Crowdsource a Parachain',
       description: 'It looks like chinese but a quick google might helps.',
       costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'dot', value: 500000, isPaid: false },
+        { token: 'cryptodollar', value: 500000000, isPaid: false },
+        { token: 'dot', value: 100000000, isPaid: false },
       ],
       reward: 'Unlock Polkadotmon',
-      image: false,
-    },
-    {
-      index: 'ok_boomer',
-      name: 'OK boomer !',
-      description: 'The future is now, old man',
-      costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'sol', value: 500000, isPaid: false },
-      ],
-      reward: 'Unlock Solana Staking',
-      image: false,
-    },
-    {
-      index: 'beat_visa_transaction_speed',
-      name: 'Beat VISA transaction speed',
-      description: 'VISA is so over-rated',
-      costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'sol', value: 500000, isPaid: false },
-      ],
-      reward: 'Unlock Solanamon',
-      image: false,
     },
     {
       index: 'send_shitcoins_to_vitalik',
       name: 'Send your shitcoins to Vitalik',
       description: 'Better be in a rich man garbage than a poor guy wallet',
       costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'shib', value: 500000, isPaid: false },
+        { token: 'cryptodollar', value: 1000000000, isPaid: false },
+        { token: 'shib', value: 500000000, isPaid: false },
       ],
       reward: 'Unlock Shibainumon',
-      image: false,
     },
-    {
-      index: 'fill_a_pool_with_cash_money',
-      name: 'Fill a pool with cash money',
-      description: 'Save water, swim in cash.',
-      costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'uni', value: 500000, isPaid: false },
-      ],
-      reward: 'Unlock the Uniswap Underground',
-      image: false,
-    },
-    {
-      index: 'swap_whatever_in_large_amounts',
-      name: 'Swap whatever in large amounts',
-      description: 'We don\'t care we\'re just here for the airdrop',
-      costs: [
-        { token: 'cryptodollar', value: 500000, isPaid: false },
-        { token: 'uni', value: 500000, isPaid: false },
-      ],
-      reward: 'Unlock the Unimon',
-      image: false,
-    },
+    
   
   
   
@@ -311,21 +419,28 @@ export const goalsEnum = [
       name: 'Buy a pizza with bitcoins',
       description: 'A nice pizza, without ananas and just for 10 000 BTC !',
       costs: [
-        { token: 'btc', value: 10000, isPaid: false },
+        { token: 'cryptodollar', value: 1000000000, isPaid: false },
+        { token: 'btc', value: 1000000000, isPaid: false },
+        { token: 'nmc', value: 1000000000, isPaid: false },
+        { token: 'ltc', value: 1000000000, isPaid: false },
+        { token: 'xmr', value: 1000000000, isPaid: false },
+        { token: 'eth', value: 1000000000, isPaid: false },
+        { token: 'zec', value: 1000000000, isPaid: false },
+        { token: 'bch', value: 1000000000, isPaid: false },
+        { token: 'eos', value: 1000000000, isPaid: false },
+        { token: 'ada', value: 1000000000, isPaid: false },
+        { token: 'trx', value: 1000000000, isPaid: false },
+        { token: 'bnb', value: 1000000000, isPaid: false },
+        { token: 'link', value: 1000000000, isPaid: false },
+        { token: 'xtz', value: 1000000000, isPaid: false },
+        { token: 'dot', value: 1000000000, isPaid: false },
+        { token: 'sol', value: 1000000000, isPaid: false },
+        { token: 'shib', value: 1000000000, isPaid: false },
+        { token: 'uni', value: 1000000000, isPaid: false },
       ],
       reward: 'A pizza',
-      image: false,
     },
-    {
-      index: 'save_harambe',
-      name: 'Save Harambe',
-      description: 'Save the world from collapse by saving Harembe.',
-      costs: [
-        { token: 'cryptodollar', value: 400000000, isPaid: false },
-      ],
-      reward: 'Ooooh ooohh AAAhh AH!',
-      image: false,
-    },
+    
     
    /*    {
         index: 'fix_inflation',

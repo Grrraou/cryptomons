@@ -69,7 +69,7 @@
   
     <!-- Swap Result -->
     <div v-if="swapResult" class="swap-result">
-      <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult }} <img :src="toToken.getIcon()" class="token-icon"></p>
+      <p><span style="color: #444;">You will receive approximately:</span><br>{{ swapResult.toFixed(SettingsManager.getSettings().decimals) }} <img :src="toToken.getIcon()" class="token-icon"></p>
     </div>
     <div v-else class="swap-result">
       <p>1<img :src="fromToken.getIcon()" class="token-icon" draggable="false"> = {{ fromToken.price }}<img src="/tokens/cryptodollar.png" class="token-icon" draggable="false"></p>
@@ -84,6 +84,7 @@ import VueSelect from "vue3-select-component";
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import UXManager from '@/managers/UXManager';
+import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
   name: 'SimpleSwapBox',
@@ -148,6 +149,7 @@ export default defineComponent({
       fromToken,
       toToken,
       swapResult,
+      SettingsManager,
       selectPercentage,
       swapTokens,
     };

@@ -1,8 +1,18 @@
 <template>
   <div class="goals-page">
     <h1 class="page-title">Goals <InfoBubble page="goals" /></h1>
+
+    <div class="filters">
+      <label>
+        <input type="checkbox" v-model="hideUnlocked" @click="SettingsManager.getSettings().goalsHideUnlocked = !hideUnlocked" /> Hide Unlocked Goals
+      </label>
+      <label>
+        <input type="checkbox" v-model="hideUnpayable" @click="SettingsManager.getSettings().goalsHideUnpayable = !hideUnpayable" /> Hide Unpayable Goals
+      </label>
+    </div>
+
     <div class="goals-container">
-      <div v-for="goal in goals" :key="goal.index">
+      <div v-for="goal in filteredGoals" :key="goal.index">
         <GoalWidget :goal="goal" />
       </div>
     </div>
@@ -10,10 +20,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import { useGoalStores } from '@/stores/useGoals';
 import GoalWidget from '@/components/GoalWidget.vue';
 import InfoBubble from '@/components/InfoBubble.vue';
+import SettingsManager from '@/managers/SettingsManager';
 
 export default defineComponent({
   components: {
@@ -24,8 +35,29 @@ export default defineComponent({
     // Retrieve all goal stores
     const goals = computed(() => Object.keys(useGoalStores).map(key => useGoalStores[key]()));
 
+    // Filters
+    const hideUnlocked = ref(SettingsManager.getSettings().goalsHideUnlocked);
+    const hideUnpayable = ref(SettingsManager.getSettings().goalsHideUnpayable);
+
+    // Computed goals list with filters applied
+    const filteredGoals = computed(() => {
+      return goals.value.filter(goal => {
+        const isUnpayable = goal.costs.some(cost => !goal.canPayCost(cost.token));
+        if (hideUnlocked.value && goal.isCompleted) {
+          return false;
+        }
+        if (hideUnpayable.value && isUnpayable) {
+          return false;
+        }
+        return true;
+      });
+    });
+
     return {
-      goals,
+      filteredGoals,
+      hideUnlocked,
+      hideUnpayable,
+      SettingsManager,
     };
   },
 });
@@ -34,6 +66,22 @@ export default defineComponent({
 <style scoped>
 .goals-page {
   padding: 20px;
+}
+
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.filters label {
+  font-size: 14px;
+  color: #333;
+}
+
+.filters input[type="checkbox"] {
+  margin-right: 8px;
 }
 
 .goals-container {
