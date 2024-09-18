@@ -44,7 +44,7 @@ export const goalsEnum = [
       name: 'Gold deserve Silver',
       description: 'If you have gold, why not having silver too ?',
       costs: [
-        { token: 'nmc', value: 10, isPaid: false },
+        { token: 'nmc', value: 5, isPaid: false },
       ],
       reward: 'Unlock the Litecoin mine',
       image: true,
@@ -54,7 +54,7 @@ export const goalsEnum = [
       name: 'Centralize decentralization',
       description: 'This makes no sens ? yeah i know...',
       costs: [
-        { token: 'ltc', value: 25, isPaid: false },
+        { token: 'ltc', value: 10, isPaid: false },
       ],
       reward: 'Unlock Swap',
       image: true,

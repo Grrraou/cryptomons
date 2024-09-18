@@ -59,7 +59,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return token.balance >= this.getUpgradeCost();
             },
             getUpgradeCost(): number {
-                return this.level + this.level * 10;
+                return 1 - this.level + this.level * 3;
             },
             getImage() {
                 const imgPath = this.img === false ? '/mines/default.png' : `/mines/${this.index}.png`;
