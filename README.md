@@ -6,7 +6,7 @@ Cryptomons is a Vue 3 application with TypeScript, Pinia for state management, a
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v14+)
+- [Node.js](https://nodejs.org/) (v20+)
 - [Yarn](https://yarnpkg.com/)
 
 ### Installation
@@ -32,4 +32,11 @@ To run the project in development mode:
 
     ```bash
     yarn dev
+    ```
+
+
+ ## Docker
+    ```bash
+    docker build -t cryptomons .
+    docker run -d -p 8080:80 --name cryptomons --memory=128m --cpus="0.5" cryptomons
     ```

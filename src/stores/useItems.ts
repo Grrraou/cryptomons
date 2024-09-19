@@ -1,9 +1,14 @@
 import { defineStore } from 'pinia';
-import { Item } from '@/enums/ItemsEnum'; // Assuming the Item type is in a file named types.ts
+import { Item } from '@/enums/ItemsEnum';
+
+export type EquipementSlotType = 'Head' | 'Chest' | 'Pants' | 'Hands' | 'Boots' | 'Weapon' | 'Gloves' | 'Consumable';
 
 interface EquipmentState {
     Head: Item | null;
     Chest: Item | null;
+    Hands: Item | null;
+    Pants: Item | null;
+    Boots: Item | null;
     Weapon: Item | null;
     inventory: Item[];
 }
@@ -12,11 +17,14 @@ export const useItemsStore = defineStore('items', {
     state: (): EquipmentState => ({
         Head: null,
         Chest: null,
+        Hands: null,
+        Pants: null,
+        Boots: null,
         Weapon: null,
         inventory: [],
     }),
     actions: {
-        equipItem(slotType: 'Head' | 'Chest' | 'Weapon', inventoryIndex: number) {
+        equipItem(slotType: EquipementSlotType, inventoryIndex: number) {
             if (this[slotType]) {
                 this.inventory.push(this[slotType]!);
             }
@@ -26,7 +34,7 @@ export const useItemsStore = defineStore('items', {
                 this.removeItemFromInventory(inventoryIndex);
             }
         },
-        unequipItem(slotType: 'Head' | 'Chest' | 'Weapon', isGoingToInventory: boolean = true) {
+        unequipItem(slotType: EquipementSlotType, isGoingToInventory: boolean = true) {
             const item = this[slotType];
             if (item) {
                 if (isGoingToInventory) this.inventory.push(item);
@@ -50,14 +58,23 @@ export const useItemsStore = defineStore('items', {
             let xp = this.Head?.xp ?? 0;
             xp += this.Chest?.xp ?? 0;
             xp += this.Weapon?.xp ?? 0;
+            xp += this.Hands?.xp ?? 0;
+            xp += this.Pants?.xp ?? 0;
+            xp += this.Boots?.xp ?? 0;
 
             let damage = this.Head?.damage ?? 0;
             damage += this.Chest?.damage ?? 0;
             damage += this.Weapon?.damage ?? 0;
+            damage += this.Hands?.damage ?? 0;
+            damage += this.Pants?.damage ?? 0;
+            damage += this.Boots?.damage ?? 0;
 
             let mining = this.Head?.mining ?? 0;
             mining += this.Chest?.mining ?? 0;
             mining += this.Weapon?.mining ?? 0;
+            mining += this.Hands?.mining ?? 0;
+            mining += this.Pants?.mining ?? 0;
+            mining += this.Boots?.mining ?? 0;
 
             return {
                 xp: xp,

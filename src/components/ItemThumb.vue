@@ -14,7 +14,7 @@
       <p v-if="item.xp"><img style="width: 12px;" src="/xp.png"> +{{ item.xp }}%</p>
       <p v-if="item.damage">⚔️ +{{ item.damage }}%</p>
       <p v-if="item.mining">⛏️ +{{ item.mining }}%</p>
-      <p>value: {{ ItemManager.getItemPrice(item).toFixed(SettingsManager.getSettings().decimals) }}<img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()"></p>
+      <p>{{ ItemManager.getItemPrice(item).toFixed(SettingsManager.getSettings().decimals) }}<img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()"></p>
     </div>
   </div>
 </template>

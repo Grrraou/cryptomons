@@ -3,6 +3,7 @@
     <div style="height: 10px;"></div>
     <div id="equipement-stats">
       <!-- {{ equipementStats }} -->
+      <span>Equipement stats: </span>  
       <span v-if="equipementStats.xp"><img style="width: 12px;" src="/xp.png"> +{{ equipementStats.xp }}%</span>
       <span v-if="equipementStats.damage">⚔️ +{{ equipementStats.damage }}%</span>
       <span v-if="equipementStats.mining">⛏️ +{{ equipementStats.mining }}%</span>
@@ -43,6 +44,60 @@
         @dragstart="dragItem('Chest', $event)"
       />
     </div>
+
+    <!-- Hands Slot -->
+    <div
+      class="slot"
+      id="handsSlot"
+      @dragover.prevent
+      @drop="handleDrop($event, 'Hands')"
+      @dragenter.prevent
+    >
+      <ItemThumb
+        class="equip-slot"
+        :class="{ occupied: itemsStore.Hands }"
+        :item="itemsStore.Hands"
+        v-if="itemsStore.Hands"
+        draggable="true"
+        @dragstart="dragItem('Hands', $event)"
+      />
+    </div>
+
+    <!-- Pants Slot -->
+    <div
+      class="slot"
+      id="pantsSlot"
+      @dragover.prevent
+      @drop="handleDrop($event, 'Pants')"
+      @dragenter.prevent
+    >
+      <ItemThumb
+        class="equip-slot"
+        :class="{ occupied: itemsStore.Pants }"
+        :item="itemsStore.Pants"
+        v-if="itemsStore.Pants"
+        draggable="true"
+        @dragstart="dragItem('Pants', $event)"
+      />
+    </div>
+
+    <!-- Boots Slot -->
+    <div
+      class="slot"
+      id="bootsSlot"
+      @dragover.prevent
+      @drop="handleDrop($event, 'Boots')"
+      @dragenter.prevent
+    >
+      <ItemThumb
+        class="equip-slot"
+        :class="{ occupied: itemsStore.Boots }"
+        :item="itemsStore.Boots"
+        v-if="itemsStore.Boots"
+        draggable="true"
+        @dragstart="dragItem('Boots', $event)"
+      />
+    </div>
   
     <!-- Weapon Slot -->
     <div
@@ -69,6 +124,7 @@
 import { defineComponent, ref, watch } from 'vue';
 import ItemThumb from './ItemThumb.vue';
 import ItemManager from '@/managers/ItemManager';
+import { EquipementSlotType } from '@/stores/useItems';
   
 export default defineComponent({
   components: {
@@ -82,13 +138,13 @@ export default defineComponent({
       equipementStats.value = itemsStore.getEquipementStats();
     }, { deep: true });
 
-    const dragItem = (slotType: 'Head' | 'Chest' | 'Weapon', event: DragEvent) => {
+    const dragItem = (slotType: EquipementSlotType, event: DragEvent) => {
       if (event.dataTransfer) {
         event.dataTransfer.setData('slotType', slotType);
       }
     };
   
-    const handleDrop = (event: DragEvent, slotType: 'Head' | 'Chest' | 'Weapon') => {
+    const handleDrop = (event: DragEvent, slotType: EquipementSlotType) => {
       event.preventDefault();
       const inventoryIndex = event.dataTransfer?.getData('inventoryIndex');
 
@@ -183,6 +239,27 @@ export default defineComponent({
 
 #headSlot {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('/items/headSlot.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+}
+
+#handsSlot {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('/items/handsSlot.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+}
+
+#pantsSlot {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('/items/pantsSlot.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+}
+
+#bootsSlot {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('/items/bootsSlot.png');
   background-size: cover;
   background-position: center;
   background-color: #000;

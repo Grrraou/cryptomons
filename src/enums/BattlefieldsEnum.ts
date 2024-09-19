@@ -13,7 +13,12 @@ export const battlefieldsEnum: Battlefield[] = [
         requirement: null, 
         monsters: ['fisc_gobelin', 'scammer_troll', 'pump_and_dump_dragon', 'rug_puller_wraith', 'gas_fee_gremlin', 'ponzi_kraken'], 
     },
-    { index: 'kraken_abyss', name: "Kraken's Abyss", requirement: 'buy_uwucrew_and_digidaigaku', monsters: ['pump_and_dump_dragon'] },
+    { 
+        index: 'kraken_abyss', 
+        name: "Kraken's Abyss", 
+        requirement: 'buy_uwucrew_and_digidaigaku', 
+        monsters: ['fomo_phantom', 'shill_serpent', 'whale_manipulator', 'dusting_demon', 'defi_doppelganger', 'crypto_clown'] 
+    },
     { index: 'uniswap_underground', name: 'Uniswap Underground', requirement: 'fill_a_pool_with_cash_money', monsters: ['rug_puller_wraith'] },
     /* { index: 'gemini_gorge', name: 'Gemini Gorge', requirement: null, image: false },
     { index: 'bybit_blitz', name: 'Bybit Blitz', requirement: null, image: false },

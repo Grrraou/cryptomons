@@ -1,9 +1,10 @@
+import { EquipementSlotType } from "@/stores/useItems";
 
 export type Item = {
   index: string;
   name: string;
   description: string;
-  type: 'Consumable' | 'Head' | 'Chest' | 'Weapon';
+  type: EquipementSlotType;
   power: number;
   img?: boolean;
   xp?: number;
@@ -42,7 +43,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Fortress Plate',
     description: 'An elite chestplate crafted with Binance\'s finest technology, providing superior defense.',
     type: 'Chest',
-    power: 1.2,
+    power: 2,
     img: true,
   },
   {
@@ -58,7 +59,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Fortress Helmet',
     description: '',
     type: 'Head',
-    power: 1.2,
+    power: 2,
     img: true,
   },
   {
@@ -74,7 +75,55 @@ export const itemsEnum: Item[] = [
     name: 'Binance Fortress Sword',
     description: '',
     type: 'Weapon',
-    power: 1.2,
+    power: 2,
+    img: true,
+  },
+  {
+    index: 'kraken-gloves',
+    name: 'Kraken Gloves',
+    description: '',
+    type: 'Hands',
+    power: 1,
+    img: true,
+  },
+  {
+    index: 'kraken-fortress-gloves',
+    name: 'Kraken Fortress Gloves',
+    description: '',
+    type: 'Hands',
+    power: 2,
+    img: true,
+  },
+  {
+    index: 'kraken-boots',
+    name: 'Kraken Boots',
+    description: '',
+    type: 'Boots',
+    power: 1,
+    img: true,
+  },
+  {
+    index: 'kraken-fortress-boots',
+    name: 'Kraken Fortress Boots',
+    description: '',
+    type: 'Boots',
+    power: 2,
+    img: true,
+  },
+  {
+    index: 'kraken-pants',
+    name: 'Kraken Pants',
+    description: '',
+    type: 'Pants',
+    power: 1,
+    img: true,
+  },
+  {
+    index: 'kraken-fortress-pants',
+    name: 'Kraken Fortress pants',
+    description: '',
+    type: 'Pants',
+    power: 2,
     img: true,
   },
 ];
