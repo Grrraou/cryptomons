@@ -15,8 +15,8 @@
         <!-- Option template to display each option with an icon -->
         <template #option="{ option }">
           <div class="option-content">
-            <img :src="option.icon" alt="Token Logo" class="token-logo" draggable="false" />
-            <span class="option-label">{{ option.label }} ( {{ option.balance }} )</span>
+            <img :src="(option as any).icon" alt="Token Logo" class="token-logo" draggable="false" />
+            <span class="option-label">{{ option.label }} ( {{ (option as any).balance }} )</span>
           </div>
         </template>
       </VueSelect>
@@ -38,8 +38,8 @@
       >
         <template #option="{ option }">
           <div class="option-content">
-            <img :src="option.icon" alt="Token Logo" class="token-logo" draggable="false" />
-            <span class="option-label">{{ option.label }}  at {{ option.price }}<img src="/tokens/cryptodollar.png" alt="Token Logo" class="token-logo" /></span>
+            <img :src="(option as any).icon" alt="Token Logo" class="token-logo" draggable="false" />
+            <span class="option-label">{{ option.label }}  at {{ (option as any).price }}<img src="/tokens/cryptodollar.png" alt="Token Logo" class="token-logo" /></span>
           </div>
         </template>
       </VueSelect>

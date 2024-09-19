@@ -25,7 +25,7 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
       updateBalance(amount: number) {
         this.balance += amount;
       },
-      getIcon() {
+      getIcon(): string {
         const imgPath = `/tokens/${this.index}.png`;
         return new URL(imgPath, import.meta.url).href;
       },

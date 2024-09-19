@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SideMenu from './components/SideMenu.vue';
-import './assets/styles/main.css';
+import '/public/styles/main.css';
 import MineManager from './managers/MineManager';
 import StakingManager from './managers/StakingManager';
 import BattlefieldManager from './managers/BattlefieldManager';

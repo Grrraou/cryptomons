@@ -25,7 +25,7 @@ class TokenManager {
         return swapStore;
     }
 
-    static getTokensOrderedByBalance() {
+    static getTokensOrderedByBalance(): TokenStoreType[] {
         return this.getTokens().slice().sort((a, b) => b.balance - a.balance);
     }
 

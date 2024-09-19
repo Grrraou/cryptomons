@@ -38,5 +38,7 @@ To run the project in development mode:
  ## Docker
     ```bash
     docker build -t cryptomons .
-    docker run -d -p 8080:80 --name cryptomons --memory=128m --cpus="0.5" cryptomons
+    docker run -d -p 80:80 --name cryptomons --memory=128m --cpus="0.5" cryptomons
     ```
+
+http://localhost/
