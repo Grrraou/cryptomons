@@ -79,12 +79,11 @@
 </template>
   
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, Ref } from 'vue';
 import VueSelect from "vue3-select-component";
 import TokenManager from '@/managers/TokenManager';
-import AudioManager from '@/managers/AudioManager';
-import UXManager from '@/managers/UXManager';
 import SettingsManager from '@/managers/SettingsManager';
+import { TokenStoreType } from '@/stores/useTokens';
   
 export default defineComponent({
   name: 'SimpleSwapBox',
@@ -94,11 +93,11 @@ export default defineComponent({
   setup() {
     const swapStore = TokenManager.getSwapStore();
 
-    const fromToken = computed({
+    const fromToken: Ref<TokenStoreType> = computed({
       get: () => swapStore.getFromTokenStore(),
       set: (value) => swapStore.fromToken = value.index,
     });
-    const toToken = computed({
+    const toToken: Ref<TokenStoreType> = computed({
       get: () => swapStore.getToTokenStore(),
       set: (value) => swapStore.toToken = value.index,
     });
@@ -114,34 +113,7 @@ export default defineComponent({
     };
   
     const swapTokens = () => {
-      if (swapStore.amount <= 0) {
-        UXManager.showError(`Can't swap 0.`);
-        return;
-      }
-
-      if (fromToken.value.balance < swapStore.amount) {
-        UXManager.showError(`Insufficient ${fromToken.value.index.toUpperCase()} balance.`);
-        return;
-      }
-
-      if (!fromToken.value.isFiat()) {
-          // Decrease fromToken price, proportional to its current price and the amount being swapped
-          const priceDecrease = fromToken.value.price * (swapStore.priceFactor * (swapStore.amount / (swapStore.amount + fromToken.value.price)));
-          fromToken.value.price = Math.max(fromToken.value.price - priceDecrease, 0.01);
-      }
-
-      if (!toToken.value.isFiat()) {
-          // Increase toToken price, proportional to its current price and the amount being swapped
-          const priceIncrease = toToken.value.price * (swapStore.priceFactor * (swapStore.amount / (swapStore.amount + toToken.value.price)));
-          toToken.value.price = Math.max(toToken.value.price + priceIncrease, 0.01);
-      }
-        
-      fromToken.value.updateBalance(-swapStore.amount);
-      toToken.value.updateBalance(swapResult.value);
-      UXManager.showSuccess(`Swapped ${swapStore.amount} ${fromToken.value.index.toUpperCase()} to ${swapResult.value} ${toToken.value.index.toUpperCase()}`);
-      AudioManager.play('swap.wav');
-      swapResult.value = 0;
-      swapStore.amount = 0;
+      swapResult.value = swapStore.swapTokens();
     };
   
     return {

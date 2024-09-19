@@ -7,6 +7,8 @@ import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import AchievementManager from '@/managers/AchievementManager';
 import SettingsManager from '@/managers/SettingsManager';
+import UXManager from '@/managers/UXManager';
+
 
 type MineStoreType = {
   index: string;
@@ -23,6 +25,7 @@ type MineStoreType = {
   getUpgradeCost: () => number;
   getImage: () => string;
   mine: (mount: number|null) => void;
+  mineManually: (Event: MouseEvent) => void;
   getDefaultMiningAmount: () => number;
 };
 
@@ -36,7 +39,6 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
         actions: {
             isUnlocked() {
                 if (!this.requirement) return true;
-                console.log(this.requirement)
                 const goalStore = useGoalStores[this.requirement]();
                 return goalStore.isCompleted;
             },
@@ -72,6 +74,15 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 if (window.location.pathname === '/mines') {
                     AudioManager.playRandom(miningSoundsEnum);
                 }
+            },
+            mineManually(event: MouseEvent) {
+                this.increaseClicks(1);
+                const minedAmount = this.getDefaultMiningAmount();
+                const tokenStore = TokenManager.getTokenStore(this.token);
+                this.mine(minedAmount);
+                const x = event.clientX;
+                const y = event.clientY;
+                UXManager.showFlyingText(minedAmount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), x, y);
             },
             getDefaultMiningAmount() {
                 const randomFactor = Math.random() * 0.000001;

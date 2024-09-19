@@ -59,6 +59,7 @@ export default defineComponent({
 
         const completeGoals = () => {
             GoalManager.getGoals().forEach(goalStore => goalStore.completeGoal());
+            TokenManager.getTokens().forEach(tokenStore => tokenStore.updateBalance(1));
         };
 
         const iNeedMoney = () => {

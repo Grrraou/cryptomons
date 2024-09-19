@@ -25,7 +25,7 @@ export const heroesEnum: Hero[] = [
     { index: 'unimon', name: 'Unimon', token: 'uni', requirement: 'swap_whatever_in_large_amounts', baseBattlePower: 4, baseMiningPower: 2 },
     { index: 'solanamon', name: 'Solanamon', token: 'sol', requirement: 'beat_visa_transaction_speed', baseBattlePower: 5, baseMiningPower: 1 },
     { index: 'chainlinkomon', name: 'Chainlinkomon', token: 'link', requirement: 'consult_the_oracles', baseBattlePower: 3, baseMiningPower: 3 },
-    { index: 'tezosomon', name: 'Tezosomon', token: 'tezos', requirement: 'harass_your_friends_about_nfts', baseBattlePower: 3, baseMiningPower: 3 },
+    { index: 'tezosomon', name: 'Tezosomon', token: 'xtz', requirement: 'harass_your_friends_about_nfts', baseBattlePower: 3, baseMiningPower: 3 },
     { index: 'polkadotmon', name: 'Polkadotmon', token: 'dot', requirement: 'crowdsource_parachain', baseBattlePower: 3, baseMiningPower: 3 },
     { index: 'shibainumon', name: 'Shibainumon', token: 'shib', requirement: 'send_shitcoins_to_vitalik', baseBattlePower: 2, baseMiningPower: 4 },
     

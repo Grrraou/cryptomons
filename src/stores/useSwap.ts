@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { TokenStoreType } from './useTokens';
 import TokenManager from '@/managers/TokenManager';
+import UXManager from '@/managers/UXManager';
+import AudioManager from '@/managers/AudioManager';
 
 export type SwapOption = {
     label: string;
@@ -23,7 +25,7 @@ export const useSwapStore = defineStore('swap_options', {
     state: (): SwapStoreType => ({
         fromToken: TokenManager.getTokensOrderedByBalance()[0].index,
         toToken: TokenManager.getReferenceTokenStore().index,
-        priceFactor: 0.01,
+        priceFactor: 1,
         amount: 0,
         swapResult: 0,
     }),
@@ -76,6 +78,65 @@ export const useSwapStore = defineStore('swap_options', {
                 const fromTokenValueInDollar = ((this.amount - fees) * fromTokenValue);
                 swapResult = (fromTokenValueInDollar / toTokenValue);
             }
+            return swapResult;
+        },
+        swapTokens(): number {
+            const fromToken = TokenManager.getTokenStore(this.fromToken);
+            const toToken = TokenManager.getTokenStore(this.toToken);
+
+            if (this.amount <= 0) {
+              UXManager.showError(`Can't swap 0.`);
+              return 0;
+            }
+      
+            if (fromToken.balance < this.amount) {
+              UXManager.showError(`Insufficient ${fromToken.index.toUpperCase()} balance.`);
+              return 0;
+            }
+      
+            if (!fromToken.isFiat()) {
+              const linearImpact = this.amount * 0.001; // Small base impact for linear scaling
+              const logImpact = Math.log10(this.amount + 1); // Logarithmic scaling for larger amounts
+              const combinedImpact = linearImpact + logImpact; // Combine both impacts
+          
+              const amountImpact = Math.pow(combinedImpact, this.priceFactor); // Use priceFactor as exponent
+              const priceImpact = Math.pow(fromToken.price, this.priceFactor); // Use priceFactor as exponent
+      
+              // Higher damping factor for fromToken
+              const dampingFactor = 0.06; // Higher impact for selling
+      
+              // Adjusted price decrease calculation
+              const priceDecrease = dampingFactor * fromToken.price * (amountImpact / (amountImpact + priceImpact));
+      
+              // Apply the price decrease, ensuring it doesn't drop below the minimum
+              fromToken.price = Math.max(fromToken.price - priceDecrease, 0.01);
+          }
+      
+          if (!toToken.isFiat()) {
+              const linearImpactToToken = this.amount * 0.001; // Small base impact for linear scaling
+              const logImpactToToken = Math.log10(this.amount + 1); // Logarithmic scaling for larger amounts
+              const combinedImpactToToken = linearImpactToToken + logImpactToToken; // Combine both impacts
+              
+              const amountImpactToToken = Math.pow(combinedImpactToToken, this.priceFactor); // Use priceFactor as exponent
+              const priceImpactToToken = Math.pow(toToken.price, this.priceFactor); // Use priceFactor as exponent
+      
+              // Lower damping factor for toToken to ensure net negative impact over cycles
+              const dampingFactorToToken = 0.03; // Less impact for buying toToken
+      
+              // Adjusted price increase calculation
+              const priceIncrease = dampingFactorToToken * toToken.price * (amountImpactToToken / (amountImpactToToken + priceImpactToToken));
+      
+              // Apply the price increase, ensuring it doesn't drop below the minimum
+              toToken.price = Math.max(toToken.price + priceIncrease, 0.01);
+            }
+
+            let swapResult = 0;
+            fromToken.updateBalance(-this.amount);
+            toToken.updateBalance(swapResult);
+            UXManager.showSuccess(`Swapped ${this.amount} ${fromToken.index.toUpperCase()} to ${swapResult} ${toToken.index.toUpperCase()}`);
+            AudioManager.play('swap.wav');
+            swapResult = 0;
+            this.amount = 0;
             return swapResult;
         },
         getFees(): number {

@@ -41,7 +41,6 @@ export default defineComponent({
             }
 
             input = document.getElementById('referenceToken') as HTMLSelectElement;
-            console.log(input.value)
             if (input) {
                 SettingsManager.getSettings().referenceTokenIndex = input.value;
             }

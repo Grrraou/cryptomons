@@ -25,7 +25,7 @@ export const goalsEnum = [
       costs: [
         { token: 'btc', value: 0.5, isPaid: false },
       ],
-      reward: 'Unlock Bitcomon too !',
+      reward: 'Unlock Bitcomon with better stats !',
     },
     {
       index: 'decentralize_dns',

@@ -27,11 +27,11 @@
     </div>
 
     <div class="action-container">
-        <button class="mine-button" @click="mineManually($event)">
+        <button class="mine-button" @click="mineStore.mineManually($event)">
           <img src="/mines/miningButton.png" alt="Mine Logo" class="button-logo" draggable="false" />
           Mine!
         </button>
-        <button class="upgrade-button" @click="upgrade" :disabled="!mineStore.canUpgrade()">
+        <button class="upgrade-button" @click="mineStore.upgrade()" :disabled="!mineStore.canUpgrade()">
           <img src="/mines/upgradeButton.png" alt="Mine Logo" class="button-logo" draggable="false" />
           Upgrade (Cost: {{ mineStore.getUpgradeCost() }} <img :src="tokenStore.getIcon()" class="token-icon-small" />)
         </button>
@@ -94,22 +94,6 @@ export default defineComponent({
           heroes.value = HeroManager.getHeroes();
         }
       };
-      
-      const mineManually = (event: MouseEvent) => {
-        mineStore.increaseClicks(1);
-        const minedAmount = mineStore.getDefaultMiningAmount();
-        mineStore.mine(minedAmount);
-        const x = event.clientX;
-        const y = event.clientY;
-        UXManager.showFlyingText(minedAmount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), x, y);
-      };
-
-      const upgrade = (event: MouseEvent) => {
-        mineStore.upgrade()
-        const x = event.clientX;
-        const y = event.clientY;
-        UXManager.showFlyingText('Level UP !', '/levelUp.png', x, y);
-      };
 
       return {
         mineStore,
@@ -118,8 +102,6 @@ export default defineComponent({
         heroes,
         SettingsManager,
         handleHeroDrop,
-        mineManually,
-        upgrade,
       };
     },
   });
