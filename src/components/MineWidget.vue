@@ -39,8 +39,8 @@
   
     <!-- Workers Area Section -->
     <div class="workers-section">
-      <p class="workers-heading">Workers in this Area:</p>
-      <p v-if="heroes.length === 0" class="no-heroes">No workers assigned</p>
+      <div class="workers-heading">
+        <p>Workers in this Area:</p>
       <div v-if="heroes.length > 0" class="heroes-in-area">
         <div v-for="(hero, index) in heroes">
           <HeroThumb 
@@ -52,6 +52,11 @@
           />
         </div>
       </div>
+      <div class="drop-area">
+            Drop heroes here to assign
+      </div>
+    </div>
+      
     </div>
   </div>
 </template>
@@ -62,7 +67,6 @@ import HeroThumb from '@/components/HeroThumb.vue';
 import MineManager from '@/managers/MineManager';
 import TokenManager from '@/managers/TokenManager';
 import HeroManager from '@/managers/HeroManager';
-import UXManager from '@/managers/UXManager';
 import SettingsManager from '@/managers/SettingsManager';
   
 export default defineComponent({
@@ -324,5 +328,16 @@ export default defineComponent({
     width: 30px;
     height: auto;
   }
+
+  .drop-area {
+    background-color: #d3d3d3;
+    border: 2px dashed #aaa;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #444;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
 </style>
   

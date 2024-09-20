@@ -49,7 +49,7 @@
             <li v-else>
               <router-link to="/swap" class="forbidden-link" draggable="false">🚫 Swap</router-link>
             </li>
-            <li>
+            <li :class="goalsClass">
               <router-link to="/goals" draggable="false">🎯 Goals</router-link>
             </li>
             <li>
@@ -73,6 +73,7 @@ import { defineComponent, computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useGoalStores } from '@/stores/useGoals';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
+import GoalManager from '@/managers/GoalManager';
 
 export default defineComponent({
   name: 'SideMenu',
@@ -86,11 +87,19 @@ export default defineComponent({
       soundOn.value = !soundOn.value;
       AudioManager.toggleSound();
     };
+    let goalsClass = computed(() => {
+      console.log(GoalManager.isThereGoalCostToPay())
+      return GoalManager.isThereGoalCostToPay() ? 'shiny' : '';
+    });
 
     /* Refreshed total assets */
     const totalAssetsValue = ref<number>(TokenManager.getTotalAssetsValue());
     let intervalId: number | null = null;
     const updateTotalAssetsValue = () => {
+/*       goalsClass = computed(() => {
+        console.log(GoalManager.isThereGoalCostToPay() ? 'shiny' : '')
+        return GoalManager.isThereGoalCostToPay() ? 'shiny' : '';
+      }); */
       totalAssetsValue.value = TokenManager.getTotalAssetsValue();
     };
     onMounted(() => {
@@ -104,6 +113,7 @@ export default defineComponent({
 
     return {
       useGoalStores,
+      goalsClass,
       TokenManager,
       soundIcon,
       toggleSound,
@@ -121,6 +131,10 @@ export default defineComponent({
 .totalAssets {
   font-weight: bold;
   font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 150px;
 }
 
 .token-icon {
@@ -209,4 +223,23 @@ nav ul li a.router-link-active {
   font-size: 24px;
   cursor: pointer;
 }
+
+.shiny a {
+  color: #000;
+  background: none;
+  animation: shiny-text-animation 2s linear infinite;
+}
+
+@keyframes shiny-text-animation {
+  0% {
+    color: #444;
+  }
+  50% {
+    color: #ffa500;
+  }
+  100% {
+    color: #444;
+  }
+}
+
 </style>
