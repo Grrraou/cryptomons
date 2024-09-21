@@ -46,7 +46,6 @@ import { defineComponent, computed } from 'vue';
 import { Hero } from '@/enums/HeroesEnum';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
-import GoalManager from '@/managers/GoalManager';
   
 export default defineComponent({
     props: {

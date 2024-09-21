@@ -66,24 +66,29 @@ body {
 .infobox {
     display: none;
     position: absolute;
-    border-radius: 10%;
+    border-radius: 10px;
     border: 2px solid #444;
     top: 110%;
     left: 50%;
     transform: translateX(-50%);
+    transform: translateY(-100%);
     background-color: #fff;
     padding: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 100;
+    z-index: 999;
     width: 200px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
-    transform: translateY(-50%);
+    font-size: 12px;
 }
-  
+
 .infobox p {
     margin: 5px 0;
+}
+
+.infoboxed {
+    position: relative;
 }
   
 .infoboxed:hover .infobox, .infoboxed .infobox:hover {

@@ -8,8 +8,12 @@
         <div class="logo-container">
           <img src="/mainLogo.png" alt="Cryptomons Logo" class="logo" draggable="false" />
         </div>
-        <div class="totalAssets">
+        <div class="totalAssets infoboxed">
           {{ totalAssetsValue.toFixed(2) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()">
+          <!-- Info Box -->
+          <div class="infobox">
+            <p>Total Assets value in converted in {{ TokenManager.getReferenceTokenStore().name }}</p>
+          </div>
         </div>
         <nav class="main-menu-nav">
           <ul>

@@ -50,9 +50,8 @@ export default defineComponent({
 
     const filteredTokens = computed(() => {
       let filtered = tokenStores.filter(store => {
-        const tokenAmount = store.balance;
         return (
-          tokenAmount > 0 &&
+          store.balance > 0 &&
           (store.name.toLowerCase().includes(filterText.value.toLowerCase()) ||
           store.index.toLowerCase().includes(filterText.value.toLowerCase()))
         );

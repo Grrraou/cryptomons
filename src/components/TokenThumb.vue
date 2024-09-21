@@ -30,7 +30,7 @@
   
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useTokenStores } from '@/stores/useTokens';
+import { TokenStoreType, useTokenStores } from '@/stores/useTokens';
 import TokenManager from '@/managers/TokenManager';
 import SettingsManager from '@/managers/SettingsManager';
   
@@ -38,7 +38,7 @@ export default defineComponent({
   name: 'TokenThumb',
   props: {
     token: {
-      type: Object as () => { index: string; name: string },
+      type: Object as () => TokenStoreType,
       required: true,
     },
     sortOption: {
@@ -47,7 +47,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const tokenStore = useTokenStores[props.token.index](); // Create store instance
+    const tokenStore = useTokenStores[props.token.index]();
 
     return {
       tokenStore,
