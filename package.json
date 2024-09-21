@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "electron-main.cjs",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "electron:dev": "vite dev & electron .",
+    "electron:build": "vite build && electron-builder"
   },
   "dependencies": {
     "pinia": "^2.2.2",
@@ -23,10 +26,28 @@
     "@types/node": "^20.14.5",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
+    "electron": "^32.1.2",
+    "electron-builder": "^25.0.5",
     "npm-run-all2": "^6.2.0",
     "typescript": "^5.6.2",
     "vite": "^5.3.1",
     "vue-tsc": "^2.0.21",
     "vue3-select-component": "^0.5.2"
+  },
+  "build": {
+    "appId": "com.cryptomons.app",
+    "files": [
+      "dist",
+      "electron-main.cjs"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    }
   }
 }

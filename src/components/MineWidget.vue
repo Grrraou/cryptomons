@@ -4,7 +4,7 @@
     <!-- Title and Logo Section -->
     <div class="title-section">
       <h3 class="mine-name">{{ mineStore.name }}</h3>
-      <img :src="mineStore.getImage()" alt="Bitcoin Mine Logo" class="logo-image" draggable="false" />
+      <img :src="mineStore.getImage()" alt="Mine Logo" class="logo-image" draggable="false" />
       <div class="logs"></div>
     </div>
   
