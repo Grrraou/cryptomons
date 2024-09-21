@@ -1,5 +1,7 @@
 {
   "name": "cryptomons",
+  "description": "Just click, we'll talk later!",
+  "author": "Grrr <grrr@returntomonkey.org>",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -23,7 +25,7 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/lodash": "^4.17.7",
-    "@types/node": "^20.14.5",
+    "@types/node": "^22.5.5",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
     "electron": "^32.1.2",
@@ -36,6 +38,7 @@
   },
   "build": {
     "appId": "com.cryptomons.app",
+    "icon": "dist/favicon",
     "files": [
       "dist",
       "electron-main.cjs"
@@ -44,6 +47,7 @@
       "buildResources": "build"
     },
     "win": {
+      "icon": "dist/favicon.ico",
       "target": [
         "nsis",
         "portable"

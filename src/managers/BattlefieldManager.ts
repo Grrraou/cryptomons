@@ -41,7 +41,7 @@ class BattlefieldManager {
                     UXManager.showFlyingTextOnElement('⚔️' + amount.toString(), null, heroStore.getDOMid());
                 });
             });
-        }, interval);
+        }, interval) as unknown as number;
     }
 }
 

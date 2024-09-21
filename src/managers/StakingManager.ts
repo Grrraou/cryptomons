@@ -38,7 +38,7 @@ class StakingManager {
             if (window.location.pathname === '/staking' && isThereStaked) {
                 AudioManager.play('staking.wav', 0.2);
             }
-        }, interval);
+        }, interval) as unknown as number;
     }
 }
 

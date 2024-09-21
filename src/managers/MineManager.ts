@@ -31,7 +31,7 @@ class MineManager {
                     UXManager.showFlyingTextOnElement(amount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), heroStore.getDOMid());
                 });
             });
-        }, interval);
+        }, interval) as unknown as number;
     }
 }
 
