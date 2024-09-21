@@ -19,7 +19,7 @@
       <div class="xp-container">
         <div class="xp-bar">
           <div class="xp-bar-fill" :style="{ width: (heroStore.xp / heroStore.getLevelUpCost()) + '%' }">
-            <span class="xp-text">{{ (heroStore.xp / heroStore.getLevelUpCost()).toFixed(2) }} %</span>
+            <span class="xp-text" :class="xpClass">{{ (heroStore.xp / heroStore.getLevelUpCost()).toFixed(2) }} %</span>
           </div>
         </div>
         <div class="level-icon">
@@ -46,6 +46,7 @@ import { defineComponent, computed } from 'vue';
 import { Hero } from '@/enums/HeroesEnum';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
+import GoalManager from '@/managers/GoalManager';
   
 export default defineComponent({
     props: {
@@ -59,6 +60,10 @@ export default defineComponent({
 
         const levelupButtonClass = computed(() => {
           return (heroStore.canLevelUp()) ? 'active' : 'inactive';
+        });
+
+        let xpClass = computed(() => {
+          return heroStore.canLevelUp() ? 'shiny' : '';
         });
   
         function dragStart(event: DragEvent, hero: Hero) {
@@ -77,6 +82,7 @@ export default defineComponent({
             heroStore,
             TokenManager,
             levelupButtonClass,
+            xpClass,
             dragStart,
             triggerParentDrag,
         };

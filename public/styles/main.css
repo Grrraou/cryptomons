@@ -42,3 +42,22 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+
+.shiny {
+    color: #000;
+    background: none;
+    animation: shiny-text-animation 2s linear infinite;
+}
+
+@keyframes shiny-text-animation {
+0% {
+    color: #444;
+}
+50% {
+    color: #ffa500;
+}
+100% {
+    color: #444;
+}
+}

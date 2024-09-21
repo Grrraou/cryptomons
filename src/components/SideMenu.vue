@@ -49,8 +49,8 @@
             <li v-else>
               <router-link to="/swap" class="forbidden-link" draggable="false">🚫 Swap</router-link>
             </li>
-            <li :class="goalsClass">
-              <router-link to="/goals" draggable="false">🎯 Goals</router-link>
+            <li>
+              <router-link to="/goals" draggable="false" :class="goalsClass">🎯 Goals</router-link>
             </li>
             <li>
               <router-link to="/achievements" draggable="false">🏆 Achievements</router-link>
@@ -88,7 +88,6 @@ export default defineComponent({
       AudioManager.toggleSound();
     };
     let goalsClass = computed(() => {
-      console.log(GoalManager.isThereGoalCostToPay())
       return GoalManager.isThereGoalCostToPay() ? 'shiny' : '';
     });
 
@@ -223,23 +222,4 @@ nav ul li a.router-link-active {
   font-size: 24px;
   cursor: pointer;
 }
-
-.shiny a {
-  color: #000;
-  background: none;
-  animation: shiny-text-animation 2s linear infinite;
-}
-
-@keyframes shiny-text-animation {
-  0% {
-    color: #444;
-  }
-  50% {
-    color: #ffa500;
-  }
-  100% {
-    color: #444;
-  }
-}
-
 </style>

@@ -296,7 +296,7 @@ export const goalsEnum = [
     {
       index: 'buy_bittorent',
       name: 'Buy Bittorent',
-      description: 'Remember DivX ?',
+      description: 'Member DivX ? ohhh I member !',
       costs: [
         { token: 'cryptodollar', value: 750000, isPaid: false },
         { token: 'trx', value: 75000, isPaid: false },

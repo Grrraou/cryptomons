@@ -4,6 +4,7 @@ import { useGoalStores } from './useGoals';
 import UXManager from '@/managers/UXManager';
 import TokenManager from '@/managers/TokenManager';
 import ItemManager from '@/managers/ItemManager';
+import SettingsManager from '@/managers/SettingsManager';
 
 export type HeroStoreType = {
   index: string;
@@ -45,6 +46,7 @@ export const useHeroStores: Record<string, () => HeroStoreType> = heroesEnum.red
         if (!this.canLevelUp()) {
           amount = amount ?? 1;
           amount *= 1 + (ItemManager.getItemStore().getEquipementStats().xp / 100);
+          amount *= SettingsManager.getSettings().xpPower;
           this.xp += amount;
           if (this.xp > this.getXpToLevel()) {
             this.xp = this.getXpToLevel();

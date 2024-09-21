@@ -12,6 +12,10 @@
             <label for="lootPower">Loot Power:</label>
             <input :value="SettingsManager.getSettings().lootPower" type="number" id="lootPower" />
         </div>
+        <div>
+            <label for="xpPower">XP Power:</label>
+            <input :value="SettingsManager.getSettings().xpPower" type="number" id="xpPower" />
+        </div>
         <br>
         <button @click="saveSettings">Save settings</button>
         <button @click="resetSettings">reset</button>
@@ -49,12 +53,19 @@ export default defineComponent({
                 const value = parseInt(input.value, 10);
                 SettingsManager.getSettings().lootPower = value;
             }
+
+            input = document.getElementById('xpPower') as HTMLInputElement;
+            if (input) {
+                const value = parseInt(input.value, 10);
+                SettingsManager.getSettings().xpPower = value;
+            }
         };
 
         const resetSettings = () => {
             SettingsManager.getSettings().miningPower = 1;
             SettingsManager.getSettings().battlePower = 1;
             SettingsManager.getSettings().lootPower = 1;
+            SettingsManager.getSettings().xpPower = 1;
         };
 
         const completeGoals = () => {
