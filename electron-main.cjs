@@ -5,15 +5,14 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1024,
     height: 768,
-    icon: path.join(__dirname, 'dist/favicon.ico'),
+    icon: 'dist/favicon.ico',
     webPreferences: {
-      //preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
     },
   });
 
   if (app.isPackaged) {
-    win.loadFile(path.join(__dirname, 'dist/index.html'));
+    win.loadFile('dist/index.html');
   } else {
     win.loadURL('http://localhost:5173'); // Vite dev server
   }
