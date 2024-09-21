@@ -43,7 +43,7 @@ body {
     align-items: center;
 }
 
-
+/* SHINY */
 .shiny {
     color: #000;
     background: none;
@@ -51,13 +51,43 @@ body {
 }
 
 @keyframes shiny-text-animation {
-0% {
-    color: #444;
+    0% {
+        color: #444;
+    }
+    50% {
+        color: #ffa500;
+    }
+    100% {
+        color: #444;
+    }
 }
-50% {
-    color: #ffa500;
+
+/* INFOBOX */
+.infobox {
+    display: none;
+    position: absolute;
+    border-radius: 10%;
+    border: 2px solid #444;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    width: 200px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translateY(-50%);
 }
-100% {
-    color: #444;
+  
+.infobox p {
+    margin: 5px 0;
 }
+  
+.infoboxed:hover .infobox, .infoboxed .infobox:hover {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
 }

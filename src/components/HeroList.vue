@@ -19,7 +19,7 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent, computed, ref } from 'vue';
   import HeroManager from '@/managers/HeroManager';
   import HeroThumb from '@/components/HeroThumb.vue';
 import MineManager from '@/managers/MineManager';
@@ -31,6 +31,17 @@ import MineManager from '@/managers/MineManager';
     },
     setup() {
         const heroes = ref(HeroManager.getHeroes());
+
+        /* const filteredHeroes = computed(() => {
+          let filtered = tokenStores.filter(store => {
+            const tokenAmount = store.balance;
+            return (
+              tokenAmount > 0 &&
+              (store.name.toLowerCase().includes(filterText.value.toLowerCase()) ||
+              store.index.toLowerCase().includes(filterText.value.toLowerCase()))
+            );
+          });
+        }); */
   
         const handleHeroDrop = (event: DragEvent) => {
             const heroIndex = event.dataTransfer?.getData('heroIndex');

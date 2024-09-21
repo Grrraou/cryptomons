@@ -130,7 +130,7 @@ export const useSwapStore = defineStore('swap_options', {
               toToken.price = Math.max(toToken.price + priceIncrease, 0.01);
             }
 
-            let swapResult = 0;
+            let swapResult = this.calculatePotentialSwap();
             fromToken.updateBalance(-this.amount);
             toToken.updateBalance(swapResult);
             UXManager.showSuccess(`Swapped ${this.amount} ${fromToken.index.toUpperCase()} to ${swapResult} ${toToken.index.toUpperCase()}`);

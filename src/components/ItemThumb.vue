@@ -1,5 +1,5 @@
 <template>
-  <div class="item" :style="backgroundStyle">
+  <div class="item infoboxed" :style="backgroundStyle">
 
     <!-- Consumable Button: Visible only for consumable items -->
     <button v-if="item.type === 'Consumable'" class="consume-btn" @click="consumeItem(item.index)">
@@ -102,36 +102,6 @@ export default defineComponent({
   .consume-btn:hover {
     background-color: #ff0000;
   }
-
-/* INFOBOX */
-.infobox {
-  display: none;
-  position: absolute;
-  border-radius: 10%;
-  border: 2px solid #444;
-  top: 110%; /* Adjust as needed */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #fff;
-  padding: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 100;
-  width: 200px;
-  pointer-events: none;
-  opacity: 0; /* Initially invisible */
-  transition: opacity 0.3s ease; /* Smooth transition */
-  transform: translateY(-50%);
-}
-
-.infobox p {
-  margin: 5px 0;
-}
-
-.item:hover .infobox, .item .infobox:hover {
-  display: block;
-  opacity: 1; /* Fade in */
-  pointer-events: auto;
-}
 
 .token-icon {
   width: 12px;
