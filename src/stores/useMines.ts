@@ -52,9 +52,9 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
             upgrade() {
                 if (this.canUpgrade()) {
                     const token = TokenManager.getTokenStore(this.token);
-                    this.level += 1;
                     AchievementManager.incrementUpgradeAreaAchievements(this.index, 1);
-                    token.balance -= this.getUpgradeCost();
+                    token.updateBalance(-this.getUpgradeCost());
+                    this.level += 1;
                 }
             },
             canUpgrade(): boolean {
@@ -62,7 +62,7 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return token.balance >= this.getUpgradeCost();
             },
             getUpgradeCost(): number {
-                return 1 - this.level + this.level * 3;
+                return ((this.level - 1) + this.level * 3);
             },
             getImage() {
                 const imgPath = this.img === false ? 'mines/default.png' : `mines/${this.index}.png`;
