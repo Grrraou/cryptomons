@@ -1,6 +1,7 @@
 import { Item, itemsEnum } from "@/enums/ItemsEnum";
 import { useItemsStore } from "@/stores/useItems";
 import TokenManager from "./TokenManager";
+import UXManager from "./UXManager";
 
 class ItemManager {
 
@@ -30,10 +31,8 @@ class ItemManager {
 
     static getItemImage(itemIndex: string) {
         const item = this.getBaseItem(itemIndex);
-        if (item && item.img) {
-            return `/items/${item.type}/${item.index}.png`;
-        }
-        return '/items/default.png';
+        const imgPath = (item && item.img) ? `items/${item.type}/${item.index}.png` : 'items/default.png';
+        return UXManager.getImagePath(imgPath);
     }
 
     static getItemPrice(item: Item) {

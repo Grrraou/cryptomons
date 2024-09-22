@@ -49,8 +49,8 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 return goalStore ? goalStore.name : null;
             },
             getImage() {
-                const imgPath = this.image === false ? '/battlefields/default.png' : `/battlefields/${this.index}.png`;
-                return new URL(imgPath, import.meta.url).href;
+                const imgPath = this.image === false ? 'battlefields/default.png' : `battlefields/${this.index}.png`;
+                return UXManager.getImagePath(imgPath);
             },
             getHeroes() {
                 return HeroManager.getHeroByArea(this.index);
@@ -67,7 +67,8 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 return { ...monster } as Monster;
             },
             getMonsterImage() {
-                return `/monsters/${this.currentMonster.index}.png`;
+                const imgPath = `monsters/${this.currentMonster.index}.png`;
+                return UXManager.getImagePath(imgPath);
             },
             damageMonster(amount: number) {
                 if (this.currentMonster.health) {

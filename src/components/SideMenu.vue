@@ -142,9 +142,10 @@ export default defineComponent({
 
 .token-icon {
   width: 16px;
-  height: auto;
+  height: 16px;
   transition: transform 0.3s ease;
-  margin-bottom: -2px;
+  margin-top: 4px;
+  margin-left: 2px;
 }
 
 .logo-container {

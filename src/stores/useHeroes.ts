@@ -79,8 +79,8 @@ export const useHeroStores: Record<string, () => HeroStoreType> = heroesEnum.red
         return this.level * this.level;
       },
       getPicture() {
-        const imgPath = `/heroes/${this.index}.png`;
-        return new URL(imgPath, import.meta.url).href;
+        const imgPath = `heroes/${this.index}.png`;
+        return UXManager.getImagePath(imgPath);
       },
       isWorkingThere(areaIndex: string) {
         return this.location === areaIndex;

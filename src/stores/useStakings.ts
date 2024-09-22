@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Staking, stakingsEnum } from '@/enums/StakingsEnum';
 import GoalManager from '@/managers/GoalManager';
 import TokenManager from '@/managers/TokenManager';
+import UXManager from '@/managers/UXManager';
 
 export type StakingStoreType = {
     index: string;
@@ -41,8 +42,8 @@ export const useStakingsStores: Record<string, () => StakingStoreType> = staking
                 return this.apr * this.staked;
             },
             getImage() {
-                const imgPath = this.img === false ? '/stakings/default.png' : `/stakings/${this.index}.png`;
-                return new URL(imgPath, import.meta.url).href;
+                const imgPath = this.img === false ? 'stakings/default.png' : `stakings/${this.index}.png`;
+                return UXManager.getImagePath(imgPath);
             },
             getDOMid() {
                 return `staking-widget-${this.index}`;

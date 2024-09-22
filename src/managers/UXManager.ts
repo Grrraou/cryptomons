@@ -1,6 +1,15 @@
 import { toast } from 'vue3-toastify';
 class UXManager {
 
+  static getImagePath(imgPath: string) {
+    const isElectron = navigator.userAgent.toLowerCase().includes('electron');
+    const url = new URL(imgPath, import.meta.url).href;
+    if (isElectron) {
+        return url.replace('/assets', '');
+    }
+    return `/${imgPath}`;
+  }
+
   static showSuccess(text: string) {
     toast.success(text);
   }

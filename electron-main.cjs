@@ -17,6 +17,12 @@ function createWindow() {
     win.loadURL('http://localhost:5173'); // Vite dev server
   }
 
+  // Remove the menu bar
+  //Menu.setApplicationMenu(null);
+
+  // Optionally, you can still allow the menu to be toggled with the "Alt" key:
+  win.setMenuBarVisibility(false);
+
   /* DEBUG */
   win.webContents.openDevTools(); 
 }

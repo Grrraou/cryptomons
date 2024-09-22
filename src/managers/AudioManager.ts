@@ -1,4 +1,5 @@
 import { useSettingsStore } from "@/stores/useSettings";
+import UXManager from "./UXManager";
 
 class AudioManager {
     construct() {
@@ -15,7 +16,8 @@ class AudioManager {
 
     static play(soundFileName: string, volume = 1): Promise<void> {
         return new Promise<void>((resolve) => {
-            const sound = new Audio(`/sounds/${soundFileName}`);
+            const audioPath = `sounds/${soundFileName}`;
+            const sound = new Audio(UXManager.getImagePath(audioPath));
             
             if (this.isSoundOn()) {
                 sound.volume = volume;

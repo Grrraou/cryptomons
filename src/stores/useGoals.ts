@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Goal, goalsEnum } from '@/enums/GoalsEnum';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
+import UXManager from '@/managers/UXManager';
 
 export type GoalStoreType = {
   index: string;
@@ -55,8 +56,8 @@ export const useGoalStores: Record<string, () => GoalStoreType> = goalsEnum.redu
         }
       },
       getImage() {
-        const imgPath = this.img === false ? '/goals/default.png' : `/goals/${this.index}.png`;
-        return new URL(imgPath, import.meta.url).href;
+        const imgPath = this.img === false ? 'goals/default.png' : `goals/${this.index}.png`;
+        return UXManager.getImagePath(imgPath);
       },
     },
     persist: true,

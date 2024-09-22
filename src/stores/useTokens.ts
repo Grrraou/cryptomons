@@ -1,5 +1,6 @@
 import { tokensEnum, Token } from '@/enums/TokensEnum';
 import TokenManager from '@/managers/TokenManager';
+import UXManager from '@/managers/UXManager';
 import { defineStore } from 'pinia';
 
 export type TokenStoreType = {
@@ -26,8 +27,8 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
         this.balance += amount;
       },
       getIcon(): string {
-        const imgPath = `/tokens/${this.index}.png`;
-        return new URL(imgPath, import.meta.url).href;
+        const imgPath = `tokens/${this.index}.png`;
+        return UXManager.getImagePath(imgPath);
       },
       getBalanceInCrypto() {
         return TokenManager.getAssetValue(this.index);

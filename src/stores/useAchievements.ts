@@ -37,8 +37,8 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
                 UXManager.showSuccess(`🎉 ${this.title} achievement UNLOCKED 🎉`);
             },
             getImage() {
-                const imgPath = this.image ? `/achievements/${this.index}.png` : '/achievements/default.png';
-                return new URL(imgPath, import.meta.url).href;
+                const imgPath = this.image ? `achievements/${this.index}.png` : 'achievements/default.png';
+                return UXManager.getImagePath(imgPath);
             },
         },
         persist: true,

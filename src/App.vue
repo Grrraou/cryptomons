@@ -5,7 +5,17 @@
 
     <!-- Main content area -->
     <div class="page-content">
-      <router-view></router-view>
+      <!-- This will render the routed content -->
+      <router-view v-slot="{ Component }">
+        <div v-if="Component">
+          <!-- Render the routed component -->
+          <component :is="Component" />
+        </div>
+        <div v-else>
+          <!-- Fallback content when no route is matched -->
+          <HomePage />
+        </div>
+      </router-view>
     </div>
   </div>
 </template>
@@ -17,10 +27,12 @@ import '/public/styles/main.css';
 import MineManager from './managers/MineManager';
 import StakingManager from './managers/StakingManager';
 import BattlefieldManager from './managers/BattlefieldManager';
+import HomePage from './views/HomePage.vue';
 
 export default defineComponent({
   components: {
     SideMenu,
+    HomePage,
   },
   created() {
     const mineManager = new MineManager();
