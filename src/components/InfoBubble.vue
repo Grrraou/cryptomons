@@ -33,7 +33,7 @@
                         <p>
                             Just sit back, let them handle it, and bask in the illusion of progress!
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('minesTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('minesTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -58,7 +58,7 @@
                         <p>
                             So kick back, watch those decimals climb, and enjoy the endless thrill of profits you can never touch!
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('stakingTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('stakingTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -79,7 +79,7 @@
                             So, sit back and admire the virtual fortune you’ve amassed, because in the vault, 
                             it’s all about appearances. And hey, nobody needs to know it's worth nothing.
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('vaultTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('vaultTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -105,7 +105,7 @@
                             So grab your mouse, or your heroes, and dive into the chaos. It’s time to battle, click, 
                             and loot your way to a fortune that doesn’t exist!
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('battleTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('battleTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -130,7 +130,7 @@
                             So go ahead, explore your stash of treasures, and gear up to boost your way to 
                             greatness—because in the inventory, it's all about having the right tools for the job!
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('inventoryTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('inventoryTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -154,7 +154,7 @@
                             crypto slowly slips away with every click. But hey, at least the cryptodollar's got 
                             your back!
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('swapTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('swapTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -175,7 +175,7 @@
                             So what are you waiting for? Start unlocking and watch as your fake crypto empire grows 
                             one goal at a time. Because in the end, it's all about having more things to click!
                         </p>
-                        <button class="tutorialButton" @click="startTutorial('goalsTutorial')">Start tutorial</button>
+                        <button class="tutorialButton" @click="startTutorial('goalsTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -196,7 +196,7 @@
                             So keep clicking, keep grinding, and keep unlocking, because the more achievements you 
                             rack up, the closer you get to becoming the ultimate master of imaginary riches!
                         </p>
-                        <!-- <button class="tutorialButton" @click="startTutorial('achievementsTutorial')">Start tutorial</button> -->
+                        <!-- <button class="tutorialButton" @click="startTutorial('achievementsTutorial')">🎓 Start tutorial 📖</button> -->
                     </div>
                 </div>
   
@@ -217,7 +217,7 @@
                             So take a deep breath, dive into the data, and marvel at just how efficient you’ve become 
                             at conquering the meaningless world of Cryptomons.
                         </p>
-                        <!-- <button class="tutorialButton" @click="startTutorial('statsTutorial')">Start tutorial</button> -->
+                        <!-- <button class="tutorialButton" @click="startTutorial('statsTutorial')">🎓 Start tutorial 📖</button> -->
                     </div>
                 </div>
   
@@ -233,7 +233,7 @@
                             So go ahead, make yourself at home and fine-tune the experience just the way you like it. 
                             Or don’t. We’re not judging.
                         </p>
-                        <!-- <button class="tutorialButton" @click="startTutorial('settingsTutorial')">Start tutorial</button> -->
+                        <!-- <button class="tutorialButton" @click="startTutorial('settingsTutorial')">🎓 Start tutorial 📖</button> -->
                     </div>
                 </div>
   
@@ -363,5 +363,21 @@ export default defineComponent({
 .highlight {
     font-weight: bold;
     color: #e74c3c;
+}
+
+.tutorialButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ffa500;
+    border: 2px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 </style>

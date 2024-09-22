@@ -41,12 +41,27 @@ export default defineComponent({
             },
             onSkip: () => {
                 tutorialStore.completeTutorial(props.name);
+                /* ENABLE PREVIOUSLY DISABLED MENU */
+                const elements = document.querySelectorAll('.main-menu-nav ul li a') as NodeListOf<HTMLElement>;
+                elements.forEach(element => {
+                    element.style.pointerEvents = 'auto';
+                });
             },
             onFinish: () => {
                 tutorialStore.completeTutorial(props.name);
+                /* ENABLE PREVIOUSLY DISABLED MENU */
+                const elements = document.querySelectorAll('.main-menu-nav ul li a') as NodeListOf<HTMLElement>;
+                elements.forEach(element => {
+                    element.style.pointerEvents = 'auto';
+                });
             },
             onStop: () => {
                 tutorialStore.completeTutorial(props.name);
+                /* ENABLE PREVIOUSLY DISABLED MENU */
+                const elements = document.querySelectorAll('.main-menu-nav ul li a') as NodeListOf<HTMLElement>;
+                elements.forEach(element => {
+                    element.style.pointerEvents = 'auto';
+                });
             },
             onNextStep: (currentStep) => {},
             onPreviousStep: (currentStep) => {},

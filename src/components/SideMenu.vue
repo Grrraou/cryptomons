@@ -20,7 +20,7 @@
             <li>
               <router-link to="/" draggable="false">🏠 Home</router-link>
             </li>
-            <li>
+            <li class="sidemenu-mines">
               <router-link to="/mines" draggable="false">⛏️ Mines</router-link>
             </li>
             <li v-if="useGoalStores['discover_proof_of_stake']().isCompleted">
@@ -53,7 +53,7 @@
             <li v-else>
               <router-link to="/swap" class="forbidden-link" draggable="false">🚫 Swap</router-link>
             </li>
-            <li>
+            <li class="sidemenu-goals">
               <router-link to="/goals" draggable="false" :class="goalsClass">🎯 Goals</router-link>
             </li>
             <li>

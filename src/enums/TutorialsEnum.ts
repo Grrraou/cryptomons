@@ -1,5 +1,6 @@
 export type TutorialsType = {
     minesTutorial: TutorialStepsType[],
+    goalsTutorial: TutorialStepsType[],
 }
 
 export type TutorialStepsType = {
@@ -131,5 +132,19 @@ export const tutorialsEnum: TutorialsType = {
                 enableScrolling: false,
             },
         },
-    ]
+    ],
+    goalsTutorial: [
+        {
+            target: '.sidemenu-mines',
+            header: {
+                title: 'Navigate',
+            },
+            content: `You can come back to the mines by clicking here again.`,
+            params: {
+                highlight: true,
+                placement: 'right',
+                enableScrolling: false,
+            },
+        },
+    ],
 };
