@@ -7,7 +7,7 @@
       class="monster-portrait" />
     <p v-if="battlefieldStore.currentMonster">
       {{ battlefieldStore.currentMonster.name }}
-      {{ battlefieldStore.currentMonster.health?.toFixed(2) }} HP
+      <span class="monster-life">{{ battlefieldStore.currentMonster.health?.toFixed(2) }} HP</span>
     </p>
     <p v-else>No monster</p>
   </div>

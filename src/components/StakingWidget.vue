@@ -4,20 +4,20 @@
             <h3>{{ stakingStore.name }} Staking</h3>
             <div class="logs"></div>
         </div>
-        <p>
+        <p class="staked-amount">
             <strong>Staked Amount:</strong> {{ stakingStore.staked.toFixed(SettingsManager.getSettings().decimals) }} 
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
-        <p>
+        <p class="stored-amount">
             <strong>Stored Amount:</strong> {{ tokenStore.balance.toFixed(SettingsManager.getSettings().decimals) }} 
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
-        <p><strong>APR:</strong> {{ stakingStore.apr * 100 }}%</p>
-        <p>
+        <p class="apr"><strong>APR:</strong> {{ stakingStore.apr * 100 }}%</p>
+        <p class="estimated-gains">
             <strong>Estimated gains:</strong> {{ stakingStore.getEstimatedGains().toFixed(SettingsManager.getSettings().decimals) }} 
             <img :src="tokenStore.getIcon()" class="token-icon" :title="stakingStore.token" draggable="false">
         </p>
-        <input type="number" v-model.number="stakeInput"  placeholder="Enter amount to stake" />
+        <input type="number" v-model.number="stakeInput"  placeholder="Enter amount to stake" class="amount-input" />
         <div class="quick-select-buttons">
           <button @click="selectPercentage(25)">25%</button>
           <button @click="selectPercentage(50)">50%</button>

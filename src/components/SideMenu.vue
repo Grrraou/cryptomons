@@ -23,46 +23,46 @@
             <li class="sidemenu-mines">
               <router-link to="/mines" draggable="false">⛏️ Mines</router-link>
             </li>
-            <li v-if="useGoalStores['discover_proof_of_stake']().isCompleted">
+            <li v-if="useGoalStores['discover_proof_of_stake']().isCompleted" class="sidemenu-staking">
               <router-link to="/staking" draggable="false">🔒 Staking</router-link>
             </li>
-            <li v-else>
+            <li v-else class="sidemenu-staking">
               <router-link to="/staking" class="forbidden-link" draggable="false">🚫 Staking</router-link>
             </li>
-            <li v-if="useGoalStores['grandma_bitcoin']().isCompleted">
+            <li v-if="useGoalStores['grandma_bitcoin']().isCompleted" class="sidemenu-vault">
               <router-link to="/vault" draggable="false">🏛️ Vault</router-link>
             </li>
-            <li v-else>
+            <li v-else class="sidemenu-vault">
               <router-link to="/vault" class="forbidden-link" draggable="false">🚫 Vault</router-link>
             </li>
-            <li v-if="useGoalStores['build_and_build']().isCompleted">
+            <li v-if="useGoalStores['build_and_build']().isCompleted" class="sidemenu-battle">
               <router-link to="/battle" draggable="false">⚔️ Battle</router-link>
             </li>
-            <li v-else>
+            <li v-else class="sidemenu-battle">
               <router-link to="/battle" class="forbidden-link" draggable="false">🚫 Battle</router-link>
             </li>
-            <li v-if="useGoalStores['shopping_on_silk_road']().isCompleted">
+            <li v-if="useGoalStores['shopping_on_silk_road']().isCompleted" class="sidemenu-inventory">
               <router-link to="/inventory" draggable="false">📦 Inventory</router-link>
             </li>
-            <li v-else>
+            <li v-else class="sidemenu-inventory">
               <router-link to="/inventory" class="forbidden-link" draggable="false">🚫 Inventory</router-link>
             </li>
-            <li v-if="useGoalStores['centralize_decentralization']().isCompleted">
+            <li v-if="useGoalStores['centralize_decentralization']().isCompleted" class="sidemenu-swap">
               <router-link to="/swap" draggable="false">🔄 Swap</router-link>
             </li>
-            <li v-else>
+            <li v-else class="sidemenu-swap">
               <router-link to="/swap" class="forbidden-link" draggable="false">🚫 Swap</router-link>
             </li>
             <li class="sidemenu-goals">
               <router-link to="/goals" draggable="false" :class="goalsClass">🎯 Goals</router-link>
             </li>
-            <li>
+            <li class="sidemenu-achievements">
               <router-link to="/achievements" draggable="false">🏆 Achievements</router-link>
             </li>
-            <li>
+            <li class="sidemenu-stats">
               <router-link to="/stats" draggable="false">📊 Stats</router-link>
             </li>
-            <li>
+            <li class="sidemenu-settings">
               <router-link to="/settings" draggable="false">⚙️ Settings</router-link>
             </li>
           </ul>

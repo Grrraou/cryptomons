@@ -1,6 +1,7 @@
 <template>
   <div class="vault-page game-container">
     <h1 class="page-title">Crypto Vault <InfoBubble page="vault" /></h1>
+    <TutorialComponent name="vaultTutorial"></TutorialComponent>
 
     <!-- Filter and Sort UI -->
     <div class="filter-sort">
@@ -35,12 +36,14 @@ import { defineComponent, computed, ref } from 'vue';
 import TokenThumb from '@/components/TokenThumb.vue';
 import TokenManager from '@/managers/TokenManager';
 import InfoBubble from '@/components/InfoBubble.vue';
+import TutorialComponent from '@/components/TutorialComponent.vue';
   
 export default defineComponent({
   name: 'VaultPage',
   components: {
     TokenThumb,
     InfoBubble,
+    TutorialComponent,
   },
   setup() {
     const tokenStores = TokenManager.getTokens();

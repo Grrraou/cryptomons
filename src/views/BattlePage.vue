@@ -1,5 +1,7 @@
 <template>
     <h1 class="page-title">BattleFields <InfoBubble page="battle" /></h1>
+    <TutorialComponent name="battleTutorial"></TutorialComponent>
+
     <div class="battle-page game-container">
         <div class="battlefields-container">
             <div v-for="(battlefield, index) in battlefields" 
@@ -10,6 +12,7 @@
         </div>
         <HeroList class="hero-list" />
     </div>
+
 </template>
   
 <script lang="ts">
@@ -18,12 +21,14 @@ import BattlefieldWidget from '@/components/BattlefieldWidget.vue';
 import HeroList from '@/components/HeroList.vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import BattlefieldManager from '@/managers/BattlefieldManager';
+import TutorialComponent from '@/components/TutorialComponent.vue';
 
 export default defineComponent({
     components: {
         BattlefieldWidget,
         HeroList,
-        InfoBubble
+        InfoBubble,
+        TutorialComponent,
     },
     setup() {
         const battlefields = BattlefieldManager.getAvailableBattlefields();

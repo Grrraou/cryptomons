@@ -1,6 +1,6 @@
 <template>
   <div class="swap-box">
-    <h2>Crypto Swap (fees: {{ fromToken.swapFees * 100 }}%)</h2>
+    <h2>Crypto Swap <span class="swap-fees">(fees: {{ fromToken.swapFees * 100 }}%)</span></h2>
     <div class="swap-interface">
 
       <!-- From Token -->
@@ -9,6 +9,7 @@
         v-model="fromToken"
         :options="swapStore.getFromTokenSwapOptions()"
         label="label"
+        class="swap-fromtoken"
         placeholder="Select or search token"
         :clearable=false
       >
@@ -34,6 +35,7 @@
         v-model="toToken"
         :options="swapStore.getToTokenSwapOptions()"
         label="label"
+        class="swap-totoken"
         placeholder="Select or search token"
       >
         <template #option="{ option }">

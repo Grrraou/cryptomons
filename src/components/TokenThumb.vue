@@ -1,26 +1,26 @@
 <template>
   <div class="token-thumb">
-    <h2>
+    <h2 class="token-name">
       <img class="tokenSymbol" :src="tokenStore.getIcon()" draggable="false" />
       {{ token.name }}
     </h2>
     
     <!-- Current Amount with dynamic class binding for highlighting -->
-    <p :class="{'highlight-amount': sortOption === 'amount'}">
+    <p :class="{'highlight-amount': sortOption === 'amount'}" class="current-amount">
       <span class='label'>Current Amount:</span> 
       <br>
       <span class="tokenSum">{{ tokenStore.balance.toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="tokenStore.getIcon()" draggable="false" /></span>
     </p>
 
     <!-- Price per token with dynamic class binding for highlighting -->
-    <p :class="{'highlight-price': sortOption === 'price'}">
+    <p :class="{'highlight-price': sortOption === 'price'}" class="current-price">
       <span class='label'>Price per {{ tokenStore.name }}:</span>
       <br>
       <span class="tokenSum">{{ tokenStore.price.toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>
     </p>
     
     <!-- Total Value in Cryptocredits with dynamic class binding for highlighting -->
-    <p :class="{'highlight-total-value': sortOption === 'totalValue'}">
+    <p :class="{'highlight-total-value': sortOption === 'totalValue'}" class="current-reference-value">
       <span class='label'>Total Value in {{ TokenManager.getReferenceTokenStore().name }}:</span>
       <br>
       <span class="tokenSum">{{ tokenStore.getBalanceInCrypto().toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>

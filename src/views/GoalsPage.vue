@@ -1,6 +1,7 @@
 <template>
   <div class="goals-page">
     <h1 class="page-title">Goals <InfoBubble page="goals" /></h1>
+    <TutorialComponent name="goalsTutorial"></TutorialComponent>
 
     <div class="filters">
       <label>
@@ -25,14 +26,15 @@ import { useGoalStores } from '@/stores/useGoals';
 import GoalWidget from '@/components/GoalWidget.vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import SettingsManager from '@/managers/SettingsManager';
+import TutorialComponent from '@/components/TutorialComponent.vue';
 
 export default defineComponent({
   components: {
     GoalWidget,
     InfoBubble,
+    TutorialComponent,
   },
   setup() {
-    // Retrieve all goal stores
     const goals = computed(() => Object.keys(useGoalStores).map(key => useGoalStores[key]()));
 
     // Filters

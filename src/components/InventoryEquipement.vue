@@ -8,7 +8,7 @@
       <span v-if="equipementStats.damage">⚔️ +{{ equipementStats.damage }}%</span>
       <span v-if="equipementStats.mining">⛏️ +{{ equipementStats.mining }}%</span>
     </div>
-    <div class="equipement-container"></div>
+    <div class="equipement-spacing"></div>
     <!-- Head Slot -->
     <div
       class="slot"
@@ -225,6 +225,11 @@ export default defineComponent({
 .spacer {
   width: 100%;
   height: 300px; /* This height acts as padding-bottom */
+}
+
+.equipement-spacing {
+  height: 50px;
+  width: 100%;
 }
 
 

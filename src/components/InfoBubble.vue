@@ -196,7 +196,7 @@
                             So keep clicking, keep grinding, and keep unlocking, because the more achievements you 
                             rack up, the closer you get to becoming the ultimate master of imaginary riches!
                         </p>
-                        <!-- <button class="tutorialButton" @click="startTutorial('achievementsTutorial')">🎓 Start tutorial 📖</button> -->
+                        <button class="tutorialButton" @click="startTutorial('achievementsTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -217,7 +217,7 @@
                             So take a deep breath, dive into the data, and marvel at just how efficient you’ve become 
                             at conquering the meaningless world of Cryptomons.
                         </p>
-                        <!-- <button class="tutorialButton" @click="startTutorial('statsTutorial')">🎓 Start tutorial 📖</button> -->
+                        <button class="tutorialButton" @click="startTutorial('statsTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   
@@ -233,7 +233,7 @@
                             So go ahead, make yourself at home and fine-tune the experience just the way you like it. 
                             Or don’t. We’re not judging.
                         </p>
-                        <!-- <button class="tutorialButton" @click="startTutorial('settingsTutorial')">🎓 Start tutorial 📖</button> -->
+                        <button class="tutorialButton" @click="startTutorial('settingsTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
   

@@ -1,5 +1,5 @@
 <template>
-  <div :style="backgroundStyle" class="goal-box">
+  <div :style="backgroundStyle" class="goal-box" :id="refId">
     <div class="goal-header">
       <div class="goal-info">
         <h3 class="goal-name">{{ goal.name }}</h3>
@@ -55,6 +55,7 @@ export default defineComponent({
   },
   setup(props) {
     const goalStore = useGoalStores[props.goal.index]();
+    const refId = `goal_${props.goal.index}`;
   
     const getTokenIcon = (tokenIndex: string) => {
       const tokenStore = TokenManager.getTokenStore(tokenIndex);;
@@ -71,6 +72,7 @@ export default defineComponent({
       goalStore,
       getTokenIcon,
       backgroundStyle,
+      refId,
     };
   },
 });

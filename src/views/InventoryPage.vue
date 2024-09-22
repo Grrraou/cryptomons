@@ -1,5 +1,7 @@
 <template>
     <h1 class="page-title">Inventory <InfoBubble page="inventory" /></h1>
+    <TutorialComponent name="inventoryTutorial"></TutorialComponent>
+
     <div class="inventory-page">
         <!-- Top Section: Equipment and Selling -->
         <div class="top-section">
@@ -16,6 +18,7 @@
             <InventoryChest />
         </div>
     </div>
+
 </template>
   
 <script lang="ts">
@@ -24,6 +27,7 @@ import InventoryEquipement from '@/components/InventoryEquipement.vue';
 import InventorySelling from '@/components/InventorySelling.vue';
 import InventoryChest from '@/components/InventoryChest.vue';
 import InfoBubble from '@/components/InfoBubble.vue';
+import TutorialComponent from '@/components/TutorialComponent.vue';
   
 export default defineComponent({
     components: {
@@ -31,6 +35,7 @@ export default defineComponent({
         InventorySelling,
         InventoryChest,
         InfoBubble,
+        TutorialComponent,
     },
 });
 </script>
