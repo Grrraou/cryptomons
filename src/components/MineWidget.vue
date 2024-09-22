@@ -1,6 +1,6 @@
 <template>
   <!-- @todo removed :style="backgroundStyle" -->
-  <div class="clicker-area" :style="backgroundStyle" @dragover.prevent @drop="handleHeroDrop">
+  <div class="clicker-area" :style="backgroundStyle" @dragover.prevent @drop="handleHeroDrop" :id="refId">
     <!-- Title and Logo Section -->
     <div class="title-section">
       <h3 class="mine-name">{{ mineStore.name }}</h3>
@@ -83,6 +83,7 @@ export default defineComponent({
       const mineStore = MineManager.getMineStore(props.mine.index);
       const tokenStore = TokenManager.getTokenStore(mineStore.token);
       const heroes = ref(HeroManager.getHeroes());
+      const refId = `bitcoin_mine_${mineStore.index}`;
 
       const backgroundStyle = computed(() => ({
         backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${mineStore.getImage()}')`,
@@ -104,6 +105,7 @@ export default defineComponent({
         backgroundStyle,
         tokenStore,
         heroes,
+        refId,
         SettingsManager,
         handleHeroDrop,
       };

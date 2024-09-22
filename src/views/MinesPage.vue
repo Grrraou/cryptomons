@@ -1,4 +1,5 @@
 <template>
+    <TutorialComponent name="minesTutorial"></TutorialComponent>
     <div class="clicker-game">
         <div class="game-container">
             <div class="areas-container">
@@ -26,19 +27,21 @@ import MineWidget from '@/components/MineWidget.vue';
 import HeroList from '@/components/HeroList.vue';
 import MineManager from '@/managers/MineManager';
 import InfoBubble from '@/components/InfoBubble.vue';
+import TutorialComponent from '@/components/TutorialComponent.vue';
   
 export default defineComponent({
     components: {
     MineWidget,
     HeroList,
     InfoBubble,
+    TutorialComponent,
     },
     setup() {
-        const mines = MineManager.getMines();
+      const mines = MineManager.getMines();
 
-        return {
-            mines,
-        };
+      return {
+          mines,
+      };
     },
 });
 </script>
