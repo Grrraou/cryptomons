@@ -65,8 +65,13 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
                 return 1 - this.level + this.level * 3;
             },
             getImage() {
-                const imgPath = this.img === false ? '/mines/default.png' : `/mines/${this.index}.png`;
-                return new URL(imgPath, import.meta.url).href;
+                const imgPath = this.img === false ? 'mines/default.png' : `mines/${this.index}.png`;
+                const isElectron = navigator.userAgent.toLowerCase().includes('electron');
+                const url = new URL(imgPath, import.meta.url).href;
+                if (isElectron) {
+                    return url.replace('/assets', '');
+                }
+                return `/${imgPath}`;
             },
             mine(amount: number|null) {
                 const token = TokenManager.getTokenStore(this.token);
