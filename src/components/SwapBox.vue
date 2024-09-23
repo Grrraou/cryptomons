@@ -4,23 +4,25 @@
     <div class="swap-interface">
 
       <!-- From Token -->
-      <label for="from-token">From:</label>
-      <VueSelect
-        v-model="fromToken"
-        :options="swapStore.getFromTokenSwapOptions()"
-        label="label"
-        class="swap-fromtoken"
-        placeholder="Select or search token"
-        :clearable=false
-      >
-        <!-- Option template to display each option with an icon -->
-        <template #option="{ option }">
-          <div class="option-content">
-            <img :src="(option as any).icon" alt="Token Logo" class="token-logo" draggable="false" />
-            <span class="option-label">{{ option.label }} ( {{ (option as any).balance }} )</span>
-          </div>
-        </template>
-      </VueSelect>
+      <div class="tokenSelector">
+        <label for="from-token">From:</label>
+        <VueSelect
+          v-model="fromToken"
+          :options="swapStore.getFromTokenSwapOptions()"
+          label="label"
+          class="swap-fromtoken"
+          placeholder="Select or search token"
+          :clearable=false
+        >
+          <!-- Option template to display each option with an icon -->
+          <template #option="{ option }">
+            <div class="option-content">
+              <img :src="(option as any).icon" alt="Token Logo" class="token-logo" draggable="false" />
+              <span class="option-label">{{ option.label }} ( {{ (option as any).balance }} )</span>
+            </div>
+          </template>
+        </VueSelect>
+    </div>
   
       <!-- Swap Button (Switch From and To Tokens) -->
       <div class="swap-tokens-button-container">
@@ -30,21 +32,23 @@
       </div>
   
       <!-- To Token -->
-      <label for="to-token">To:</label>
-      <VueSelect
-        v-model="toToken"
-        :options="swapStore.getToTokenSwapOptions()"
-        label="label"
-        class="swap-totoken"
-        placeholder="Select or search token"
-      >
-        <template #option="{ option }">
-          <div class="option-content">
-            <img :src="(option as any).icon" alt="Token Logo" class="token-logo" draggable="false" />
-            <span class="option-label">{{ option.label }}  at {{ (option as any).price }}<img src="/tokens/cryptodollar.png" alt="Token Logo" class="token-logo" /></span>
-          </div>
-        </template>
-      </VueSelect>
+      <div class="tokenSelector">
+        <label for="to-token">To:</label>
+        <VueSelect
+          v-model="toToken"
+          :options="swapStore.getToTokenSwapOptions()"
+          label="label"
+          class="swap-totoken"
+          placeholder="Select or search token"
+        >
+          <template #option="{ option }">
+            <div class="option-content">
+              <img :src="(option as any).icon" alt="Token Logo" class="token-logo" draggable="false" />
+              <span class="option-label">{{ option.label }}  at {{ (option as any).price }}<img src="/tokens/cryptodollar.png" alt="Token Logo" class="token-logo" /></span>
+            </div>
+          </template>
+        </VueSelect>
+      </div>
   
       <!-- Swap Amount -->
       <div class="swap-amount">
@@ -149,6 +153,12 @@ export default defineComponent({
   margin-right: 8px;
 }
 
+.tokenSelector {
+  border: 3px dashed #444;
+  border-radius: 10px;
+  padding: 15px;
+}
+
 .amount-input {
   width: 94%;
   padding: 10px;
@@ -185,6 +195,11 @@ export default defineComponent({
   color: #444;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   width: 500px;
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) no-repeat,
+    url(/swap/swapBackground.png) no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 .swap-interface {
@@ -235,9 +250,17 @@ export default defineComponent({
 
 
 .swap-result {
-  margin-top: 20px;
-  color: green;
+  margin-top: 15px;
+  padding: 0 10px;
+  font-size: 18px;
   font-weight: bold;
+  color: #444;
+  background-color: #FFF;
+  border: 2px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .swap-button {

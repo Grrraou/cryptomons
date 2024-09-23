@@ -1,84 +1,170 @@
 <template>
+  <TokenRain />
   <div class="home-page game-container">
-    <h1 class="page-title">Cryptomons clicker</h1>
-    <div class="game-presentation">
-      <h1>The Game That Feels Like Real Crypto, Without Losing a Dime!</h1>
+    <h1 class="title">
+      <span>C</span><span>r</span><span>y</span><span>p</span><span>t</span><span>o</span><span>m</span><span>o</span><span>n</span><span>s</span> 
+      <span>C</span><span>l</span><span>i</span><span>c</span><span>k</span><span>e</span><span>r</span>
+    </h1>
+    <InfoBubble page="home" class="home-info-bubble" />
 
-      <p>Bored of losing your hard-earned cash in the wild west of cryptocurrency? 
-        <strong>GOOD!</strong> Now you can experience all the <em>thrills</em> of mining, staking, swapping, and battling in exchanges—
-        without the sleepless nights and bank account drain! Welcome to 
-        <span class="game-title">Cryptomons Clicker</span>, where everything is fake but the addictive rush is oh-so-real.
-      </p>
+   
 
-      <p>
-        In this <strong>totally harmless</strong> game inspired by the crypto economy, you’ll be mining tokens 
-        (<em>that don’t exist</em>), staking them for profits (<em>that will never pay out</em>), and swapping them on exchanges 
-        (<em>that won’t crash</em>). But why stop there? Join the battlefields—which are really just shady exchanges disguised 
-        as combat arenas—where you'll fight against other players, all scrambling to manipulate the 
-        <span class="highlight">market</span> in your favor.
-      </p>
+    <CandleChart></CandleChart>
 
-      <p>
-        So, sit back, relax, and click your way to <span class="highlight">fake fortune</span>, because here, the only thing at risk...
-        is your time. Who needs real gains when you can click for <em>imaginary ones</em>?
-      </p>
+    <div class="start-button">
+      <div class="hand">👆</div>
+      <router-link to="/mines" draggable="false">START</router-link>
     </div>
+
   </div>
 </template>
 
 <script lang="ts">
+import CandleChart from '@/components/animations/CandleChart.vue';
+import TokenRain from '@/components/animations/TokenRain.vue';
+import InfoBubble from '@/components/InfoBubble.vue';
 import { defineComponent } from 'vue';
+
+
 
 export default defineComponent({
   name: 'HomePage',
+  components: {
+    TokenRain,
+    CandleChart,
+    InfoBubble,
+  },
+  setup: () => {
+
+    return {
+    }
+  }
 });
 </script>
 
 <style scoped>
-.game-presentation {
+.home-info-bubble {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+/** TITLE */
+.title {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  font-family: 'Arial', sans-serif;
+  color: #ffcc00;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: inline-block;
+}
+
+.title span {
+  display: inline-block;
+  animation: colorChange 2s infinite ease-in-out, sizeChange 1.5s infinite ease-in-out;
+}
+
+.title span:nth-child(odd) {
+  animation-delay: 0.2s; /* Delay for alternate letters */
+}
+
+.title span:nth-child(even) {
+  animation-delay: 0.4s; /* Delay for alternate letters */
+}
+
+@keyframes colorChange {
+  0%, 100% {
+    color: #ffcc00;
+  }
+  50% {
+    color: #444;
+  }
+}
+
+@keyframes sizeChange {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2); /* Slight size increase */
+  }
+}
+
+/** CLICKING HAND */
+.hand {
+  position: absolute;
+  font-size: 5rem;
+  z-index: 999;
+  cursor: pointer;
+  opacity: 0;
+  animation: handAppear 4s infinite ease-in-out;
+}
+
+@keyframes handAppear {
+  0%, 80% {
+    opacity: 0; /* Hidden most of the time */
+  }
+  85% {
+    opacity: 1; /* Hand appears */
+    transform: scale(1); /* Normal size */
+  }
+  90% {
+    transform: scale(0.95); /* Clicking animation */
+  }
+  95% {
+    transform: scale(1); /* Return to normal size */
+  }
+  100% {
+    opacity: 0; /* Hide again */
+  }
+}
+
+
+/** START BUTTON */
+.start-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfectly center the button */
+  z-index: 999;
+  padding: 20px 0;
+  font-size: 2rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  animation: idle-bounce 2s infinite ease-in-out; /* Idle animation */
+}
+
+
+.start-button:hover {
+  background-color: #218838;
+  transform: translate(-50%, -50%) scale(1.05); /* Slightly enlarge on hover */
+}
+
+.start-button a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
   font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 40px;
+  z-index: 1000;
+  position: relative;
+  padding: 20px 50px;
 }
 
-h1 {
-  color: #17a2b8;
-  font-size: 2.5em;
-  text-align: center;
-  margin-bottom: 20px;
+@keyframes idle-bounce {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1); /* Normal scale */
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03); /* Slightly grow and shrink */
+  }
 }
 
-p {
-  font-size: 1.2em;
-  line-height: 1.6;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.game-title {
-  color: #ff6347;
-  font-weight: bold;
-}
-
-.highlight {
-  color: #ffa500;
-  font-weight: bold;
-}
-
-strong {
-  color: #ff4500;
-}
-
-em {
-  color: #808080;
-}
-
-.game-presentation p:last-child {
-  margin-bottom: 0;
-  text-align: center;
-  font-style: italic;
-}
 </style>

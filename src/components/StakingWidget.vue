@@ -100,6 +100,7 @@ export default defineComponent({
     font-weight: bold;
     color: #444;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    min-width: 250px;
 }
 
 .staking-button {
@@ -173,6 +174,18 @@ export default defineComponent({
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1600px) {
+    .quick-select-buttons button {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .quick-select-buttons button {
+        padding: 0;
+    }
 }
 
 .quick-select-buttons button:hover {

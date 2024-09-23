@@ -4,70 +4,68 @@
       <div class="sound-toggle">
         <button @click="toggleSound()">{{ soundIcon }}</button>
       </div>
-      <div class="side-menu-container">
-        <div class="logo-container">
-          <img src="/mainLogo.png" alt="Cryptomons Logo" class="logo" draggable="false" />
-        </div>
-        <div class="totalAssets infoboxed">
-          {{ totalAssetsValue.toFixed(2) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()">
-          <!-- Info Box -->
-          <div class="infobox">
-            <p>Total Assets value in converted in {{ TokenManager.getReferenceTokenStore().name }}</p>
-          </div>
-        </div>
-        <nav class="main-menu-nav">
-          <ul>
-            <li>
-              <router-link to="/" draggable="false">🏠 Home</router-link>
-            </li>
-            <li class="sidemenu-mines">
-              <router-link to="/mines" draggable="false">⛏️ Mines</router-link>
-            </li>
-            <li v-if="useGoalStores['discover_proof_of_stake']().isCompleted" class="sidemenu-staking">
-              <router-link to="/staking" draggable="false">🔒 Staking</router-link>
-            </li>
-            <li v-else class="sidemenu-staking">
-              <router-link to="/staking" class="forbidden-link" draggable="false">🚫 Staking</router-link>
-            </li>
-            <li v-if="useGoalStores['grandma_bitcoin']().isCompleted" class="sidemenu-vault">
-              <router-link to="/vault" draggable="false">🏛️ Vault</router-link>
-            </li>
-            <li v-else class="sidemenu-vault">
-              <router-link to="/vault" class="forbidden-link" draggable="false">🚫 Vault</router-link>
-            </li>
-            <li v-if="useGoalStores['build_and_build']().isCompleted" class="sidemenu-battle">
-              <router-link to="/battle" draggable="false">⚔️ Battle</router-link>
-            </li>
-            <li v-else class="sidemenu-battle">
-              <router-link to="/battle" class="forbidden-link" draggable="false">🚫 Battle</router-link>
-            </li>
-            <li v-if="useGoalStores['shopping_on_silk_road']().isCompleted" class="sidemenu-inventory">
-              <router-link to="/inventory" draggable="false">📦 Inventory</router-link>
-            </li>
-            <li v-else class="sidemenu-inventory">
-              <router-link to="/inventory" class="forbidden-link" draggable="false">🚫 Inventory</router-link>
-            </li>
-            <li v-if="useGoalStores['centralize_decentralization']().isCompleted" class="sidemenu-swap">
-              <router-link to="/swap" draggable="false">🔄 Swap</router-link>
-            </li>
-            <li v-else class="sidemenu-swap">
-              <router-link to="/swap" class="forbidden-link" draggable="false">🚫 Swap</router-link>
-            </li>
-            <li class="sidemenu-goals">
-              <router-link to="/goals" draggable="false" :class="goalsClass">🎯 Goals</router-link>
-            </li>
-            <li class="sidemenu-achievements">
-              <router-link to="/achievements" draggable="false">🏆 Achievements</router-link>
-            </li>
-            <li class="sidemenu-stats">
-              <router-link to="/stats" draggable="false">📊 Stats</router-link>
-            </li>
-            <li class="sidemenu-settings">
-              <router-link to="/settings" draggable="false">⚙️ Settings</router-link>
-            </li>
-          </ul>
-        </nav>
+      <div class="logo-container">
+        <img src="/mainLogo.png" alt="Cryptomons Logo" class="logo" draggable="false" />
       </div>
+      <div class="totalAssets infoboxed">
+        {{ totalAssetsValue.toFixed(2) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()">
+        <!-- Info Box -->
+        <div class="infobox">
+          <p>Total Assets value in converted in {{ TokenManager.getReferenceTokenStore().name }}</p>
+        </div>
+      </div>
+      <nav class="main-menu-nav">
+        <ul>
+          <li>
+            <router-link to="/" draggable="false">🏠 Home</router-link>
+          </li>
+          <li class="sidemenu-mines">
+            <router-link to="/mines" draggable="false">⛏️ Mines</router-link>
+          </li>
+          <li v-if="useGoalStores['discover_proof_of_stake']().isCompleted" class="sidemenu-staking">
+            <router-link to="/staking" draggable="false">🔒 Staking</router-link>
+          </li>
+          <li v-else class="sidemenu-staking">
+            <router-link to="/staking" class="forbidden-link" draggable="false">🚫 Staking</router-link>
+          </li>
+          <li v-if="useGoalStores['grandma_bitcoin']().isCompleted" class="sidemenu-vault">
+            <router-link to="/vault" draggable="false">🏛️ Vault</router-link>
+          </li>
+          <li v-else class="sidemenu-vault">
+            <router-link to="/vault" class="forbidden-link" draggable="false">🚫 Vault</router-link>
+          </li>
+          <li v-if="useGoalStores['build_and_build']().isCompleted" class="sidemenu-battle">
+            <router-link to="/battle" draggable="false">⚔️ Battle</router-link>
+          </li>
+          <li v-else class="sidemenu-battle">
+            <router-link to="/battle" class="forbidden-link" draggable="false">🚫 Battle</router-link>
+          </li>
+          <li v-if="useGoalStores['shopping_on_silk_road']().isCompleted" class="sidemenu-inventory">
+            <router-link to="/inventory" draggable="false">📦 Inventory</router-link>
+          </li>
+          <li v-else class="sidemenu-inventory">
+            <router-link to="/inventory" class="forbidden-link" draggable="false">🚫 Inventory</router-link>
+          </li>
+          <li v-if="useGoalStores['centralize_decentralization']().isCompleted" class="sidemenu-swap">
+            <router-link to="/swap" draggable="false">🔄 Swap</router-link>
+          </li>
+          <li v-else class="sidemenu-swap">
+            <router-link to="/swap" class="forbidden-link" draggable="false">🚫 Swap</router-link>
+          </li>
+          <li class="sidemenu-goals">
+            <router-link to="/goals" draggable="false" :class="goalsClass">🎯 Goals</router-link>
+          </li>
+          <li class="sidemenu-achievements">
+            <router-link to="/achievements" draggable="false">🏆 Achievements</router-link>
+          </li>
+          <li class="sidemenu-stats">
+            <router-link to="/stats" draggable="false">📊 Stats</router-link>
+          </li>
+          <li class="sidemenu-settings">
+            <router-link to="/settings" draggable="false">⚙️ Settings</router-link>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
@@ -78,6 +76,7 @@ import { useGoalStores } from '@/stores/useGoals';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import GoalManager from '@/managers/GoalManager';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'SideMenu',
@@ -99,10 +98,6 @@ export default defineComponent({
     const totalAssetsValue = ref<number>(TokenManager.getTotalAssetsValue());
     let intervalId: number | null = null;
     const updateTotalAssetsValue = () => {
-/*       goalsClass = computed(() => {
-        console.log(GoalManager.isThereGoalCostToPay() ? 'shiny' : '')
-        return GoalManager.isThereGoalCostToPay() ? 'shiny' : '';
-      }); */
       totalAssetsValue.value = TokenManager.getTotalAssetsValue();
     };
     onMounted(() => {
@@ -113,6 +108,8 @@ export default defineComponent({
         clearInterval(intervalId);
       }
     });
+
+    const route = useRoute();
 
     return {
       useGoalStores,
@@ -129,6 +126,11 @@ export default defineComponent({
 <style scoped>
 .main-menu-nav {
   font-size: 20px;
+  height: 100vh;
+  min-height: 50px;
+  width: 150px;
+  overflow-y: scroll;
+  overflow-x: auto; 
 }
 
 .totalAssets {
@@ -177,9 +179,12 @@ export default defineComponent({
 }
 
 .side-menu {
+  border-right: 5px solid #444;
   width: 160px;
   padding: 20px;
-  background-image: url('/menuBG.png');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url(/menuBG.png);
+  background-size: cover;
+  background-position: center center;
   position: fixed;
   height: 100vh;
 }
@@ -190,17 +195,31 @@ nav ul {
 }
 
 nav ul li {
-  margin: 10px 0;
+  margin: 15px 0;
+  position: relative;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 nav ul li a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
+  font-size: 0.8em;
+  width: 100%;
+  display: block;
+}
+
+nav ul li a:not(nav ul li a.router-link-active) {
+  color: #fff !important;
 }
 
 nav ul li a:hover {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 nav ul li a.router-link-active {

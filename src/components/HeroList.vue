@@ -1,6 +1,9 @@
 <template>
     <div class="hero-list-wrapper">
       <div class="hero-container" @dragover.prevent @drop="handleHeroDrop">
+        <div class="hero-actions">
+          <div class="recall-all" @click="recallAll">📯</div>
+        </div>
         <div class="hero-list-container">
             <div v-if="heroes.some(hero => hero.location === 'free')" class="hero-grid">
                 <div v-for="(hero, index) in heroes" :key="index">
@@ -19,7 +22,7 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, computed, ref } from 'vue';
+  import { defineComponent, ref } from 'vue';
   import HeroManager from '@/managers/HeroManager';
   import HeroThumb from '@/components/HeroThumb.vue';
 import MineManager from '@/managers/MineManager';
@@ -53,9 +56,14 @@ import MineManager from '@/managers/MineManager';
             }
         };
 
+        const recallAll = () => {
+          HeroManager.recallAllHeroes();
+        };
+
         return {
             heroes,
             handleHeroDrop,
+            recallAll,
         };
     },
 });
@@ -66,9 +74,8 @@ import MineManager from '@/managers/MineManager';
 <style scoped>
 .hero-list-wrapper {
   position: relative;
-  max-width: 300px;
+  max-width: 190px;
   margin: 0 auto;
-  scrollbar-width: none;
 }
 
 .hero-list-title {
@@ -88,16 +95,25 @@ import MineManager from '@/managers/MineManager';
   border-bottom: 2px solid #444;
 }
 
+.hero-actions {
+  top: 10px;
+  border: 2px solid #444;
+  border-radius: 10px;
+  background: #fff;
+  padding: 5px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 .hero-container {
   text-align: center;
   padding: 20px;
   position: fixed;
-  background-image: url('/heroes/workersMenuBG.png');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(240, 240, 240, 0.3)), url(/heroes/workersMenuBG.png);
   background-size: cover;
-  background-position: center;
-  scrollbar-width: none;
-  background-repeat: no-repeat;
+  background-position: center center;
   border: 2px solid #444;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -119,9 +135,17 @@ import MineManager from '@/managers/MineManager';
 }
 
 .hero-list {
-    width: 200px;
     max-height: 80vh;
     overflow-y: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.recall-all {
+  cursor: pointer;
 }
 </style>
   

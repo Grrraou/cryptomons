@@ -26,6 +26,7 @@ app.use(Vue3Toastify, {
     hideProgressBar: false,
     icon: false,
     rtl: false,
+    classname: 'customToast',
 } as ToastContainerOptions);
 
 app.mount('#app');

@@ -64,7 +64,6 @@ export default defineComponent({
   height: 100%;
   border: 2px solid #ccc;
   border-radius: 5px;
-  scrollbar-width: none;
 }
 
 .spacer {

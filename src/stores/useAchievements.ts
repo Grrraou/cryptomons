@@ -34,10 +34,14 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
             },
             completeAchievement() {
                 this.isCompleted = true;
-                UXManager.showSuccess(`🎉 ${this.title} achievement UNLOCKED 🎉`);
+                UXManager.showSuccess(`🎉 Achievement UNLOCKED 🎉\n ${this.title}`);
             },
             getImage() {
-                const imgPath = this.image ? `achievements/${this.index}.png` : 'achievements/default.png';
+                let imgPath = 'achievements/locked.png';
+                if (this.isCompleted) {
+                    imgPath = this.image ? `achievements/${this.index}.png` : 'achievements/default.png';
+                }
+                
                 return UXManager.getImagePath(imgPath);
             },
         },

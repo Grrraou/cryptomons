@@ -172,7 +172,6 @@ export default defineComponent({
   overflow-y: auto;
   align-items: center;
   padding: 10px;
-  scrollbar-width: none;
   width: 100%;
 }
 

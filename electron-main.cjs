@@ -24,7 +24,7 @@ function createWindow() {
   win.setMenuBarVisibility(false);
 
   /* DEBUG */
-  win.webContents.openDevTools(); 
+  //win.webContents.openDevTools(); 
 }
 
 app.whenReady().then(createWindow);

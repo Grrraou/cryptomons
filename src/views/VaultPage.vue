@@ -113,6 +113,7 @@ export default defineComponent({
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 150px;
 }
 </style>
   

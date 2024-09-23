@@ -66,10 +66,4 @@ export default defineComponent({
   flex-basis: 30%;
 }
 
-.hero-list {
-  flex-basis: 20%;
-  margin-left: 20px;
-  max-height: 80vh;
-  overflow-y: auto;
-}
 </style>

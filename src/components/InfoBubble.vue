@@ -11,6 +11,30 @@
                 <span class="close-btn" @click="hideOverlay">&times;</span>
           
                 <!-- Conditionally render content based on prop page -->
+                <div v-if="page === 'home'">
+                    <div class="game-description">
+                        <h1>The Game That Feels Like Real Crypto, Without Losing a Dime!</h1>
+
+                        <p>Bored of losing your hard-earned cash in the wild west of cryptocurrency? 
+                            <strong>GOOD!</strong> Now you can experience all the <em>thrills</em> of mining, staking, swapping, and battling in exchanges—
+                            without the sleepless nights and bank account drain! Welcome to 
+                            <span class="game-title">Cryptomons Clicker</span>, where everything is fake but the addictive rush is oh-so-real.
+                        </p>
+
+                        <p>
+                            In this <strong>totally harmless</strong> game inspired by the crypto economy, you’ll be mining tokens 
+                            (<em>that don’t exist</em>), staking them for profits (<em>that will never pay out</em>), and swapping them on exchanges 
+                            (<em>that won’t crash</em>). But why stop there? Join the battlefields—which are really just shady exchanges disguised 
+                            as combat arenas—where you'll fight against other players, all scrambling to manipulate the 
+                            <span class="highlight">market</span> in your favor.
+                        </p>
+
+                        <p>
+                            So, sit back, relax, and click your way to <span class="highlight">fake fortune</span>, because here, the only thing at risk...
+                            is your time. Who needs real gains when you can click for <em>imaginary ones</em>?
+                        </p>
+                    </div>
+                </div>
                 <div v-if="page === 'mines'">
                     <div class="game-description">
                         <h2>Welcome to the Mines!</h2>

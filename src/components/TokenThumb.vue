@@ -1,5 +1,5 @@
 <template>
-  <div class="token-thumb">
+  <div class="token-thumb" :style="backgroundStyle">
     <h2 class="token-name">
       <img class="tokenSymbol" :src="tokenStore.getIcon()" draggable="false" />
       {{ token.name }}
@@ -29,7 +29,7 @@
 </template>
   
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { TokenStoreType, useTokenStores } from '@/stores/useTokens';
 import TokenManager from '@/managers/TokenManager';
 import SettingsManager from '@/managers/SettingsManager';
@@ -49,8 +49,15 @@ export default defineComponent({
   setup(props) {
     const tokenStore = useTokenStores[props.token.index]();
 
+    const backgroundStyle = computed(() => ({
+        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9)), url('${tokenStore.getIcon()}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }));
+
     return {
       tokenStore,
+      backgroundStyle,
       TokenManager,
       SettingsManager,
     };

@@ -28,6 +28,7 @@ import MineManager from './managers/MineManager';
 import StakingManager from './managers/StakingManager';
 import BattlefieldManager from './managers/BattlefieldManager';
 import HomePage from './views/HomePage.vue';
+import AudioManager from './managers/AudioManager';
 
 export default defineComponent({
   components: {
@@ -43,6 +44,8 @@ export default defineComponent({
 
     const battlefieldManager = new BattlefieldManager();
     battlefieldManager.startAutoBattle();
+
+    AudioManager.playLoop('music2.aac', 0.7);
 
     // prevent right click
     /* document.addEventListener('contextmenu', function (event) {

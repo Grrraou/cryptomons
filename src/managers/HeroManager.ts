@@ -17,6 +17,12 @@ class HeroManager {
             return heroStore.location === areaIndex ? heroStore : null;
         }).filter(hero => hero !== null);
     }
+
+    static recallAllHeroes() {
+        this.getHeroes().forEach(heroStore => {
+            heroStore.location = 'free';
+        });
+    }
 }
 
 export default HeroManager;

@@ -29,7 +29,7 @@
       </div>
     </div>
   
-    <div v-else class="goal-unlocked-message">
+    <div v-else class="goal-unlocked-message goal-costs">
       <p class="unlocked-text">🎉 This Goal is Unlocked! 🎉</p>
     </div>
   </div>

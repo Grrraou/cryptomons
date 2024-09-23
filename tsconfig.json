@@ -4,7 +4,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["node", "vite/client", "vue3-toastify/global"],
+    "types": ["node", "vite/client", "vue3-toastify/global", "@types/chart.js"],
     "moduleResolution": "Node", // Ensure this is set to Node
     "noEmit": true,
     "esModuleInterop": true,
