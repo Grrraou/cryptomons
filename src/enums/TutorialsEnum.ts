@@ -339,6 +339,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.staking-page #staking-widget-peercoin_staking .amount-input',
+            header: {
+                title: 'Staking input',
+            },
             content: `Here you can type how much tokens you want to stake`,
             params: {
                 highlight: true,
@@ -348,6 +351,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.staking-page #staking-widget-peercoin_staking .quick-select-buttons',
+            header: {
+                title: 'Staking buttons',
+            },
             content: `Or you can use the percentage buttons for more convenience, it will fill the input with the selected percentage of owned tokens`,
             params: {
                 highlight: true,
@@ -357,6 +363,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.staking-page #staking-widget-peercoin_staking .staking-button',
+            header: {
+                title: 'Staking !',
+            },
             content: `When everything is ok you can click here to stake your tokens and start earning by doing nothing. But REMEMBER, you won't be able to unstake them !`,
             params: {
                 highlight: true,
@@ -380,6 +389,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.vault-page .vault-item',
+            header: {
+                title: 'Tokens',
+            },
             content: `Each box represent a token, you can't see a token if you don't own some of them`,
             params: {
                 highlight: true,
@@ -389,6 +401,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.vault-page .vault-item h2',
+            header: {
+                title: 'Token symbol',
+            },
             content: `Here you can check the token's name and symbol`,
             params: {
                 highlight: true,
@@ -398,6 +413,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.vault-page .vault-item .current-price',
+            header: {
+                title: 'Price',
+            },
             content: `The price is how much you can obtain by selling one of them`,
             params: {
                 highlight: true,
@@ -407,6 +425,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.vault-page .vault-item .current-reference-value',
+            header: {
+                title: 'Total value',
+            },
             content: `Here you can see the total value of your balance for this token, converted in reference token. (basically it is current amout * price)`,
             params: {
                 highlight: true,
@@ -416,6 +437,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.totalAssets',
+            header: {
+                title: 'Total total value',
+            },
             content: `A bit like there, but this one is the sum of ALL your owned tokens, converted in reference token.`,
             params: {
                 highlight: true,
@@ -425,6 +449,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.sidemenu-settings',
+            header: {
+                title: 'Settings',
+            },
             content: `The reference token can be changed in the settings but for more convenience i recommand keeping the crypto dollar`,
             params: {
                 highlight: true,
@@ -434,6 +461,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.vault-page .vault-item .current-price',
+            header: {
+                title: '1 = 1',
+            },
             content: `Why ? because it is a fiat token, meaning it price will always be the same while the others token's price can fluctuate.`,
             params: {
                 highlight: true,
@@ -457,6 +487,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.hero-container',
+            header: {
+                title: 'Heroes',
+            },
             content: `You should know this box, it is your heroes list like in the mines, it means you will be able to drag&drop them to the battlefields to fight for you`,
             params: {
                 highlight: true,
@@ -466,6 +499,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.battlefield-block',
+            header: {
+                title: 'Battlefield',
+            },
             content: `And this is your first battlefield, you will unlock more later in the goals`,
             params: {
                 highlight: true,
@@ -475,6 +511,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.battlefield-block .heroes-area',
+            header: {
+                title: 'Fighting heroes',
+            },
             content: `I think you already understood but just in case, this is where you can drop your heroes to fight`,
             params: {
                 highlight: true,
@@ -484,6 +523,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.battlefield-block .monsterThumb',
+            header: {
+                title: 'Monsters',
+            },
             content: `Here is where the horrible monsters appears, you can click on them to do damage. Let's try !`,
             params: {
                 highlight: true,
@@ -493,6 +535,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.battlefield-block .monsterThumb .monster-life',
+            header: {
+                title: 'Monster\'s life',
+            },
             content: `When you damage monster it is obviously loosing lifes, when it reach 0 you won and another monster pop !`,
             params: {
                 highlight: true,
@@ -502,6 +547,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.sidemenu-inventory',
+            header: {
+                title: 'Loot',
+            },
             content: `When you kill a monster, you have a certain chance to get it loot. Each monster can loot 1 item but the item's characteristics are a bit randomised`,
             params: {
                 highlight: true,
@@ -525,6 +573,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.inventory-section',
+            header: {
+                title: 'Item chest',
+            },
             content: `All your items will appears here`,
             params: {
                 highlight: true,
@@ -534,6 +585,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.equipement-section',
+            header: {
+                title: 'Equipement',
+            },
             content: `Here is the equipement section where you can check your equiped items`,
             params: {
                 highlight: true,
@@ -543,6 +597,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.equipement-section .equipement-container #headSlot',
+            header: {
+                title: 'Head',
+            },
             content: `Each slot accepts only one item type, here is the Head`,
             params: {
                 highlight: true,
@@ -552,6 +609,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.equipement-section #weaponSlot',
+            header: {
+                title: 'Weapon',
+            },
             content: `Here is the Weapon etc... you can drag & drop your item in the corresponding slot to equip it`,
             params: {
                 highlight: true,
@@ -561,6 +621,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.equipement-section #equipement-stats',
+            header: {
+                title: 'Stats',
+            },
             content: `After equiping some gear you will see the cumulated stats boost in this window`,
             params: {
                 highlight: true,
@@ -570,6 +633,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.selling-container',
+            header: {
+                title: 'Selling',
+            },
             content: `Or, if you don't want to keep the item you can drag and drop them here to sell if you don't want to keep it`,
             params: {
                 highlight: true,
@@ -579,6 +645,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.sidemenu-battle',
+            header: {
+                title: 'Fight !',
+            },
             content: `Now let's go fighting to loot more items !`,
             params: {
                 highlight: true,
@@ -588,6 +657,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.sidemenu-achievements',
+            header: {
+                title: 'Achievements',
+            },
             content: `You can't ? erf... then maybe check in the achievements, some of them might rewards an item`,
             params: {
                 highlight: true,
@@ -611,6 +683,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.swap-fees',
+            header: {
+                title: 'Fees',
+            },
             content: `The price is here, you will pay this percentage any time you want to swap tokens`,
             params: {
                 highlight: true,
@@ -620,6 +695,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.swap-fromtoken',
+            header: {
+                title: 'Selling',
+            },
             content: `Here you can select the token you want to sell`,
             params: {
                 highlight: true,
@@ -629,6 +707,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.swap-totoken',
+            header: {
+                title: 'Buying',
+            },
             content: `And here you can select the token you want to buy`,
             params: {
                 highlight: true,
@@ -638,6 +719,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.swap-tokens-button',
+            header: {
+                title: 'Switch',
+            },
             content: `By clicking here you can quickly switch the selling and buying token`,
             params: {
                 highlight: true,
@@ -647,6 +731,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.amount-input',
+            header: {
+                title: 'Input',
+            },
             content: `Here you can select the amount of token you want to sell`,
             params: {
                 highlight: true,
@@ -656,6 +743,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.quick-select-buttons',
+            header: {
+                title: 'Lazy buttons',
+            },
             content: `Or select one of these button for more convenience`,
             params: {
                 highlight: true,
@@ -665,6 +755,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.swap-result',
+            header: {
+                title: 'Result',
+            },
             content: `Here you can see the price of the selected token, or the amount of token you will receive after the swap if you selected an amount`,
             params: {
                 highlight: true,
@@ -674,6 +767,9 @@ export const tutorialsEnum: TutorialsType = {
         },
         {
             target: '.swap-button',
+            header: {
+                title: 'JUST DO IT !',
+            },
             content: `Finally, when everything is ok you can clic here to swap`,
             params: {
                 highlight: true,
