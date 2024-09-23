@@ -103,7 +103,6 @@ import MineManager from '@/managers/MineManager';
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: calc(80vh);
   overflow-y: auto;
-  margin-top: 50px;
   width: 120px;
 }
 
