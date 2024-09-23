@@ -72,10 +72,6 @@ export default defineComponent({
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
   
-.hero-list {
-    width: 200px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
+
 </style>
   

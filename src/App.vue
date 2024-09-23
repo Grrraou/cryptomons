@@ -62,9 +62,5 @@ body {
   min-height: 100vh;
 }
 
-.page-content {
-  flex: 1;
-  padding: 20px;
-  background-color: #fff;
-}
+
 </style>

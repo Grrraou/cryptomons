@@ -118,5 +118,11 @@ import MineManager from '@/managers/MineManager';
   color: #bbb;
   margin-top: 20px;
 }
+
+.hero-list {
+    width: 200px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
 </style>
   

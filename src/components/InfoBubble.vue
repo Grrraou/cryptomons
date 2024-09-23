@@ -284,17 +284,17 @@ export default defineComponent({
 .info-bubble {
     position: relative;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     background-color: #17a2b8;
     border-radius: 50%;
     text-align: center;
-    line-height: 20px;
-    font-size: 14px;
+    line-height: 40px;
+    font-size: 25px;
     font-weight: bold;
     cursor: pointer;
     margin-left: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
   
 .info-icon {

@@ -35,11 +35,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.home-page {
-  padding-left: 220px;
-  margin-top: 50px;
-}
-
 .game-presentation {
   font-family: Arial, sans-serif;
   background-color: #f0f8ff;

@@ -41,10 +41,6 @@ export default defineComponent({
 
 
 <style scoped>
-.staking-page {
-  padding-left: 220px;
-  margin-top: 50px;
-}
 
 .staking-list {
   display: flex;

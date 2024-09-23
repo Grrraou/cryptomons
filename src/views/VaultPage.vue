@@ -102,11 +102,6 @@ export default defineComponent({
   font-size: 1.2em;
 }
 
-.vault-page {
-  padding-left: 220px;
-  margin-top: 50px;
-}
-
 .vault-list {
   margin-top: 20px;
 }

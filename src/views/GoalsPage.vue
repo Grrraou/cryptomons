@@ -66,10 +66,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.goals-page {
-  padding: 20px;
-}
-
 .filters {
   margin-bottom: 20px;
   display: flex;

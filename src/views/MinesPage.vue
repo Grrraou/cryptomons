@@ -1,10 +1,8 @@
 <template>
+    <h1 class="page-title">Mines <InfoBubble page="mines" /></h1>
     <TutorialComponent name="minesTutorial"></TutorialComponent>
-    <div class="clicker-game">
-        <div class="game-container">
+    <div class="mine-page">
             <div class="areas-container">
-                <h1 class="page-title">Mines <InfoBubble page="mines" /></h1>
-  
                 <div class="areas-grid">
                     <div v-for="mine in mines" :key="mine.index">
                         <MineWidget
@@ -15,9 +13,7 @@
                     </div>
                 </div>
             </div>
-  
-            <HeroList class="hero-list" />
-        </div>
+          <HeroList class="hero-list" />
     </div>
 </template>
   
@@ -48,16 +44,16 @@ export default defineComponent({
   
 
 <style scoped>
-.game-container {
+.mine-page {
   display: flex;
-}
-
-.clicker-game {
-  text-align: center;
+  justify-content: space-between;
 }
 
 .areas-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
 }
 
 .row {
