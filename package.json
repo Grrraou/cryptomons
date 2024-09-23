@@ -3,6 +3,9 @@
   "description": "Just click, we'll talk later!",
   "author": "Grrr <grrr@returntomonkey.org>",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=22"
+  },
   "private": true,
   "type": "module",
   "main": "electron-main.cjs",

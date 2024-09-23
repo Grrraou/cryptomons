@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
 import MinesPage from '@/views/MinesPage.vue';
 import VaultPage from '@/views/VaultPage.vue';
@@ -92,7 +92,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
