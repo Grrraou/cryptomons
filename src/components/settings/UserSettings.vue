@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="user-settings">
         <div>
             <label for="decimals">Number of decimals:</label>
             <input :value="SettingsManager.getSettings().decimals" type="number" id="decimals" />
         </div>
-
+        <br>
         <div>
             <label for="referenceToken">Reference Token:</label>
             <select id="referenceToken">
@@ -20,6 +20,11 @@
         <br>
         <button @click="saveSettings">Save settings</button>
         <button @click="resetSettings">reset</button>
+        <br><br>
+        <div class="reset-datas">
+            <button @click="resetStoredStats">Reset Stats</button>
+        </div>
+
     </div>
 </template>
   
@@ -49,14 +54,43 @@ export default defineComponent({
         const resetSettings = () => {
             SettingsManager.getSettings().decimals = 5;
         };
+
+        const resetStoredStats = () => {
+            localStorage.clear();
+            window.location.reload();
+        };
   
         return {
             tokenList,
             saveSettings,
             resetSettings,
+            resetStoredStats,
             SettingsManager,
         };
     },
 });
 </script>
   
+<style scoped>
+.user-settings {
+    text-align: center;
+}
+
+.reset-datas {
+    text-align: center;
+     margin-bottom: 20px;
+}
+  
+.reset-datas button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+  
+.reset-datas button:hover {
+    background-color: #cc0000;
+}
+</style>

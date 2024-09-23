@@ -8,7 +8,7 @@
       <span v-if="equipementStats.damage">⚔️ +{{ equipementStats.damage }}%</span>
       <span v-if="equipementStats.mining">⛏️ +{{ equipementStats.mining }}%</span>
     </div>
-    <div class="equipement-spacing"></div>
+
     <!-- Head Slot -->
     <div
       class="slot"
@@ -173,6 +173,7 @@ export default defineComponent({
   align-items: center;
   padding: 10px;
   width: 100%;
+  max-height: 100%;
 }
 
 .slot {
@@ -184,7 +185,7 @@ export default defineComponent({
   background-color: #fff;
   width: 140px;
   height: 140px;
-  margin: 0 15px;
+  margin: 30px 15px;
   position: relative;
 }
 
@@ -224,11 +225,6 @@ export default defineComponent({
 .spacer {
   width: 100%;
   height: 300px; /* This height acts as padding-bottom */
-}
-
-.equipement-spacing {
-  height: 50px;
-  width: 100%;
 }
 
 

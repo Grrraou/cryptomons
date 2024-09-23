@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="debug-settings">
         <div>
             <label for="miningPower">Mining Power:</label>
             <input :value="SettingsManager.getSettings().miningPower" type="number" id="miningPower" />
@@ -87,4 +87,14 @@ export default defineComponent({
     },
 });
 </script>
+
+<style scoped>
+.debug-settings {
+    text-align: center;
+}
+
+.debug-settings div {
+    margin: 15px;
+}
+</style>
   

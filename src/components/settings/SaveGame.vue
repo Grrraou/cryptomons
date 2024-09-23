@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="save-settings">
         <div class="export-component">
             <h3>Export Local Storage</h3>
             <button @click="exportData">Download Local Storage Data</button>
@@ -74,4 +74,9 @@ export default defineComponent({
     },
 });
 </script>
-  
+
+<style scoped>
+.save-settings {
+    text-align: center;
+}
+</style>

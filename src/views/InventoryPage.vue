@@ -88,7 +88,7 @@ export default defineComponent({
   
 .inventory-section {
     width: 100%;
-    height: 50%;
+    height: 48%;
     border: 2px solid #444;
     border-radius: 10px;
     background-color: #e0f7fa;
