@@ -1,46 +1,106 @@
 <template>
-    <div class="user-settings">
-        <div>
-            <label for="decimals">Number of decimals:</label>
-            <input :value="SettingsManager.getSettings().decimals" type="number" id="decimals" />
-        </div>
-        <br>
-        <div>
-            <label for="referenceToken">Reference Token:</label>
-            <select id="referenceToken">
-                <option
+    <div class="user-settings-block">
+        <div class="user-settings">
+
+            <div class="settings-group">
+                <label for="decimals" class="setting-label">Number of decimals:</label>
+                <input 
+                    :value="SettingsManager.getSettings().decimals" 
+                    type="number" 
+                    id="decimals" 
+                    min="0" 
+                    class="setting-input" 
+                />
+            </div>
+
+            <div class="settings-group">
+                <label for="referenceToken" class="setting-label">Reference Token:</label>
+                <select id="referenceToken" class="setting-select">
+                    <option
                     v-for="token in tokenList" 
                     :value="token.index" 
                     :selected="token.index === SettingsManager.getSettings().referenceTokenIndex"
-                >
+                    >
                     {{ token.name }} ({{ token.index }})
-                </option>
-            </select>
-        </div>
-        <br>
-        <button @click="saveSettings">Save settings</button>
-        <button @click="resetSettings">reset</button>
-        <br><br>
-        <div class="reset-datas">
-            <button @click="resetStoredStats">Reset Stats</button>
+                    </option>
+                </select>
+            </div>
+
+            <div class="settings-group">
+                <label for="soundVolume" class="setting-label">Sound Volume:</label>
+                <input 
+                    v-model="soundVolume" 
+                    type="range" 
+                    id="soundVolume" 
+                    min="0" 
+                    max="1" 
+                    step="0.1" 
+                    class="volume-slider" 
+                />
+                <span class="slider-value">{{ soundVolume }}</span>
+            </div>
+
+            <div class="settings-group">
+                <label for="musicVolume" class="setting-label">Music Volume:</label>
+                <input 
+                    v-model="musicVolume" 
+                    type="range" 
+                    id="musicVolume" 
+                    min="0" 
+                    max="1" 
+                    step="0.1" 
+                    class="volume-slider" 
+                />
+                <span class="slider-value">{{ musicVolume }}</span>
+            </div>
+
+
+            <br>
+            <button @click="saveSettings">Save settings</button>
+            <button @click="defaultSettings">Default settings</button>
+            <br><br>
+            <div class="reset-datas">
+                <button @click="resetStoredStats">Reset Stats</button>
+            </div>
+
         </div>
 
         <div class="discord">
             <a href="https://discord.gg/FHnyJu7g" target="_Blank"><img src="/ui/discord.png"></a>
         </div>
-
     </div>
 </template>
   
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import SettingsManager from '@/managers/SettingsManager';
 import TokenManager from '@/managers/TokenManager';
+import AudioManager from '@/managers/AudioManager';
   
 export default defineComponent({
     name: 'MiningBattlePower',
     setup() {
         const tokenList = TokenManager.getTokens();
+        const settingsStore = SettingsManager.getSettings();
+        
+        const soundVolume = computed({
+            get() {
+                return settingsStore.soundVolume;
+            },
+            set(value: number) {
+                settingsStore.soundVolume = value;
+            }
+        });
+
+        const musicVolume = computed({
+            get() {
+                return settingsStore.musicVolume;
+            },
+            set(value: number) {
+                settingsStore.musicVolume = value;
+                AudioManager.changeMusicVolume(value);
+            }
+        });
 
         const saveSettings = () => {
             let input = null;
@@ -53,21 +113,37 @@ export default defineComponent({
             if (input) {
                 SettingsManager.getSettings().referenceTokenIndex = input.value;
             }
+
+            input = document.getElementById('soundVolume') as HTMLSelectElement;
+            if (input) {
+                SettingsManager.getSettings().soundVolume = input.value;
+            }
+
+            input = document.getElementById('musicVolume') as HTMLSelectElement;
+            if (input) {
+                SettingsManager.getSettings().musicVolume = input.value;
+            }
         };
 
-        const resetSettings = () => {
+        const defaultSettings = () => {
             SettingsManager.getSettings().decimals = 5;
+            SettingsManager.getSettings().referenceTokenIndex = 'cryptodollar'
+            SettingsManager.getSettings().soundVolume = 1;
+            SettingsManager.getSettings().musicVolume = 1;
         };
 
         const resetStoredStats = () => {
             localStorage.clear();
+            AudioManager.silentMode();
             window.location.reload();
         };
   
         return {
             tokenList,
+            soundVolume,
+            musicVolume,
             saveSettings,
-            resetSettings,
+            defaultSettings,
             resetStoredStats,
             SettingsManager,
         };
@@ -76,8 +152,24 @@ export default defineComponent({
 </script>
   
 <style scoped>
-.user-settings {
+.user-settings-block {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .reset-datas {
@@ -101,4 +193,101 @@ export default defineComponent({
 .discord img {
     width: 100px;
 }
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.setting-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    width: 150px;
+}
+
+.setting-input, .setting-select {
+    flex-grow: 1;
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.setting-input:focus, .setting-select:focus {
+    outline: none;
+    border-color: #2b8a3e;
+    box-shadow: 0 0 5px rgba(43, 138, 62, 0.3);
+}
+
+.setting-select {
+    appearance: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.setting-select:focus {
+    outline: none;
+}
+
+.settings-group:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+/** SLIDERS */
+.volume-slider {
+  flex-grow: 1;
+  margin: 0 10px;
+  height: 8px;
+  -webkit-appearance: none;
+  background-color: #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2b8a3e;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2b8a3e;
+  cursor: pointer;
+}
+
+.slider-value {
+  font-size: 16px;
+  color: #333;
+  width: 40px;
+  text-align: center;
+}
+
 </style>

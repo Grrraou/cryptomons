@@ -1,5 +1,6 @@
 import { useSettingsStore } from "@/stores/useSettings";
 import UXManager from "./UXManager";
+import SettingsManager from "./SettingsManager";
 
 class AudioManager {
 
@@ -10,19 +11,22 @@ class AudioManager {
     }
 
     static toggleSound() {
-        const isOn = !useSettingsStore().soundOn;
-        useSettingsStore().soundOn = isOn;
+        useSettingsStore().soundOn = !useSettingsStore().soundOn;
         this.toggleMusic();
     }
 
-    static play(soundFileName: string, volume = 1): Promise<void> {
+    static silentMode() {
+        useSettingsStore().soundOn = false;
+        this.currentMusic.muted = true;
+    }
+
+    static play(soundFileName: string): Promise<void> {
         return new Promise<void>((resolve) => {
             const audioPath = `sounds/${soundFileName}`;
             const sound = new Audio(UXManager.getImagePath(audioPath));
             
             if (this.isSoundOn()) {
-                console.log(this.isSoundOn)
-                sound.volume = volume;
+                sound.volume = SettingsManager.getSettings().soundVolume;
                 sound.play();
                 sound.onended = () => resolve();
             } else {
@@ -31,9 +35,9 @@ class AudioManager {
         });
     }
 
-    static playRandom(soundsArray: string[], volume = 1) {
+    static playRandom(soundsArray: string[]) {
         const randomIndex = Math.floor(Math.random() * soundsArray.length);
-        this.play(soundsArray[randomIndex], volume);
+        this.play(soundsArray[randomIndex]);
     }
     
     static playMusic(soundFileName: string | null = null, volume = 1): void {
@@ -45,13 +49,17 @@ class AudioManager {
         soundFileName = soundFileName ?? musics[Math.floor(Math.random() * musics.length)];
         const audioPath = `sounds/${soundFileName}`;
         this.currentMusic = new Audio(UXManager.getImagePath(audioPath));
-        this.currentMusic.volume = volume;
+        this.currentMusic.volume = SettingsManager.getSettings().musicVolume;
         this.currentMusic.loop = true;
         this.currentMusic.play();
 
         if (!this.isSoundOn()) {
             this.toggleMusic();
         }
+    }
+
+    static changeMusicVolume(volume: number) {
+        this.currentMusic.volume = volume;
     }
 
     static toggleMusic(): void {

@@ -2,6 +2,7 @@ import { Item, itemsEnum } from "@/enums/ItemsEnum";
 import { useItemsStore } from "@/stores/useItems";
 import TokenManager from "./TokenManager";
 import UXManager from "./UXManager";
+import SettingsManager from "./SettingsManager";
 
 class ItemManager {
 
@@ -16,7 +17,7 @@ class ItemManager {
         if (!item || !item.power) {
             return item;
         }
-        const base = 5;
+        const base = SettingsManager.getSettings().itemPower;
 
         item.xp = Math.floor(base * item.power * Math.random() * (1.2 - 0.8) + 0.8);
         item.damage = Math.floor(base * item.power * Math.random() * (1.2 - 0.8) + 0.8);

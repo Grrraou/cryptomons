@@ -73,7 +73,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
             damageMonster(amount: number) {
                 if (this.currentMonster.health) {
                     this.currentMonster.health -= amount;
-                    AudioManager.playRandom(attackSoundsEnum, 0.5);
+                    AudioManager.playRandom(attackSoundsEnum);
                     if (this.currentMonster.health <= 0) {
                         this.lootMonster();
                         this.setMonster();

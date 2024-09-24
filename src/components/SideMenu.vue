@@ -133,6 +133,10 @@ export default defineComponent({
   overflow-x: auto; 
 }
 
+.sidemenu-achievements {
+  font-size: 16px;
+}
+
 .totalAssets {
   font-weight: bold;
   font-size: 20px;

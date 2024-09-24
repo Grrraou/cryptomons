@@ -57,6 +57,7 @@
           type="number" 
           placeholder="Amount" 
           class="amount-input" 
+          min="0"
         />
         <div class="quick-select-buttons">
           <button @click="selectPercentage(25)">25%</button>

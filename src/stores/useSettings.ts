@@ -2,8 +2,11 @@ import { defineStore } from 'pinia';
 
 export type SettingsStore = {
   soundOn: boolean;
+  soundVolume: number;
   musicOn: boolean;
+  musicVolume: number;
   referenceTokenIndex: string;
+  
   /* UX */
   decimals: number;
   goalsHideUnlocked: boolean;
@@ -14,6 +17,7 @@ export type SettingsStore = {
   battlePower: number;
   lootPower: number;
   xpPower: number;
+  itemPower: number;
   toggleSound: () => boolean;
   toggleMusic: () => boolean;
 };
@@ -21,7 +25,9 @@ export type SettingsStore = {
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
     soundOn: true,
+    soundVolume: 0.5,
     musicOn: true,
+    musicVolume: 0.5,
     referenceTokenIndex: 'cryptodollar',
     decimals: 5,
     goalsHideUnlocked: false,
@@ -30,6 +36,7 @@ export const useSettingsStore = defineStore('settings', {
     battlePower: 1,
     lootPower: 1,
     xpPower: 1,
+    itemPower: 1,
   }),
   actions: {
     toggleSound() {

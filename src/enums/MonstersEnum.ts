@@ -11,6 +11,7 @@ export type Monster = {
 };
 
 export const monstersEnum: Monster[] = [
+    /** BINANCE */
     { index: 'fisc_gobelin', name: 'Fisc Goblin', description: 'He wants your money', power: 1, loot: { index: 'binance-chestguard', ratio: 0.05 } },
     { index: 'scammer_troll', name: 'Scammer Troll', description: "Don't trust everyone", power: 2, loot: { index: 'binance-fortress-plate', ratio: 0.01 } },
     { index: 'pump_and_dump_dragon', name: 'Pump-and-Dump Dragon', description: 'Master of market manipulation', power: 1, loot: { index: 'binance-helmet', ratio: 0.05 } },
@@ -18,20 +19,24 @@ export const monstersEnum: Monster[] = [
     { index: 'ponzi_kraken', name: 'Ponzi Kraken', description: 'Feeding off the naive', power: 1, loot: { index: 'binance-sword', ratio: 0.05 } },
     { index: 'gas_fee_gremlin', name: 'Gas Fee Gremlin', description: 'Eats up your transactions', power: 2, loot: { index: 'binance-fortress-sword', ratio: 0.02 } },
 
-    { index: 'fomo_phantom', name: 'FOMO Phantom', description: 'Drives fear of missing out', power: 2, loot: { index: 'kraken-gloves', ratio: 0.05 } },
-    { index: 'shill_serpent', name: 'Shill Serpent', description: 'Tempts you with empty promises', power: 3, loot: { index: 'kraken-fortress-gloves', ratio: 0.01 } },
-    { index: 'whale_manipulator', name: 'Whale Manipulator', description: 'Shakes the market at will', power: 2, loot: { index: 'kraken-boots', ratio: 0.05 }  },
-    { index: 'dusting_demon', name: 'Dusting Demon', description: 'Leaves traces to track you', power: 3, loot: { index: 'kraken-fortress-boots', ratio: 0.01 } },
-    { index: 'defi_doppelganger', name: 'DeFi Doppelganger', description: 'A fake in the decentralized space', power: 2, loot: { index: 'kraken-pants', ratio: 0.05 }  },
-    { index: 'crypto_clown', name: 'Crypto Clown', description: 'Turns serious investments into a joke', power: 3, loot: { index: 'kraken-fortress-pants', ratio: 0.01 } },
+    /** KRAKEN */
+    { index: 'fomo_phantom', name: 'FOMO Phantom', description: 'Drives fear of missing out', power: 3, loot: { index: 'kraken-gloves', ratio: 0.05 } },
+    { index: 'shill_serpent', name: 'Shill Serpent', description: 'Tempts you with empty promises', power: 4, loot: { index: 'kraken-fortress-gloves', ratio: 0.01 } },
+    { index: 'whale_manipulator', name: 'Whale Manipulator', description: 'Shakes the market at will', power: 3, loot: { index: 'kraken-boots', ratio: 0.05 }  },
+    { index: 'dusting_demon', name: 'Dusting Demon', description: 'Leaves traces to track you', power: 4, loot: { index: 'kraken-fortress-boots', ratio: 0.01 } },
+    { index: 'defi_doppelganger', name: 'DeFi Doppelganger', description: 'A fake in the decentralized space', power: 3, loot: { index: 'kraken-pants', ratio: 0.05 }  },
+    { index: 'crypto_clown', name: 'Crypto Clown', description: 'Turns serious investments into a joke', power: 4, loot: { index: 'kraken-fortress-pants', ratio: 0.01 } },
 
-    /* { index: 'hodl_hobgoblin', name: 'HODL Hobgoblin', description: 'Tells you to hold, no matter what', power: 2 },
-    { index: 'airdrop_angel', name: 'Airdrop Angel', description: 'Gives you free tokens, but at what cost?', power: 3 },
-    { index: 'fork_fiend', name: 'Fork Fiend', description: 'Splits chains and confuses investors', power: 4 },
-    { index: 'mempool_mimic', name: 'Mempool Mimic', description: 'Hides in pending transactions', power: 2 },
-    { index: 'exchange_imp', name: 'Exchange Imp', description: 'Plays tricks with your trading pairs', power: 3 },
-    { index: 'blockchain_banshee', name: 'Blockchain Banshee', description: 'Screams of lost keys and frozen assets', power: 4 },
-    { index: 'node_nightmare', name: 'Node Nightmare', description: 'Disrupts consensus and causes chaos', power: 5 },
+    /** UNISWAP */
+    { index: 'hodl_hobgoblin', name: 'HODL Hobgoblin', description: 'Tells you to hold, no matter what', power: 10, loot: { index: 'uniswap-chestguard', ratio: 0.05 } },
+    { index: 'airdrop_angel', name: 'Airdrop Angel', description: 'Gives you free tokens, but at what cost?', power: 15, loot: { index: 'uniswap-fortress-plate', ratio: 0.05 } },
+    { index: 'fork_fiend', name: 'Fork Fiend', description: 'Splits chains and confuses investors', power: 10, loot: { index: 'uniswap-helmet', ratio: 0.05 } },
+    { index: 'mempool_mimic', name: 'Mempool Mimic', description: 'Hides in pending transactions', power: 15, loot: { index: 'uniswap-fortress-helmet', ratio: 0.05 } },
+    { index: 'exchange_imp', name: 'Exchange Imp', description: 'Plays tricks with your trading pairs', power: 10, loot: { index: 'uniswap-sword', ratio: 0.05 } },
+    { index: 'blockchain_banshee', name: 'Blockchain Banshee', description: 'Screams of lost keys and frozen assets', power: 15, loot: { index: 'uniswap-fortress-sword', ratio: 0.05 } },
+
+
+    /* { index: 'node_nightmare', name: 'Node Nightmare', description: 'Disrupts consensus and causes chaos', power: 5 },
     { index: 'paper_wallet_poltergeist', name: 'Paper Wallet Poltergeist', description: 'Haunts forgotten backups', power: 3 },
     { index: 'dust_attack_djinn', name: 'Dust Attack Djinn', description: 'Curses you with tiny, malicious transactions', power: 2 },
     { index: 'oracle_ogre', name: 'Oracle Ogre', description: 'Feeds false data to smart contracts', power: 4 },

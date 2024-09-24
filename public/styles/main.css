@@ -8,6 +8,30 @@ body {
     user-select: none;
 }
 
+button {
+    border-radius: 10px;
+    border: 2px solid #444;
+    background-color: #ffa500;
+    padding: 8px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5EC15E;
+}
+
+input, select {
+    border-radius: 10px;
+    border: 2px solid #444;
+    background-color: #fff;
+    padding: 8px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .layout {
     height: auto !important;
 }
@@ -202,8 +226,9 @@ body {
     font-style: italic;
   }
   
-  /* Apply Ubuntu font to all elements */
   * {
     font-family: 'Ubuntu', sans-serif;
   }
+
+
   

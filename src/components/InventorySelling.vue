@@ -1,7 +1,7 @@
 <template>
   <div class="selling-container" @drop="handleDrop" @dragover.prevent>
     <h3>Drag Items to Sell</h3>
-    <div id="sell-area" class="sell-area">Drop here to sell</div>
+    <div id="sell-area" class="sell-area">SELL</div>
   </div>
 </template>
   
