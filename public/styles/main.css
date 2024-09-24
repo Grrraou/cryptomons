@@ -83,25 +83,6 @@ input, select {
     color: #ffa500 !important;
 }
 
-/* SHINY */
-.shiny {
-    color: #000;
-    background: none;
-    animation: shiny-text-animation 2s linear infinite;
-}
-
-@keyframes shiny-text-animation {
-    0% {
-        color: #444;
-    }
-    50% {
-        color: #ffa500;
-    }
-    100% {
-        color: #444;
-    }
-}
-
 /* INFOBOX */
 .infobox {
     display: none;

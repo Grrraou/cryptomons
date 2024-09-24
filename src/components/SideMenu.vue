@@ -68,6 +68,7 @@
       </nav>
     </div>
   </div>
+  
 </template>
 
 <script lang="ts">
@@ -218,8 +219,8 @@ nav ul li a {
   display: block;
 }
 
-nav ul li a:not(nav ul li a.router-link-active) {
-  color: #fff !important;
+nav ul li a:not(nav ul li a.router-link-active, .shiny) {
+  color: #fff;
 }
 
 nav ul li a:hover {
@@ -249,5 +250,20 @@ nav ul li a.router-link-active {
   border: none;
   font-size: 24px;
   cursor: pointer;
+}
+
+.shiny {
+  animation: shinyAnimation 2s infinite alternate;
+}
+
+@keyframes shinyAnimation {
+  0% {
+    color: #444;
+    text-shadow: 0 0 10px #444;
+  }
+  100% {
+    color: #ffa500;
+    text-shadow: 0 0 10px #ffa500;
+  }
 }
 </style>
