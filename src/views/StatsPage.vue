@@ -15,11 +15,15 @@
             </div>
 
             <div class="stats-group">
-                <div class="stat"><span class="stat-label">🔒 Total Staked: </span><span class="stat-value">{{ totalStaked }}</span></div>
+                <div class="stat"><span class="stat-label">🔒 Total Staked: </span><span class="stat-value">{{ totalStakedValue }} <img class="token-icon" src='/tokens/cryptodollar.png'></span></div>
             </div>
 
             <div class="stats-group">
                 <div class="stat"><span class="stat-label">🏆 Achievements: </span><span class="stat-value">{{ unlockedAchievements }} / {{ totalAchievements }}</span></div>
+            </div>
+
+            <div class="stats-group">
+                <div class="stat"><span class="stat-label">🎯 Goals: </span><span class="stat-value">{{ unlockedGoals }} / {{ totalGoals }}</span></div>
             </div>
 
         </div>
@@ -33,6 +37,8 @@ import MineManager from '@/managers/MineManager';
 import HeroManager from '@/managers/HeroManager';
 import StakingManager from '@/managers/StakingManager';
 import AchievementManager from '@/managers/AchievementManager';
+import TokenManager from '@/managers/TokenManager';
+import GoalManager from '@/managers/GoalManager';
 
 export default defineComponent({
     name: 'StatsPage',
@@ -66,9 +72,10 @@ export default defineComponent({
         /** STAKINGS */
         const stakingStores = StakingManager.getStakings();
 
-        let totalStaked = 0;
+        let totalStakedValue = 0;
         stakingStores.forEach(stakingStore => {
-            totalStaked += stakingStore.staked;
+            /** use refence token */
+            totalStakedValue += stakingStore.staked * TokenManager.getTokenStore(stakingStore.token).price;
         });
 
         /** ACHIEVEMENTS */
@@ -82,6 +89,15 @@ export default defineComponent({
             }
         });
 
+        /** GOALS */
+        const goalStores = GoalManager.getGoals();
+
+        let unlockedGoals = 0;
+        const totalGoals = goalStores.length;
+        goalStores.forEach(goalStore => {
+            unlockedGoals += 1;
+        });
+
         return {
             totalMineClick,
             totalMineUpgrades,
@@ -90,10 +106,13 @@ export default defineComponent({
             totalHeroes,
             totalHeroesLevel,
 
-            totalStaked,
+            totalStakedValue,
 
             unlockedAchievements,
-            totalAchievements
+            totalAchievements,
+
+            unlockedGoals,
+            totalGoals,
         };
     },
 });
@@ -141,5 +160,10 @@ export default defineComponent({
 
 .stats-group:nth-child(odd) {
   background-color: #f0f0f0;
+}
+
+.token-icon {
+    width: 20px;
+    margin-bottom: -4px;
 }
 </style>

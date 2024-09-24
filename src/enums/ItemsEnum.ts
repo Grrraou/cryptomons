@@ -35,7 +35,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Chestguard',
     description: 'A sturdy chest armor infused with the power of Binance, offering strong protection.',
     type: 'Chest',
-    power: 1,
+    power: 10,
     img: true,
   },
   {
@@ -43,7 +43,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Fortress Plate',
     description: 'An elite chestplate crafted with Binance\'s finest technology, providing superior defense.',
     type: 'Chest',
-    power: 2,
+    power: 20,
     img: true,
   },
   {
@@ -51,7 +51,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Helmet',
     description: '',
     type: 'Head',
-    power: 1,
+    power: 10,
     img: true,
   },
   {
@@ -59,7 +59,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Fortress Helmet',
     description: '',
     type: 'Head',
-    power: 2,
+    power: 20,
     img: true,
   },
   {
@@ -67,7 +67,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Sword',
     description: '',
     type: 'Weapon',
-    power: 1,
+    power: 10,
     img: true,
   },
   {
@@ -75,7 +75,7 @@ export const itemsEnum: Item[] = [
     name: 'Binance Fortress Sword',
     description: '',
     type: 'Weapon',
-    power: 2,
+    power: 20,
     img: true,
   },
   {
@@ -83,7 +83,7 @@ export const itemsEnum: Item[] = [
     name: 'Kraken Gloves',
     description: '',
     type: 'Hands',
-    power: 1,
+    power: 10,
     img: true,
   },
   {
@@ -91,7 +91,7 @@ export const itemsEnum: Item[] = [
     name: 'Kraken Fortress Gloves',
     description: '',
     type: 'Hands',
-    power: 2,
+    power: 20,
     img: true,
   },
   {
@@ -99,7 +99,7 @@ export const itemsEnum: Item[] = [
     name: 'Kraken Boots',
     description: '',
     type: 'Boots',
-    power: 1,
+    power: 10,
     img: true,
   },
   {
@@ -107,7 +107,7 @@ export const itemsEnum: Item[] = [
     name: 'Kraken Fortress Boots',
     description: '',
     type: 'Boots',
-    power: 2,
+    power: 20,
     img: true,
   },
   {
@@ -115,7 +115,7 @@ export const itemsEnum: Item[] = [
     name: 'Kraken Pants',
     description: '',
     type: 'Pants',
-    power: 1,
+    power: 10,
     img: true,
   },
   {
@@ -123,7 +123,7 @@ export const itemsEnum: Item[] = [
     name: 'Kraken Fortress pants',
     description: '',
     type: 'Pants',
-    power: 2,
+    power: 20,
     img: true,
   },
 ];

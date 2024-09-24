@@ -35,7 +35,7 @@ class StakingManager {
                     );
                 }
             });
-            if (window.location.pathname === '/staking' && isThereStaked) {
+            if (window.location.hash === '#/staking' && isThereStaked) {
                 AudioManager.play('staking.wav', 0.2);
             }
         }, interval) as unknown as number;

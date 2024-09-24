@@ -319,6 +319,11 @@ export default defineComponent({
     cursor: pointer;
     margin-left: 15px;
     margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.info-bubble:hover {
+    background-color: #ffa500;
 }
   
 .info-icon {

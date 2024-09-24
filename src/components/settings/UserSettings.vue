@@ -25,6 +25,10 @@
             <button @click="resetStoredStats">Reset Stats</button>
         </div>
 
+        <div class="discord">
+            <a href="https://discord.gg/FHnyJu7g" target="_Blank"><img src="/ui/discord.png"></a>
+        </div>
+
     </div>
 </template>
   
@@ -92,5 +96,9 @@ export default defineComponent({
   
 .reset-datas button:hover {
     background-color: #cc0000;
+}
+
+.discord img {
+    width: 100px;
 }
 </style>

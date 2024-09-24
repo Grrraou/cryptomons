@@ -45,7 +45,7 @@ export default defineComponent({
     const battlefieldManager = new BattlefieldManager();
     battlefieldManager.startAutoBattle();
 
-    AudioManager.playLoop('music2.aac', 0.7);
+    AudioManager.playMusic();
 
     // prevent right click
     /* document.addEventListener('contextmenu', function (event) {
