@@ -27,7 +27,7 @@
             </div>
 
             <div class="settings-group">
-                <label for="floating-numbers" class="setting-label">Display floating numbers on click?</label>
+                <label for="floating-numbers" class="setting-label">Display floating texts ?</label>
                 <input 
                     type="checkbox" 
                     id="floating-numbers" 
