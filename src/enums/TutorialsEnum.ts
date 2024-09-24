@@ -100,7 +100,7 @@ export const tutorialsEnum: TutorialsType = {
             content: `Later, when you will unlock heroes, you will be able to drag&drop them in this area to let them mine for you.`,
             params: {
                 highlight: true,
-                placement: 'right',
+                placement: 'bottom',
                 enableScrolling: false,
             },
         },
