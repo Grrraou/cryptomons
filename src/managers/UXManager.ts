@@ -1,4 +1,5 @@
 import { toast } from 'vue3-toastify';
+import SettingsManager from './SettingsManager';
 class UXManager {
 
   static getImagePath(imgPath: string) {
@@ -19,6 +20,9 @@ class UXManager {
   }
 
   static showFlyingText(text: string, image: string|null = null, x: number|null = null, y: number|null = null) {
+    if (!SettingsManager.getSettings().floatingEarningsOnClick) {
+      return;
+    }
     const textElement = document.createElement('div');
     textElement.innerText = ` ${text}`;
           
