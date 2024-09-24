@@ -1,5 +1,5 @@
 <template>
-  <div class="item infoboxed" :style="backgroundStyle">
+  <div class="item infoboxed" :style="backgroundStyle"  :class="itemRarityClass">
 
     <!-- Consumable Button: Visible only for consumable items -->
     <button v-if="item.type === 'Consumable'" class="consume-btn" @click="consumeItem(item.index)">
@@ -54,6 +54,8 @@ export default defineComponent({
       backgroundColor: '#000',
     }));
 
+    const itemRarityClass = `item-rarity-${props.item.rarity}`;
+
     return {
       inventoryIndex,
       backgroundStyle,
@@ -61,6 +63,7 @@ export default defineComponent({
       TokenManager,
       SettingsManager,
       consumeItem,
+      itemRarityClass,
     };
   },
 });
@@ -76,7 +79,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #444;
+    border: 5px solid #444;
     border-radius: 5px;
     cursor: grab;
     text-align: center;
@@ -106,5 +109,27 @@ export default defineComponent({
 .token-icon {
   width: 12px;
 }
+
+/** RARITY */
+.item-rarity-1, .item-rarity-1 .infobox {
+  border: 5px solid #9d9d9d; /* Common (grey) */
+}
+
+.item-rarity-2, .item-rarity-2 .infobox {
+  border: 5px solid #5EC15E; /* Uncommon (green) */
+}
+
+.item-rarity-3, .item-rarity-3 .infobox {
+  border: 5px solid #3B82F6; /* Rare (blue) */
+}
+
+.item-rarity-4, .item-rarity-4 .infobox {
+  border: 5px solid #A871C1; /* Epic (purple) */
+}
+
+.item-rarity-5, .item-rarity-5 .infobox {
+  border: 5px solid #FFA500; /* Legendary (orange/gold) */
+}
+
 </style>
   

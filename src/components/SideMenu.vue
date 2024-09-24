@@ -2,7 +2,7 @@
   <div class="side-menu-container">
     <div class="side-menu">
       <div class="sound-toggle">
-        <button @click="toggleSound()">{{ soundIcon }}</button>
+        <button @click="toggleSound">{{ soundIcon }}</button>
       </div>
       <div class="logo-container">
         <img src="/mainLogo.png" alt="Cryptomons Logo" class="logo" draggable="false" />

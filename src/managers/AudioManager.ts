@@ -41,20 +41,22 @@ class AudioManager {
     }
     
     static playMusic(soundFileName: string | null = null, volume = 1): void {
-        const musics = [
-            'music.aac',
-            'music2.aac',
-            'music3.aac',
-        ];
-        soundFileName = soundFileName ?? musics[Math.floor(Math.random() * musics.length)];
-        const audioPath = `sounds/${soundFileName}`;
-        this.currentMusic = new Audio(UXManager.getImagePath(audioPath));
-        this.currentMusic.volume = SettingsManager.getSettings().musicVolume;
-        this.currentMusic.loop = true;
-        this.currentMusic.play();
-
-        if (!this.isSoundOn()) {
-            this.toggleMusic();
+        if (!this.currentMusic) {
+            const musics = [
+                'music.aac',
+                'music2.aac',
+                'music3.aac',
+            ];
+            soundFileName = soundFileName ?? musics[Math.floor(Math.random() * musics.length)];
+            const audioPath = `sounds/${soundFileName}`;
+            this.currentMusic = new Audio(UXManager.getImagePath(audioPath));
+            this.currentMusic.volume = SettingsManager.getSettings().musicVolume;
+            this.currentMusic.loop = true;
+            this.currentMusic.play();
+    
+            if (!this.isSoundOn()) {
+                this.toggleMusic();
+            }
         }
     }
 

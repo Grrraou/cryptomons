@@ -73,7 +73,7 @@ export const tutorialsEnum: TutorialsType = {
             header: {
                 title: 'Mine level',
             },
-            content: `Here you can check the mine level, the more you level up a mine, the more tokens you you mine.`,
+            content: `Here you can check the mine level, the more you level up a mine, the more tokens you mine.`,
             params: {
                 highlight: true,
                 placement: 'right',

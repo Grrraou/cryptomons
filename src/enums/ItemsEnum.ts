@@ -7,6 +7,7 @@ export type Item = {
   type: EquipementSlotType;
   power: number;
   img?: boolean;
+  rarity?: number;
   xp?: number;
   damage?: number;
   mining?: number;
