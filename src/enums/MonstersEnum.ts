@@ -35,14 +35,15 @@ export const monstersEnum: Monster[] = [
     { index: 'exchange_imp', name: 'Exchange Imp', description: 'Plays tricks with your trading pairs', power: 10, loot: { index: 'uniswap-sword', ratio: 0.05 } },
     { index: 'blockchain_banshee', name: 'Blockchain Banshee', description: 'Screams of lost keys and frozen assets', power: 15, loot: { index: 'uniswap-fortress-sword', ratio: 0.05 } },
 
+    /** PANCAKE */
+    { index: 'node_nightmare', name: 'Node Nightmare', description: 'Disrupts consensus and causes chaos', power: 20, loot: { index: 'pancake-gloves', ratio: 0.05 } },
+    { index: 'paper_wallet_poltergeist', name: 'Paper Wallet Poltergeist', description: 'Haunts forgotten backups', power: 30, loot: { index: 'pancake-fortress-gloves', ratio: 0.05 } },
+    { index: 'dust_attack_djinn', name: 'Dust Attack Djinn', description: 'Curses you with tiny, malicious transactions', power: 20, loot: { index: 'pancake-boots', ratio: 0.05 } },
+    { index: 'oracle_ogre', name: 'Oracle Ogre', description: 'Feeds false data to smart contracts', power: 30, loot: { index: 'pancake-fortress-boots', ratio: 0.05 } },
+    { index: 'miner_minotaur', name: 'Miner Minotaur', description: 'Labors endlessly for rewards, but at great cost', power: 20, loot: { index: 'pancake-pants', ratio: 0.05 } },
+    { index: 'token_troll', name: 'Token Troll', description: 'Lurks in obscure coins, waiting to trap victims', power: 30, loot: { index: 'pancake-fortress-pants', ratio: 0.05 } },
 
-    /* { index: 'node_nightmare', name: 'Node Nightmare', description: 'Disrupts consensus and causes chaos', power: 5 },
-    { index: 'paper_wallet_poltergeist', name: 'Paper Wallet Poltergeist', description: 'Haunts forgotten backups', power: 3 },
-    { index: 'dust_attack_djinn', name: 'Dust Attack Djinn', description: 'Curses you with tiny, malicious transactions', power: 2 },
-    { index: 'oracle_ogre', name: 'Oracle Ogre', description: 'Feeds false data to smart contracts', power: 4 },
-    { index: 'miner_minotaur', name: 'Miner Minotaur', description: 'Labors endlessly for rewards, but at great cost', power: 3 },
-    { index: 'token_troll', name: 'Token Troll', description: 'Lurks in obscure coins, waiting to trap victims', power: 2 },
-    { index: 'satoshi_specter', name: 'Satoshi Specter', description: 'The elusive creator, a ghostly presence', power: 5 },
+    /* { index: 'satoshi_specter', name: 'Satoshi Specter', description: 'The elusive creator, a ghostly presence', power: 5 },
     { index: 'wallet_wraith', name: 'Wallet Wraith', description: 'Drains your funds without a trace', power: 4 },
     { index: 'altcoin_abomination', name: 'Altcoin Abomination', description: 'A twisted creation, volatile and unpredictable', power: 3 },
     { index: 'faucet_fairy', name: 'Faucet Fairy', description: 'Grants tiny amounts of crypto, but it adds up', power: 2 },

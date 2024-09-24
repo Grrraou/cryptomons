@@ -303,6 +303,30 @@ export const goalsEnum = [
       ],
       reward: 'Unlock Tronomon',
     },
+
+    {
+      index: 'participate_the_food_war',
+      name: 'Participate the food War !',
+      description: 'by cooking pancakes',
+      costs: [
+        { token: 'cryptodollar', value: 750000, isPaid: false },
+        { token: 'bnb', value: 75000, isPaid: false },
+        { token: 'cake', value: 75000, isPaid: false },
+      ],
+      reward: 'Unlock Pancake Battlefield',
+    },
+    {
+      index: 'play_the_lottery',
+      name: 'Play the lottery',
+      description: '1 / 1 000 000 chance.. so what if i play 1 000 000 time ?',
+      costs: [
+        { token: 'cryptodollar', value: 750000, isPaid: false },
+        { token: 'trx', value: 75000, isPaid: false },
+        { token: 'cake', value: 75000, isPaid: false },
+      ],
+      reward: 'Unlock Pancakomon',
+    },
+
     
     {
       index: 'yolo_or_fomo',

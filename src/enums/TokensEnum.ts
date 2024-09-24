@@ -26,6 +26,7 @@ export const tokensEnum = [
     { index: 'xtz', name: 'Tezos', price: 0.2 },//2018
     { index: 'dot', name: 'Polkadot', price: 0.2 },//2020
     { index: 'sol', name: 'Solana', price: 1 },//2020
-    { index: 'shib', name: 'Shiba Inu', price: 0.1 },//2020
-    { index: 'uni', name: 'Uniswap', price: 0.1 },//2020
+    { index: 'shib', name: 'Shiba Inu', price: 10 },//2020
+    { index: 'uni', name: 'Uniswap', price: 50 },//2020
+    { index: 'cake', name: 'Cake', price: 100 },//2020
 ];

@@ -21,14 +21,14 @@ class ItemManager {
 
         item.rarity = 1;
         const rarityChances = Math.random(); // Generates a number between 0 and 1
-        if (rarityChances < 1 / 5) {
-            item.rarity = 2;
-        } else if (rarityChances < 1 / 20) {
-            item.rarity = 3;
+        if (rarityChances < 1 / 200) {
+            item.rarity = 5;
         } else if (rarityChances < 1 / 50) {
             item.rarity = 4;
-        } else if (rarityChances < 1 / 200) {
-            item.rarity = 5;
+        } else if (rarityChances < 1 / 20) {
+            item.rarity = 3;
+        } else if (rarityChances < 1 / 5) {
+            item.rarity = 2;
         }
 
         const base = SettingsManager.getSettings().itemPower * (item.rarity * item.rarity);

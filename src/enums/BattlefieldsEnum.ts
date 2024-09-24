@@ -25,9 +25,13 @@ export const battlefieldsEnum: Battlefield[] = [
         requirement: 'fill_a_pool_with_cash_money', 
         monsters: ['hodl_hobgoblin', 'airdrop_angel', 'fork_fiend', 'mempool_mimic', 'exchange_imp', 'blockchain_banshee'],
     },
-    /* 
-    { index: 'pancakeswap_plains', name: 'PancakeSwap Plains', requirement: null, image: false },
-    { index: 'gemini_gorge', name: 'Gemini Gorge', requirement: null, image: false },
+    { 
+        index: 'pancakeswap_plains', 
+        name: 'PancakeSwap Plains', 
+        requirement: 'participate_the_food_war', 
+        monsters: ['node_nightmare', 'paper_wallet_poltergeist', 'dust_attack_djinn', 'oracle_ogre', 'miner_minotaur', 'token_troll'],
+    },
+    /* { index: 'gemini_gorge', name: 'Gemini Gorge', requirement: null, image: false },
     { index: 'bybit_blitz', name: 'Bybit Blitz', requirement: null, image: false },
     { index: 'sushiswap_slaughterhouse', name: 'SushiSwap Slaughterhouse', requirement: null, image: false },
     { index: 'kucoin_citadel', name: 'KuCoin Citadel', requirement: null, image: false },
