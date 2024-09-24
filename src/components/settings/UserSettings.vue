@@ -301,39 +301,5 @@ export default defineComponent({
   text-align: center;
 }
 
-/** CHECKBOXES */
-/* Default checkbox style */
-input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  appearance: none; /* Removes default styles */
-  background-color: #fff;
-  border: 2px solid #999;
-  border-radius: 2px; /* Keeps it as a box with slightly rounded corners */
-  position: relative;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-  flex-grow: 0;
-}
-
-/* Checked state */
-input[type="checkbox"]:checked {
-  background-color: #5EC15E; /* Green when checked */
-  border-color: #5EC15E;
-}
-
-/* Checkmark inside the box */
-input[type="checkbox"]:checked::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 4px;
-  width: 6px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
 
 </style>

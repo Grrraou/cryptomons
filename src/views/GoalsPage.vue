@@ -66,6 +66,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+input {
+  margin: 0;
+}
+
 .filters {
   margin-bottom: 20px;
   display: flex;

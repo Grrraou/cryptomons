@@ -339,7 +339,7 @@ export default defineComponent({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background with opacity */
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
 }
   
@@ -351,6 +351,9 @@ export default defineComponent({
     border-radius: 10px;
     text-align: left;
     font-size: 1.2em;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9)), url(/helpBG.png);
+    background-size: cover;
+    background-position: center center;
 }
   
 .close-btn {
