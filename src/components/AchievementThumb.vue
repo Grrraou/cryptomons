@@ -4,8 +4,9 @@
             <h3>{{ achievement.title }}</h3>
             <span class="achievement-meta">
             <p>{{ achievement.description }}</p>
-            <p v-if="achievement.loot">{{ achievement.loot }}</p>
-            <p v-if="!achievementStore.isCompleted">Locked</p>
+            <p v-if="achievement.loot">
+              <img :src="lootItemSrc" class="loot-item">
+            </p>
             </span>
         </div>
     </div>
@@ -23,6 +24,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import AchievementManager from '@/managers/AchievementManager';
+import ItemManager from '@/managers/ItemManager';
 
 export default defineComponent({
   props: {
@@ -33,6 +35,8 @@ export default defineComponent({
   },
   setup(props) {
     const achievementStore = AchievementManager.getAchievementStore(props.achievement.index);
+    const lootItem = ItemManager.getBaseItem(achievementStore.loot.split(':')[0]);
+    const lootItemSrc = `/items/${lootItem.type}/${lootItem.index}.png`;
 
     const backgroundStyle = computed(() => {
       const backgroundUrl = achievementStore.getImage();
@@ -45,13 +49,12 @@ export default defineComponent({
       };
     });
 
-    // Compute the size of the black overlay based on the progress toward the achievement
+    /** HIDE LAYER */
     const overlayStyle = computed(() => {
       const target = achievementStore.target;
       const reference = achievementStore.getReference();
       const backgroundUrl = achievementStore.getImage();
 
-      // Ensure reference is valid
       if (reference <= 0) {
         return {
             height: '100%',
@@ -67,14 +70,8 @@ export default defineComponent({
         };
       }
 
-      // Normalize the target value
-      const normalizedTarget = Math.min(target, reference);
       const progress =  reference / target;
-
-      // Calculate the overlay height
       const overlayHeight = `${100 - progress * 100}%`;
-
-      // Return a strict style object
       const style: Record<string, string> = {
             height: overlayHeight,
             position: 'absolute',
@@ -95,6 +92,7 @@ export default defineComponent({
       achievementStore,
       backgroundStyle,
       overlayStyle,
+      lootItemSrc,
     };
   },
 });
@@ -124,6 +122,7 @@ export default defineComponent({
 
 .achievement-box:hover {
   transform: translateY(-4px);
+
 }
 
 .achievement-meta {
@@ -143,7 +142,11 @@ export default defineComponent({
 .achievement-content {
   font-size: 1.2em;
   height: 170px;
-  
+  max-width: 100%;
+}
+
+.achievement-box.unlocked:hover .achievement-content {
+  height: auto;
 }
 
 .progress-overlay {
@@ -156,5 +159,10 @@ export default defineComponent({
   right: 0;
   background: rgba(0, 0, 0, 0.5);
   transition: height 0.3s ease;
+}
+
+.loot-item {
+  width: 70px;
+  border: 5px solid #5EC15E;
 }
 </style>
