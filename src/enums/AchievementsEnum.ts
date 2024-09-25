@@ -111,6 +111,14 @@ export const achievementsEnum: Achievement[] = [
         target: 10,
         loot: 'battlefield_slot:binance_barricade',
       },
+      {
+        index: "killed_area_binance_barricade_10",
+        title: "Binance thug",
+        description: "Kill 10 monsters in Binance Barricade.",
+        reference: 'battlefields:binance_barricade:killed',
+        target: 10,
+        loot: 'inventory_slot',
+      },
 
 /*     {
         index: "upgrade_area_btc_mine_10",

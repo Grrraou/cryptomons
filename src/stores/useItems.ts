@@ -17,6 +17,7 @@ interface EquipmentState {
     Weapon: Item | null;
     inventory: Item[];
     looted: number[];
+    itemSlots: number;
 }
 
 export const useItemsStore = defineStore('items', {
@@ -29,6 +30,7 @@ export const useItemsStore = defineStore('items', {
         Weapon: null,
         inventory: [],
         looted: [0,0,0,0,0,0],
+        itemSlots: 20,
     }),
     actions: {
         equipItem(slotType: EquipementSlotType, inventoryIndex: number) {
@@ -103,11 +105,13 @@ export const useItemsStore = defineStore('items', {
             return rarityColors[rarity];
         },
         lootItem(itemIndex: string, target: string | null = null) {
-            const item = ItemManager.generateLoot(itemIndex, target);
-            if (item) {
-                this.addItemToInventory(item);
-                this.looted[item.rarity] += 1;
-                UXManager.showSuccess(`🎁 looted: ${item.name}`);
+            if (this.itemSlots > this.inventory.length) {
+                const item = ItemManager.generateLoot(itemIndex, target);
+                if (item) {
+                    this.addItemToInventory(item);
+                    this.looted[item.rarity] += 1;
+                    UXManager.showSuccess(`🎁 looted: ${item.name}`);
+                }
             }
         },
         consumeItem(item: Item, inventoryIndex: number) {
@@ -122,10 +126,12 @@ export const useItemsStore = defineStore('items', {
                     mineStore.heroSlots += item.power;
                     UXManager.showSuccess(`🧴 Item consumed: \nMore worker slots for ${mineStore.name}`);
                 case 'battlefield_slot':
-                    console.log(item.token)
                     const battlefieldStore = BattlefieldManager.getBattlefieldStore(item.token);
                     battlefieldStore.heroSlots += item.power;
                     UXManager.showSuccess(`🧴 Item consumed: \nMore fighters slots for ${battlefieldStore.name}`);
+                case 'inventory_slot':
+                    this.itemSlots += 1;
+                    UXManager.showSuccess(`🧴 Item consumed: \nPlace for more items in your chest.`);
                 default:
                     break;
             }

@@ -18,7 +18,7 @@ export const monstersEnum: Monster[] = [
     { index: 'rug_puller_wraith', name: 'Rug-Puller Wraith', description: 'Vanishing with your investments', power: 2, loot: { index: 'binance-fortress-helmet', ratio: 0.02 } },
     { index: 'ponzi_kraken', name: 'Ponzi Kraken', description: 'Feeding off the naive', power: 1, loot: { index: 'binance-sword', ratio: 0.05 } },
     { index: 'gas_fee_gremlin', name: 'Gas Fee Gremlin', description: 'Eats up your transactions', power: 2, loot: { index: 'binance-fortress-sword', ratio: 0.02 } },
-    { index: 'satoshi_specter', name: 'Satoshi Specter', description: 'The elusive creator, a ghostly presence', power: 4, loot: { index: 'good_news', ratio: 0.01 } },
+    { index: 'satoshi_specter', name: 'Satoshi Specter', description: 'The elusive creator, a ghostly presence', power: 4, loot: { index: 'good_news', ratio: 0.001 } },
 
     /** KRAKEN */
     { index: 'fomo_phantom', name: 'FOMO Phantom', description: 'Drives fear of missing out', power: 3, loot: { index: 'kraken-gloves', ratio: 0.05 } },

@@ -1,5 +1,6 @@
 <template>
   <div class="inventory-container" @dragover.prevent @drop="handleDrop">
+    <h3>Chest ( {{ inventoryItems.length }} / {{ itemsStore.itemSlots }} )</h3>
     <div v-for="(item, index) in inventoryItems">
       <ItemThumb 
         class="item" 
@@ -46,6 +47,7 @@ export default defineComponent({
   
     return {
       inventoryItems,
+      itemsStore,
       dragItem,
       handleDrop,
     };
@@ -65,12 +67,16 @@ export default defineComponent({
   height: 100%;
   border: 2px solid #ccc;
   border-radius: 5px;
-  padding-top: 50px;
+}
+
+.inventory-container h3 {
+  width: 100%;
+  text-align: center;
 }
 
 .spacer {
   width: 100%;
-  height: 300px; /* This height acts as padding-bottom */
+  height: 300px;
 }
 </style>
   

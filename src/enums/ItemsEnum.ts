@@ -31,6 +31,13 @@ export const itemsEnum: Item[] = [
     type: 'Consumable',
     power: 1,
   },
+  {
+    index: 'inventory_slot',
+    name: 'Inventory Slot',
+    description: 'Increase the number of items you can store in your chest.',
+    type: 'Consumable',
+    power: 1,
+  },
 
   /** BINANCE */
   {
