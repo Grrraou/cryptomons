@@ -14,7 +14,7 @@ export const goalsEnum = [
       name: 'Halving Bitcoin',
       description: 'This won\'t really halve BTC mining... or maybe it will.. uhm',
       costs: [
-        { token: 'btc', value: 0.5, isPaid: false },
+        { token: 'btc', value: 0.25, isPaid: false },
       ],
       reward: 'Unlock Bitcomon !',
     },
@@ -23,7 +23,7 @@ export const goalsEnum = [
       name: 'Bitcoin Savings & Trust',
       description: 'Trust me dude.',
       costs: [
-        { token: 'btc', value: 0.5, isPaid: false },
+        { token: 'btc', value: 0.25, isPaid: false },
       ],
       reward: 'Unlock Bitcomon with better stats !',
     },
