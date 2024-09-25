@@ -139,8 +139,8 @@ export default defineComponent({
         const defaultSettings = () => {
             SettingsManager.getSettings().decimals = 5;
             SettingsManager.getSettings().referenceTokenIndex = 'cryptodollar'
-            SettingsManager.getSettings().soundVolume = 1;
-            SettingsManager.getSettings().musicVolume = 1;
+            SettingsManager.getSettings().soundVolume = 0.5;
+            SettingsManager.getSettings().musicVolume = 0.5;
         };
 
         const resetStoredStats = () => {

@@ -18,6 +18,7 @@ export const monstersEnum: Monster[] = [
     { index: 'rug_puller_wraith', name: 'Rug-Puller Wraith', description: 'Vanishing with your investments', power: 2, loot: { index: 'binance-fortress-helmet', ratio: 0.02 } },
     { index: 'ponzi_kraken', name: 'Ponzi Kraken', description: 'Feeding off the naive', power: 1, loot: { index: 'binance-sword', ratio: 0.05 } },
     { index: 'gas_fee_gremlin', name: 'Gas Fee Gremlin', description: 'Eats up your transactions', power: 2, loot: { index: 'binance-fortress-sword', ratio: 0.02 } },
+    { index: 'satoshi_specter', name: 'Satoshi Specter', description: 'The elusive creator, a ghostly presence', power: 4, loot: { index: 'good_news', ratio: 0.01 } },
 
     /** KRAKEN */
     { index: 'fomo_phantom', name: 'FOMO Phantom', description: 'Drives fear of missing out', power: 3, loot: { index: 'kraken-gloves', ratio: 0.05 } },
@@ -43,7 +44,7 @@ export const monstersEnum: Monster[] = [
     { index: 'miner_minotaur', name: 'Miner Minotaur', description: 'Labors endlessly for rewards, but at great cost', power: 20, loot: { index: 'pancake-pants', ratio: 0.05 } },
     { index: 'token_troll', name: 'Token Troll', description: 'Lurks in obscure coins, waiting to trap victims', power: 30, loot: { index: 'pancake-fortress-pants', ratio: 0.05 } },
 
-    /* { index: 'satoshi_specter', name: 'Satoshi Specter', description: 'The elusive creator, a ghostly presence', power: 5 },
+    /* 
     { index: 'wallet_wraith', name: 'Wallet Wraith', description: 'Drains your funds without a trace', power: 4 },
     { index: 'altcoin_abomination', name: 'Altcoin Abomination', description: 'A twisted creation, volatile and unpredictable', power: 3 },
     { index: 'faucet_fairy', name: 'Faucet Fairy', description: 'Grants tiny amounts of crypto, but it adds up', power: 2 },

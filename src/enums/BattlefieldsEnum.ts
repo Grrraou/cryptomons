@@ -11,7 +11,7 @@ export const battlefieldsEnum: Battlefield[] = [
         index: 'binance_barricade', 
         name: 'Binance Barricade', 
         requirement: null, 
-        monsters: ['fisc_gobelin', 'scammer_troll', 'pump_and_dump_dragon', 'rug_puller_wraith', 'gas_fee_gremlin', 'ponzi_kraken'], 
+        monsters: ['fisc_gobelin', 'scammer_troll', 'pump_and_dump_dragon', 'rug_puller_wraith', 'gas_fee_gremlin', 'ponzi_kraken', 'satoshi_specter'], 
     },
     { 
         index: 'kraken_abyss', 

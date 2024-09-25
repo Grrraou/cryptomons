@@ -11,6 +11,7 @@ export type Item = {
   xp?: number;
   damage?: number;
   mining?: number;
+  token?: string;
   effect?: () => void | number;
 }
 
@@ -22,7 +23,6 @@ export const itemsEnum: Item[] = [
     description: 'A sturdy chest armor infused with the power of Binance, offering strong protection.',
     type: 'Chest',
     power: 10,
-    img: true,
   },
   {
     index: 'binance-fortress-plate',
@@ -30,7 +30,6 @@ export const itemsEnum: Item[] = [
     description: 'An elite chestplate crafted with Binance\'s finest technology, providing superior defense.',
     type: 'Chest',
     power: 20,
-    img: true,
   },
   {
     index: 'binance-helmet',
@@ -38,7 +37,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Head',
     power: 10,
-    img: true,
   },
   {
     index: 'binance-fortress-helmet',
@@ -46,7 +44,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Head',
     power: 20,
-    img: true,
   },
   {
     index: 'binance-sword',
@@ -54,7 +51,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Weapon',
     power: 10,
-    img: true,
   },
   {
     index: 'binance-fortress-sword',
@@ -62,7 +58,13 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Weapon',
     power: 20,
-    img: true,
+  },
+  {
+    index: 'good_news',
+    name: 'Some good news in crypto world',
+    description: 'Increase token value.',
+    type: 'Consumable',
+    power: 3,
   },
 
   /** KRAKEN */
@@ -72,7 +74,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Hands',
     power: 10,
-    img: true,
   },
   {
     index: 'kraken-fortress-gloves',
@@ -80,7 +81,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Hands',
     power: 20,
-    img: true,
   },
   {
     index: 'kraken-boots',
@@ -88,7 +88,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Boots',
     power: 10,
-    img: true,
   },
   {
     index: 'kraken-fortress-boots',
@@ -96,7 +95,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Boots',
     power: 20,
-    img: true,
   },
   {
     index: 'kraken-pants',
@@ -104,7 +102,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Pants',
     power: 10,
-    img: true,
   },
   {
     index: 'kraken-fortress-pants',
@@ -112,7 +109,6 @@ export const itemsEnum: Item[] = [
     description: '',
     type: 'Pants',
     power: 20,
-    img: true,
   },
 
   /** UNISWAP */
@@ -122,7 +118,6 @@ export const itemsEnum: Item[] = [
     description: 'A sturdy chest armor infused with the power of Uniswap, offering strong protection.',
     type: 'Chest',
     power: 30,
-    img: true,
   },
   {
     index: 'uniswap-fortress-plate',
@@ -130,7 +125,6 @@ export const itemsEnum: Item[] = [
     description: 'An elite chestplate crafted with Uniswap\'s finest technology, providing superior defense.',
     type: 'Chest',
     power: 60,
-    img: true,
   },
   {
     index: 'uniswap-helmet',
@@ -138,7 +132,6 @@ export const itemsEnum: Item[] = [
     description: 'A durable helmet designed to protect against the toughest of challenges, powered by Uniswap.',
     type: 'Head',
     power: 30,
-    img: true,
   },
   {
     index: 'uniswap-fortress-helmet',
@@ -146,7 +139,6 @@ export const itemsEnum: Item[] = [
     description: 'A helmet forged with Uniswap\'s advanced technology, offering unparalleled protection.',
     type: 'Head',
     power: 60,
-    img: true,
   },
   {
     index: 'uniswap-sword',
@@ -154,7 +146,6 @@ export const itemsEnum: Item[] = [
     description: 'A sharp and reliable sword that carries the strength of Uniswap.',
     type: 'Weapon',
     power: 30,
-    img: true,
   },
   {
     index: 'uniswap-fortress-sword',
@@ -162,7 +153,6 @@ export const itemsEnum: Item[] = [
     description: 'A powerful sword crafted with Uniswap\'s legendary prowess, providing unmatched offense.',
     type: 'Weapon',
     power: 60,
-    img: true,
   },  
 
   /** PANCAKE */
@@ -172,7 +162,6 @@ export const itemsEnum: Item[] = [
     description: 'Light yet durable gloves powered by Pancake, offering excellent grip and protection.',
     type: 'Hands',
     power: 30,
-    img: true,
   },
   {
     index: 'pancake-fortress-gloves',
@@ -180,7 +169,6 @@ export const itemsEnum: Item[] = [
     description: 'Fortified gloves crafted with Pancake\'s finest materials, delivering superior defense.',
     type: 'Hands',
     power: 60,
-    img: true,
   },
   {
     index: 'pancake-boots',
@@ -188,7 +176,6 @@ export const itemsEnum: Item[] = [
     description: 'Sturdy boots infused with Pancake\'s energy, perfect for any terrain.',
     type: 'Boots',
     power: 30,
-    img: true,
   },
   {
     index: 'pancake-fortress-boots',
@@ -196,7 +183,6 @@ export const itemsEnum: Item[] = [
     description: 'Elite boots offering unmatched protection and performance, powered by Pancake.',
     type: 'Boots',
     power: 60,
-    img: true,
   },
   {
     index: 'pancake-pants',
@@ -204,7 +190,6 @@ export const itemsEnum: Item[] = [
     description: 'Reliable pants crafted with Pancake technology, offering great mobility.',
     type: 'Pants',
     power: 30,
-    img: true,
   },
   {
     index: 'pancake-fortress-pants',
@@ -212,7 +197,6 @@ export const itemsEnum: Item[] = [
     description: 'Advanced pants designed to provide exceptional durability and comfort, powered by Pancake.',
     type: 'Pants',
     power: 60,
-    img: true,
   },  
 ];
   

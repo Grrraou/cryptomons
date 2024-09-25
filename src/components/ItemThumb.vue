@@ -2,7 +2,7 @@
   <div class="item infoboxed" :style="backgroundStyle"  :class="itemRarityClass">
 
     <!-- Consumable Button: Visible only for consumable items -->
-    <button v-if="item.type === 'Consumable'" class="consume-btn" @click="consumeItem(item.index)">
+    <button v-if="item.type === 'Consumable'" class="consume-btn" @click="consumeItem(item, inventoryIndex)">
       Use
     </button>
 
@@ -11,9 +11,14 @@
       <p>{{ item.name }}</p>
       <p>Type: {{ item.type }}</p>
       <p v-if="item.description">{{ item.description }}</p>
+      <br>
       <p v-if="item.xp"><img style="width: 12px;" src="/xp.png"> +{{ item.xp }}%</p>
       <p v-if="item.damage">⚔️ +{{ item.damage }}%</p>
       <p v-if="item.mining">⛏️ +{{ item.mining }}%</p>
+      <p v-if="item.index === 'good_news'">
+        <img class="token-icon" :src="TokenManager.getTokenStore(item.token).getIcon()"> price +{{ item.power.toFixed(2) }}%
+      </p>
+      <br>
       <p>{{ ItemManager.getItemPrice(item).toFixed(SettingsManager.getSettings().decimals) }}<img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()"></p>
     </div>
   </div>
@@ -42,9 +47,8 @@ export default defineComponent({
     const itemsStore = useItemsStore();
     const inventoryIndex = props.inventoryIndex ?? 0;
 
-    const consumeItem = (index: string) => {
-      /* @todo */
-      itemsStore.consumeItem(index);
+    const consumeItem = (item: Item, inventoryIndex: number) => {
+      itemsStore.consumeItem(item, inventoryIndex);
     };
 
     const backgroundStyle = computed(() => ({
@@ -92,7 +96,7 @@ export default defineComponent({
   .consume-btn {
     position: absolute;
     top: 5px;
-    right: 5px;
+    left: 5px;
     padding: 2px 6px;
     font-size: 12px;
     background-color: #ff5c5c;
@@ -111,24 +115,28 @@ export default defineComponent({
 }
 
 /** RARITY */
+.item-rarity-0, .item-rarity-0 .infobox {
+  border: 5px solid #000;
+}
+
 .item-rarity-1, .item-rarity-1 .infobox {
-  border: 5px solid #9d9d9d; /* Common (grey) */
+  border: 5px solid #9d9d9d;
 }
 
 .item-rarity-2, .item-rarity-2 .infobox {
-  border: 5px solid #5EC15E; /* Uncommon (green) */
+  border: 5px solid #5EC15E;
 }
 
 .item-rarity-3, .item-rarity-3 .infobox {
-  border: 5px solid #3B82F6; /* Rare (blue) */
+  border: 5px solid #3B82F6;
 }
 
 .item-rarity-4, .item-rarity-4 .infobox {
-  border: 5px solid #A871C1; /* Epic (purple) */
+  border: 5px solid #A871C1;
 }
 
 .item-rarity-5, .item-rarity-5 .infobox {
-  border: 5px solid #FFA500; /* Legendary (orange/gold) */
+  border: 5px solid #FFA500;
 }
 
 </style>

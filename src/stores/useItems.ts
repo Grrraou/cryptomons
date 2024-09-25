@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import { Item } from '@/enums/ItemsEnum';
+import TokenManager from '@/managers/TokenManager';
+import UXManager from '@/managers/UXManager';
 
 export type EquipementSlotType = 'Head' | 'Chest' | 'Pants' | 'Hands' | 'Boots' | 'Weapon' | 'Gloves' | 'Consumable';
 
@@ -97,17 +99,18 @@ export const useItemsStore = defineStore('items', {
 
             return rarityColors[rarity];
         },
-        consumeItem(index: string) {
-           /*  const item = this.inventory.find((item) => item.index === index);
-            if (item && item.type === 'Consumable') {
-                // Execute the effect
-                if (item.effect) {
-                    item.effect();
-                }
-                
-                // Remove from inventory after consumption
-                this.removeItemFromInventory(index);
-            } */
+        consumeItem(item: Item, inventoryIndex: number) {
+            switch (item.index) {
+                case 'good_news':
+                    const tokenStore = TokenManager.getTokenStore(item.token);
+                    tokenStore.price *= item.power;
+                    UXManager.showSuccess(`🧴 Item consumed: \n${tokenStore.name} price incread by ${item.power.toFixed(2)}%`);
+                    break;
+                default:
+                    break;
+            }
+            this.removeItemFromInventory(inventoryIndex);
+            
         },
     },
     persist: true,
