@@ -3,6 +3,8 @@
     <div class="battlefieldContainer">
       <div class="battle-name">
         <h2>{{ battlefieldStore.name }}</h2>
+        <p>🖱️ {{ battlefieldStore.clicks }}</p>
+        <p>💀 {{ battlefieldStore.killed }}</p>
       </div>
       <div class="battle-field">
         <MonsterThumb 
@@ -11,9 +13,9 @@
           :battlefield="battlefieldStore"
         />
         <div class="heroes-area" @drop="handleHeroDrop" @dragover.prevent>
-          <h3>Assigned Heroes</h3>
+          <h3>Assigned Heroes ( {{ assignedHeroes.length }} / {{ battlefieldStore.heroSlots }} )</h3>
           <div class="heroes-grid">
-            <div v-for="(hero, index) in heroes">
+            <div v-for="(hero, index) in assignedHeroes">
               <HeroThumb 
                 v-if="hero.isWorkingThere(battlefieldStore.index)"
                 :key="index" 
@@ -57,14 +59,19 @@ export default defineComponent({
   setup(props) {
     const battlefieldStore = BattlefieldManager.getBattlefieldStore(props.battlefield.index);
     const heroes = ref(HeroManager.getHeroes());
+    const assignedHeroes = computed(() => heroes.value.filter(heroStore => {
+        return heroStore.isWorkingThere(battlefieldStore.index);
+      }));
 
     const handleHeroDrop = (event: DragEvent) => {
-      const heroIndex = event.dataTransfer?.getData('heroIndex');
-      if (heroIndex) {
-        const hero = HeroManager.getHeroStore(heroIndex);
-        hero.location = battlefieldStore.index;
-        heroes.value = HeroManager.getHeroes();
+      if (battlefieldStore.heroSlots > assignedHeroes.value.length) {
+        const heroIndex = event.dataTransfer?.getData('heroIndex');
+        if (heroIndex) {
+          const hero = HeroManager.getHeroStore(heroIndex);
+          hero.location = battlefieldStore.index;
+        }
       }
+      
     };
 
     const backgroundStyle = computed(() => ({
@@ -73,55 +80,15 @@ export default defineComponent({
         backgroundPosition: 'center',
         backgroundColor: '#000',
     }));
-
-      /* const monsterStore = useMonsterStore(battlefieldStore.index);
-      const heroStore = useHeroStores();
-      const itemStore = useItemStore(); */
-  
-      /* const localMonster = ref(monsterStore.getCurrentMonster());
-      const heroes = ref(heroStore.getHeroesByArea(battlefieldStore.index)); */
   
       const battlefieldId = computed(() => `battlefield-${battlefieldStore.index}`);
   
-      /* const handleHeroDrop = (event: DragEvent) => {
-        const heroData = event.dataTransfer?.getData('heroData');
-        if (!heroData) return;
-        const hero = JSON.parse(heroData);
-        heroStore.moveHero(hero.index, battlefieldStore.index);
-      }; */
-  
-      /* const attackMonster = (event: MouseEvent) => {
-        let manualDamageAmount = 1;
-        const weapon = itemStore.getEquippedItem('Weapon');
-        if (weapon) {
-          manualDamageAmount += weapon.effect();
-        }
-        monsterStore.damageCreature(localMonster.value.battlefieldIndex, manualDamageAmount, null, event);
-        localMonster.value = monsterStore.getCurrentMonster();
-      }; */
-  
-      /* onMounted(() => {
-        eventBus.on('hero-moved', () => {
-          heroes.value = heroStore.getHeroesByArea(battlefieldStore.index);
-        });
-      }); */
-  
-      /* onBeforeUnmount(() => {
-        eventBus.off('hero-moved');
-      }); */
-  
       return {
         battlefieldStore,
-        heroes,
-        handleHeroDrop,
+        assignedHeroes,
         backgroundStyle,
-
-
-        /* localMonster,
-        heroes, */
         battlefieldId,
-        /* handleHeroDrop,
-        attackMonster, */
+        handleHeroDrop,
       };
     },
   });
@@ -131,6 +98,7 @@ export default defineComponent({
 <style scoped>
 .battlefieldContainer {
     width: 100%;
+    display: flex;
 }
 
 
@@ -145,12 +113,14 @@ export default defineComponent({
     color: #444;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+    width: 250px;
 }
   
 .monster-area {
     background-color: #ffe6e6;
     border: 3px solid #9c1616;
     padding: 10px;
+    width: 300px;;
     border-radius: 5px;
     text-align: center;
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), 

@@ -78,6 +78,12 @@ class UXManager {
       img.onerror = () => resolve(false);
     });
   }
+
+  static disableRightClick() {
+    document.addEventListener('contextmenu', function (event) {
+      event.preventDefault();
+    });
+  }
 }
 
 export default UXManager;

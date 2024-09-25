@@ -21,6 +21,7 @@ type BattlefieldStoreType = {
     killed: number;
     clicks: number;
     totalDamage: number;
+    heroSlots: number;
     isUnlocked: () => boolean;
     getRequirementDescription: () => string | null;
     getImage: () => string;
@@ -35,13 +36,14 @@ type BattlefieldStoreType = {
 
 export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> = battlefieldsEnum.reduce((acc, battlefield) => {
     const store = defineStore(`battlefield_${battlefield.index}`, {
-        state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster, defaultDamage: number, killed: number, clicks: 0, totalDamage: 0 } => ({
+        state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster, defaultDamage: number, killed: number, clicks: 0, totalDamage: 0, heroSlots: number } => ({
             ...battlefield,
             currentMonster: BattlefieldManager.getMonster(battlefield.monsters[0]) as Monster,
             defaultDamage: 1,
             killed: 0,
             clicks: 0,
             totalDamage: 0,
+            heroSlots: 1,
         }),
         actions: {
             isUnlocked() {
@@ -95,13 +97,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                 if (loot) {
                     const chance = Math.random();
                     if (chance < (loot.ratio * SettingsManager.getSettings().lootPower)) {
-                        const item = ItemManager.generateLoot(loot.index);
-                        if (item) {
-                            const itemStore = ItemManager.getItemStore();
-                            itemStore.addItemToInventory(item);
-                            itemStore.looted[item.rarity] += 1;
-                            UXManager.showSuccess(`🎁 looted: ${item.name}`);
-                        }
+                        ItemManager.getItemStore().lootItem(loot.index);
                     }
                 }
             },

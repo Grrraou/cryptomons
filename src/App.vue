@@ -29,6 +29,7 @@ import StakingManager from './managers/StakingManager';
 import BattlefieldManager from './managers/BattlefieldManager';
 import HomePage from './views/HomePage.vue';
 import AudioManager from './managers/AudioManager';
+import UXManager from './managers/UXManager';
 
 export default defineComponent({
   components: {
@@ -47,10 +48,7 @@ export default defineComponent({
 
     AudioManager.playMusic();
 
-    // prevent right click
-    /* document.addEventListener('contextmenu', function (event) {
-      event.preventDefault();
-    }); */
+    //UXManager.disableRightClick();
   },
 });
 </script>

@@ -23,7 +23,7 @@ export const tutorialsEnum: TutorialsType = {
         {
             target: '#bitcoin_mine_btc_mine',
             header: {
-                title: 'Start minning !',
+                title: 'Start mining !',
             },
             content: `This is your first mine, also the first option to earn tokens.`,
             params: {

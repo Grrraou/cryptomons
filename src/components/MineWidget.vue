@@ -40,9 +40,9 @@
     <!-- Workers Area Section -->
     <div class="workers-section">
       <div class="workers-heading">
-        <p>Workers in this Area:</p>
-      <div v-if="heroes.length > 0" class="heroes-in-area">
-        <div v-for="(hero, index) in heroes">
+        <p>Workers in this Area ( {{ assignedHeroes.length }} / {{ mineStore.heroSlots }} ): </p>
+      <div v-if="assignedHeroes.length > 0" class="heroes-in-area">
+        <div v-for="(hero, index) in assignedHeroes">
           <HeroThumb 
             v-if="hero.isWorkingThere(mineStore.index)"
             :key="index" 
@@ -84,6 +84,9 @@ export default defineComponent({
       const tokenStore = TokenManager.getTokenStore(mineStore.token);
       const heroes = ref(HeroManager.getHeroes());
       const refId = `bitcoin_mine_${mineStore.index}`;
+      const assignedHeroes = computed(() => heroes.value.filter(heroStore => {
+        return heroStore.isWorkingThere(mineStore.index);
+      }));
 
       const backgroundStyle = computed(() => ({
         backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${mineStore.getImage()}')`,
@@ -92,12 +95,15 @@ export default defineComponent({
       }));
 
       const handleHeroDrop = (event: DragEvent) => {
-        const heroIndex = event.dataTransfer?.getData('heroIndex');
-        if (heroIndex) {
-          const hero = HeroManager.getHeroStore(heroIndex);
-          hero.location = mineStore.index;
-          heroes.value = HeroManager.getHeroes();
+        if (mineStore.heroSlots > assignedHeroes.value.length) {
+          const heroIndex = event.dataTransfer?.getData('heroIndex');
+          if (heroIndex) {
+            const hero = HeroManager.getHeroStore(heroIndex);
+            hero.location = mineStore.index;
+            heroes.value = HeroManager.getHeroes();
+          }
         }
+        
       };
 
       return {
@@ -105,6 +111,7 @@ export default defineComponent({
         backgroundStyle,
         tokenStore,
         heroes,
+        assignedHeroes,
         refId,
         SettingsManager,
         handleHeroDrop,

@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'; 
-import { achievementsEnum, Achievement } from '@/enums/AchievementsEnum';// Assume the AchievementsEnum is updated as in the previous message
+import { achievementsEnum, Achievement } from '@/enums/AchievementsEnum';
 import UXManager from '@/managers/UXManager';
 import MineManager from '@/managers/MineManager';
+import ItemManager from '@/managers/ItemManager';
+import BattlefieldManager from '@/managers/BattlefieldManager';
 
 export type AchievementStoreType = {
     index: string;
@@ -13,7 +15,6 @@ export type AchievementStoreType = {
     image: boolean;
     progress: number;
     isCompleted: boolean;
-    incrementProgress: (amount: number) => void;
     completeAchievement: () => void;
     getReference: () => number;
     getImage: () => string;
@@ -21,23 +22,19 @@ export type AchievementStoreType = {
 
 export const useAchievementStores: Record<string, () => AchievementStoreType> = achievementsEnum.reduce((acc, achievement) => {
     const store = defineStore(`achievement_${achievement.index}`, {
-        state: (): Omit<Achievement, 'incrementProgress' | 'completeAchievement'> & { progress: number; isCompleted: boolean } => ({
+        state: (): Omit<Achievement, 'completeAchievement'> & { progress: number; isCompleted: boolean } => ({
             ...achievement,
             progress: 0,
             isCompleted: false,
         }),
         actions: {
-            incrementProgress(amount: number) {
-                if (!this.isCompleted) {
-                    this.progress = Math.min(this.progress + amount, this.target);
-                    if (this.progress >= this.target) {
-                        this.completeAchievement();
-                    }
-                }
-            },
             completeAchievement() {
                 this.isCompleted = true;
                 UXManager.showSuccess(`🎉 Achievement UNLOCKED 🎉\n ${this.title}`);
+                if (this.loot) {
+                    const split = this.loot.split(':');
+                    ItemManager.getItemStore().lootItem(split[0], split[1]);
+                }
             },
             getReference() {
                 const exploded = this.reference.split(':');
@@ -47,6 +44,9 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
                 switch (type) {
                     case 'mines':
                         return MineManager.getMineStore(object)[stat];
+                        break;
+                    case 'battlefields':
+                        return BattlefieldManager.getBattlefieldStore(object)[stat];
                         break;
                 }
                 return 0;

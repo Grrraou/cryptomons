@@ -60,10 +60,12 @@ export default defineComponent({
   justify-content: flex-start;
   width: 100%;
   padding: 10px;
+  padding-right: 10%;
   overflow-y: auto;
   height: 100%;
   border: 2px solid #ccc;
   border-radius: 5px;
+  padding-top: 50px;
 }
 
 .spacer {

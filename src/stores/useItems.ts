@@ -2,6 +2,9 @@ import { defineStore } from 'pinia';
 import { Item } from '@/enums/ItemsEnum';
 import TokenManager from '@/managers/TokenManager';
 import UXManager from '@/managers/UXManager';
+import ItemManager from '@/managers/ItemManager';
+import MineManager from '@/managers/MineManager';
+import BattlefieldManager from '@/managers/BattlefieldManager';
 
 export type EquipementSlotType = 'Head' | 'Chest' | 'Pants' | 'Hands' | 'Boots' | 'Weapon' | 'Gloves' | 'Consumable';
 
@@ -99,6 +102,14 @@ export const useItemsStore = defineStore('items', {
 
             return rarityColors[rarity];
         },
+        lootItem(itemIndex: string, target: string | null = null) {
+            const item = ItemManager.generateLoot(itemIndex, target);
+            if (item) {
+                this.addItemToInventory(item);
+                this.looted[item.rarity] += 1;
+                UXManager.showSuccess(`🎁 looted: ${item.name}`);
+            }
+        },
         consumeItem(item: Item, inventoryIndex: number) {
             switch (item.index) {
                 case 'good_news':
@@ -106,6 +117,15 @@ export const useItemsStore = defineStore('items', {
                     tokenStore.price *= item.power;
                     UXManager.showSuccess(`🧴 Item consumed: \n${tokenStore.name} price incread by ${item.power.toFixed(2)}%`);
                     break;
+                case 'mining_slot':
+                    const mineStore = MineManager.getMineStore(item.token);
+                    mineStore.heroSlots += item.power;
+                    UXManager.showSuccess(`🧴 Item consumed: \nMore worker slots for ${mineStore.name}`);
+                case 'battlefield_slot':
+                    console.log(item.token)
+                    const battlefieldStore = BattlefieldManager.getBattlefieldStore(item.token);
+                    battlefieldStore.heroSlots += item.power;
+                    UXManager.showSuccess(`🧴 Item consumed: \nMore fighters slots for ${battlefieldStore.name}`);
                 default:
                     break;
             }

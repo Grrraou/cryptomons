@@ -78,6 +78,7 @@ import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import GoalManager from '@/managers/GoalManager';
 import { useRoute } from 'vue-router';
+import AchievementManager from '@/managers/AchievementManager';
 
 export default defineComponent({
   name: 'SideMenu',
@@ -98,11 +99,17 @@ export default defineComponent({
     /* Refreshed total assets */
     const totalAssetsValue = ref<number>(TokenManager.getTotalAssetsValue());
     let intervalId: number | null = null;
-    const updateTotalAssetsValue = () => {
+    const commonChecker = () => {
       totalAssetsValue.value = TokenManager.getTotalAssetsValue();
+      AchievementManager.getAchievements().filter(achievementStore => !achievementStore.isCompleted).forEach(achievementStore => {
+        const achievementReference = achievementStore.getReference()
+        if (achievementReference >= achievementStore.target) {
+          achievementStore.completeAchievement();
+        }
+      });
     };
     onMounted(() => {
-      intervalId = window.setInterval(updateTotalAssetsValue, 1000); // Update every second
+      intervalId = window.setInterval(commonChecker, 1000); // Update every second
     });
     onBeforeUnmount(() => {
       if (intervalId) {

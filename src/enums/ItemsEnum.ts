@@ -16,6 +16,22 @@ export type Item = {
 }
 
 export const itemsEnum: Item[] = [
+  /** SPECIAL REWARDS */
+  {
+    index: 'mining_slot',
+    name: 'Mining Slot',
+    description: 'Increase the number of heroes that can work in a place.',
+    type: 'Consumable',
+    power: 1,
+  },
+  {
+    index: 'battlefield_slot',
+    name: 'Battlefield Slot',
+    description: 'Increase the number of fight that can work in a place.',
+    type: 'Consumable',
+    power: 1,
+  },
+
   /** BINANCE */
   {
     index: 'binance-chestguard',

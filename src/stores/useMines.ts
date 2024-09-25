@@ -5,7 +5,6 @@ import { HeroStoreType } from './useHeroes';
 import HeroManager from '@/managers/HeroManager';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
-import AchievementManager from '@/managers/AchievementManager';
 import SettingsManager from '@/managers/SettingsManager';
 import UXManager from '@/managers/UXManager';
 
@@ -18,6 +17,7 @@ type MineStoreType = {
   clicks: number;
   level: number;
   totalMined: number;
+  heroSlots: number;
   isUnlocked: () => boolean,
   getHeroes: () => HeroStoreType[];
   increaseClicks: (amount: number) => void;
@@ -32,11 +32,12 @@ type MineStoreType = {
 
 export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.reduce((acc, mine) => {
     const store = defineStore(`mine_${mine.index}`, {
-        state: (): Mine & { clicks: number; level: number; totalMined: number } => ({
+        state: (): Mine & { clicks: number; level: number; totalMined: number, heroSlots: number } => ({
         ...mine,
         clicks: 0,
         level: 1,
         totalMined: 0,
+        heroSlots: 1,
         }),
         actions: {
             isUnlocked() {
@@ -49,12 +50,10 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
             },
             increaseClicks(amount: number) {
                 this.clicks += amount;
-                AchievementManager.incrementClickAreaAchievements(this.index, amount);
             },
             upgrade() {
                 if (this.canUpgrade()) {
                     const token = TokenManager.getTokenStore(this.token);
-                    AchievementManager.incrementUpgradeAreaAchievements(this.index, 1);
                     token.updateBalance(-this.getUpgradeCost());
                     this.level += 1;
                 }

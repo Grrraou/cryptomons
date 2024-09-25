@@ -10,13 +10,14 @@ export type Achievement = {
 };
   
 export const achievementsEnum: Achievement[] = [
+    /** MINES */
     {
         index: "clicks_area_btc_mine_10",
         title: "Bitcoin Tinkerer",
         description: "Start your journey with a modest 10 clicks in the Bitcoin mine.",
         reference: 'mines:btc_mine:clicks',
         target: 10,
-        loot: 'good_new_btc',
+        loot: 'good_news:btc',
     },
     {
         index: "clicks_area_btc_mine_100",
@@ -24,7 +25,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach a milestone of 100 clicks and show your dedication to Bitcoin mining.",
         reference: 'mines:btc_mine:clicks',
         target: 100,
-        loot: 'good_new_btc',
+        loot: 'good_news:btc',
     },
     {
         index: "clicks_area_btc_mine_1000",
@@ -32,32 +33,48 @@ export const achievementsEnum: Achievement[] = [
         description: "Dominate the Bitcoin mine with 1000 clicks, proving your mining prowess.",
         reference: 'mines:btc_mine:clicks',
         target: 1000,
-        loot: 'mining_slot_btc',
+        loot: 'good_news:btc',
+    },
+    {
+        index: "clicks_area_btc_mine_10000",
+        title: "Bitcoin Crazy clicker",
+        description: "Dominate the Bitcoin mine with 10000 clicks, proving your mining prowess.",
+        reference: 'mines:btc_mine:clicks',
+        target: 10000,
+        loot: 'mining_slot:btc_mine',
     },
 
     {
+        index: "upgrade_area_btc_mine_2",
+        title: "Satoshi's noob",
+        description: "Reach Bitcoin mine level 2",
+        reference: 'mines:btc_mine:level',
+        target: 2,
+        loot: 'good_news:btc',
+    },
+    {
         index: "upgrade_area_btc_mine_10",
         title: "Satoshi's Apprentice",
-        description: "You've just scratched the surface of Bitcoin mining. Keep pushing to master the art.",
+        description: "Reach Bitcoin mine level 10",
         reference: 'mines:btc_mine:level',
         target: 10,
-        loot: 'good_new_btc',
+        loot: 'mining_slot:btc_mine',
       },
       {
         index: "upgrade_area_btc_mine_100",
         title: "Crypto Aficionado",
-        description: "Your dedication to Bitcoin mining is starting to pay off. You're no stranger to the blockchain now.",
+        description: "Reach Bitcoin mine level 100",
         reference: 'mines:btc_mine:level',
         target: 100,
-        loot: 'good_new_btc',
+        loot: 'mining_slot:btc_mine',
       },
       {
         index: "upgrade_area_btc_mine_1000",
         title: "Master of the Blockchain",
-        description: "You've become a powerhouse in the world of Bitcoin mining, and the blockchain bows to your prowess.",
+        description: "Reach Bitcoin mine level 1000",
         reference: 'mines:btc_mine:level',
         target: 1000,
-        loot: 'mining_slot_btc',
+        loot: 'mining_slot:btc_mine',
       },
 
       {
@@ -66,7 +83,7 @@ export const achievementsEnum: Achievement[] = [
         description: "You've mined your first 100 Bitcoin! A promising start in the crypto world.",
         reference: 'mines:btc_mine:totalMined',
         target: 100,
-        loot: 'good_new_btc',
+        loot: 'good_news:btc',
       },
       {
         index: "mined_area_btc_mine_1000",
@@ -74,7 +91,7 @@ export const achievementsEnum: Achievement[] = [
         description: "With 1,000 Bitcoin mined, you're establishing yourself as a serious player in the mining game.",
         reference: 'mines:btc_mine:totalMined',
         target: 1000,
-        loot: 'good_new_btc',
+        loot: 'good_news:btc',
       },
       {
         index: "mined_area_btc_mine_10000",
@@ -82,10 +99,19 @@ export const achievementsEnum: Achievement[] = [
         description: "You've reached a milestone few can claim: 10,000 Bitcoin mined! The crypto world is at your feet.",
         reference: 'mines:btc_mine:totalMined',
         target: 10000,
-        loot: 'mining_slot_btc',
+        loot: 'good_news:btc',
       },
       
-      
+      /** BATTLEFIELDS */
+      {
+        index: "click_area_binance_barricade_10",
+        title: "Binance explorer",
+        description: "Attack manually 10 times one of Binance Barricade monsters.",
+        reference: 'battlefields:binance_barricade:clicks',
+        target: 10,
+        loot: 'battlefield_slot:binance_barricade',
+      },
+
 /*     {
         index: "upgrade_area_btc_mine_10",
         title: "Bitcoin Architect - 10 Upgrades",

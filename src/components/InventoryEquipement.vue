@@ -174,6 +174,8 @@ export default defineComponent({
   padding: 10px;
   width: 100%;
   max-height: 100%;
+  padding-right: 10%;
+  padding-top: 50px;
 }
 
 .slot {

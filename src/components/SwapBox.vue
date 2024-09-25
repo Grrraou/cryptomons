@@ -182,7 +182,7 @@ export default defineComponent({
 .swap-box {
   margin: 10px auto;
   padding: 20px;
-  border: 2px solid #ffa500;
+  border: 6px solid #ffa500;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fdfdfd;

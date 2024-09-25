@@ -3,7 +3,7 @@
 
     <!-- Consumable Button: Visible only for consumable items -->
     <button v-if="item.type === 'Consumable'" class="consume-btn" @click="consumeItem(item, inventoryIndex)">
-      Use
+      USE
     </button>
 
     <!-- Info Box -->
@@ -48,6 +48,7 @@ export default defineComponent({
     const inventoryIndex = props.inventoryIndex ?? 0;
 
     const consumeItem = (item: Item, inventoryIndex: number) => {
+      console.log(item)
       itemsStore.consumeItem(item, inventoryIndex);
     };
 
@@ -58,7 +59,7 @@ export default defineComponent({
       backgroundColor: '#000',
     }));
 
-    const itemRarityClass = `item-rarity-${props.item.rarity}`;
+    const itemRarityClass = computed(() => `item-rarity-${props.item.rarity}`);
 
     return {
       inventoryIndex,
@@ -97,7 +98,7 @@ export default defineComponent({
     position: absolute;
     top: 5px;
     left: 5px;
-    padding: 2px 6px;
+    padding: 4px 12px;
     font-size: 12px;
     background-color: #ff5c5c;
     color: white;
@@ -112,6 +113,7 @@ export default defineComponent({
 
 .token-icon {
   width: 12px;
+  margin-bottom: -2px;
 }
 
 /** RARITY */

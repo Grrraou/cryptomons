@@ -3,6 +3,8 @@ import { useItemsStore } from "@/stores/useItems";
 import TokenManager from "./TokenManager";
 import UXManager from "./UXManager";
 import SettingsManager from "./SettingsManager";
+import MineManager from "./MineManager";
+import BattlefieldManager from "./BattlefieldManager";
 
 class ItemManager {
 
@@ -11,7 +13,7 @@ class ItemManager {
         return { ...item } as Item;
     }
 
-    static generateLoot(itemIndex: string) {
+    static generateLoot(itemIndex: string, target: string | null = null) {
         const item = ItemManager.getBaseItem(itemIndex);
 
         if (!item || !item.power) {
@@ -19,24 +21,12 @@ class ItemManager {
         }
 
         if (item.type === 'Consumable') {
-            return this.generateConsumable(item);
+            return this.generateConsumable(item, target);
         }
         
-        item.rarity = 0;
-        const rarityChances = Math.random();
-        if (rarityChances < 1 / 200) {
-            item.rarity = 5;
-        } else if (rarityChances < 1 / 50) {
-            item.rarity = 4;
-        } else if (rarityChances < 1 / 25) {
-            item.rarity = 3;
-        } else if (rarityChances < 1 / 10) {
-            item.rarity = 2;
-        } else if (rarityChances < 1 / 5) {
-            item.rarity = 1;
-        }
+        item.rarity = this.generateRandomRarity();
 
-        const base = SettingsManager.getSettings().itemPower * (item.rarity * item.rarity);
+        const base = SettingsManager.getSettings().itemPower * (item.rarity * item.rarity + 1);
 
         item.xp = Math.floor(base * item.power * Math.random() * (1.2 - 0.8) + 0.8);
         item.damage = Math.floor(base * item.power * Math.random() * (1.2 - 0.8) + 0.8);
@@ -45,33 +35,52 @@ class ItemManager {
         return item;
     }
 
-    static generateConsumable(item: Item) {
+    static generateConsumable(item: Item, target: string | null = null) {
+        item.power = Math.random() * ((item.power * 2) - (item.power / 2)) + (item.power / 2);
+
+        item.rarity = this.generateRandomRarity();
+        item.power *= item.rarity + 1;
+
         switch (item.index) {
             case 'good_news':
-                item.token = TokenManager.getTokens().filter(tokenStore => tokenStore.index !== 'cryptodollar')[Math.floor(Math.random() * TokenManager.getTokens().length - 1)].index;
+                item.token = target
+                    ?? TokenManager.getTokens()
+                        .filter(tokenStore => tokenStore.index !== 'cryptodollar')[Math.floor(Math.random() * TokenManager.getTokens().length - 1)]
+                        .index;
                 break;
+            case 'mining_slot':
+                item.token = target 
+                    ?? MineManager.getMines()[Math.floor(Math.random() * MineManager.getMines().length)].index;
+                item.power = 1;
+                item.rarity = 5;
+            case 'battlefield_slot':
+                item.token = target 
+                    ?? BattlefieldManager.getBattlefields()[Math.floor(Math.random() * BattlefieldManager.getBattlefields().length)].index;
+                item.power = 1;
+                item.rarity = 5;
             default:
                 break;
         }
 
-        item.power = Math.random() * ((item.power * 2) - (item.power / 2)) + (item.power / 2);
+        return item;
+    }
 
-        item.rarity = 0;
+    static generateRandomRarity() {
+        let rarity = 0;
         const rarityChances = Math.random();
         if (rarityChances < 1 / 200) {
-            item.rarity = 5;
-        } else if (rarityChances < 1 / 50) {
-            item.rarity = 4;
-        } else if (rarityChances < 1 / 20) {
-            item.rarity = 3;
+            rarity = 5;
+        } else if (rarityChances < 1 / 75) {
+            rarity = 4;
+        } else if (rarityChances < 1 / 40) {
+            rarity = 3;
+        } else if (rarityChances < 1 / 15) {
+            rarity = 2;
         } else if (rarityChances < 1 / 5) {
-            item.rarity = 2;
-        } else if (rarityChances < 1 / 5) {
-            item.rarity = 1;
+            rarity = 1;
         }
-        item.power *= item.rarity + 1;
 
-        return item;
+        return rarity;
     }
 
     static getItemStore () {
@@ -81,7 +90,6 @@ class ItemManager {
     static getItemImage(itemIndex: string) {
         const item = this.getBaseItem(itemIndex);
         const imgPath = (item || item.img) ? `items/${item.type}/${item.index}.png` : 'items/default.png';
-        console.log(imgPath)
         return UXManager.getImagePath(imgPath);
     }
 
