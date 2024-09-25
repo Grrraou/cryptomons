@@ -118,7 +118,7 @@ export const useItemsStore = defineStore('items', {
             switch (item.index) {
                 case 'good_news':
                     const tokenStore = TokenManager.getTokenStore(item.token);
-                    tokenStore.price *= item.power;
+                    tokenStore.price += (tokenStore.price / 100) * item.power;
                     UXManager.showSuccess(`🧴 Item consumed: \n${tokenStore.name} price incread by ${item.power.toFixed(2)}%`);
                     break;
                 case 'mining_slot':
