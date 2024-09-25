@@ -2,6 +2,12 @@
 
 Cryptomons is a Vue 3 application with TypeScript, Pinia for state management, and Vue Router for navigation.
 
+https://cryptomons.org
+
+
+
+
+
 ## Project Setup
 
 ### Prerequisites
