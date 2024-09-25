@@ -1,4 +1,4 @@
-import { tokensEnum, Token } from '@/enums/TokensEnum';
+import { tokensEnum, Token, PriceCandleType } from '@/enums/TokensEnum';
 import TokenManager from '@/managers/TokenManager';
 import UXManager from '@/managers/UXManager';
 import { defineStore } from 'pinia';
@@ -11,6 +11,7 @@ export type TokenStoreType = {
     swapFees: number;
     bought: number;
     sold: number;
+    history: PriceCandleType[];
     updateBalance: (amount: number) => void;
     getIcon: () => string;
     getBalanceInCrypto: () => number;
@@ -25,6 +26,7 @@ export const useTokenStores: Record<string, () => TokenStoreType> = tokensEnum.r
       swapFees: 0.05,
       bought: 0,
       sold: 0,
+      history: [],
     }),
     actions: {
       updateBalance(amount: number) {

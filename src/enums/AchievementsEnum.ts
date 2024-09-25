@@ -1011,5 +1011,10 @@ export const achievementsEnum: Achievement[] = [
         loot: "inventory_slot"
     },
     
+    /**
+     * STAKING
+     */
+    
+
 ];
   

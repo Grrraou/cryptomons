@@ -3,6 +3,7 @@ import { TokenStoreType } from './useTokens';
 import TokenManager from '@/managers/TokenManager';
 import UXManager from '@/managers/UXManager';
 import AudioManager from '@/managers/AudioManager';
+import SettingsManager from '@/managers/SettingsManager';
 
 export type SwapOption = {
     label: string;
@@ -109,6 +110,23 @@ export const useSwapStore = defineStore('swap_options', {
       
               // Adjusted price decrease calculation
               const priceDecrease = dampingFactor * fromToken.price * (amountImpact / (amountImpact + priceImpact));
+
+                // History Chart
+                const open = fromToken.price;
+                const close = +(Math.max(fromToken.price - priceDecrease, 0.01)).toFixed(2);
+
+                const randomFactor = 0.02; // A factor to add randomness, adjust as needed
+                const high = +(Math.max(open, close) * (1 + Math.random() * randomFactor)).toFixed(2);
+                const low = +(Math.min(open, close) * (1 - Math.random() * randomFactor)).toFixed(2);
+                const index = fromToken.history.length + 1;
+
+                 fromToken.history.push({ 
+                    x: index, 
+                    o: open, 
+                    h: high, 
+                    l: low, 
+                    c: close 
+                });
       
               // Apply the price decrease, ensuring it doesn't drop below the minimum
               fromToken.price = Math.max(fromToken.price - priceDecrease, 0.01);
@@ -127,6 +145,24 @@ export const useSwapStore = defineStore('swap_options', {
       
               // Adjusted price increase calculation
               const priceIncrease = dampingFactorToToken * toToken.price * (amountImpactToToken / (amountImpactToToken + priceImpactToToken));
+
+
+              // History Chart
+              const open = toToken.price;
+              const close = +(Math.max(toToken.price + priceIncrease, 0.01)).toFixed(2);
+
+              const randomFactor = 0.02; // A factor to add randomness, adjust as needed
+              const high = +(Math.max(open, close) * (1 + Math.random() * randomFactor)).toFixed(2);
+              const low = +(Math.min(open, close) * (1 - Math.random() * randomFactor)).toFixed(2);
+              const index = toToken.history.length + 1;
+
+              toToken.history.push({ 
+                  x: index, 
+                  o: open, 
+                  h: high, 
+                  l: low, 
+                  c: close 
+              });
       
               // Apply the price increase, ensuring it doesn't drop below the minimum
               toToken.price = Math.max(toToken.price + priceIncrease, 0.01);
@@ -139,7 +175,7 @@ export const useSwapStore = defineStore('swap_options', {
             toToken.bought += swapResult;
 
             this.volume += (this.amount * fromToken.price) + (swapResult * toToken.price);
-            UXManager.showSuccess(`Swapped ${this.amount} ${fromToken.index.toUpperCase()} to ${swapResult} ${toToken.index.toUpperCase()}`);
+            UXManager.showSuccess(`Swapped ${this.amount} ${fromToken.index.toUpperCase()} to ${swapResult.toFixed(SettingsManager.getSettings().decimals)} ${toToken.index.toUpperCase()}`);
             AudioManager.play('swap.wav');
             swapResult = 0;
             this.amount = 0;

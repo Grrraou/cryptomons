@@ -1,5 +1,5 @@
 <template>
-  <div class="token-thumb" :style="backgroundStyle">
+  <div class="token-thumb infoboxed" :style="backgroundStyle">
     <h2 class="token-name">
       <img class="tokenSymbol" :src="tokenStore.getIcon()" draggable="false" />
       {{ token.name }}
@@ -25,14 +25,29 @@
       <br>
       <span class="tokenSum">{{ tokenStore.getBalanceInCrypto().toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>
     </p>
+    
+    <div v-if="GoalManager.getGoalStore('centralize_decentralization').isCompleted" class="infobox" @dragstart.prevent>
+      <button v-if="!chartInit" @click="initChart($event)">📊 View graph for {{ graphPrice.toFixed(2) }} <img :src="TokenManager.getTokenStore('grt').getIcon()" class="token-icon"></button>
+      <canvas ref="candleChart"></canvas>
+    </div>
+    
   </div>
 </template>
   
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref, onMounted } from 'vue';
 import { TokenStoreType, useTokenStores } from '@/stores/useTokens';
 import TokenManager from '@/managers/TokenManager';
 import SettingsManager from '@/managers/SettingsManager';
+import GoalManager from '@/managers/GoalManager';
+
+import { Chart, registerables } from 'chart.js';
+import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial'; // Import both the controller and element
+import 'chartjs-adapter-date-fns'; // Import the date adapter
+import UXManager from '@/managers/UXManager';
+  
+// Register all chart.js components and the financial chart components
+Chart.register(...registerables, CandlestickController, CandlestickElement); // Register both the controller and element
   
 export default defineComponent({
   name: 'TokenThumb',
@@ -48,18 +63,90 @@ export default defineComponent({
   },
   setup(props) {
     const tokenStore = useTokenStores[props.token.index]();
+    const grtStore = TokenManager.getTokenStore('grt');
+    const graphPrice = ref(1 + tokenStore.history.length * 0.01);
 
     const backgroundStyle = computed(() => ({
-        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9)), url('${tokenStore.getIcon()}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }));
+      backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9)), url('${tokenStore.getIcon()}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }));
+
+    /** CHART */
+    const candleChart = ref<HTMLCanvasElement | null>(null);
+    let chartInstance: Chart | null = null;
+    let chartInit = ref(false);
+
+    // Initialize the chart
+    const initChart = (event) => {
+      if (grtStore.balance < graphPrice.value) {
+        return;
+      }
+      grtStore.balance -= graphPrice.value;
+      UXManager.showFlyingText(`-${graphPrice.value.toFixed(2)}`, grtStore.getIcon(), event.clientX, event.clientY, 'red');
+      chartInit.value = true;
+      if (candleChart.value) {
+        const ctx = candleChart.value.getContext('2d');
+
+        if (ctx) {
+          chartInstance = new Chart(ctx, {
+            type: 'candlestick',
+            data: {
+              datasets: [
+                {
+                  label: 'Candlestick Data',
+                  data: tokenStore.history,
+                  borderColor: 'black',
+                  barThickness: 3,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                x: {
+                  label: "moves",
+                  type: 'linear',
+                  beginAtZero: false,
+                  ticks: {
+                    autoSkip: false,
+                    stepSize: 1,
+                  },
+                },
+                y: {
+                  beginAtZero: false,
+                },
+              },
+              plugins: {
+                      tooltip: {
+                      enabled: false,
+                  },
+                  legend: {
+                      display: false,
+                  },
+              },
+              responsive: true,
+              maintainAspectRatio: true,
+            },
+          });
+        }
+      }
+    };
+
+    /** add a new goal to make all the graphs free */
+   /*  onMounted(() => {
+      initChart();
+    }); */
 
     return {
       tokenStore,
       backgroundStyle,
+      candleChart,
+      chartInit,
+      graphPrice,
+      initChart,
       TokenManager,
       SettingsManager,
+      GoalManager,
     };
   },
 });
@@ -131,6 +218,17 @@ export default defineComponent({
 
 .tokenSymbol {
   width: 16px;
+}
+
+/** CHART */
+canvas {
+  width: 300px;
+  height: 300px;
+}
+
+.infobox {
+  height: auto;
+  max-height: 100%;
 }
 </style>
   

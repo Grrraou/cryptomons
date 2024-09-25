@@ -19,7 +19,7 @@ class UXManager {
     toast.error(text);
   }
 
-  static showFlyingText(text: string, image: string|null = null, x: number|null = null, y: number|null = null) {
+  static showFlyingText(text: string, image: string|null = null, x: number|null = null, y: number|null = null, color: string = 'green') {
     if (!SettingsManager.getSettings().floatingEarningsOnClick) {
       return;
     }
@@ -32,7 +32,7 @@ class UXManager {
     textElement.style.top = `${y}px`;
     textElement.style.fontSize = '24px';
     textElement.style.fontWeight = 'bold';
-    textElement.style.color = 'green';
+    textElement.style.color = color;
     textElement.style.opacity = '1';
     textElement.style.pointerEvents = 'none';
     textElement.style.transition = 'transform 2s ease-out, opacity 2s ease-out';

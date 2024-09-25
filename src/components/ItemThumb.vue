@@ -48,7 +48,6 @@ export default defineComponent({
     const inventoryIndex = props.inventoryIndex ?? 0;
 
     const consumeItem = (item: Item, inventoryIndex: number) => {
-      console.log(item)
       itemsStore.consumeItem(item, inventoryIndex);
     };
 

@@ -1,13 +1,22 @@
+export type PriceCandleType = { 
+    x: number,
+    o: number,
+    h: number,
+    l: number,
+    c: number,
+};
+
 export type Token = {
     index: string;
     name: string;
     price: number;
     balance: number;
+    history: PriceCandleType[];
 };
   
 export const tokensEnum = [
-    { index: 'cryptodollar', name: 'Crypto Dollar', price: 1 },
-    { index: 'btc', name: 'Bitcoin', price: 10 },//2009
+    { index: 'cryptodollar', name: 'Crypto Dollar', price: 1, },
+    { index: 'btc', name: 'Bitcoin', price: 10,},//2009
     { index: 'nmc', name: 'Namecoin', price: 5 },//2011
     { index: 'ltc', name: 'Litecoin', price: 5 },//2011
     { index: 'xrp', name: 'Ripple', price: 1 },//2012
@@ -29,4 +38,5 @@ export const tokensEnum = [
     { index: 'shib', name: 'Shiba Inu', price: 10 },//2020
     { index: 'uni', name: 'Uniswap', price: 50 },//2020
     { index: 'cake', name: 'Cake', price: 100 },//2020
+    { index: 'grt', name: 'The Graph', price: 3 },
 ];
