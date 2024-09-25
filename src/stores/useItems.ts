@@ -11,6 +11,7 @@ interface EquipmentState {
     Boots: Item | null;
     Weapon: Item | null;
     inventory: Item[];
+    looted: number[];
 }
 
 export const useItemsStore = defineStore('items', {
@@ -22,6 +23,7 @@ export const useItemsStore = defineStore('items', {
         Boots: null,
         Weapon: null,
         inventory: [],
+        looted: [0,0,0,0,0,0],
     }),
     actions: {
         equipItem(slotType: EquipementSlotType, inventoryIndex: number) {
@@ -43,6 +45,7 @@ export const useItemsStore = defineStore('items', {
         },
         addItemToInventory(item: Item) {
             this.inventory.push(item);
+            this.looted[item.rarity] + 1;
         },
         getItemFromInventory(inventoryIndex: number) {
             return this.inventory[inventoryIndex];
@@ -81,6 +84,18 @@ export const useItemsStore = defineStore('items', {
                 damage: damage,
                 mining: mining,
             };
+        },
+        getRarityColor(rarity: number) {
+            const rarityColors = [
+                '#000',
+                '#9d9d9d',
+                '#5EC15E',
+                '#3B82F6',
+                '#A871C1',
+                '#FFA500',
+            ];
+
+            return rarityColors[rarity];
         },
         consumeItem(index: string) {
            /*  const item = this.inventory.find((item) => item.index === index);

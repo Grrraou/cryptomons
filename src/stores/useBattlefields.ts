@@ -17,7 +17,10 @@ type BattlefieldStoreType = {
     monsters: string[];
     image: boolean;
     currentMonster: Monster;
-    defaultDamage: number,
+    defaultDamage: number;
+    killed: number;
+    clicks: number;
+    totalDamage: number;
     isUnlocked: () => boolean;
     getRequirementDescription: () => string | null;
     getImage: () => string;
@@ -32,10 +35,13 @@ type BattlefieldStoreType = {
 
 export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> = battlefieldsEnum.reduce((acc, battlefield) => {
     const store = defineStore(`battlefield_${battlefield.index}`, {
-        state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster, defaultDamage: number } => ({
+        state: (): Omit<Battlefield, 'currentMonster'> & { currentMonster: Monster, defaultDamage: number, killed: number, clicks: 0, totalDamage: 0 } => ({
             ...battlefield,
             currentMonster: BattlefieldManager.getMonster(battlefield.monsters[0]) as Monster,
             defaultDamage: 1,
+            killed: 0,
+            clicks: 0,
+            totalDamage: 0,
         }),
         actions: {
             isUnlocked() {
@@ -73,8 +79,10 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
             damageMonster(amount: number) {
                 if (this.currentMonster.health) {
                     this.currentMonster.health -= amount;
+                    this.totalDamage += amount;
                     AudioManager.playRandom(attackSoundsEnum);
                     if (this.currentMonster.health <= 0) {
+                        this.killed += 1;
                         this.lootMonster();
                         this.setMonster();
                     }
@@ -91,6 +99,7 @@ export const useBattlefieldsStores: Record<string, () => BattlefieldStoreType> =
                         if (item) {
                             const itemStore = ItemManager.getItemStore();
                             itemStore.addItemToInventory(item);
+                            itemStore.looted[item.rarity] += 1;
                             UXManager.showSuccess(`🎁 looted: ${item.name}`);
                         }
                     }

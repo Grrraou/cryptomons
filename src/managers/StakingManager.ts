@@ -30,6 +30,7 @@ class StakingManager {
                     const tokenStore = TokenManager.getTokenStore(stakingStore.token);
                     const amount = stakingStore.getEstimatedGains();
                     tokenStore.balance += amount;
+                    stakingStore.earned += amount;
                     UXManager.showFlyingTextOnElement(
                         amount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), stakingStore.getDOMid(), 150
                     );

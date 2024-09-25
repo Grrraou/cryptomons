@@ -11,6 +11,7 @@ export type StakingStoreType = {
     apr: number;
     requirement: string | null;
     staked: number;
+    earned: number,
     isUnlocked: () => boolean;
     stakeTokens: (amount: number) => void;
     getEstimatedGains: () => number;
@@ -20,9 +21,10 @@ export type StakingStoreType = {
 
 export const useStakingsStores: Record<string, () => StakingStoreType> = stakingsEnum.reduce((acc, staking) => {
     const store = defineStore(`staking_${staking.index}`, {
-        state: (): Staking & { staked: number; } => ({
+        state: (): Staking & { staked: number; earned: number } => ({
             ...staking,
             staked: 0,
+            earned: 0,
         }),
         actions: {
             isUnlocked() {

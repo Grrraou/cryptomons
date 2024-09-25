@@ -19,6 +19,7 @@ export type SwapStoreType = {
     priceFactor: number;
     amount: number;
     swapResult: number;
+    volume: number;
 }
 
 export const useSwapStore = defineStore('swap_options', {
@@ -28,6 +29,7 @@ export const useSwapStore = defineStore('swap_options', {
         priceFactor: 1,
         amount: 0,
         swapResult: 0,
+        volume: 0,
     }),
     actions: {
         getFromTokenStore() {
@@ -132,7 +134,11 @@ export const useSwapStore = defineStore('swap_options', {
 
             let swapResult = this.calculatePotentialSwap();
             fromToken.updateBalance(-this.amount);
+            fromToken.sold += this.amount;
             toToken.updateBalance(swapResult);
+            toToken.bought += swapResult;
+
+            this.volume += (this.amount * fromToken.price) + (swapResult * toToken.price);
             UXManager.showSuccess(`Swapped ${this.amount} ${fromToken.index.toUpperCase()} to ${swapResult} ${toToken.index.toUpperCase()}`);
             AudioManager.play('swap.wav');
             swapResult = 0;

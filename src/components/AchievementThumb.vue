@@ -11,11 +11,12 @@
     </div>
   
     <div v-else class="achievement-box" :style="backgroundStyle">
-        <div class="achievement-content">
-                <h3>{{ achievement.title }}</h3>
-                <p>{{ achievementStore.description }}</p>
+        <div class="achievement-content content-locked" style="">
+                <p style="font-size: 1.3em;">{{ achievementStore.description }}</p>
         </div>
-        <div class="progress-overlay" :style="overlayStyle"></div>
+        <div class="progress-overlay" :style="overlayStyle">
+            <h3 style="color: #ffa500">{{ achievement.title }}</h3>
+        </div>
     </div>
 </template>
   
@@ -104,7 +105,7 @@ export default defineComponent({
   margin: 10px;
   padding: 20px;
   width: 10%;
-  border: 2px solid #444;
+  border: 4px solid #444;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fdfdfd;
@@ -117,7 +118,8 @@ export default defineComponent({
   color: #444;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   min-width: 150px;
-  position: relative; /* Allow overlay to be positioned absolutely */
+  position: relative;
+  box-sizing: border-box;
 }
 
 .achievement-box:hover {
@@ -134,17 +136,20 @@ export default defineComponent({
 
 .achievement-box.unlocked {
   color: #ffa500;
-  border: 6px solid #ffa500;
+  border: 4px solid #ffa500;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
 }
 
 .achievement-content {
   font-size: 1.2em;
-  min-height: 170px;
+  height: 170px;
+  
 }
 
 .progress-overlay {
     border-radius: 10px;
+    font-size: 1.2em;
+    text-align: center;
   position: absolute;
   bottom: 0;
   left: 0;

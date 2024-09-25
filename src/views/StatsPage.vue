@@ -5,11 +5,11 @@
         <div class="stats">
 
             <div class="stats-group">
-                <div class="stat"><span class="stat-label">🖱️ Total mine click: </span><span class="stat-value">{{ totalMineClick }}</span></div>
+                <div class="stat"><span class="stat-label">🖱️ Total mine clicks: </span><span class="stat-value">{{ totalMineClick }}</span></div>
                 <div class="stat"><span class="stat-label">🔼 Total mine upgrades:</span> <span class="stat-value">{{ totalMineUpgrades }}</span></div>
                 <div v-for="(mine, index) in MineManager.getMines()" class="stat">
-                    <span class="stat-label">Total <img class="token-icon" :src="TokenManager.getTokenStore(mine.token).getIcon()"> Mined:</span>
-                    <span class="stat-value">{{ mine.totalMined }}</span>
+                    <span class="stat-label"><img class="token-icon" :src="TokenManager.getTokenStore(mine.token).getIcon()"> Mined:</span>
+                    <span class="stat-value">{{ mine.totalMined.toFixed(SettingsManager.getSettings().decimals) }}</span>
                 </div>
             </div>
 
@@ -19,7 +19,88 @@
             </div>
 
             <div class="stats-group">
+                <div class="stat">
+                    <span class="stat-label">
+                        💀 Total monsters killed: 
+                    </span>
+                    <span class="stat-value">{{ totalMonstersKilled }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        🖱️ Total battle clicks: 
+                    </span>
+                    <span class="stat-value">{{ totalBattleClicks }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        ⚔️ Total damages: 
+                    </span>
+                    <span class="stat-value">{{ totalDamages }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        <span style="height: 12px; width: 12px; display: inline-block;background-color: #000"></span> items looted: 
+                    </span>
+                    <span class="stat-value">{{ ItemManager.getItemStore().looted[0] }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        <span style="height: 12px; width: 12px; display: inline-block;background-color: #9d9d9d"></span> items looted: 
+                    </span>
+                    <span class="stat-value">{{ ItemManager.getItemStore().looted[1] }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        <span style="height: 12px; width: 12px; display: inline-block;background-color: #5EC15E"></span> items looted: 
+                    </span>
+                    <span class="stat-value">{{ ItemManager.getItemStore().looted[2] }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        <span style="height: 12px; width: 12px; display: inline-block;background-color: #3B82F6"></span> items looted: 
+                    </span>
+                    <span class="stat-value">{{ ItemManager.getItemStore().looted[3] }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        <span style="height: 12px; width: 12px; display: inline-block;background-color: #A871C1"></span> items looted: 
+                    </span>
+                    <span class="stat-value">{{ ItemManager.getItemStore().looted[4] }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">
+                        <span style="height: 12px; width: 12px; display: inline-block;background-color: #FFA500"></span> items looted: 
+                    </span>
+                    <span class="stat-value">{{ ItemManager.getItemStore().looted[5] }}</span>
+                </div>
+            </div>
+
+            <div class="stats-group">
                 <div class="stat"><span class="stat-label">🔒 Total Staked: </span><span class="stat-value">{{ totalStakedValue }} <img class="token-icon" src='/tokens/cryptodollar.png'></span></div>
+                <span v-for="(staking, index) in StakingManager.getStakings()">
+                    <div class="stat">
+                        <span class="stat-label"><img class="token-icon" :src="TokenManager.getTokenStore(staking.token).getIcon()"> staked:</span>
+                        <span class="stat-value">{{ staking.staked.toFixed(SettingsManager.getSettings().decimals) }}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label"><img class="token-icon" :src="TokenManager.getTokenStore(staking.token).getIcon()"> earned:</span>
+                        <span class="stat-value">{{ staking.earned.toFixed(SettingsManager.getSettings().decimals) }}</span>
+                    </div>
+                </span>
+            </div>
+
+            <div class="stats-group">
+                <div class="stat"><span class="stat-label">🔒 Total Swapped: </span><span class="stat-value">{{ SwapManager.getSwap().volume }} <img class="token-icon" src='/tokens/cryptodollar.png'></span></div>
+                <span v-for="(token, index) in TokenManager.getTokens()" >
+                    <div class="stat">
+                        <span class="stat-label"><img class="token-icon" :src="token.getIcon()"> bought:</span>
+                        <span class="stat-value">{{ token.bought.toFixed(SettingsManager.getSettings().decimals) }}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label"><img class="token-icon" :src="token.getIcon()"> sold:</span>
+                        <span class="stat-value">{{ token.sold.toFixed(SettingsManager.getSettings().decimals) }}</span>
+                    </div>
+                </span>
             </div>
 
             <div class="stats-group">
@@ -43,6 +124,10 @@ import StakingManager from '@/managers/StakingManager';
 import AchievementManager from '@/managers/AchievementManager';
 import TokenManager from '@/managers/TokenManager';
 import GoalManager from '@/managers/GoalManager';
+import SwapManager from '@/managers/SwapManager';
+import SettingsManager from '@/managers/SettingsManager';
+import ItemManager from '@/managers/ItemManager';
+import BattlefieldManager from '@/managers/BattlefieldManager';
 
 export default defineComponent({
     name: 'StatsPage',
@@ -102,6 +187,18 @@ export default defineComponent({
             unlockedGoals += 1;
         });
 
+        /** BATTLEFIELDS */
+        const battlefieldStores = BattlefieldManager.getBattlefields();
+
+        let totalMonstersKilled = 0;
+        let totalBattleClicks = 0;
+        let totalDamages = 0;
+        battlefieldStores.forEach(battlefieldStore => {
+            totalMonstersKilled += battlefieldStore.killed;
+            totalBattleClicks += battlefieldStore.clicks;
+            totalDamages += battlefieldStore.totalDamage;
+        });
+
         return {
             totalMineClick,
             totalMineUpgrades,
@@ -118,8 +215,16 @@ export default defineComponent({
             unlockedGoals,
             totalGoals,
 
+            totalMonstersKilled,
+            totalBattleClicks,
+            totalDamages,
+
             MineManager,
             TokenManager,
+            StakingManager,
+            SwapManager,
+            SettingsManager,
+            ItemManager,
         };
     },
 });

@@ -44,6 +44,7 @@ export default defineComponent({
         let damage = battlefieldStore.getDefaultDamage();
         damage *= 1 + (ItemManager.getItemStore().getEquipementStats().damage / 100);
         battlefieldStore.damageMonster(damage);
+        battlefieldStore.clicks += 1;
         const x = event.clientX;
         const y = event.clientY;
         UXManager.showFlyingText('⚔️' + damage.toFixed(2).toString(), null, x, y);
