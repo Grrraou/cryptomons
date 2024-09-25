@@ -104,7 +104,6 @@ export default defineComponent({
             options: {
               scales: {
                 x: {
-                  label: "moves",
                   type: 'linear',
                   beginAtZero: false,
                   ticks: {
