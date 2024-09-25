@@ -39,4 +39,5 @@ export const tokensEnum = [
     { index: 'uni', name: 'Uniswap', price: 50 },//2020
     { index: 'cake', name: 'Cake', price: 100 },//2020
     { index: 'grt', name: 'The Graph', price: 3 },
+    { index: 'osmo', name: 'Osmosis', price: 2 },
 ];

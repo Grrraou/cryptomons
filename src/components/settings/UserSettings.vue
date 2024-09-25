@@ -89,7 +89,7 @@ import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
   
 export default defineComponent({
-    name: 'MiningBattlePower',
+    name: 'UserSettings',
     setup() {
         const tokenList = TokenManager.getTokens();
         const settingsStore = SettingsManager.getSettings();

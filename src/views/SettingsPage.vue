@@ -6,6 +6,8 @@
     <br><hr><br>
     <UserSettings />
     <br><hr><br>
+    <DonationLinks />
+    <br><br><br>
     <DebugSettings />
   </div>
 </template>
@@ -16,6 +18,8 @@ import InfoBubble from '@/components/InfoBubble.vue';
 import SaveGame from '@/components/settings/SaveGame.vue';
 import DebugSettings from '@/components/settings/DebugSettings.vue';
 import UserSettings from '@/components/settings/UserSettings.vue';
+import TokenManager from '@/managers/TokenManager';
+import DonationLinks from '@/components/settings/DonationLinks.vue';
 
 export default defineComponent({
   name: 'SettingsPage',
@@ -24,7 +28,14 @@ export default defineComponent({
     SaveGame,
     UserSettings,
     DebugSettings,
-  }
+    DonationLinks,
+  },
+  setup: () => {
+
+    return {
+      TokenManager,
+    };
+  },
 });
 </script>
 

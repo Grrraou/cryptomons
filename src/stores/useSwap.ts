@@ -175,7 +175,7 @@ export const useSwapStore = defineStore('swap_options', {
             toToken.bought += swapResult;
 
             this.volume += (this.amount * fromToken.price) + (swapResult * toToken.price);
-            UXManager.showSuccess(`Swapped ${this.amount} ${fromToken.index.toUpperCase()} to ${swapResult.toFixed(SettingsManager.getSettings().decimals)} ${toToken.index.toUpperCase()}`);
+            UXManager.showSuccess(`Swapped ${this.amount.toFixed(SettingsManager.getSettings().decimals)} ${fromToken.index.toUpperCase()} to ${swapResult.toFixed(SettingsManager.getSettings().decimals)} ${toToken.index.toUpperCase()}`);
             AudioManager.play('swap.wav');
             swapResult = 0;
             this.amount = 0;

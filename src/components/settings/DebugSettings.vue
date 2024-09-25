@@ -75,7 +75,7 @@ import GoalManager from '@/managers/GoalManager';
 import TokenManager from '@/managers/TokenManager';
   
 export default defineComponent({
-    name: 'MiningBattlePower',
+    name: 'DegubSettings',
     setup() {
         const saveSettings = () => {
             let input = null;
