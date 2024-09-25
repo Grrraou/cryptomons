@@ -18,7 +18,6 @@ class ItemManager {
             return item;
         }
         
-
         item.rarity = 1;
         const rarityChances = Math.random(); // Generates a number between 0 and 1
         if (rarityChances < 1 / 200) {

@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'; 
 import { achievementsEnum, Achievement } from '@/enums/AchievementsEnum';// Assume the AchievementsEnum is updated as in the previous message
 import UXManager from '@/managers/UXManager';
+import MineManager from '@/managers/MineManager';
 
 export type AchievementStoreType = {
     index: string;
     title: string;
     description: string;
+    reference: string;
     target: number;
     loot: string | null;
     image: boolean;
@@ -13,6 +15,7 @@ export type AchievementStoreType = {
     isCompleted: boolean;
     incrementProgress: (amount: number) => void;
     completeAchievement: () => void;
+    getReference: () => number;
     getImage: () => string;
 };
 
@@ -35,6 +38,18 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
             completeAchievement() {
                 this.isCompleted = true;
                 UXManager.showSuccess(`🎉 Achievement UNLOCKED 🎉\n ${this.title}`);
+            },
+            getReference() {
+                const exploded = this.reference.split(':');
+                const type = exploded[0];
+                const object = exploded[1];
+                const stat = exploded[2];
+                switch (type) {
+                    case 'mines':
+                        return MineManager.getMineStore(object)[stat];
+                        break;
+                }
+                return 0;
             },
             getImage() {
                 let imgPath = 'achievements/locked.png';

@@ -6,7 +6,11 @@
 
             <div class="stats-group">
                 <div class="stat"><span class="stat-label">🖱️ Total mine click: </span><span class="stat-value">{{ totalMineClick }}</span></div>
-                <div class="stat">🔼 Total mine upgrades: <span class="stat-value">{{ totalMineUpgrades }}</span></div>
+                <div class="stat"><span class="stat-label">🔼 Total mine upgrades:</span> <span class="stat-value">{{ totalMineUpgrades }}</span></div>
+                <div v-for="(mine, index) in MineManager.getMines()" class="stat">
+                    <span class="stat-label">Total <img class="token-icon" :src="TokenManager.getTokenStore(mine.token).getIcon()"> Mined:</span>
+                    <span class="stat-value">{{ mine.totalMined }}</span>
+                </div>
             </div>
 
             <div class="stats-group">
@@ -31,7 +35,7 @@
 </template>
   
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent } from 'vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import MineManager from '@/managers/MineManager';
 import HeroManager from '@/managers/HeroManager';
@@ -113,6 +117,9 @@ export default defineComponent({
 
             unlockedGoals,
             totalGoals,
+
+            MineManager,
+            TokenManager,
         };
     },
 });

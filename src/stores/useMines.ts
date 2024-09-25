@@ -17,6 +17,7 @@ type MineStoreType = {
   requirement: string | null;
   clicks: number;
   level: number;
+  totalMined: number;
   isUnlocked: () => boolean,
   getHeroes: () => HeroStoreType[];
   increaseClicks: (amount: number) => void;
@@ -31,10 +32,11 @@ type MineStoreType = {
 
 export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.reduce((acc, mine) => {
     const store = defineStore(`mine_${mine.index}`, {
-        state: (): Mine & { clicks: number; level: number } => ({
+        state: (): Mine & { clicks: number; level: number; totalMined: number } => ({
         ...mine,
         clicks: 0,
         level: 1,
+        totalMined: 0,
         }),
         actions: {
             isUnlocked() {
@@ -70,7 +72,9 @@ export const useMinesStores: Record<string, () => MineStoreType> = minesEnum.red
             },
             mine(amount: number|null) {
                 const token = TokenManager.getTokenStore(this.token);
-                token.balance += amount ?? this.getDefaultMiningAmount();
+                amount = amount ?? this.getDefaultMiningAmount();
+                token.balance += amount;
+                this.totalMined += amount;
 
                 if (window.location.hash === '#/mines') {
                     AudioManager.playRandom(miningSoundsEnum);
