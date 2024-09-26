@@ -1,7 +1,12 @@
 <template>
+  <TutorialComponent name="tothemoonTutorial"></TutorialComponent>
   <div class="rocket-container">
-    <div class="space-background" :style="{ backgroundPositionY: backgroundPosition + 'px' }"></div>
+    <div class="space-background" :style="{ backgroundPositionY: backgroundPosition + 'px' }">
+      <InfoBubble page="toTheMoon" class="moon-info-bubble" />
+      
+    </div>
     <div class="rocket" id="rocket">
+      
       <img :src="rocketImage" alt="Rocket" class="rocket-image" draggable="false" :class="{ shake: isShaking }" />
       <button @click="toggleRocket" :disabled="gasStore.balance < 0.1">
         {{ isShaking ? 'Stop Rocket' : 'Start Rocket' }}
@@ -30,8 +35,14 @@ import TokenManager from '@/managers/TokenManager';
 import UXManager from '@/managers/UXManager';
 import RocketManager from '@/managers/RocketManager';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import InfoBubble from '@/components/InfoBubble.vue';
+import TutorialComponent from '@/components/TutorialComponent.vue';
 
 export default {
+  components: {
+    InfoBubble,
+    TutorialComponent,
+  },
   setup() {
       const isShaking = ref(false);
       const rocketImage = ref('/moon/rocket-stop.png');
@@ -82,9 +93,8 @@ export default {
        */
       if (rand < 30) {
         const tokenStore = TokenManager.getTokens()[Math.floor(Math.random() * TokenManager.getTokens().length)];
-        const totalAssets = TokenManager.getTotalAssetsValue();
         const randomPercent = Math.random() * (5 - 1) + 1; 
-        const partOfAssets = (randomPercent / 100) * totalAssets;
+        const partOfAssets = (randomPercent / 100) * (RocketManager.getRocket().distance / 100);
         const gain = partOfAssets / tokenStore.price;
         tokenStore.updateBalance(gain);
 
@@ -105,7 +115,7 @@ export default {
           });
         const heroStore = unlockedHeroes[Math.floor(Math.random() * unlockedHeroes.length)];
         const randomPercent = Math.random() * (5 - 1) + 1; 
-        const gain = (randomPercent / 100) * heroStore.getXpToLevel();
+        const gain = (randomPercent / 100) * (heroStore.getXpToLevel() + (RocketManager.getRocket().distance / 100));
 
         planet.value.name = `${heroStore.name} found an anomaly !`;
         planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("${heroStore.getPicture()}");background-size: cover;background-position: center center;`;
@@ -302,5 +312,11 @@ export default {
 .token-icon {
   width: 12px;
   margin-bottom: -2px;
+}
+
+.moon-info-bubble {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 </style>

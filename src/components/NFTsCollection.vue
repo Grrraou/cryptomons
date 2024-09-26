@@ -4,15 +4,21 @@
       <h3 :class="titleClass">
         {{ collection.name }} ( {{ NFTsManager.getCollectionCompletion(collection.index) }}% )
       </h3>
-      <p>{{ collection.description }}</p>
+      <p>{{ (NFTsManager.getCollectionCompletion(collection.index) > 50) ? collection.description : '???' }}</p>
     </div>
     <div class="nft-container">
       <div
         class="nft-item"
+        :class="nft.isFound ? 'infoboxed' : ''"
         v-for="nft in NFTsManager.getNFTbyCollection(collection.index)"
         :key="nft.index"
         :style="nftItemStyle(nft.index, nft.isFound)"
       >
+        <div class="infobox">
+          <h4>{{ nft.name }}</h4>
+          <p>{{ nft.description }}</p>
+          <p>rarity: {{  nft.rarity }}</p>
+        </div>
       </div>
     </div>
     

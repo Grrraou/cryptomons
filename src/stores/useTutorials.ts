@@ -9,6 +9,8 @@ export interface TutorialStoreType {
     battleTutorial: boolean;
     inventoryTutorial: boolean;
     swapTutorial: boolean;
+    nftsTutorial: boolean;
+    tothemoonTutorial: boolean;
     statsTutorial: boolean;
     settingsTutorial: boolean;
     [key: string]: boolean; // Index signature for dynamic properties
@@ -24,6 +26,8 @@ export const useTutorialStore = defineStore('tutorial', {
     battleTutorial: false,
     inventoryTutorial: false,
     swapTutorial: false,
+    nftsTutorial: false,
+    tothemoonTutorial: false,
     statsTutorial: false,
     settingsTutorial: false,
   }),

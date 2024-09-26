@@ -260,7 +260,39 @@
                         <button class="tutorialButton" @click="startTutorial('settingsTutorial')">🎓 Start tutorial 📖</button>
                     </div>
                 </div>
-  
+
+                <div v-if="page === 'nfts'">
+                    <div class="game-description">
+                        <h2>Welcome to the NFTs Collection Page</h2>
+                        <p>
+                            Ah, NFTs... because why just play the game when you can collect overpriced pixelated tokens, right? 
+                            Complete your <span class="highlight">NFT collection</span> and bask in the glory of minor in-game perks like 
+                            double AFK mining speed or faster staking—because who doesn’t want to flex their virtual privilege while doing nothing?
+                        </p>
+                        <p>
+                            Go ahead, keep unlocking those shiny JPEGs. With enough luck (and enough tapping), you’ll soon feel the immense satisfaction of owning digital assets 
+                            that offer dubious long-term value but instant bragging rights. We’re sure your future self will be proud.
+                        </p>
+                        <button class="tutorialButton" @click="startTutorial('nftTutorial')">🎓 Start tutorial 📖</button>
+                    </div>
+                </div>
+
+                <div v-if="page === 'toTheMoon'">
+                    <div class="game-description">
+                        <h2>Welcome "To The Moon"</h2>
+                        <p>
+                            Strap in, astronaut! It’s time to burn some <span class="highlight">Gas</span> (because who needs that, right?) and blast off into the vast emptiness of space in search of... 
+                            well, probably nothing. But hey, there’s a chance you might stumble upon some random treasures along the way, because space is definitely filled with valuable loot just waiting to be found by your totally advanced rocket.
+                        </p>
+                        <p>
+                            Spend your hard-earned Gas tokens to fuel your cosmic adventure. The more you waste—I mean, spend—the higher the chance you’ll find something mildly useful, like a space rock or maybe even something shiny. 
+                            Will it be worth it? Probably not. But isn’t that the point?
+                        </p>
+                        <button class="tutorialButton" @click="startTutorial('tothemoonTutorial')">🎓 Start tutorial 📖</button>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

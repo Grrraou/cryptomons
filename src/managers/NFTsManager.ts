@@ -54,8 +54,9 @@ class NFTsManager {
         nfts.forEach(nft => {
             found += (nft.isFound) ? 1 : 0;
         });
+        const result = (nfts.length / found) * 100;
 
-        return (nfts.length / found) * 100;
+        return (!Number.isFinite(result)) ? 0 : result;
     }
 
     static isCollectionCompleted(collectionIndex: string) {

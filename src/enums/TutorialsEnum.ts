@@ -7,6 +7,8 @@ export type TutorialsType = {
     battleTutorial: TutorialStepsType[],
     inventoryTutorial: TutorialStepsType[],
     swapTutorial: TutorialStepsType[],
+    nftTutorial: TutorialStepsType[],
+    tothemoonTutorial: TutorialStepsType[],
     statsTutorial: TutorialStepsType[],
     settingsTutorial: TutorialStepsType[],
 }
@@ -771,6 +773,130 @@ export const tutorialsEnum: TutorialsType = {
                 title: 'JUST DO IT !',
             },
             content: `Finally, when everything is ok you can clic here to swap`,
+            params: {
+                highlight: true,
+                placement: 'right',
+                enableScrolling: false,
+            },
+        },
+    ],
+    nftTutorial: [
+        {
+            target: '.page-title',
+            header: {
+                title: 'NFTs',
+            },
+            content: `Here you can check your NFTs collections.`,
+            params: {
+                highlight: true,
+                placement: 'bottom',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.nft-collection',
+            header: {
+                title: 'Collections',
+            },
+            content: `Collection consists of a set of NFTs that you can find in the game, basically they are just images but with value.`,
+            params: {
+                highlight: true,
+                placement: 'bottom',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.collection-title h3',
+            header: {
+                title: 'Completion',
+            },
+            content: `Here you can see the collection name and it's completion percentage.`,
+            params: {
+                highlight: true,
+                placement: 'bottom',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.collection-title p',
+            header: {
+                title: 'Bonus',
+            },
+            content: `Even if you need the complete collection to have a bonus, you can see the nature of that bonus when you reach 50% completion.`,
+            params: {
+                highlight: true,
+                placement: 'bottom',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.nft-container',
+            header: {
+                title: 'NFT',
+            },
+            content: `Here you can view your NFTs for that collection. If not found yet you can't see it ! Their is no "it's just a JPEG ! I can download it" here.`,
+            params: {
+                highlight: true,
+                placement: 'top',
+                enableScrolling: false,
+            },
+        },
+    ],
+    tothemoonTutorial: [
+        {
+            target: '.sidemenu-tothemoon',
+            header: {
+                title: 'To the moon !',
+            },
+            content: `Finnally what you hardly clicked for is near, here you will try to reach the moon, but not in the shortest past of course.`,
+            params: {
+                highlight: true,
+                placement: 'right',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.rocket',
+            header: {
+                title: 'Rocket',
+            },
+            content: `This is your rocket, this how how we usually travel in deep space.`,
+            params: {
+                highlight: true,
+                placement: 'left',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.rocket button',
+            header: {
+                title: 'GAS',
+            },
+            content: `To move such a vehicule it requires some GAS, the Gas will be slowly consumed as you travel. If you run short the rocket stops.`,
+            params: {
+                highlight: true,
+                placement: 'left',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.sidemenu-goals',
+            header: {
+                title: 'GAS token',
+            },
+            content: `Since Gas is a token you can get some by swapping.`,
+            params: {
+                highlight: true,
+                placement: 'right',
+                enableScrolling: false,
+            },
+        },
+        {
+            target: '.distance',
+            header: {
+                title: 'Distance',
+            },
+            content: `Here you can check how far you are, the more you advance the more important the rewards will be.`,
             params: {
                 highlight: true,
                 placement: 'right',
