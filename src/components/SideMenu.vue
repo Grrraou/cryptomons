@@ -55,6 +55,15 @@
           <li class="sidemenu-goals">
             <router-link to="/goals" draggable="false" :class="goalsClass">🎯 Goals</router-link>
           </li>
+          <li v-if="useGoalStores['fund_doge_1']().isCompleted" class="sidemenu-tothemoon">
+            <router-link to="/toTheMoon" draggable="false" :class="toTheMoonClass">🚀 To the moon</router-link>
+          </li>
+          <li v-else class="sidemenu-tothemoon">
+            <router-link to="/toTheMoon" class="forbidden-link" draggable="false">🚫 To the moon</router-link>
+          </li>
+          <li class="sidemenu-nfts">
+            <router-link to="/NFTs" draggable="false" :class="nftsClass">🃏 NFTs</router-link>
+          </li>
           <li class="sidemenu-achievements">
             <router-link to="/achievements" draggable="false">🏆 Achievements</router-link>
           </li>
@@ -96,6 +105,14 @@ export default defineComponent({
       return GoalManager.isThereGoalCostToPay() ? 'shiny' : '';
     });
 
+    let toTheMoonClass = computed(() => {
+      return '';
+    });
+
+    let nftsClass = computed(() => {
+      return '';
+    });
+
     /* Refreshed total assets */
     const totalAssetsValue = ref<number>(TokenManager.getTotalAssetsValue());
     let intervalId: number | null = null;
@@ -122,6 +139,8 @@ export default defineComponent({
     return {
       useGoalStores,
       goalsClass,
+      toTheMoonClass,
+      nftsClass,
       TokenManager,
       soundIcon,
       toggleSound,
@@ -141,7 +160,7 @@ export default defineComponent({
   overflow-x: auto; 
 }
 
-.sidemenu-achievements {
+.sidemenu-achievements, .sidemenu-tothemoon {
   font-size: 16px;
 }
 

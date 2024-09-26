@@ -183,6 +183,30 @@ export const goalsEnum = [
       ],
       reward: 'Unlock Moneromon',
     },
+
+    {
+      index: 'becomes_a_curator',
+      name: 'Becomes a curator',
+      description: 'One must choose wisely',
+      costs: [
+        { token: 'cryptodollar', value: 6000, isPaid: false },
+        { token: 'grt', value: 800, isPaid: false },
+      ],
+      reward: 'Unlock the vault graphs',
+    },
+
+    {
+      index: 'fund_doge_1',
+      name: 'Fund mission DOGE-1',
+      description: 'Mission to the moon !',
+      costs: [
+        { token: 'doge', value: 1800, isPaid: false },
+        { token: 'neo', value: 5, isPaid: false },
+      ],
+      reward: 'Unlock the Rocket !',
+    },
+
+
     {
       index: 'hack_a_dao',
       name: 'Hack a DAO',

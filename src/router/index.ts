@@ -11,6 +11,8 @@ import StatsPage from '@/views/StatsPage.vue';
 import SettingsPage from '@/views/SettingsPage.vue';
 import SwapPage from '@/views/SwapPage.vue';
 import GoalManager from '@/managers/GoalManager';
+import ToTheMoon from '@/views/ToTheMoon.vue';
+import NFTsPage from '@/views/NFTsPage.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', name: 'Home', component: HomePage },
@@ -86,6 +88,21 @@ const routes: RouteRecordRaw[] = [
     }, 
   },
   { path: '/goals', name: 'Goals', component: GoalsPage },
+  { 
+    path: '/toTheMoon', 
+    name: 'toTheMoon', 
+    component: ToTheMoon, 
+    beforeEnter: (to, from, next) => {
+      const isGoalUnlocked = GoalManager.isGoalReached('fund_doge_1');
+      if (isGoalUnlocked) {
+        next(); 
+      } else {
+        alert('You need to fund the DOGE-1 mission first.');
+        next('/goals');
+      }
+    }, 
+  },
+  { path: '/NFTs', name: 'NFTs', component: NFTsPage },
   { path: '/achievements', name: 'Achievements', component: AchievementsPage },
   { path: '/stats', name: 'Stats', component: StatsPage },
   { path: '/settings', name: 'Settings', component: SettingsPage },

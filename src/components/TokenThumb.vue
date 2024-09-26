@@ -26,7 +26,7 @@
       <span class="tokenSum">{{ tokenStore.getBalanceInCrypto().toFixed(SettingsManager.getSettings().decimals) }} <img class="token-icon" :src="TokenManager.getReferenceTokenStore().getIcon()" draggable="false" /></span>
     </p>
     
-    <div v-if="GoalManager.getGoalStore('centralize_decentralization').isCompleted" class="infobox" @dragstart.prevent>
+    <div v-if="GoalManager.getGoalStore('becomes_a_curator').isCompleted" class="infobox" @dragstart.prevent>
       <button v-if="!chartInit" @click="initChart($event)">📊 View graph for {{ graphPrice.toFixed(2) }} <img :src="TokenManager.getTokenStore('grt').getIcon()" class="token-icon"></button>
       <canvas ref="candleChart"></canvas>
     </div>

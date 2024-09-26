@@ -7,6 +7,7 @@
       :src="token.src"
       alt="Falling Token"
       @dragover.prevent
+      draggable="false"
       @click="grabToken(token.index, $event)"
     />
   </div>

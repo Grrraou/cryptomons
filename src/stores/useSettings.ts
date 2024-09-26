@@ -19,6 +19,7 @@ export type SettingsStore = {
   lootPower: number;
   xpPower: number;
   itemPower: number;
+  rocketSpeed: number;
   toggleSound: () => boolean;
   toggleMusic: () => boolean;
 };
@@ -41,6 +42,7 @@ export const useSettingsStore = defineStore('settings', {
     lootPower: 1,
     xpPower: 1,
     itemPower: 1,
+    rocketSpeed: 1,
   }),
   actions: {
     toggleSound() {

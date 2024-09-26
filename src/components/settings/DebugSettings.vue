@@ -57,6 +57,17 @@
                 />
             </div>
 
+            <div class="settings-group">
+                <label for="rocketSpeed" class="setting-label">Rocket Speed:</label>
+                <input 
+                    :value="SettingsManager.getSettings().rocketSpeed" 
+                    type="number" 
+                    id="rocketSpeed" 
+                    min="0" 
+                    class="setting-input" 
+                />
+            </div>
+
             <br>
             <button @click="saveSettings">Save settings</button>
             <button @click="resetSettings">Reset</button>
@@ -108,6 +119,12 @@ export default defineComponent({
                 const value = parseInt(input.value, 10);
                 SettingsManager.getSettings().itemPower = value;
             }
+
+            input = document.getElementById('rocketSpeed') as HTMLInputElement;
+            if (input) {
+                const value = parseInt(input.value, 10);
+                SettingsManager.getSettings().rocketSpeed = value;
+            }
         };
 
         const resetSettings = () => {
@@ -116,6 +133,7 @@ export default defineComponent({
             SettingsManager.getSettings().lootPower = 1;
             SettingsManager.getSettings().xpPower = 1;
             SettingsManager.getSettings().itemPower = 1;
+            SettingsManager.getSettings().rocketSpeed = 1;
         };
 
         const completeGoals = () => {
