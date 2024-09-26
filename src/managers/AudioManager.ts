@@ -5,6 +5,7 @@ import SettingsManager from "./SettingsManager";
 class AudioManager {
 
     private static currentMusic: HTMLAudioElement | null = null;
+    private static rocketSound: HTMLAudioElement | null = null;
 
     static isSoundOn() {
         return useSettingsStore().soundOn;

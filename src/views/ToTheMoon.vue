@@ -34,7 +34,7 @@ import SettingsManager from '@/managers/SettingsManager';
 import TokenManager from '@/managers/TokenManager';
 import UXManager from '@/managers/UXManager';
 import RocketManager from '@/managers/RocketManager';
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import TutorialComponent from '@/components/TutorialComponent.vue';
 
@@ -69,7 +69,6 @@ export default {
     };
 
     const checkForPlanetDiscovery = () => {
-      // Random 1/5 chance of discovering a planet
       gasStore.updateBalance(-0.1);
       RocketManager.getRocket().incrementRocketDistance();
       UXManager.showFlyingTextOnElement('-0.1', gasStore.getIcon(), 'rocket', 150, 'red');
@@ -79,7 +78,7 @@ export default {
       }
       if (Math.random() < 1 / 5) {
         generatePlanet();
-        stopRocket(); // Auto-stop the rocket if a planet is discovered
+        stopRocket();
       }
     };
 
@@ -159,12 +158,44 @@ export default {
 
     }
 
+    let rocketSound = new Audio(UXManager.getImagePath('sounds/rocket.wav'));
+    rocketSound.loop = true;
+    rocketSound.volume = SettingsManager.getSettings().soundVolume;
+    rocketSound.pause();
+
+
+    const toggleRocketSound = () => {
+        if (isShaking.value && SettingsManager.getSettings().soundOn) {
+          rocketSound.play();
+          console.log('test')
+        } else {
+          rocketSound.pause();
+        }
+    }
+
+    watch(
+      () => SettingsManager.getSettings().soundOn,
+      (newVal) => {
+        if (newVal) {
+          if (isShaking.value) {
+            rocketSound.play();
+          }
+        } else {
+          rocketSound.pause();
+        }
+      }
+    );
+
+    //toggleRocketSound();
+
     const toggleRocket = () => {
       planetDiscovered.value = false;
       isShaking.value = !isShaking.value;
       rocketImage.value = isShaking.value
         ? '/moon/rocket-start.png'
         : '/moon/rocket-stop.png';
+      
+      toggleRocketSound();
 
       if (isShaking.value) {
         // Start moving the background
@@ -207,6 +238,7 @@ export default {
       if (discoveryInterval !== null) {
         clearInterval(discoveryInterval);
       }
+      rocketSound.pause();
     });
 
     return {
