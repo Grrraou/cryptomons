@@ -1,4 +1,5 @@
 <template>
+  <FallingToken :tokens="fallingTokens"/>
   <div class="layout">
     <!-- Use the SideMenu component here -->
     <SideMenu />
@@ -29,12 +30,24 @@ import StakingManager from './managers/StakingManager';
 import BattlefieldManager from './managers/BattlefieldManager';
 import HomePage from './views/HomePage.vue';
 import AudioManager from './managers/AudioManager';
+import FallingToken from './components/animations/FallingToken.vue';
 import UXManager from './managers/UXManager';
+import TokenManager from './managers/TokenManager';
 
 export default defineComponent({
   components: {
     SideMenu,
     HomePage,
+    FallingToken
+  },
+  setup: () => {
+    const fallingTokens = TokenManager.getTokens().filter(tokenStore => {
+      return tokenStore.balance > 0;
+    })
+
+    return {
+      fallingTokens,
+    }
   },
   created() {
     const mineManager = new MineManager();
