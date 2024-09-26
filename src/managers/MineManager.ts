@@ -2,6 +2,7 @@ import { useMinesStores } from "@/stores/useMines";
 import SettingsManager from "./SettingsManager";
 import UXManager from "./UXManager";
 import TokenManager from "./TokenManager";
+import NFTsManager from "./NFTsManager";
 
 class MineManager {
     private autoClickerIntervals: number | null = null;
@@ -31,7 +32,7 @@ class MineManager {
                     UXManager.showFlyingTextOnElement(amount.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), heroStore.getDOMid());
                 });
             });
-        }, interval) as unknown as number;
+        }, interval / ((NFTsManager.isCollectionCompleted('crypto_hoboes')) ? 2 : 1)) as unknown as number;
     }
 }
 

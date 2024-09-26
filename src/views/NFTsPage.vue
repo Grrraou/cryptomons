@@ -19,7 +19,7 @@ import { defineComponent } from 'vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import TutorialComponent from '@/components/TutorialComponent.vue';
 import NFTsCollection from '@/components/NFTsCollection.vue';
-import { NFTsEnum } from '@/enums/NFTsEnum'; // Adjust path as needed
+import { NFTsEnum } from '@/enums/NFTsEnum';
   
 export default defineComponent({
   components: {

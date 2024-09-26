@@ -3,6 +3,7 @@ import TokenManager from './TokenManager';
 import UXManager from './UXManager';
 import AudioManager from './AudioManager';
 import SettingsManager from './SettingsManager';
+import NFTsManager from './NFTsManager';
 
 class StakingManager {
     private autoClickerIntervals: number | null = null;
@@ -39,7 +40,7 @@ class StakingManager {
             if (window.location.hash === '#/staking' && isThereStaked) {
                 AudioManager.play('staking.wav');
             }
-        }, interval) as unknown as number;
+        }, interval / ((NFTsManager.isCollectionCompleted('bored_ape_garage_sale')) ? 2 : 1)) as unknown as number;
     }
 }
 

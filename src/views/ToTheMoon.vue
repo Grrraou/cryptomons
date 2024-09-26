@@ -8,9 +8,13 @@
         ( {{ gasStore.balance.toFixed(2) }} <img :src="gasStore.getIcon()" class="token-icon"> )
       </button>
     </div>
-    <!-- Planet appears when discovered -->
+
+    <div class="distance">
+      {{ RocketManager.getRocket().distance.toFixed(2) }} km
+    </div>
+
     <div v-if="planetDiscovered" class="planet" :style="planet.style" id="planet">
-        {{ planet.name }}<br><!-- Dynamic planet content here -->
+        {{ planet.name }}<br>
         {{ planet.description }}
     </div>
   </div>
@@ -20,10 +24,11 @@
 import BattlefieldManager from '@/managers/BattlefieldManager';
 import HeroManager from '@/managers/HeroManager';
 import ItemManager from '@/managers/ItemManager';
+import NFTsManager from '@/managers/NFTsManager';
 import SettingsManager from '@/managers/SettingsManager';
 import TokenManager from '@/managers/TokenManager';
 import UXManager from '@/managers/UXManager';
-import { cp } from 'fs';
+import RocketManager from '@/managers/RocketManager';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 export default {
@@ -32,8 +37,6 @@ export default {
       const rocketImage = ref('/moon/rocket-stop.png');
       const backgroundPosition = ref(0); // Current background Y position
       const planetDiscovered = ref(false); // Whether a planet is discovered
-
-      const planetName = ref('Planet X'); // Dynamic planet name or content
       const planet = ref({name: 'Name', style: '', description: ''});
 
       let animationFrameId: number | null = null;
@@ -57,6 +60,7 @@ export default {
     const checkForPlanetDiscovery = () => {
       // Random 1/5 chance of discovering a planet
       gasStore.updateBalance(-0.1);
+      RocketManager.getRocket().incrementRocketDistance();
       UXManager.showFlyingTextOnElement('-0.1', gasStore.getIcon(), 'rocket', 150, 'red');
       if (gasStore.balance < 0.1) {
         stopRocket();
@@ -113,7 +117,7 @@ export default {
       /**
        * ITEMS
        */
-      else if (rand < 190) {
+      else if (rand < 90) {
         const unlockedBattlefields = BattlefieldManager.getBattlefields().filter(battlefield => {
           return battlefield.isUnlocked();
         });
@@ -131,9 +135,16 @@ export default {
        * NFTs
        */
       else {
-        planet.value.name = `Found a NFT !`;
-        planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("/items/default.png");background-size: cover;background-position: center center;`;
-        planet.value.description = `Not implemented yet`;
+        const collection = NFTsManager.getCollections()[Math.floor(Math.random() * NFTsManager.getCollections().length)]
+        const nft = NFTsManager.getRandomNFT(collection.index);
+        planet.value.name = 'Found an already possessed NFT...';
+
+        if (!nft.isFound) {
+          nft.findNFT();
+          planet.value.name = 'Found a WHOLE NEW NFT !';
+        }
+        planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("${nft.getImage()}");background-size: cover;background-position: center center;`;
+        planet.value.description = `${nft.description}`;
       }
 
     }
@@ -196,6 +207,7 @@ export default {
       planet,
       toggleRocket,
       gasStore,
+      RocketManager,
     };
   },
 };
@@ -222,7 +234,15 @@ export default {
 }
 
 .rocket img, .rocket button {
-  z-index: 2; /* Rocket and button are above the background */
+  z-index: 2;
+}
+
+.distance {
+  z-index: 2;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #FFF;
 }
 
 .space-background {

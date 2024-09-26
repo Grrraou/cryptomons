@@ -73,6 +73,7 @@
             <button @click="resetSettings">Reset</button>
             <br><br>
             <button @click="completeGoals">Complete all goals</button>
+            <button @click="findNFTs">Find all NFTs</button>
             <button @click="iNeedMoney">I need Money</button>
 
         </div>
@@ -84,6 +85,7 @@ import { defineComponent } from 'vue';
 import SettingsManager from '@/managers/SettingsManager';
 import GoalManager from '@/managers/GoalManager';
 import TokenManager from '@/managers/TokenManager';
+import NFTsManager from '@/managers/NFTsManager';
   
 export default defineComponent({
     name: 'DegubSettings',
@@ -141,6 +143,10 @@ export default defineComponent({
             TokenManager.getTokens().forEach(tokenStore => tokenStore.updateBalance(1));
         };
 
+        const findNFTs = () => {
+            NFTsManager.getNFTs().forEach(nft => nft.findNFT())
+        };
+
         const iNeedMoney = () => {
             TokenManager.getTokenStore(SettingsManager.getSettings().referenceTokenIndex).updateBalance(1000000);
         };
@@ -149,6 +155,7 @@ export default defineComponent({
             saveSettings,
             resetSettings,
             completeGoals,
+            findNFTs,
             iNeedMoney,
             SettingsManager,
         };
