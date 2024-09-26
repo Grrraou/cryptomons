@@ -2,6 +2,7 @@ export type NFTCollectionType = {
     index: string,
     name: string,
     description: string,
+    lootable: boolean,
     nfts: NFTType[],
 }
 
@@ -17,6 +18,7 @@ export const NFTsEnum: NFTCollectionType[] = [
         index: 'crypto_hoboes',
         name: 'CryptoHoboes',
         description: 'Double the speed of heroes ⛏️ mining',
+        lootable: true,
         nfts: [
             {
                 "index": "empty_wallet",
@@ -84,6 +86,7 @@ export const NFTsEnum: NFTCollectionType[] = [
         index: 'bored_ape_garage_sale',
         name: 'Bored Ape Garage Sale',
         description: 'Double the speed of 🔒 stacking rewards',
+        lootable: true,
         nfts: [
             {
                 "index": "banana_peel_apocalypse",
@@ -147,4 +150,154 @@ export const NFTsEnum: NFTCollectionType[] = [
             }
         ],
     },
+    {
+        index: 'art_blocked',
+        name: 'Art Blocked',
+        description: 'Double the speed of heroes ⚔️ battle',
+        lootable: true,
+        nfts: [
+            {
+                "index": "generative_squiggle",
+                "name": "Generative Squiggle",
+                "description": "A squiggle that could have been drawn by a toddler, but it's algorithmic, so... 50 ETH.",
+                "rarity": 1
+            },
+            {
+                "index": "loading_forever",
+                "name": "Loading Forever",
+                "description": "An NFT that never fully loads. It’s art because you don’t get it.",
+                "rarity": 3
+            },
+            {
+                "index": "algorithmic_masterpiece",
+                "name": "Algorithmic Masterpiece",
+                "description": "Random shapes and colors smashed together by a computer. Truly priceless.",
+                "rarity": 5
+            },
+            {
+                "index": "blank_canvas_deluxe",
+                "name": "Blank Canvas Deluxe",
+                "description": "It’s a blank canvas! Pure minimalism. And worth every nonexistent penny.",
+                "rarity": 4
+            },
+            {
+                "index": "abstract_mess",
+                "name": "Abstract Mess",
+                "description": "It looks like your printer ran out of ink, but it’s generative art, so who’s complaining?",
+                "rarity": 2
+            },
+            {
+                "index": "triangle_spaghetti",
+                "name": "Triangle Spaghetti",
+                "description": "Is it triangles? Is it spaghetti? Only the algorithm knows.",
+                "rarity": 3
+            },
+            {
+                "index": "pixels_on_purpose",
+                "name": "Pixels on Purpose",
+                "description": "A random pixelated mess that makes no sense. But hey, it’s on-chain.",
+                "rarity": 1
+            },
+            {
+                "index": "neon_explosion",
+                "name": "Neon Explosion",
+                "description": "Just bright neon colors fighting each other for no reason. Must be worth a fortune.",
+                "rarity": 4
+            },
+            {
+                "index": "blocky_mystery",
+                "name": "Blocky Mystery",
+                "description": "It’s a bunch of blocks. The meaning is a mystery, much like the price tag.",
+                "rarity": 2
+            },
+            {
+                "index": "algorithm_gone_wild",
+                "name": "Algorithm Gone Wild",
+                "description": "When the algorithm has too much freedom, you get this... whatever it is.",
+                "rarity": 5
+            }
+        ],
+    },
+    {
+        index: 'women_of_the_wordly_market',
+        name: 'Women of the Worldly Market',
+        description: 'Double the speed of the 🚀 rocket',
+        lootable: true,
+        nfts: [
+            {
+                "index": "diversity_for_sale",
+                "name": "Diversity for Sale",
+                "description": "Tokenized diversity at its finest—empowerment with a price tag!",
+                "rarity": 2
+            },
+            {
+                "index": "empowered_by_eth",
+                "name": "Empowered by ETH",
+                "description": "Because true empowerment is only a smart contract away, right?",
+                "rarity": 3
+            },
+            {
+                "index": "tokenized_feminism",
+                "name": "Tokenized Feminism",
+                "description": "One NFT = one step closer to breaking the glass ceiling. Sort of.",
+                "rarity": 4
+            },
+            {
+                "index": "queen_of_the_blockchain",
+                "name": "Queen of the Blockchain",
+                "description": "Reigning over a digital empire that’s as empowering as it is profitable.",
+                "rarity": 5
+            },
+            {
+                "index": "pixel_perfection",
+                "name": "Pixel Perfection",
+                "description": "Women in pixel form, perfectly monetized and ready for the market.",
+                "rarity": 1
+            }
+        ],
+    },
+    {
+        index: 'cold_cats',
+        name: 'Cold Cats',
+        description: 'Consult token graphs for free in the 🏛️ vault',
+        lootable: false,
+        nfts: [
+            {
+                "index": "emotionless_feline",
+                "name": "Emotionless Feline",
+                "description": "A cool cat so chill it doesn’t even feel emotions anymore. Positivity sold separately.",
+                "rarity": 0
+            },
+            {
+                "index": "cash_grab_kitty",
+                "name": "Cash Grab Kitty",
+                "description": "It’s not about the art—it’s about the ETH. Buy now, feel cool later.",
+                "rarity": 1
+            },
+            {
+                "index": "stay_positive_purr",
+                "name": "Stay Positive Purr",
+                "description": "Forcing smiles and good vibes because that’s what the blockchain demands.",
+                "rarity": 2
+            },
+            {
+                "index": "blue_eyed_blank",
+                "name": "Blue Eyed Blank",
+                "description": "This cold cat has seen it all... and cares about none of it. But hey, it’s blue!",
+                "rarity": 3
+            },
+            {
+                "index": "icy_enthusiast",
+                "name": "Icy Enthusiast",
+                "description": "Coolness isn’t free—this cat was sold for a mint and still hasn’t warmed up.",
+                "rarity": 4
+            },
+            {
+                "index": "meow_for_eth",
+                "name": "Meow for ETH",
+                "description": "Will purr for positivity... as long as there’s a price tag attached.",
+                "rarity": 5
+            }
+        ],
+    }
 ];

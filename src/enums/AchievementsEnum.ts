@@ -6,7 +6,8 @@ export type Achievement = {
     description: string;
     reference: string;
     target: number;
-    loot: string | null;
+    loot?: string | null;
+    nft?: string | null;
 };
   
 export const achievementsEnum: Achievement[] = [
@@ -1010,6 +1011,59 @@ export const achievementsEnum: Achievement[] = [
         target: 10000,
         loot: "inventory_slot"
     },
+
+    /**
+     * SWAP
+     */
+    {
+        index: "swap_volume_1",
+        title: "Swaprentice",
+        description: "Swap a volume of 1 cryptodollar.",
+        reference: "swap::volume",
+        target: 1,
+        nft: "cold_cats:emotionless_feline"
+    },
+    {
+        index: "swap_volume_5000",
+        title: "Swap Conqueror",
+        description: "Swap a volume of 5,000 cryptodollars.",
+        reference: "swap::volume",
+        target: 5000,
+        nft: "cold_cats:cash_grab_kitty"
+    },
+    {
+        index: "swap_volume_10000",
+        title: "Swap Titan",
+        description: "Swap a volume of 10,000 cryptodollars.",
+        reference: "swap::volume",
+        target: 10000,
+        nft: "cold_cats:stay_positive_purr"
+    },
+    {
+        index: "swap_volume_50000",
+        title: "Swap King",
+        description: "Swap a volume of 50,000 cryptodollars.",
+        reference: "swap::volume",
+        target: 50000,
+        nft: "cold_cats:blue_eyed_blank"
+    },
+    {
+        index: "swap_volume_100000",
+        title: "Swap Emperor",
+        description: "Swap a volume of 100,000 cryptodollars.",
+        reference: "swap::volume",
+        target: 100000,
+        nft: "cold_cats:icy_enthusiast"
+    },
+    {
+        index: "swap_volume_1000000",
+        title: "Swap Overlord",
+        description: "Swap a volume of 1,000,000 cryptodollars.",
+        reference: "swap::volume",
+        target: 1000000,
+        nft: "cold_cats:meow_for_eth"
+    }
+    
     
     /**
      * STAKING

@@ -4,7 +4,7 @@
             <h3>{{ achievement.title }}</h3>
             <span class="achievement-meta">
             <p>{{ achievement.description }}</p>
-            <p v-if="achievement.loot">
+            <p v-if="achievement.loot || achievement.nft">
               <img :src="lootItemSrc" class="loot-item">
             </p>
             </span>
@@ -25,6 +25,7 @@
 import { defineComponent, computed } from 'vue';
 import AchievementManager from '@/managers/AchievementManager';
 import ItemManager from '@/managers/ItemManager';
+import NFTsManager from '@/managers/NFTsManager';
 
 export default defineComponent({
   props: {
@@ -35,8 +36,16 @@ export default defineComponent({
   },
   setup(props) {
     const achievementStore = AchievementManager.getAchievementStore(props.achievement.index);
-    const lootItem = ItemManager.getBaseItem(achievementStore.loot.split(':')[0]);
-    const lootItemSrc = `/items/${lootItem.type}/${lootItem.index}.png`;
+
+    let lootItemSrc = null;
+    if (achievementStore.loot) {
+      const lootItem = ItemManager.getBaseItem(achievementStore.loot.split(':')[0]);
+      lootItemSrc = `/items/${lootItem.type}/${lootItem.index}.png`;
+    } else if (achievementStore.nft) {
+      const nft = NFTsManager.getNFT(achievementStore.nft.split(':')[1]);
+      lootItemSrc = `/nft/${nft.collection}/${nft.index}.png`;
+    }
+    
 
     const backgroundStyle = computed(() => {
       const backgroundUrl = achievementStore.getImage();

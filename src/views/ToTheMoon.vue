@@ -144,7 +144,7 @@ export default {
        * NFTs
        */
       else {
-        const collection = NFTsManager.getCollections()[Math.floor(Math.random() * NFTsManager.getCollections().length)]
+        const collection = NFTsManager.getLootableCollections()[Math.floor(Math.random() * NFTsManager.getCollections().length)]
         const nft = NFTsManager.getRandomNFT(collection.index);
         planet.value.name = 'Found an already possessed NFT...';
 
@@ -186,8 +186,6 @@ export default {
       }
     );
 
-    //toggleRocketSound();
-
     const toggleRocket = () => {
       planetDiscovered.value = false;
       isShaking.value = !isShaking.value;
@@ -201,7 +199,7 @@ export default {
         // Start moving the background
         lastTime = performance.now();
         animationFrameId = requestAnimationFrame(moveBackground);
-        discoveryInterval = setInterval(checkForPlanetDiscovery, 10000 / SettingsManager.getSettings().rocketSpeed);
+        discoveryInterval = setInterval(checkForPlanetDiscovery, (10000  / ((NFTsManager.isCollectionCompleted('women_of_the_wordly_market')) ? 2 : 1)) / SettingsManager.getSettings().rocketSpeed);
       } else {
         stopRocket();
       }

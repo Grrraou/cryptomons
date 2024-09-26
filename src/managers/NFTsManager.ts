@@ -1,4 +1,4 @@
-import { useNFTStores } from "@/stores/useNFTs";
+import { NFTStoreType, useNFTStores } from "@/stores/useNFTs";
 import { NFTsEnum, NFTType } from "@/enums/NFTsEnum";
 
 class NFTsManager {
@@ -8,11 +8,15 @@ class NFTsManager {
     }
 
     static getNFT(nftIndex: string) {
-        return this.getNFTs()[nftIndex]?.();
+        return this.getNFTs().find(nft => nft.index === nftIndex);
     }
 
     static getCollections() {
         return NFTsEnum;
+    }
+
+    static getLootableCollections() {
+        return NFTsEnum.filter(collection => collection.lootable);
     }
 
     static getRandomNFT(collectionIndex: string) {

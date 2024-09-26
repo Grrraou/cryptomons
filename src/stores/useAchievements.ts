@@ -4,6 +4,8 @@ import UXManager from '@/managers/UXManager';
 import MineManager from '@/managers/MineManager';
 import ItemManager from '@/managers/ItemManager';
 import BattlefieldManager from '@/managers/BattlefieldManager';
+import NFTsManager from '@/managers/NFTsManager';
+import SwapManager from '@/managers/SwapManager';
 
 export type AchievementStoreType = {
     index: string;
@@ -11,7 +13,8 @@ export type AchievementStoreType = {
     description: string;
     reference: string;
     target: number;
-    loot: string | null;
+    loot?: string | null;
+    nft?: string | null;
     image: boolean;
     progress: number;
     isCompleted: boolean;
@@ -35,6 +38,10 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
                     const split = this.loot.split(':');
                     ItemManager.getItemStore().lootItem(split[0], split[1]);
                 }
+                if (this.nft) {
+                    const split = this.nft.split(':');
+                    NFTsManager.getNFT(split[1]).findNFT();
+                }
             },
             getReference() {
                 const exploded = this.reference.split(':');
@@ -47,6 +54,9 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
                         break;
                     case 'battlefields':
                         return BattlefieldManager.getBattlefieldStore(object)[stat];
+                        break;
+                    case 'swap':
+                        return SwapManager.getSwap()[stat];
                         break;
                 }
                 return 0;

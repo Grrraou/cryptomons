@@ -1,6 +1,7 @@
 import { monstersEnum } from "@/enums/MonstersEnum";
 import { useBattlefieldsStores } from "@/stores/useBattlefields";
 import UXManager from "./UXManager";
+import NFTsManager from "./NFTsManager";
 
 class BattlefieldManager {
     private autoClickerIntervals: number | null = null;
@@ -41,7 +42,7 @@ class BattlefieldManager {
                     UXManager.showFlyingTextOnElement('⚔️' + amount.toString(), null, heroStore.getDOMid());
                 });
             });
-        }, interval) as unknown as number;
+        }, interval / ((NFTsManager.isCollectionCompleted('art_blocked')) ? 2 : 1)) as unknown as number;
     }
 }
 
