@@ -41,7 +41,7 @@
             <router-link to="/battle" class="forbidden-link" draggable="false">🚫 Battle</router-link>
           </li>
           <li v-if="useGoalStores['shopping_on_silk_road']().isCompleted" class="sidemenu-inventory">
-            <router-link to="/inventory" draggable="false">📦 Inventory</router-link>
+            <router-link to="/inventory" draggable="false" :class="inventoryClass">📦 Inventory</router-link>
           </li>
           <li v-else class="sidemenu-inventory">
             <router-link to="/inventory" class="forbidden-link" draggable="false">🚫 Inventory</router-link>
@@ -88,6 +88,7 @@ import AudioManager from '@/managers/AudioManager';
 import GoalManager from '@/managers/GoalManager';
 import { useRoute } from 'vue-router';
 import AchievementManager from '@/managers/AchievementManager';
+import ItemManager from '@/managers/ItemManager';
 
 export default defineComponent({
   name: 'SideMenu',
@@ -101,6 +102,11 @@ export default defineComponent({
       soundOn.value = !soundOn.value;
       AudioManager.toggleSound();
     };
+
+    let inventoryClass = computed(() => {
+      return (ItemManager.getItemStore().inventory.length >= ItemManager.getItemStore().itemSlots - 5) ? 'shiny' : '';
+    });
+
     let goalsClass = computed(() => {
       return GoalManager.isThereGoalCostToPay() ? 'shiny' : '';
     });
@@ -138,6 +144,7 @@ export default defineComponent({
 
     return {
       useGoalStores,
+      inventoryClass,
       goalsClass,
       toTheMoonClass,
       nftsClass,

@@ -94,6 +94,9 @@ class ItemManager {
     }
 
     static getItemPrice(item: Item) {
+        if (item.cannotSell) {
+            return 0;
+        }
         let price = 1;
         const referencePrice = TokenManager.getReferenceTokenStore().price;
         if (item.xp) price += (item.xp + item.xp) * referencePrice;

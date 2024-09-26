@@ -26,14 +26,14 @@ export default defineComponent({
 
       if (inventoryIndex) {
           item = itemsStore.getItemFromInventory(parseInt(inventoryIndex));
-          if (item) {
+          if (item && !item.cannotSell) {
               itemsStore.removeItemFromInventory(parseInt(inventoryIndex));
           }
       } else if (slotType) {
           item = itemsStore[slotType];
           itemsStore.unequipItem(slotType, false);
       }
-      if (item) {
+      if (item && !item.cannotSell) {
         const sellingPrice = ItemManager.getItemPrice(item);
         tokenStore.updateBalance(sellingPrice);
         UXManager.showFlyingTextOnElement(sellingPrice.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), 'sell-area', 50);

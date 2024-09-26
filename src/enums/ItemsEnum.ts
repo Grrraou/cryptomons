@@ -12,6 +12,7 @@ export type Item = {
   damage?: number;
   mining?: number;
   token?: string;
+  cannotSell?: boolean;
   effect?: () => void | number;
 }
 
@@ -23,6 +24,7 @@ export const itemsEnum: Item[] = [
     description: 'Increase the number of heroes that can work in a place.',
     type: 'Consumable',
     power: 1,
+    cannotSell: true,
   },
   {
     index: 'battlefield_slot',
@@ -30,6 +32,7 @@ export const itemsEnum: Item[] = [
     description: 'Increase the number of fight that can work in a place.',
     type: 'Consumable',
     power: 1,
+    cannotSell: true,
   },
   {
     index: 'inventory_slot',
@@ -37,6 +40,7 @@ export const itemsEnum: Item[] = [
     description: 'Increase the number of items you can store in your chest.',
     type: 'Consumable',
     power: 1,
+    cannotSell: true,
   },
 
   /** BINANCE */
