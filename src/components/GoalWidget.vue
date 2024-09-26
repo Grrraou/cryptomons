@@ -107,6 +107,10 @@ export default defineComponent({
   margin-left: 15px;
 }
 
+.goal-logo:hover {
+  transform: scale(3);
+}
+
 .goal-header h3 {
   font-size: 24px;
   margin-bottom: 10px;

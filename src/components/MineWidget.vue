@@ -89,7 +89,7 @@ export default defineComponent({
       }));
 
       const backgroundStyle = computed(() => ({
-        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(240, 240, 240, 0.5)), url('${mineStore.getImage()}')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url('${mineStore.getImage()}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }));
@@ -226,6 +226,10 @@ export default defineComponent({
 
   .clicks-display:hover .click-icon, .level-display:hover .level-icon, .token-balance-display:hover .token-icon {
     transform: scale(2);
+  }
+
+  .logo-image:hover {
+    transform: scale(5);
   }
 
   button {
