@@ -26,14 +26,14 @@ export const tokensEnum = [
     { index: 'xmr', name: 'Monero', price: 0.5 },//2014
     { index: 'eth', name: 'Ethereum', price: 2 },//2015
     { index: 'zec', name: 'Zcash', price: 2 },//2016
-    { index: 'bch', name: 'Bitcoin Cash', price: 0.2 },//2017
-    { index: 'eos', name: 'EOS', price: 0.2 },//2017
-    { index: 'ada', name: 'Cardano', price: 0.2 },//2017
-    { index: 'trx', name: 'Tron', price: 0.2 },//2017
-    { index: 'bnb', name: 'Binance Coin', price: 0.2 },//2017
-    { index: 'link', name: 'Chainlink', price: 0.2 },//2017
-    { index: 'xtz', name: 'Tezos', price: 0.2 },//2018
-    { index: 'dot', name: 'Polkadot', price: 0.2 },//2020
+    { index: 'bch', name: 'Bitcoin Cash', price: 5 },//2017
+    { index: 'eos', name: 'EOS', price: 5 },//2017
+    { index: 'ada', name: 'Cardano', price: 5 },//2017
+    { index: 'trx', name: 'Tron', price: 5 },//2017
+    { index: 'bnb', name: 'Binance Coin', price: 5 },//2017
+    { index: 'link', name: 'Chainlink', price: 5 },//2017
+    { index: 'xtz', name: 'Tezos', price: 5 },//2018
+    { index: 'dot', name: 'Polkadot', price: 5 },//2020
     { index: 'sol', name: 'Solana', price: 1 },//2020
     { index: 'shib', name: 'Shiba Inu', price: 10 },//2020
     { index: 'uni', name: 'Uniswap', price: 50 },//2020
@@ -41,5 +41,5 @@ export const tokensEnum = [
     { index: 'grt', name: 'The Graph', price: 3 },
     { index: 'osmo', name: 'Osmosis', price: 2 },
     { index: 'neo', name: 'Neo', price: 100 },
-    { index: 'gas', name: 'Gas', price: 1 },
+    { index: 'gas', name: 'Gas', price: 10 },
 ];
