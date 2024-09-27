@@ -205,7 +205,7 @@ export default defineComponent({
 }
 
 .levelup-button {
-    display: inline-flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     padding: 0 10px;

@@ -129,12 +129,15 @@ export const useItemsStore = defineStore('items', {
                     break;
                 case 'mining_slot':
                     const mineStore = MineManager.getMineStore(item.token);
+                    console.log(item.token);
                     mineStore.heroSlots += item.power;
                     UXManager.showSuccess(`🧴 Item consumed: \nMore worker slots for ${mineStore.name}`);
+                    break;
                 case 'battlefield_slot':
                     const battlefieldStore = BattlefieldManager.getBattlefieldStore(item.token);
                     battlefieldStore.heroSlots += item.power;
                     UXManager.showSuccess(`🧴 Item consumed: \nMore fighters slots for ${battlefieldStore.name}`);
+                    break;
                 case 'inventory_slot':
                     this.itemSlots += 1;
                     UXManager.showSuccess(`🧴 Item consumed: \nPlace for more items in your chest.`);
