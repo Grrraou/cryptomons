@@ -1,10 +1,18 @@
 <template>
   <div class="monsterThumb" @click="attackManually($event)" id="DomId">
-    <img v-if="battlefieldStore.currentMonster"
+    <div class="monther-portrait-container infoboxed">
+      <img v-if="battlefieldStore.currentMonster"
       :src="battlefieldStore.getMonsterImage()"
       :alt="battlefieldStore.currentMonster.name"
       draggable="false"
       class="monster-portrait" />
+      <div class="infobox">
+        <h3 style="color: #444">{{ battlefieldStore.currentMonster.name }}</h3>
+        <p>{{ battlefieldStore.currentMonster.description }}</p>
+        <img style="width: 100px; border: 3px solid #ffa500;" :src="ItemManager.getItemImage(battlefieldStore.currentMonster.loot.index)">
+      </div>
+    </div>
+    
     <p v-if="battlefieldStore.currentMonster">
       {{ battlefieldStore.currentMonster.name }}
       <span class="monster-life">{{ battlefieldStore.currentMonster.health?.toFixed(2) }} HP</span>
@@ -55,6 +63,7 @@ export default defineComponent({
         battlefieldStore,
         monsterImage,
         attackManually,
+        ItemManager,
       };
     },
   });

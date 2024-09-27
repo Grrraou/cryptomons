@@ -21,7 +21,7 @@ export const tokensEnum = [
     { index: 'ltc', name: 'Litecoin', price: 5 },//2011
     { index: 'xrp', name: 'Ripple', price: 1 },//2012
     { index: 'ppc', name: 'Peercoin', price: 1 },//2012
-    { index: 'doge', name: 'Dogecoin', price: 0.2 },//2013
+    { index: 'doge', name: 'Dogecoin', price: 1 },//2013
     { index: 'dash', name: 'Dash', price: 2 },//2014
     { index: 'xmr', name: 'Monero', price: 0.5 },//2014
     { index: 'eth', name: 'Ethereum', price: 2 },//2015
