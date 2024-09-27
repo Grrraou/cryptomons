@@ -17,6 +17,7 @@ interface EquipmentState {
     Weapon: Item | null;
     inventory: Item[];
     looted: number[];
+    autoSell: boolean[];
     itemSlots: number;
 }
 
@@ -30,6 +31,7 @@ export const useItemsStore = defineStore('items', {
         Weapon: null,
         inventory: [],
         looted: [0,0,0,0,0,0],
+        autoSell: [false, false, false, false, false, false],
         itemSlots: 20,
     }),
     actions: {
@@ -108,7 +110,11 @@ export const useItemsStore = defineStore('items', {
             if (this.itemSlots > this.inventory.length) {
                 const item = ItemManager.generateLoot(itemIndex, target);
                 if (item) {
-                    this.addItemToInventory(item);
+                    if (this.autoSell[item.rarity]) {
+                        this.sellItem(item);
+                    } else {
+                        this.addItemToInventory(item);
+                    }
                     this.looted[item.rarity] += 1;
                     UXManager.showSuccess(`🎁 looted: ${item.name}`);
                 }
@@ -137,6 +143,14 @@ export const useItemsStore = defineStore('items', {
             }
             this.removeItemFromInventory(inventoryIndex);
             
+        },
+        sellItem(item: Item) {
+            if (!this.cannotSell) {
+                const sellingPrice = ItemManager.getItemPrice(item);
+                const tokenStore = TokenManager.getReferenceTokenStore();
+                tokenStore.updateBalance(sellingPrice);
+                return sellingPrice;
+            }
         },
     },
     persist: true,

@@ -58,6 +58,9 @@ export const useAchievementStores: Record<string, () => AchievementStoreType> = 
                     case 'swap':
                         return SwapManager.getSwap()[stat];
                         break;
+                    case 'item':
+                        return ItemManager.getItemStore()[object][stat];
+                        break;
                 }
                 return 0;
             },

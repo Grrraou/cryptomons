@@ -40,6 +40,7 @@ import { TokenStoreType, useTokenStores } from '@/stores/useTokens';
 import TokenManager from '@/managers/TokenManager';
 import SettingsManager from '@/managers/SettingsManager';
 import GoalManager from '@/managers/GoalManager';
+import NFTsManager from '@/managers/NFTsManager';
 
 import { Chart, registerables } from 'chart.js';
 import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial'; // Import both the controller and element
@@ -78,12 +79,16 @@ export default defineComponent({
     let chartInit = ref(false);
 
     // Initialize the chart
-    const initChart = (event) => {
-      if (grtStore.balance < graphPrice.value) {
-        return;
+    const initChart = (event: MouseEvent | null = null) => {
+      
+      if (event) {
+        if (grtStore.balance < graphPrice.value) {
+          return;
+        }
+        grtStore.balance -= graphPrice.value;
+        UXManager.showFlyingText(`-${graphPrice.value.toFixed(2)}`, grtStore.getIcon(), event.clientX, event.clientY, 'red');
       }
-      grtStore.balance -= graphPrice.value;
-      UXManager.showFlyingText(`-${graphPrice.value.toFixed(2)}`, grtStore.getIcon(), event.clientX, event.clientY, 'red');
+      
       chartInit.value = true;
       if (candleChart.value) {
         const ctx = candleChart.value.getContext('2d');
@@ -131,10 +136,14 @@ export default defineComponent({
       }
     };
 
+    
+
     /** add a new goal to make all the graphs free */
-   /*  onMounted(() => {
-      initChart();
-    }); */
+    onMounted(() => {
+      if (NFTsManager.isCollectionCompleted('cold_cats')) {
+        initChart();
+      }
+    });
 
     return {
       tokenStore,

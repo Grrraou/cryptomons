@@ -2,6 +2,12 @@
   <div class="selling-container" @drop="handleDrop" @dragover.prevent>
     <h3>Drag Items to Sell</h3>
     <div id="sell-area" class="sell-area">SELL</div>
+    <div id="autosell" v-if="NFTsManager.isCollectionCompleted('azookie')">
+      <div v-for="(checked, index) in ItemManager.getItemStore().autoSell">
+        <input type="checkbox" :checked="checked" @click="toggleAutoSell(index)" :id="`autosell-${index}`">
+        <label>sell {{ index }}</label>
+      </div>
+    </div>
   </div>
 </template>
   
@@ -11,6 +17,7 @@ import TokenManager from '@/managers/TokenManager';
 import ItemManager from '@/managers/ItemManager';
 import UXManager from '@/managers/UXManager';
 import SettingsManager from '@/managers/SettingsManager';
+import NFTsManager from '@/managers/NFTsManager';
   
 export default defineComponent({
   setup() {
@@ -34,14 +41,21 @@ export default defineComponent({
           itemsStore.unequipItem(slotType, false);
       }
       if (item && !item.cannotSell) {
-        const sellingPrice = ItemManager.getItemPrice(item);
-        tokenStore.updateBalance(sellingPrice);
+        const sellingPrice = itemsStore.sellItem(item);
         UXManager.showFlyingTextOnElement(sellingPrice.toFixed(SettingsManager.getSettings().decimals).toString(), tokenStore.getIcon(), 'sell-area', 50);
       }
     };
 
+    const toggleAutoSell = (index: number) => {
+      const checkbox = document.getElementById(`autosell-${index}`) as HTMLInputElement;
+      ItemManager.getItemStore().autoSell[index] = checkbox.checked;
+    };
+
     return {
       handleDrop,
+      toggleAutoSell,
+      ItemManager,
+      NFTsManager,
     };
   },
 });
@@ -56,6 +70,7 @@ export default defineComponent({
   height: 100%;
   padding: 10px;
   border-radius: 10px;
+  overflow: auto;
 }
 
 .sell-area {

@@ -84,6 +84,7 @@ export default defineComponent({
     background-size: cover;
     background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)) center center / cover, url('/inventory/sellingBG.png');
     background-size: cover;
+    overflow: hidden;
 }
   
 .inventory-section {

@@ -1062,7 +1062,59 @@ export const achievementsEnum: Achievement[] = [
         reference: "swap::volume",
         target: 1000000,
         nft: "cold_cats:meow_for_eth"
-    }
+    },
+    
+    /**
+     * Items
+     */
+    {
+        index: "loot_item_rarity_0",
+        title: "Looter, not looser",
+        description: "Loot 10 items of rarity 0",
+        reference: "item:looted:0",
+        target: 10,
+        nft: "azookie:overpriced_streetwear"
+    },
+    {
+        index: "loot_item_rarity_1",
+        title: "Loot Enthusiast",
+        description: "Loot 10 items of rarity 1.",
+        reference: "item:looted:1",
+        target: 10,
+        nft: "azookie:exclusive_hype_master"
+    },
+    {
+        index: "loot_item_rarity_2",
+        title: "Rare Finder",
+        description: "Loot 10 items of rarity 2.",
+        reference: "item:looted:2",
+        target: 10,
+        nft: "azookie:virtual_rave_king"
+    },
+    {
+        index: "loot_item_rarity_3",
+        title: "Epic Hoarder",
+        description: "Loot 10 items of rarity 3.",
+        reference: "item:looted:3",
+        target: 10,
+        nft: "azookie:bored_street_icon"
+    },
+    {
+        index: "loot_item_rarity_4",
+        title: "Legendary Collector",
+        description: "Loot 10 items of rarity 4.",
+        reference: "item:looted:4",
+        target: 10,
+        nft: "azookie:hype_fueled_influencer"
+    },
+    {
+        index: "loot_item_rarity_5",
+        title: "Mythical Master",
+        description: "Loot 10 items of rarity 5.",
+        reference: "item:looted:5",
+        target: 10,
+        nft: "azookie:perk_promises_pal"
+    },
     
     
     /**

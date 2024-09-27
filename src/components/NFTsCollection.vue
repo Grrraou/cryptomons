@@ -90,7 +90,7 @@ export default defineComponent({
 <style scoped>
 .nft-collection {
   display: flex;
-  flex-wrap: wrap; /* Ensures items wrap into new rows */
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -104,11 +104,12 @@ export default defineComponent({
   font-size: 2em;
   margin: 10px;
   text-align: center;
+  width: 100%;
 }
 
 .nft-container {
   display: flex;
-  flex-wrap: wrap; /* Ensures items wrap into new rows */
+  flex-wrap: wrap; 
   align-items: center;
   justify-content: center;
 }

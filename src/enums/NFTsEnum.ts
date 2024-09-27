@@ -299,5 +299,49 @@ export const NFTsEnum: NFTCollectionType[] = [
                 "rarity": 5
             }
         ],
-    }
+    },
+    {
+        index: 'azookie',
+        name: 'Azookie',
+        description: 'Autosell commons 📦 items',
+        lootable: false,
+        nfts: [
+            {
+                "index": "overpriced_streetwear",
+                "name": "Overpriced Streetwear",
+                "description": "Because nothing says urban culture like paying 100 ETH for a hoodie.",
+                "rarity": 0
+            },
+            {
+                "index": "exclusive_hype_master",
+                "name": "Exclusive Hype Master",
+                "description": "The coolest kid in town—just don't ask what they're hyping up.",
+                "rarity": 1
+            },
+            {
+                "index": "virtual_rave_king",
+                "name": "Virtual Rave King",
+                "description": "Why go to a real rave when you can buy your way into a virtual one?",
+                "rarity": 2
+            },
+            {
+                "index": "bored_street_icon",
+                "name": "Bored Street Icon",
+                "description": "Streetwear looks cool, but who has the energy to care anymore?",
+                "rarity": 3
+            },
+            {
+                "index": "hype_fueled_influencer",
+                "name": "Hype-Fueled Influencer",
+                "description": "Famous for wearing brands that cost more than your car. That's all.",
+                "rarity": 4
+            },
+            {
+                "index": "perk_promises_pal",
+                "name": "Perk Promises Pal",
+                "description": "Exclusive perks, or just exclusive promises? Either way, it’s hyped!",
+                "rarity": 5
+            }
+        ],
+    },
 ];
