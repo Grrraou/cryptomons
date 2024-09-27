@@ -62,7 +62,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Bitcoin mine level 10",
         reference: 'mines:btc_mine:level',
         target: 10,
-        loot: 'mining_slot:btc_mine',
+        loot: 'good_news:btc',
       },
       {
         index: "upgrade_area_btc_mine_100",
@@ -153,7 +153,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Namecoin mine level 10.",
         reference: "mines:nmc_mine:level",
         target: 10,
-        loot: "mining_slot:nmc_mine"
+        loot: "good_news:nmc"
     },
     {
         index: "upgrade_area_nmc_mine_100",
@@ -243,7 +243,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Litecoin mine level 10.",
         reference: "mines:ltc_mine:level",
         target: 10,
-        loot: "mining_slot:ltc_mine"
+        loot: "good_news:ltc"
     },
     {
         index: "upgrade_area_ltc_mine_100",
@@ -333,7 +333,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Dogecoin mine level 10.",
         reference: "mines:doge_mine:level",
         target: 10,
-        loot: "mining_slot:doge_mine"
+        loot: "good_news:doge"
     },
     {
         index: "upgrade_area_doge_mine_100",
@@ -423,7 +423,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Dash mine level 10.",
         reference: "mines:dash_mine:level",
         target: 10,
-        loot: "mining_slot:dash_mine"
+        loot: "good_news:dash"
     },
     {
         index: "upgrade_area_dash_mine_100",
@@ -513,7 +513,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Monero mine level 10.",
         reference: "mines:xmr_mine:level",
         target: 10,
-        loot: "mining_slot:xmr_mine"
+        loot: "good_news:xmr"
     },
     {
         index: "upgrade_area_xmr_mine_100",
@@ -603,7 +603,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Zcash mine level 10.",
         reference: "mines:zec_mine:level",
         target: 10,
-        loot: "mining_slot:zec_mine"
+        loot: "good_news:zec"
     },
     {
         index: "upgrade_area_zec_mine_100",
@@ -693,7 +693,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Reach Bitcoin Cash mine level 10.",
         reference: "mines:bch_mine:level",
         target: 10,
-        loot: "mining_slot:bch_mine"
+        loot: "good_news:bch"
     },
     {
         index: "upgrade_area_bch_mine_100",
