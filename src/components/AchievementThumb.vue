@@ -152,10 +152,12 @@ export default defineComponent({
   font-size: 1.2em;
   height: 170px;
   max-width: 100%;
+  text-align: center;
 }
 
 .achievement-box.unlocked:hover .achievement-content {
   height: auto;
+  text-align: center;
 }
 
 .progress-overlay {

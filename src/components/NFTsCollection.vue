@@ -2,7 +2,7 @@
   <div class="nft-collection" :style="collectionStyle">
     <div class="collection-title">
       <h3 :class="titleClass">
-        {{ collection.name }} ( {{ NFTsManager.getCollectionCompletion(collection.index) }}% )
+        {{ collection.name }} ( {{ NFTsManager.getCollectionCompletion(collection.index).toFixed(2) }}% )
       </h3>
       <p>{{ (NFTsManager.getCollectionCompletion(collection.index) > 50) ? collection.description : '???' }}</p>
     </div>

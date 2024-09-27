@@ -1014,6 +1014,8 @@ export const achievementsEnum: Achievement[] = [
         loot: "battlefield_slot:pancakeswap_plains"
     },
 
+
+
     /**
      * SWAP
      */
@@ -1065,6 +1067,9 @@ export const achievementsEnum: Achievement[] = [
         target: 1000000,
         nft: "cold_cats:meow_for_eth"
     },
+
+
+    
     
     /**
      * Items

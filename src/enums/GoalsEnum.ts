@@ -464,7 +464,7 @@ export const goalsEnum = [
   // Stupid goals
     {
       index: 'buy_pizza_with_bitcoins',
-      name: 'Buy a pizza with bitcoins',
+      name: 'Buy a pizza',
       description: 'A nice pizza, without ananas and just for 10 000 BTC !',
       costs: [
         { token: 'cryptodollar', value: 1000000000, isPaid: false },
