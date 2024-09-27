@@ -752,7 +752,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 10 times one of Binance Barricade monsters.",
         reference: 'battlefields:binance_barricade:clicks',
         target: 10,
-        loot: 'battlefield_slot:binance_barricade',
+        loot: 'inventory_slot',
     },
     {
         index: "click_area_binance_barricade_100",
@@ -760,7 +760,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 100 times one of Binance Barricade monsters.",
         reference: 'battlefields:binance_barricade:clicks',
         target: 100,
-        loot: 'battlefield_slot:binance_barricade',
+        loot: 'inventory_slot',
     },
     {
         index: "click_area_binance_barricade_1000",
@@ -768,7 +768,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 1000 times one of Binance Barricade monsters.",
         reference: 'battlefields:binance_barricade:clicks',
         target: 1000,
-        loot: 'battlefield_slot:binance_barricade',
+        loot: 'inventory_slot',
     },
     {
         index: "click_area_binance_barricade_10000",
@@ -802,7 +802,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 1000 monsters in Binance Barricade.",
         reference: 'battlefields:binance_barricade:killed',
         target: 1000,
-        loot: 'inventory_slot',
+        loot: 'battlefield_slot:binance_barricade',
     },
     {
         index: "killed_area_binance_barricade_10000",
@@ -810,7 +810,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 10000 monsters in Binance Barricade.",
         reference: 'battlefields:binance_barricade:killed',
         target: 10000,
-        loot: 'inventory_slot',
+        loot: 'battlefield_slot:binance_barricade',
     },
 
     /** KRAKEN */
@@ -820,7 +820,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 10 times one of Kraken Abyss monsters.",
         reference: "battlefields:kraken_abyss:clicks",
         target: 10,
-        loot: "battlefield_slot:kraken_abyss"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_kraken_abyss_100",
@@ -828,7 +828,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 100 times one of Kraken Abyss monsters.",
         reference: "battlefields:kraken_abyss:clicks",
         target: 100,
-        loot: "battlefield_slot:kraken_abyss"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_kraken_abyss_1000",
@@ -836,7 +836,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 1000 times one of Kraken Abyss monsters.",
         reference: "battlefields:kraken_abyss:clicks",
         target: 1000,
-        loot: "battlefield_slot:kraken_abyss"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_kraken_abyss_10000",
@@ -868,7 +868,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 1000 monsters in Kraken Abyss.",
         reference: "battlefields:kraken_abyss:killed",
         target: 1000,
-        loot: "inventory_slot"
+        loot: "battlefield_slot:kraken_abyss"
     },
     {
         index: "killed_area_kraken_abyss_10000",
@@ -876,7 +876,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 10000 monsters in Kraken Abyss.",
         reference: "battlefields:kraken_abyss:killed",
         target: 10000,
-        loot: "inventory_slot"
+        loot: "battlefield_slot:kraken_abyss"
     },
 
     /** UNISWAP */
@@ -886,7 +886,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 10 times one of Uniswap Underground monsters.",
         reference: "battlefields:uniswap_underground:clicks",
         target: 10,
-        loot: "battlefield_slot:uniswap_underground"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_uniswap_underground_100",
@@ -894,7 +894,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 100 times one of Uniswap Underground monsters.",
         reference: "battlefields:uniswap_underground:clicks",
         target: 100,
-        loot: "battlefield_slot:uniswap_underground"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_uniswap_underground_1000",
@@ -902,7 +902,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 1000 times one of Uniswap Underground monsters.",
         reference: "battlefields:uniswap_underground:clicks",
         target: 1000,
-        loot: "battlefield_slot:uniswap_underground"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_uniswap_underground_10000",
@@ -912,6 +912,7 @@ export const achievementsEnum: Achievement[] = [
         target: 10000,
         loot: "battlefield_slot:uniswap_underground"
     },
+
     {
         index: "killed_area_uniswap_underground_10",
         title: "Uniswap Thug",
@@ -934,7 +935,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 1000 monsters in Uniswap Underground.",
         reference: "battlefields:uniswap_underground:killed",
         target: 1000,
-        loot: "inventory_slot"
+        loot: "battlefield_slot:uniswap_underground"
     },
     {
         index: "killed_area_uniswap_underground_10000",
@@ -942,7 +943,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 10000 monsters in Uniswap Underground.",
         reference: "battlefields:uniswap_underground:killed",
         target: 10000,
-        loot: "inventory_slot"
+        loot: "battlefield_slot:uniswap_underground"
     },
     
 
@@ -953,7 +954,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 10 times one of PancakeSwap Plains monsters.",
         reference: "battlefields:pancakeswap_plains:clicks",
         target: 10,
-        loot: "battlefield_slot:pancakeswap_plains"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_pancakeswap_plains_100",
@@ -961,7 +962,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 100 times one of PancakeSwap Plains monsters.",
         reference: "battlefields:pancakeswap_plains:clicks",
         target: 100,
-        loot: "battlefield_slot:pancakeswap_plains"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_pancakeswap_plains_1000",
@@ -969,7 +970,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Attack manually 1000 times one of PancakeSwap Plains monsters.",
         reference: "battlefields:pancakeswap_plains:clicks",
         target: 1000,
-        loot: "battlefield_slot:pancakeswap_plains"
+        loot: "inventory_slot"
     },
     {
         index: "click_area_pancakeswap_plains_10000",
@@ -979,6 +980,7 @@ export const achievementsEnum: Achievement[] = [
         target: 10000,
         loot: "battlefield_slot:pancakeswap_plains"
     },
+
     {
         index: "killed_area_pancakeswap_plains_10",
         title: "PancakeSwap Thug",
@@ -1001,7 +1003,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 1000 monsters in PancakeSwap Plains.",
         reference: "battlefields:pancakeswap_plains:killed",
         target: 1000,
-        loot: "inventory_slot"
+        loot: "battlefield_slot:pancakeswap_plains"
     },
     {
         index: "killed_area_pancakeswap_plains_10000",
@@ -1009,7 +1011,7 @@ export const achievementsEnum: Achievement[] = [
         description: "Kill 10000 monsters in PancakeSwap Plains.",
         reference: "battlefields:pancakeswap_plains:killed",
         target: 10000,
-        loot: "inventory_slot"
+        loot: "battlefield_slot:pancakeswap_plains"
     },
 
     /**
