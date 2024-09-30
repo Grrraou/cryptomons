@@ -102,8 +102,7 @@ class RocketManager {
             rocketManager.stopRocket();
             UXManager.showFlyingTextOnElement('Out of gas', gasStore.getIcon(), 'rocket', 150, 'red');
         }
-        if (Math.random() < 1 / 10) {
-
+        if (Math.random() < 1 / 50) {
             RocketManager.getRocket().planet = RocketManager.generatePlanet();
             UXManager.showSuccess('Your rocket found something !')
             rocketManager.stopRocket();

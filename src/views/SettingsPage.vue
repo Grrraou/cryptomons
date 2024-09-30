@@ -4,6 +4,8 @@
     <br><hr><br>
     <SaveGame />
     <br><hr><br>
+    <RedeemSection />
+    <br><hr><br>
     <UserSettings />
     <br><hr><br>
     <DonationLinks />
@@ -20,6 +22,7 @@ import DebugSettings from '@/components/settings/DebugSettings.vue';
 import UserSettings from '@/components/settings/UserSettings.vue';
 import TokenManager from '@/managers/TokenManager';
 import DonationLinks from '@/components/settings/DonationLinks.vue';
+import RedeemSection from '@/components/settings/RedeemSection.vue';
 
 export default defineComponent({
   name: 'SettingsPage',
@@ -29,6 +32,7 @@ export default defineComponent({
     UserSettings,
     DebugSettings,
     DonationLinks,
+    RedeemSection,
   },
   setup: () => {
 

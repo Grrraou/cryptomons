@@ -62,7 +62,6 @@ class UXManager {
   static showFlyingTextOnElement(text: string, image: string|null = null, elementId: string, randomness: number = 15, color: string = 'green' ) {
     const element = document.getElementById(elementId);
     if (element) {
-      console.log('yes')
       const rect = element.getBoundingClientRect();
       const x = rect.left + Math.floor(Math.random() * (randomness - 1 + 1)) + 1;
       const y = rect.top + Math.floor(Math.random() * (randomness - 1 + 1)) + 1;
