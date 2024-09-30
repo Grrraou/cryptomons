@@ -7,9 +7,9 @@
     </div>
     <div class="rocket" id="rocket">
       
-      <img :src="rocketImage" alt="Rocket" class="rocket-image" draggable="false" :class="{ shake: isShaking }" />
+      <img :src="rocket.image" alt="Rocket" class="rocket-image" draggable="false" :class="{ shake: rocketStore.isActive }" />
       <button @click="toggleRocket" :disabled="gasStore.balance < 0.1">
-        {{ isShaking ? 'Stop Rocket' : 'Start Rocket' }}
+        {{ rocketStore.isActive ? 'Stop Rocket' : 'Start Rocket' }}
         ( {{ gasStore.balance.toFixed(2) }} <img :src="gasStore.getIcon()" class="token-icon"> )
       </button>
     </div>
@@ -18,25 +18,21 @@
       {{ RocketManager.getRocket().distance.toFixed(2) }} km
     </div>
 
-    <div v-if="planetDiscovered" class="planet" :style="planet.style" id="planet">
-        {{ planet.name }}<br>
-        {{ planet.description }}
+    <div v-if="rocketStore.planet" class="planet" :style="rocketStore.planet.style" id="planet">
+        {{ rocketStore.planet.name }}<br>
+        {{ rocketStore.planet.description }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import BattlefieldManager from '@/managers/BattlefieldManager';
-import HeroManager from '@/managers/HeroManager';
-import ItemManager from '@/managers/ItemManager';
-import NFTsManager from '@/managers/NFTsManager';
 import SettingsManager from '@/managers/SettingsManager';
 import TokenManager from '@/managers/TokenManager';
-import UXManager from '@/managers/UXManager';
 import RocketManager from '@/managers/RocketManager';
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import InfoBubble from '@/components/InfoBubble.vue';
 import TutorialComponent from '@/components/TutorialComponent.vue';
+import { rocketManager } from '@/App.vue';
 
 export default {
   components: {
@@ -44,210 +40,67 @@ export default {
     TutorialComponent,
   },
   setup() {
-      const isShaking = ref(false);
-      const rocketImage = ref('/moon/rocket-stop.png');
-      const backgroundPosition = ref(0); // Current background Y position
-      const planetDiscovered = ref(false); // Whether a planet is discovered
-      const planet = ref({name: 'Name', style: '', description: ''});
+    const rocketStore = RocketManager.getRocket();
+    const rocket = rocketManager.rocket;
+    const gasStore = TokenManager.getTokenStore('gas');
+    const backgroundPosition = ref(0);
 
-      let animationFrameId: number | null = null;
-      let lastTime: number | null = null;
-      let discoveryInterval: ReturnType<typeof setInterval>;
-      const gasStore = TokenManager.getTokenStore('gas');
+    rocket.sound.loop = true;
+    rocket.sound.volume = SettingsManager.getSettings().soundVolume;
+    rocket.sound.pause();
+
+    const toggleRocket = () => {
+      rocketManager.toggleRocket();
+
+      if (rocketStore.isActive) {
+        rocket.animationFrameId = requestAnimationFrame(moveBackground);
+      }
+    };
       
-
-
-    const speed = 100; // Pixels per second for background movement
-
     const moveBackground = (timestamp: number) => {
-      if (lastTime !== null) {
-        const delta = timestamp - lastTime;
-        backgroundPosition.value += (delta / 1000) * speed; // Move space background up
+      if (rocket.lastTime !== null) {
+        const delta = timestamp - rocket.lastTime;
+        backgroundPosition.value += (delta / 1000) * rocket.speed;
       }
-      lastTime = timestamp;
-      animationFrameId = requestAnimationFrame(moveBackground); // Continue the animation loop
+      rocket.lastTime = timestamp;
+      rocket.animationFrameId = requestAnimationFrame(moveBackground);
     };
-
-    const checkForPlanetDiscovery = () => {
-      gasStore.updateBalance(-0.1);
-      RocketManager.getRocket().incrementRocketDistance();
-      UXManager.showFlyingTextOnElement('-0.1', gasStore.getIcon(), 'rocket', 150, 'red');
-      if (gasStore.balance < 0.1) {
-        stopRocket();
-        UXManager.showFlyingTextOnElement('Out of gas', gasStore.getIcon(), 'rocket', 150, 'red');
-      }
-      if (Math.random() < 1 / 5) {
-        generatePlanet();
-        stopRocket();
-      }
-    };
-
-    const generatePlanet = () => {
-      planetDiscovered.value = true;
-
-      const rand = Math.random() * 100;
-
-      /**
-       * Tokens
-       */
-      if (rand < 30) {
-        const tokenStore = TokenManager.getTokens()[Math.floor(Math.random() * TokenManager.getTokens().length)];
-        const randomPercent = Math.random() * (5 - 1) + 1; 
-        const partOfAssets = (randomPercent / 100) * (RocketManager.getRocket().distance / 100);
-        const gain = partOfAssets / tokenStore.price;
-        tokenStore.updateBalance(gain);
-
-        planet.value.name = `Found a ${tokenStore.name} deposit !`;
-        planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("${tokenStore.getIcon()}");background-size: cover;background-position: center center;`;
-        planet.value.description = `+${gain.toFixed(2)} ${tokenStore.index.toUpperCase()}`;
-        
-        UXManager.showFlyingTextOnElement(`+${gain.toFixed(SettingsManager.getSettings().decimals)}`, tokenStore.getIcon(), 'rocket', 150, 'green');
-
-      } 
-      /**
-       * Heroes
-       */
-      else if (rand < 60) {
-        const unlockedHeroes = HeroManager.getHeroes()
-          .filter(heroStore => {
-            return heroStore.isUnlocked();
-          });
-        const heroStore = unlockedHeroes[Math.floor(Math.random() * unlockedHeroes.length)];
-        const randomPercent = Math.random() * (5 - 1) + 1; 
-        const gain = (randomPercent / 100) * (heroStore.getXpToLevel() + (RocketManager.getRocket().distance / 100));
-
-        planet.value.name = `${heroStore.name} found an anomaly !`;
-        planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("${heroStore.getPicture()}");background-size: cover;background-position: center center;`;
-        planet.value.description = `+${gain.toFixed(2)} XP`;
-
-        UXManager.showFlyingTextOnElement(`+${gain.toFixed(SettingsManager.getSettings().decimals)} XP`, '', 'rocket', 150, 'green');
-
-      } 
-      /**
-       * ITEMS
-       */
-      else if (rand < 90) {
-        const unlockedBattlefields = BattlefieldManager.getBattlefields().filter(battlefield => {
-          return battlefield.isUnlocked();
-        });
-        const monster = unlockedBattlefields[Math.floor(Math.random() * unlockedBattlefields.length)].getRandomMonster();
-        const item = ItemManager.getBaseItem(monster.loot.index);
-
-        ItemManager.getItemStore().lootItem(monster.loot.index)
-
-        planet.value.name = `${monster.name} defeated !`;
-        planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("/monsters/${monster.index}.png");background-size: cover;background-position: center center;`;
-        planet.value.description = `Found a ${item.name}`;
-
-      } 
-      /**
-       * NFTs
-       */
-      else {
-        const collection = NFTsManager.getLootableCollections()[Math.floor(Math.random() * NFTsManager.getCollections().length)]
-        const nft = NFTsManager.getRandomNFT(collection.index);
-        planet.value.name = 'Found an already possessed NFT...';
-
-        if (!nft.isFound) {
-          nft.findNFT();
-          planet.value.name = 'Found a WHOLE NEW NFT !';
-        }
-        planet.value.style = `background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(240, 240, 240, 0.7)), url("${nft.getImage()}");background-size: cover;background-position: center center;`;
-        planet.value.description = `${nft.description}`;
-      }
-
-    }
-
-    let rocketSound = new Audio(UXManager.getImagePath('sounds/rocket.wav'));
-    rocketSound.loop = true;
-    rocketSound.volume = SettingsManager.getSettings().soundVolume;
-    rocketSound.pause();
-
-
-    const toggleRocketSound = () => {
-        if (isShaking.value && SettingsManager.getSettings().soundOn) {
-          rocketSound.play();
-          console.log('test')
-        } else {
-          rocketSound.pause();
-        }
-    }
 
     watch(
       () => SettingsManager.getSettings().soundOn,
       (newVal) => {
         if (newVal) {
-          if (isShaking.value) {
-            rocketSound.play();
+          if (rocketStore.isActive) {
+            rocket.sound.play();
           }
         } else {
-          rocketSound.pause();
+          rocket.sound.pause();
         }
       }
     );
 
-    const toggleRocket = () => {
-      planetDiscovered.value = false;
-      isShaking.value = !isShaking.value;
-      rocketImage.value = isShaking.value
-        ? '/moon/rocket-start.png'
-        : '/moon/rocket-stop.png';
-      
-      toggleRocketSound();
-
-      if (isShaking.value) {
-        // Start moving the background
-        lastTime = performance.now();
-        animationFrameId = requestAnimationFrame(moveBackground);
-        discoveryInterval = setInterval(checkForPlanetDiscovery, (10000  / ((NFTsManager.isCollectionCompleted('women_of_the_wordly_market')) ? 2 : 1)) / SettingsManager.getSettings().rocketSpeed);
-      } else {
-        stopRocket();
-      }
-    };
-
-    const stopRocket = () => {
-      if (animationFrameId !== null) {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
-      }
-      if (discoveryInterval !== null) {
-        clearInterval(discoveryInterval);
-        discoveryInterval = null;
-      }
-      lastTime = null;
-      isShaking.value = false;
-      rocketImage.value = '/moon/rocket-stop.png';
-    };
-
     onMounted(() => {
-      // Clean up intervals and animations if the component is destroyed
-      if (animationFrameId !== null) {
-        cancelAnimationFrame(animationFrameId);
-      }
-      if (discoveryInterval !== null) {
-        clearInterval(discoveryInterval);
+      if (rocketStore.isActive) {
+        rocket.animationFrameId = requestAnimationFrame(moveBackground);
+        rocketManager.toggleRocketSound();
       }
     });
 
     onBeforeUnmount(() => {
-      if (animationFrameId !== null) {
-        cancelAnimationFrame(animationFrameId);
+      if (rocket.animationFrameId !== null) {
+        cancelAnimationFrame(rocket.animationFrameId);
       }
-      if (discoveryInterval !== null) {
-        clearInterval(discoveryInterval);
-      }
-      rocketSound.pause();
+      rocket.sound.pause();
     });
 
     return {
-      isShaking,
-      rocketImage,
       backgroundPosition,
-      planetDiscovered,
-      planet,
       toggleRocket,
       gasStore,
       RocketManager,
+      rocketManager,
+      rocket,
+      rocketStore,
     };
   },
 };
@@ -291,9 +144,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/moon/space.png') repeat-y; /* Use repeat-y for vertical scrolling */
+  background: url('/moon/space.png') repeat-y;
   background-size: cover;
-  z-index: 1; /* Behind the rocket */
+  z-index: 1;
 }
 
 .rocket-image {

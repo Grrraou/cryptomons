@@ -9,7 +9,7 @@ export interface TutorialStoreType {
     battleTutorial: boolean;
     inventoryTutorial: boolean;
     swapTutorial: boolean;
-    nftsTutorial: boolean;
+    nftTutorial: boolean;
     tothemoonTutorial: boolean;
     statsTutorial: boolean;
     settingsTutorial: boolean;
@@ -26,7 +26,7 @@ export const useTutorialStore = defineStore('tutorial', {
     battleTutorial: false,
     inventoryTutorial: false,
     swapTutorial: false,
-    nftsTutorial: false,
+    nftTutorial: false,
     tothemoonTutorial: false,
     statsTutorial: false,
     settingsTutorial: false,

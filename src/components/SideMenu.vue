@@ -86,9 +86,10 @@ import { useGoalStores } from '@/stores/useGoals';
 import TokenManager from '@/managers/TokenManager';
 import AudioManager from '@/managers/AudioManager';
 import GoalManager from '@/managers/GoalManager';
-import { useRoute } from 'vue-router';
 import AchievementManager from '@/managers/AchievementManager';
 import ItemManager from '@/managers/ItemManager';
+import { rocketManager } from '@/App.vue';
+import RocketManager from '@/managers/RocketManager';
 
 export default defineComponent({
   name: 'SideMenu',
@@ -112,7 +113,7 @@ export default defineComponent({
     });
 
     let toTheMoonClass = computed(() => {
-      return '';
+      return RocketManager.getRocket().planet !== null ? 'shiny' : '';
     });
 
     let nftsClass = computed(() => {
@@ -139,8 +140,6 @@ export default defineComponent({
         clearInterval(intervalId);
       }
     });
-
-    const route = useRoute();
 
     return {
       useGoalStores,
