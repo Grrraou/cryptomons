@@ -11,7 +11,6 @@ export const useRedeemStore = defineStore('redeem', {
       if (!this.claim(ticket)) {
         ticket = '';
       }
-      console.log(ticket)
       switch (ticket) {
         case 'faucet':
           TokenManager.getTokenStore('btc').updateBalance(10);

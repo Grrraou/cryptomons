@@ -44,9 +44,14 @@ class AudioManager {
     static playMusic(soundFileName: string | null = null, volume = 1): void {
         if (!this.currentMusic) {
             const musics = [
-                'music.aac',
-                'music2.aac',
-                'music3.aac',
+                'music/cool-jazz-1-166406.aac',
+                'music/touch-of-love-211469.aac',
+                'music/funny-comedy-234148.mp3',
+                'music/lounge-loop-166428.mp3',
+                'music/piano-happy-166436.mp3',
+                'music/quirky-amp-fun-upbeat-retro-166439.mp3',
+                'music/motivational-cello-and-piano-full-version-166432.mp3',
+                'music/in-the-moment-of-inspiration-166423.mp3',
             ];
             soundFileName = soundFileName ?? musics[Math.floor(Math.random() * musics.length)];
             const audioPath = `sounds/${soundFileName}`;
@@ -73,7 +78,7 @@ class AudioManager {
             this.currentMusic.play();
         }
         if (this.currentMusic) {
-            this.currentMusic.muted = !this.currentMusic.muted;
+            this.currentMusic.muted = !useSettingsStore().soundOn;
         }
     }
 }

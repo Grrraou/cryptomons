@@ -10,6 +10,8 @@
     <br><hr><br>
     <DonationLinks />
     <br><br><br>
+    <CreditsList />
+    <br><br><br>
     <DebugSettings />
   </div>
 </template>
@@ -23,6 +25,7 @@ import UserSettings from '@/components/settings/UserSettings.vue';
 import TokenManager from '@/managers/TokenManager';
 import DonationLinks from '@/components/settings/DonationLinks.vue';
 import RedeemSection from '@/components/settings/RedeemSection.vue';
+import CreditsList from '@/components/settings/CreditsList.vue';
 
 export default defineComponent({
   name: 'SettingsPage',
@@ -33,6 +36,7 @@ export default defineComponent({
     DebugSettings,
     DonationLinks,
     RedeemSection,
+    CreditsList,
   },
   setup: () => {
 

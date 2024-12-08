@@ -26,9 +26,9 @@ export type SettingsStore = {
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
-    soundOn: true,
+    soundOn: false,
     soundVolume: 0.5,
-    musicOn: true,
+    musicOn: false,
     musicVolume: 0.5,
     referenceTokenIndex: 'cryptodollar',
     floatingEarningsOnClick: true,

@@ -33,6 +33,7 @@ import AudioManager from './managers/AudioManager';
 import FallingToken from './components/animations/FallingToken.vue';
 import TokenManager from './managers/TokenManager';
 import RocketManager from './managers/RocketManager';
+import UXManager from './managers/UXManager';
 
 export const rocketManager = new RocketManager();
 
@@ -61,14 +62,15 @@ export default defineComponent({
     const battlefieldManager = new BattlefieldManager();
     battlefieldManager.startAutoBattle();
 
-    AudioManager.playMusic();
+    //AudioManager.toggleSound();
+    //AudioManager.playMusic();
 
     const rocketStore = RocketManager.getRocket();
     if (rocketStore.isActive && rocketManager.startPlanetDiscoveryInterval() === null) {
       rocketManager.startPlanetDiscoveryInterval();
     }
 
-    //UXManager.disableRightClick();
+    UXManager.disableRightClick();
   },
 });
 </script>
